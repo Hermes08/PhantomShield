@@ -7,2195 +7,1168 @@
     <meta name="description" content="Phantom Shield - Expert cybersecurity consulting, penetration testing, network defense, compliance assessments, and security education. Your invisible armor in the digital world.">
     <meta name="keywords" content="cybersecurity, consulting, network security, penetration testing, compliance, incident response, HIPAA, PCI-DSS, SOC2, Orlando, Florida">
     <meta name="author" content="Phantom Shield">
-    <meta name="theme-color" content="#080d1a">
+    <meta name="theme-color" content="#050816">
     <meta property="og:title" content="Phantom Shield | Advanced Cybersecurity Consulting">
     <meta property="og:description" content="Expert cybersecurity consulting, penetration testing, and security education. Founded by a UCF MS Cybersecurity & Privacy graduate.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #080d1a;
-            --bg-secondary: #0d1526;
+            --bg-deep: #050816;
+            --bg-card: rgba(15, 23, 42, 0.45);
+            --glass-border: rgba(0, 212, 255, 0.08);
+            --glass-bg: rgba(15, 23, 42, 0.35);
+            --glass-bg-hover: rgba(15, 23, 42, 0.55);
             --accent: #00d4ff;
-            --accent-secondary: #7b61ff;
-            --text-primary: #e8edf5;
-            --text-muted: #8892a4;
-            --danger: #ff4757;
-            --success: #2ed573;
+            --accent-glow: rgba(0, 212, 255, 0.3);
+            --accent2: #7b61ff;
+            --accent2-glow: rgba(123, 97, 255, 0.3);
+            --accent3: #00ffa3;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --gradient-1: linear-gradient(135deg, #00d4ff 0%, #7b61ff 100%);
+            --gradient-2: linear-gradient(135deg, #7b61ff 0%, #00ffa3 100%);
+            --gradient-3: linear-gradient(135deg, #00ffa3 0%, #00d4ff 100%);
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-deep);
+            color: var(--text);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
-        /* Preloader */
+        /* PRELOADER */
         .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeOutPreloader 0.6s ease-out 1.4s forwards;
+            position: fixed; inset: 0; z-index: 10000;
+            background: var(--bg-deep);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity .6s, visibility .6s;
+        }
+        .preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader svg { width: 80px; height: 80px; animation: pulse-shield 1.5s ease-in-out infinite; }
+        @keyframes pulse-shield {
+            0%,100% { filter: drop-shadow(0 0 12px var(--accent-glow)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 30px var(--accent)); transform: scale(1.08); }
         }
 
-        .preloader-content {
-            text-align: center;
+        /* THREE.JS CANVAS */
+        #bg-canvas {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none;
         }
 
-        .shield-loader {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            position: relative;
+        /* GLOBAL LAYOUT */
+        .page-content { position: relative; z-index: 1; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+        .section-pad { padding: 120px 0; }
+
+        /* GLASSMORPHISM SYSTEM */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(1.4);
+            -webkit-backdrop-filter: blur(20px) saturate(1.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .glass-strong {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border: 1px solid rgba(0, 212, 255, 0.12);
+            border-radius: 24px;
         }
 
-        .shield-loader::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top: 3px solid var(--accent);
-            border-right: 3px solid var(--accent-secondary);
-            border-radius: 50%;
-            animation: spin 2s linear infinite;
-        }
-
-        .shield-loader::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 25px;
-            border: 2px solid var(--accent);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .preloader-text {
-            color: var(--accent);
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            animation: pulse-text 1.5s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOutPreloader {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            width: 0;
-            z-index: 9998;
-        }
-
-        /* Header */
+        /* HEADER / NAV */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(8, 13, 26, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 0;
+            transition: all .4s cubic-bezier(.4,0,.2,1);
         }
-
-        header.shrink {
-            padding: 1rem 0;
-            background: rgba(8, 13, 26, 0.9);
+        header.scrolled {
+            background: rgba(5, 8, 22, 0.75);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.06);
+            padding: 10px 0;
         }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1240px; margin: 0 auto; padding: 0 32px;
         }
-
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--accent);
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: var(--text);
         }
-
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            position: relative;
+            width: 40px; height: 40px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            position: relative; overflow: hidden;
         }
-
-        .logo-icon svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+        .logo-icon::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+            animation: shimmer 3s infinite;
         }
-
-        nav.desktop-nav {
-            display: flex;
-            gap: 40px;
-            align-items: center;
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            100% { transform: translateX(200%) rotate(25deg); }
         }
+        .logo-icon svg { width: 22px; height: 22px; fill: white; position: relative; z-index: 1; }
+        .logo-text { font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+        .logo-text span { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
+        nav.desktop-nav { display: flex; align-items: center; gap: 6px; }
         nav.desktop-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            position: relative;
-            transition: color 0.3s ease;
+            color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500;
+            padding: 8px 16px; border-radius: 10px;
+            transition: all .25s ease;
         }
+        nav.desktop-nav a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 
-        nav.desktop-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav.desktop-nav a:hover {
-            color: var(--accent);
-        }
-
-        nav.desktop-nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav-dropdown {
-            position: relative;
-        }
-
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-trigger { cursor: pointer; display: flex; align-items: center; gap: 4px; }
         .nav-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: rgba(8, 13, 26, 0.95);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 8px;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 10px;
+            position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(4px);
+            min-width: 180px; padding: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 14px;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: all .25s cubic-bezier(.4,0,.2,1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-
         .nav-dropdown:hover .nav-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
         }
-
         .nav-dropdown-menu a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-muted);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            display: block; padding: 10px 14px; color: var(--text-muted);
+            font-size: 13px; font-weight: 500; border-radius: 8px;
+            text-decoration: none; transition: all .2s;
         }
+        .nav-dropdown-menu a:hover { color: var(--accent); background: rgba(0, 212, 255, 0.06); }
 
-        .nav-dropdown-menu a:last-child {
-            border-bottom: none;
+        .cta-nav {
+            padding: 10px 22px !important;
+            background: var(--gradient-1) !important;
+            color: white !important;
+            border-radius: 12px !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            transition: all .3s !important;
+            text-decoration: none;
         }
+        .cta-nav:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow); }
 
-        .nav-dropdown-menu a:hover {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent);
-        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
 
-        .emergency-btn {
-            padding: 10px 20px;
-            background: var(--danger);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            animation: pulse-emergency 2s ease-in-out infinite;
-        }
+        nav.mobile-nav { display: none; }
 
-        .emergency-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
-        }
-
-        @keyframes pulse-emergency {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        nav.mobile-nav {
-            display: none;
-        }
-
-        /* Hero Section */
+        /* HERO */
         .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 40px 40px;
-            overflow: hidden;
-            background: var(--bg-primary);
+            min-height: 100vh; display: flex; align-items: center;
+            padding: 140px 0 100px; position: relative;
         }
-
-        #three-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+        .hero-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
         }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 18px; border-radius: 100px;
+            background: rgba(0, 212, 255, 0.06);
+            border: 1px solid rgba(0, 212, 255, 0.12);
+            font-size: 12px; font-weight: 600; color: var(--accent);
+            letter-spacing: 0.06em; text-transform: uppercase;
+            margin-bottom: 28px;
         }
-
+        .hero-badge .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--accent3);
+            box-shadow: 0 0 8px var(--accent3);
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
         .hero h1 {
-            font-size: 72px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            transition: all 0.3s ease;
+            font-size: clamp(40px, 5vw, 64px); font-weight: 800;
+            line-height: 1.08; letter-spacing: -0.03em;
+            margin-bottom: 24px;
         }
-
-        .hero h1:hover {
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
-            transform: scale(1.02);
+        .hero h1 .gradient-text, .gradient-text {
+            background: var(--gradient-1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        .glitch {
-            position: relative;
-            display: inline-block;
+        .hero-sub {
+            font-size: 17px; color: var(--text-muted); line-height: 1.7;
+            max-width: 480px; margin-bottom: 40px;
         }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-        }
-
-        .glitch::before {
-            animation: glitch-before 0.3s ease-out;
-            color: var(--accent);
-            z-index: -1;
-            left: -2px;
-        }
-
-        .glitch::after {
-            animation: glitch-after 0.3s ease-out;
-            color: var(--accent-secondary);
-            z-index: -2;
-            left: 2px;
-        }
-
-        @keyframes glitch-before {
-            0% {
-                opacity: 1;
-                clip-path: inset(0 0 65% 0);
-                transform: translate(0, -2px);
-            }
-            100% {
-                opacity: 0;
-                clip-path: inset(0 0 0 0);
-                transform: translate(-2px, 0);
-            }
-        }
-
-        @keyframes glitch-after {
-            0% {
-                opacity: 1;
-                clip-path: inset(25% 0 58% 0);
-                transform: translate(0, 2px);
-            }
-            100% {
-                opacity: 0;
-                clip-path: inset(0 0 0 0);
-                transform: translate(2px, 0);
-            }
-        }
-
-        .typing-text {
-            font-size: 24px;
-            color: var(--accent);
-            margin-bottom: 30px;
-            font-weight: 300;
-            min-height: 30px;
-        }
-
-        .hero-description {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 60px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
-        }
-
+        .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, #00a8cc 100%);
-            color: var(--bg-primary);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 32px; border-radius: 14px;
+            background: var(--gradient-1); color: white;
+            font-weight: 600; font-size: 15px; text-decoration: none;
+            box-shadow: 0 8px 30px var(--accent-glow);
+            transition: all .3s cubic-bezier(.4,0,.2,1);
+            border: none; cursor: pointer;
         }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.4);
-        }
-
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px var(--accent-glow); }
         .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 32px; border-radius: 14px;
+            background: transparent; color: var(--text);
+            font-weight: 600; font-size: 15px; text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all .3s; cursor: pointer;
         }
+        .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-        .btn-secondary:hover {
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
-            transform: translateY(-4px);
+        /* Hero 3D visual area */
+        .hero-visual {
+            position: relative; display: flex; align-items: center; justify-content: center;
+            min-height: 500px;
         }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
+        #hero-3d { width: 100%; height: 500px; border-radius: 24px; }
+        .hero-visual .floating-badge {
+            position: absolute; padding: 14px 20px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            font-size: 13px; font-weight: 600;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            animation: float-badge 4s ease-in-out infinite;
         }
-
-        .chevron {
-            width: 30px;
-            height: 30px;
-            border-left: 2px solid var(--accent);
-            border-bottom: 2px solid var(--accent);
-            transform: rotate(-45deg);
-            animation: bounce 2s infinite;
+        .floating-badge.fb1 { top: 10%; right: -10%; animation-delay: 0s; }
+        .floating-badge.fb2 { bottom: 15%; left: -5%; animation-delay: -1.5s; }
+        .floating-badge.fb3 { top: 50%; right: -15%; animation-delay: -3s; }
+        @keyframes float-badge {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
+        .fb-icon { font-size: 20px; margin-right: 8px; }
+        .fb-val { color: var(--accent); font-size: 18px; font-weight: 800; }
+        .fb-label { color: var(--text-muted); font-size: 11px; display: block; margin-top: 2px; }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: rotate(-45deg) translateY(0);
-            }
-            40% {
-                transform: rotate(-45deg) translateY(10px);
-            }
-            60% {
-                transform: rotate(-45deg) translateY(5px);
-            }
-        }
-
-        /* Trust Bar */
+        /* TRUST BAR */
         .trust-bar {
-            padding: 60px 40px;
-            background: var(--bg-secondary);
-            text-align: center;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
-
-        .trust-title {
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+        .trust-label {
+            text-align: center; font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--text-dim); margin-bottom: 32px;
         }
-
         .trust-logos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: flex; justify-content: center; align-items: center;
+            gap: 48px; flex-wrap: wrap; opacity: 0.4;
         }
-
-        .trust-logo {
-            background: rgba(13, 21, 38, 0.4);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 20px;
-            border-radius: 8px;
+        .trust-logos span {
+            font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
             color: var(--text-muted);
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 80px;
         }
 
-        .trust-logo:hover {
-            background: rgba(0, 212, 255, 0.05);
-            border-color: rgba(0, 212, 255, 0.3);
-            color: var(--accent);
+        /* SERVICES GRID */
+        .section-label {
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.14em; color: var(--accent);
+            margin-bottom: 16px;
         }
-
-        /* Stats Section */
-        .stats {
-            padding: 80px 40px;
-            background: var(--bg-primary);
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 8px;
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 40px;
-            background: var(--bg-secondary);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .section-title {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 60px;
-            color: var(--text-primary);
-            text-align: center;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 16px;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        .about-text p {
+            font-size: clamp(32px, 3.5vw, 48px); font-weight: 800;
+            line-height: 1.12; letter-spacing: -0.03em;
             margin-bottom: 20px;
         }
-
-        .credentials {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .section-sub {
+            font-size: 16px; color: var(--text-muted); max-width: 560px;
+            margin-bottom: 56px;
         }
 
-        .credential-card {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 25px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .services-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
         }
-
-        .credential-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-secondary) 100%);
-        }
-
-        .credential-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-            transform: translateX(5px);
-        }
-
-        .credential-icon {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 6px;
-        }
-
-        .credential-title {
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .credential-text {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 100px 40px;
-            background: var(--bg-primary);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-categories {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
-        }
-
-        .category-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .service-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
         .service-card {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 25px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            padding: 36px 32px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all .4s cubic-bezier(.4,0,.2,1);
+            position: relative; overflow: hidden;
         }
-
         .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px; background: var(--gradient-1);
+            opacity: 0; transition: opacity .4s;
         }
-
         .service-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+            transform: translateY(-6px);
+            background: var(--glass-bg-hover);
+            border-color: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 40px var(--accent-glow);
         }
-
-        .service-card:hover::before {
-            opacity: 1;
+        .service-card:hover::before { opacity: 1; }
+        .card-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 24px; font-size: 26px;
+            position: relative;
         }
-
-        .service-icon {
-            width: 40px;
-            height: 40px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 6px;
+        .card-icon.ci-1 { background: rgba(0, 212, 255, 0.1); box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15); }
+        .card-icon.ci-2 { background: rgba(123, 97, 255, 0.1); box-shadow: 0 4px 20px rgba(123, 97, 255, 0.15); }
+        .card-icon.ci-3 { background: rgba(0, 255, 163, 0.1); box-shadow: 0 4px 20px rgba(0, 255, 163, 0.15); }
+        .card-icon.ci-4 { background: rgba(255, 71, 87, 0.1); box-shadow: 0 4px 20px rgba(255, 71, 87, 0.15); }
+        .card-icon.ci-5 { background: rgba(255, 193, 7, 0.1); box-shadow: 0 4px 20px rgba(255, 193, 7, 0.15); }
+        .card-icon.ci-6 { background: rgba(0, 212, 255, 0.1); box-shadow: 0 4px 20px rgba(0, 212, 255, 0.15); }
+        .service-card h3 {
+            font-size: 18px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.01em;
         }
+        .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+        .card-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            margin-top: 20px; font-size: 13px; font-weight: 600;
+            color: var(--accent); text-decoration: none;
+            transition: gap .3s;
+        }
+        .card-link:hover { gap: 10px; }
 
-        .service-title {
-            font-weight: 600;
-            color: var(--text-primary);
+        /* STATS */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,212,255,0.02) 50%, transparent 100%);
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+        }
+        .stat-card {
+            text-align: center; padding: 40px 24px;
+            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            transition: all .3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+        }
+        .stat-num {
+            font-size: 42px; font-weight: 900; letter-spacing: -0.03em;
+            background: var(--gradient-1);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
-            font-size: 16px;
         }
+        .stat-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
 
-        .service-description {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Methodology Section */
-        .methodology {
-            padding: 100px 40px;
-            background: var(--bg-secondary);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .methodology-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            position: relative;
-        }
-
-        .methodology-line {
-            position: absolute;
-            top: 40px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 50%, var(--accent) 100%);
-            background-size: 200% 100%;
-            animation: methodologyGlow 3s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes methodologyGlow {
-            0% { background-position: 0% 0; }
-            50% { background-position: 100% 0; }
-            100% { background-position: 0% 0; }
-        }
-
-        .methodology-step {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .step-number {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            border-radius: 50%;
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--bg-primary);
-        }
-
-        .step-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .step-description {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Certifications Section */
-        .certifications {
-            padding: 100px 40px;
-            background: var(--bg-primary);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .cert-card {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 40px;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .cert-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .cert-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 8px;
-            font-size: 32px;
-        }
-
-        .cert-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-
-        .cert-details {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        /* Why Choose Us Section */
-        .why-us {
-            padding: 100px 40px;
-            background: var(--bg-secondary);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
+        /* WHY PHANTOM SHIELD (split) */
         .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
         }
-
-        .why-card {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 35px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .why-list { display: flex; flex-direction: column; gap: 28px; }
+        .why-item {
+            display: flex; gap: 20px; padding: 24px;
+            border-radius: 16px;
+            transition: all .3s;
         }
-
-        .why-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .why-item:hover {
+            background: rgba(0, 212, 255, 0.03);
         }
-
-        .why-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-
-        .why-card:hover::before {
-            opacity: 1;
-        }
-
         .why-icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 6px;
-            font-size: 24px;
+            flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
         }
+        .why-icon.wi-1 { background: rgba(0,212,255,0.1); }
+        .why-icon.wi-2 { background: rgba(123,97,255,0.1); }
+        .why-icon.wi-3 { background: rgba(0,255,163,0.1); }
+        .why-icon.wi-4 { background: rgba(255,71,87,0.1); }
+        .why-item h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+        .why-item p { font-size: 14px; color: var(--text-muted); }
 
-        .why-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
+        .why-visual {
+            position: relative; display: flex; align-items: center; justify-content: center;
         }
-
-        .why-description {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.6;
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none;
         }
+        .orb-1 { width: 300px; height: 300px; background: rgba(0,212,255,0.12); top: -50px; right: -30px; }
+        .orb-2 { width: 250px; height: 250px; background: rgba(123,97,255,0.1); bottom: -40px; left: -20px; }
+        .why-card-stack {
+            display: flex; flex-direction: column; gap: 16px;
+            width: 100%; max-width: 400px; position: relative; z-index: 1;
+        }
+        .mini-glass {
+            padding: 24px 28px;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,255,0.08);
+            border-radius: 18px;
+            transition: all .3s;
+        }
+        .mini-glass:hover { border-color: rgba(0,212,255,0.2); transform: translateX(6px); }
+        .mini-glass .mg-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .mg-tag {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+            padding: 4px 10px; border-radius: 6px;
+        }
+        .mg-tag.green { background: rgba(0,255,163,0.1); color: var(--accent3); }
+        .mg-tag.red { background: rgba(255,71,87,0.1); color: #ff4757; }
+        .mg-tag.blue { background: rgba(0,212,255,0.1); color: var(--accent); }
+        .mini-glass h5 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+        .mini-glass p { font-size: 13px; color: var(--text-muted); }
+        .mg-bar { height: 4px; border-radius: 4px; background: rgba(255,255,255,0.06); margin-top: 12px; }
+        .mg-bar-fill { height: 100%; border-radius: 4px; }
 
-        /* CTA Banner */
-        .cta-banner {
-            padding: 80px 40px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 97, 255, 0.1) 100%);
-            border-top: 1px solid rgba(0, 212, 255, 0.2);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        /* GLOBAL REACH */
+        .reach-cards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+        }
+        .reach-card {
+            padding: 36px 30px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all .4s;
+            position: relative; overflow: hidden;
+        }
+        .reach-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+            border-color: rgba(0,212,255,0.15);
+        }
+        .reach-flag { font-size: 36px; margin-bottom: 16px; }
+        .reach-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .reach-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+        .reach-stat { display: flex; gap: 20px; }
+        .reach-stat .rs-num { font-size: 22px; font-weight: 800; color: var(--accent); }
+        .reach-stat .rs-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+
+        /* CTA SECTION */
+        .cta-section { padding: 100px 0; }
+        .cta-box {
             text-align: center;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 80px 60px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(0,212,255,0.06) 0%, rgba(123,97,255,0.06) 100%);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0,212,255,0.1);
+            position: relative; overflow: hidden;
         }
-
-        .cta-title {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 20px;
+        .cta-box::before {
+            content: ''; position: absolute; top: -2px; left: 20%; right: 20%;
+            height: 2px; background: var(--gradient-1); border-radius: 2px;
         }
-
-        .cta-description {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .cta-box h2 {
+            font-size: clamp(28px, 3vw, 42px); font-weight: 800;
+            letter-spacing: -0.02em; margin-bottom: 16px;
         }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 40px;
-            background: var(--bg-primary);
-            max-width: 1400px;
-            margin: 0 auto;
+        .cta-box p {
+            font-size: 17px; color: var(--text-muted); max-width: 500px;
+            margin: 0 auto 36px;
         }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .contact-form-wrapper {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 40px;
-            border-radius: 8px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(8, 13, 26, 0.8);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .info-card {
-            background: rgba(13, 21, 38, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 25px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .info-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-
-        .info-label {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .info-value {
-            color: var(--text-primary);
-            font-size: 16px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 50%;
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .social-icon:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-            transform: translateY(-3px);
-        }
-
-        /* Footer */
+        /* FOOTER */
         footer {
-            padding: 60px 40px 30px;
-            background: var(--bg-secondary);
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+            margin-bottom: 60px;
         }
-
-        .footer-column h3 {
-            color: var(--accent);
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 20px;
+        .footer-brand p { font-size: 14px; color: var(--text-muted); margin-top: 16px; max-width: 280px; }
+        .footer-col h4 {
+            font-size: 13px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 20px;
         }
-
-        .footer-column ul {
-            list-style: none;
+        .footer-col a {
+            display: block; font-size: 14px; color: var(--text-muted);
+            text-decoration: none; padding: 6px 0; transition: color .2s;
         }
-
-        .footer-column ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-column ul li a:hover {
-            color: var(--accent);
-        }
-
+        .footer-col a:hover { color: var(--accent); }
         .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 30px;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 13px; color: var(--text-dim);
         }
 
-        .copyright {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 12px;
-        }
-
-        .footer-social a {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 50%;
-            color: var(--accent);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 13px;
-        }
-
-        .footer-social a:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-        }
-
-        /* Scroll Reveal Animation */
+        /* SCROLL REVEAL */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            opacity: 0; transform: translateY(30px);
+            transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
         }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: .1s; }
+        .reveal-delay-2 { transition-delay: .2s; }
+        .reveal-delay-3 { transition-delay: .3s; }
+        .reveal-delay-4 { transition-delay: .4s; }
+        .reveal-delay-5 { transition-delay: .5s; }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-sub { margin: 0 auto 40px; }
+            .hero-ctas { justify-content: center; }
+            .hero-visual { display: none; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: 1fr; }
+            .why-visual { display: none; }
+            .reach-cards { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
-
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-            header {
-                padding: 1rem 0;
-            }
-
-            .header-container {
-                padding: 0 20px;
-            }
-
-            nav.desktop-nav {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
+            nav.desktop-nav { display: none; }
+            .hamburger { display: flex; }
             nav.mobile-nav {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: rgba(8, 13, 26, 0.95);
-                backdrop-filter: blur(10px);
-                display: none;
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(5, 8, 22, 0.96);
+                backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
                 flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                z-index: 999;
-                border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+                padding: 100px 32px 40px;
+                gap: 8px; z-index: 999;
             }
-
-            nav.mobile-nav.active {
-                display: flex;
-            }
-
-            nav.mobile-nav a,
-            nav.mobile-nav button {
-                width: 100%;
-                text-align: left;
-                padding: 12px 16px;
-                border-radius: 6px;
-                transition: all 0.3s ease;
-            }
-
+            nav.mobile-nav.active { display: flex; }
             nav.mobile-nav a {
-                color: var(--text-muted);
-                text-decoration: none;
-                display: block;
+                color: var(--text-muted); text-decoration: none;
+                font-size: 18px; font-weight: 600;
+                padding: 14px 16px; border-radius: 12px;
+                transition: all .2s;
             }
+            nav.mobile-nav a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+            .services-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .reach-cards { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .section-pad { padding: 80px 0; }
+            .hero { padding: 120px 0 60px; }
+        }
 
-            nav.mobile-nav a:hover {
-                background: rgba(0, 212, 255, 0.1);
-                color: var(--accent);
-            }
-
-            .hero {
-                padding: 80px 20px 40px;
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .typing-text {
-                font-size: 18px;
-            }
-
-            .hero-description {
-                font-size: 14px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .trust-logos {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-                padding: 60px 20px;
-            }
-
-            .section-title {
-                font-size: 36px;
-                padding: 0 20px;
-            }
-
-            .about {
-                padding: 60px 20px;
-            }
-
-            .services {
-                padding: 60px 20px;
-            }
-
-            .service-categories {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .methodology {
-                padding: 60px 20px;
-            }
-
-            .certifications {
-                padding: 60px 20px;
-            }
-
-            .why-us {
-                padding: 60px 20px;
-            }
-
-            .cta-banner {
-                padding: 60px 20px;
-            }
-
-            .contact {
-                padding: 60px 20px;
-            }
-
-            .methodology-line {
-                display: none;
-            }
-
-            .methodology-steps {
-                gap: 30px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
+        /* AMBIENT GRADIENT BLOBS */
+        .ambient {
+            position: fixed; pointer-events: none; z-index: 0;
+        }
+        .ambient-1 {
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%);
+            top: -200px; right: -200px;
+            animation: drift 20s ease-in-out infinite;
+        }
+        .ambient-2 {
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(123,97,255,0.06) 0%, transparent 70%);
+            bottom: 20%; left: -150px;
+            animation: drift 25s ease-in-out infinite reverse;
+        }
+        @keyframes drift {
+            0%,100% { transform: translate(0,0); }
+            25% { transform: translate(30px, -20px); }
+            50% { transform: translate(-20px, 30px); }
+            75% { transform: translate(20px, 20px); }
         }
     </style>
 </head>
 <body>
+
+    <!-- Ambient background blobs -->
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+
     <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <div class="shield-loader"></div>
-            <p class="preloader-text">PHANTOM SHIELD</p>
-        </div>
+    <div class="preloader" id="preloader">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z" fill="url(#pg)"/>
+            <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7b61ff"/></linearGradient></defs>
+        </svg>
     </div>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress"></div>
+    <!-- Three.js background -->
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 2C16 2 8 6 8 14C8 20 12 26 16 28C20 26 24 20 24 14C24 6 16 2 16 2Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 15L15.5 16.5L18.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <span>Phantom Shield</span>
-            </a>
+    <div class="page-content">
 
-            <nav class="desktop-nav">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <div class="nav-dropdown">
-                    <a href="#">Markets ▼</a>
-                    <div class="nav-dropdown-menu">
-                        <a href="latin-america.html">Latin America</a>
-                        <a href="panama.html">Panama</a>
-                        <a href="small-business.html">SMB</a>
+        <!-- HEADER -->
+        <header id="header">
+            <div class="header-inner">
+                <a href="/" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg>
                     </div>
+                    <div class="logo-text"><span>Phantom</span> Shield</div>
+                </a>
+
+                <nav class="desktop-nav">
+                    <a href="/">Home</a>
+                    <a href="/services">Services</a>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-dropdown-trigger">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:2px"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+                        <div class="nav-dropdown-menu">
+                            <a href="/latin-america">Latin America</a>
+                            <a href="/panama">Panama</a>
+                            <a href="/small-business">SMB</a>
+                        </div>
+                    </div>
+                    <a href="/blog">Blog</a>
+                    <a href="/contact">Contact</a>
+                    <a href="/contact" class="cta-nav">Get Protected</a>
+                </nav>
+
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
                 </div>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-
-            <button class="emergency-btn">Experiencing a Breach?</button>
-
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
-        </div>
+        </header>
 
         <nav class="mobile-nav" id="mobileNav">
             <a href="/">Home</a>
             <a href="/services">Services</a>
-            <a href="/latin-america">Markets: Latin America</a>
-            <a href="/panama">Markets: Panama</a>
-            <a href="/small-business">Markets: SMB</a>
+            <a href="/latin-america">Latin America</a>
+            <a href="/panama">Panama</a>
+            <a href="/small-business">SMB</a>
             <a href="/blog">Blog</a>
             <a href="/contact">Contact</a>
-            <button class="emergency-btn" style="width: 100%;">Experiencing a Breach?</button>
         </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <canvas id="three-canvas"></canvas>
-        <div class="hero-content">
-            <h1 class="glitch" data-text="Phantom Shield">Phantom Shield</h1>
-            <p class="typing-text" id="typingText"></p>
-            <p class="hero-description">
-                Advanced cybersecurity solutions designed for modern organizations. From threat detection to incident response, we provide comprehensive protection against evolving cyber threats.
-            </p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary">Get a Free Security Assessment</button>
-                <button class="btn btn-secondary">Our Services</button>
-            </div>
-            <div class="scroll-indicator">
-                <div class="chevron"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trust Bar -->
-    <section class="trust-bar">
-        <p class="trust-title">Trusted by Organizations Across Industries</p>
-        <div class="trust-logos">
-            <div class="trust-logo">TechCorp</div>
-            <div class="trust-logo">MedSecure</div>
-            <div class="trust-logo">FinShield</div>
-            <div class="trust-logo">CloudNet</div>
-            <div class="trust-logo">DataVault</div>
-            <div class="trust-logo">SecureOps</div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats" id="stats">
-        <div class="stat-card reveal">
-            <div class="stat-number" data-target="500">0</div>
-            <div class="stat-label">Security Assessments</div>
-        </div>
-        <div class="stat-card reveal">
-            <div class="stat-number" data-target="99.9">0</div>
-            <div class="stat-label">Threat Detection Rate (%)</div>
-        </div>
-        <div class="stat-card reveal">
-            <div class="stat-number">24/7</div>
-            <div class="stat-label">Continuous Monitoring</div>
-        </div>
-        <div class="stat-card reveal">
-            <div class="stat-number" data-target="50">0</div>
-            <div class="stat-label">Satisfied Clients</div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <h2 class="section-title reveal">About Phantom Shield</h2>
-        <div class="about-grid">
-            <div class="about-text reveal">
-                <p>Phantom Shield is a cybersecurity firm built on the foundation of real-world expertise and academic rigor. We combine cutting-edge threat intelligence with proven methodologies to protect organizations from evolving cyber threats.</p>
-                <p>Our approach goes beyond traditional security measures. We conduct in-depth assessments, identify vulnerabilities before attackers do, and implement comprehensive solutions tailored to your organization's unique needs.</p>
-                <p>Whether you're a small business or a larger enterprise, Phantom Shield provides the expertise, vigilance, and innovation required to maintain a strong security posture in today's threat landscape.</p>
-            </div>
-            <div class="credentials">
-                <div class="credential-card reveal">
-                    <div class="credential-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                            <path d="M12 2L15.09 8.26H22L17.18 12.46L19.27 18.74L12 14.54L4.73 18.74L6.82 12.46L2 8.26H8.91L12 2Z"/>
-                        </svg>
-                    </div>
-                    <div class="credential-title">MS Cybersecurity & Privacy</div>
-                    <div class="credential-text">University of Central Florida (UCF) - Advanced graduate-level coursework in security architecture, threat analysis, and compliance frameworks</div>
-                </div>
-                <div class="credential-card reveal">
-                    <div class="credential-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                            <path d="M9 2L4 6V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V6L15 2H9Z"/>
-                            <path d="M12 11V17"/>
-                            <path d="M9 14H15"/>
-                        </svg>
-                    </div>
-                    <div class="credential-title">CompTIA Security+</div>
-                    <div class="credential-text">Industry-recognized certification validating expertise in security concepts, protocols, vulnerability management, and risk assessment</div>
-                </div>
-                <div class="credential-card reveal">
-                    <div class="credential-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                            <path d="M12 2L6 6V10C6 16.63 12 21 12 21C12 21 18 16.63 18 10V6L12 2Z"/>
-                            <path d="M9 12L11 14L15 10"/>
-                        </svg>
-                    </div>
-                    <div class="credential-title">Cisco CCNA</div>
-                    <div class="credential-text">Professional certification demonstrating comprehensive understanding of networking fundamentals, security protocols, and infrastructure design</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title reveal">Our Services</h2>
-        <div class="service-categories">
-            <div class="reveal">
-                <h3 class="category-title">Network & Infrastructure</h3>
-                <div class="service-cards">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <circle cx="12" cy="12" r="1"/>
-                                <circle cx="19" cy="12" r="1"/>
-                                <circle cx="5" cy="12" r="1"/>
-                                <path d="M12 5V19M5 12H19"/>
-                            </svg>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content reveal">
+                        <div class="hero-badge"><span class="dot"></span> Now protecting LATAM & North America</div>
+                        <h1>Cybersecurity<br>That Shields<br><span class="gradient-text">Your Future</span></h1>
+                        <p class="hero-sub">Enterprise-grade threat detection, penetration testing, and compliance consulting — from Orlando to Panama City. We find vulnerabilities before attackers do.</p>
+                        <div class="hero-ctas">
+                            <a href="/contact" class="btn-primary">
+                                Get a Free Assessment
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </a>
+                            <a href="/services" class="btn-secondary">Explore Services</a>
                         </div>
-                        <div class="service-title">Network Security Audits</div>
-                        <div class="service-description">Comprehensive assessment of network architecture, configuration, and security posture to identify vulnerabilities and misconfigurations.</div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z"/>
-                                <path d="M12 6V12L16 15"/>
-                            </svg>
+                    <div class="hero-visual reveal reveal-delay-2">
+                        <canvas id="hero-3d"></canvas>
+                        <div class="floating-badge fb1">
+                            <span class="fb-icon">&#128737;</span>
+                            <div><span class="fb-val">99.9%</span><span class="fb-label">Threat Detection</span></div>
                         </div>
-                        <div class="service-title">Firewall & VPN Configuration</div>
-                        <div class="service-description">Expert setup and optimization of firewalls and VPN systems to ensure secure remote access and network perimeter protection.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 1C6.48 1 2 5.48 2 11C2 17 12 23 12 23S22 17 22 11C22 5.48 17.52 1 12 1Z"/>
-                            </svg>
+                        <div class="floating-badge fb2">
+                            <span class="fb-icon">&#9889;</span>
+                            <div><span class="fb-val">&lt;15min</span><span class="fb-label">Response Time</span></div>
                         </div>
-                        <div class="service-title">Wireless Security</div>
-                        <div class="service-description">Secure your WiFi networks with encryption, access controls, and monitoring to prevent unauthorized access and data interception.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3Z"/>
-                                <path d="M3 7H21"/>
-                            </svg>
+                        <div class="floating-badge fb3">
+                            <span class="fb-icon">&#127758;</span>
+                            <div><span class="fb-val">24/7</span><span class="fb-label">Global Monitoring</span></div>
                         </div>
-                        <div class="service-title">Cloud Security</div>
-                        <div class="service-description">Secure your cloud infrastructure with compliance audits, configuration hardening, and identity and access management solutions.</div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="reveal">
-                <h3 class="category-title">Threat Defense & Compliance</h3>
-                <div class="service-cards">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"/>
-                                <path d="M10.5 16.5L7 13L8.41 11.59L10.5 13.67L15.59 8.59L17 10L10.5 16.5Z"/>
-                            </svg>
+        <!-- TRUST BAR -->
+        <section class="trust-bar reveal">
+            <div class="container">
+                <p class="trust-label">Frameworks & Compliance Standards We Work With</p>
+                <div class="trust-logos">
+                    <span>NIST</span>
+                    <span>ISO 27001</span>
+                    <span>SOC 2</span>
+                    <span>HIPAA</span>
+                    <span>PCI-DSS</span>
+                    <span>GDPR</span>
+                    <span>CMMC</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section-pad" id="services">
+            <div class="container">
+                <div class="reveal">
+                    <p class="section-label">What We Do</p>
+                    <h2 class="section-title">Full-Spectrum<br>Cyber Defense</h2>
+                    <p class="section-sub">From proactive penetration testing to 24/7 monitoring, our team covers every vector of attack your organization faces.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card reveal reveal-delay-1">
+                        <div class="card-icon ci-1">&#128269;</div>
+                        <h3>Penetration Testing</h3>
+                        <p>Advanced red-team simulations across networks, web apps, cloud infrastructure, and social engineering vectors.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                    <div class="service-card reveal reveal-delay-2">
+                        <div class="card-icon ci-2">&#128737;</div>
+                        <h3>Managed Detection & Response</h3>
+                        <p>24/7 SOC monitoring with SIEM integration, threat hunting, and automated incident response playbooks.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                    <div class="service-card reveal reveal-delay-3">
+                        <div class="card-icon ci-3">&#128203;</div>
+                        <h3>Compliance & Audit</h3>
+                        <p>Gap analysis, policy development, and audit preparation for HIPAA, PCI-DSS, SOC 2, GDPR, and CMMC.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                    <div class="service-card reveal reveal-delay-1">
+                        <div class="card-icon ci-4">&#128680;</div>
+                        <h3>Incident Response</h3>
+                        <p>Rapid containment, forensic investigation, evidence preservation, and recovery with sub-15-minute SLA.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                    <div class="service-card reveal reveal-delay-2">
+                        <div class="card-icon ci-5">&#127891;</div>
+                        <h3>Security Training</h3>
+                        <p>Custom phishing simulations, role-based awareness programs, and executive-level security workshops.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                    <div class="service-card reveal reveal-delay-3">
+                        <div class="card-icon ci-6">&#9729;</div>
+                        <h3>Cloud Security</h3>
+                        <p>Architecture reviews, IAM hardening, misconfiguration detection across AWS, Azure, and GCP environments.</p>
+                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card reveal reveal-delay-1">
+                        <div class="stat-num">500+</div>
+                        <div class="stat-label">Vulnerabilities Found</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-2">
+                        <div class="stat-num">&lt;15min</div>
+                        <div class="stat-label">Avg. Response Time</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-3">
+                        <div class="stat-num">99.9%</div>
+                        <div class="stat-label">Detection Rate</div>
+                    </div>
+                    <div class="stat-card reveal reveal-delay-4">
+                        <div class="stat-num">24/7</div>
+                        <div class="stat-label">Monitoring Coverage</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY PHANTOM SHIELD -->
+        <section class="section-pad">
+            <div class="container">
+                <div class="why-grid">
+                    <div>
+                        <div class="reveal">
+                            <p class="section-label">Why Choose Us</p>
+                            <h2 class="section-title">Built Different.<br>Built Secure.</h2>
+                            <p class="section-sub">Founded by a UCF MS Cybersecurity graduate with industry certifications and hands-on experience across enterprise and government environments.</p>
                         </div>
-                        <div class="service-title">Penetration Testing</div>
-                        <div class="service-description">Simulated attacks to identify vulnerabilities and test your organization's ability to detect and respond to threats.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M19 13H5C3.9 13 3 12.1 3 11V8C3 6.9 3.9 6 5 6H19C20.1 6 21 6.9 21 8V11C21 12.1 20.1 13 19 13Z"/>
-                                <circle cx="17" cy="9.5" r="1.5"/>
-                            </svg>
+                        <div class="why-list">
+                            <div class="why-item reveal reveal-delay-1">
+                                <div class="why-icon wi-1">&#127919;</div>
+                                <div>
+                                    <h4>Attacker Mindset</h4>
+                                    <p>We think like adversaries — using the same TTPs as nation-state actors and ransomware gangs to find what automated scanners miss.</p>
+                                </div>
+                            </div>
+                            <div class="why-item reveal reveal-delay-2">
+                                <div class="why-icon wi-2">&#128202;</div>
+                                <div>
+                                    <h4>Compliance-First</h4>
+                                    <p>Every engagement maps directly to your regulatory requirements — HIPAA, PCI, SOC 2, CMMC, or Ley 81 in Panama.</p>
+                                </div>
+                            </div>
+                            <div class="why-item reveal reveal-delay-3">
+                                <div class="why-icon wi-3">&#127758;</div>
+                                <div>
+                                    <h4>Bilingual Operations</h4>
+                                    <p>Full English and Spanish capabilities. Offices in Orlando and Panama City for seamless Americas coverage.</p>
+                                </div>
+                            </div>
+                            <div class="why-item reveal reveal-delay-4">
+                                <div class="why-icon wi-4">&#9889;</div>
+                                <div>
+                                    <h4>Rapid Deployment</h4>
+                                    <p>From initial assessment to active protection in under 48 hours. No bloated onboarding — just results.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="service-title">Incident Response</div>
-                        <div class="service-description">24/7 incident response team ready to detect, contain, and remediate security breaches with minimal impact to operations.</div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22S22 17.52 22 12S17.52 2 12 2M12 20C7.59 20 4 16.41 4 12S7.59 4 12 4S20 7.59 20 12S16.41 20 12 20Z"/>
-                                <path d="M12.5 7H11V13L16.2 16L17 14.9L12.5 11.9Z"/>
-                            </svg>
+                    <div class="why-visual reveal reveal-delay-2">
+                        <div class="orb orb-1"></div>
+                        <div class="orb orb-2"></div>
+                        <div class="why-card-stack">
+                            <div class="mini-glass">
+                                <div class="mg-top"><h5>Threat Detected</h5><span class="mg-tag red">Critical</span></div>
+                                <p>SQL injection attempt blocked on /api/auth endpoint</p>
+                                <div class="mg-bar"><div class="mg-bar-fill" style="width:95%;background:var(--gradient-1);"></div></div>
+                            </div>
+                            <div class="mini-glass">
+                                <div class="mg-top"><h5>Compliance Scan</h5><span class="mg-tag green">Passed</span></div>
+                                <p>HIPAA gap assessment — 47/48 controls verified</p>
+                                <div class="mg-bar"><div class="mg-bar-fill" style="width:98%;background:var(--gradient-3);"></div></div>
+                            </div>
+                            <div class="mini-glass">
+                                <div class="mg-top"><h5>Pentest Report</h5><span class="mg-tag blue">In Progress</span></div>
+                                <p>External network scan — 12 findings documented</p>
+                                <div class="mg-bar"><div class="mg-bar-fill" style="width:65%;background:var(--gradient-2);"></div></div>
+                            </div>
                         </div>
-                        <div class="service-title">Malware Analysis</div>
-                        <div class="service-description">Deep analysis of malicious software to understand attack vectors, behavior, and implement effective remediation strategies.</div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M9 2H15V6H21V22H3V6H9V2Z"/>
-                                <path d="M9 11H15M9 15H15"/>
-                            </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- GLOBAL REACH -->
+        <section class="section-pad" style="background: linear-gradient(180deg, transparent, rgba(0,212,255,0.015), transparent);">
+            <div class="container">
+                <div class="reveal" style="text-align:center; margin-bottom: 16px;">
+                    <p class="section-label">Global Reach</p>
+                    <h2 class="section-title">Protecting Organizations<br>Across the Americas</h2>
+                    <p class="section-sub" style="margin: 0 auto 0;">Cybersecurity expertise tailored to the regulatory landscape and threat environment of each region we serve.</p>
+                </div>
+                <div class="reach-cards">
+                    <div class="reach-card reveal reveal-delay-1">
+                        <div class="reach-flag">&#127482;&#127480;</div>
+                        <h3>United States</h3>
+                        <p>Headquartered in Orlando, FL. Specializing in healthcare, finance, and government compliance.</p>
+                        <div class="reach-stat">
+                            <div><span class="rs-num">HIPAA</span><span class="rs-label">Focus</span></div>
+                            <div><span class="rs-num">SOC 2</span><span class="rs-label">Certified</span></div>
                         </div>
-                        <div class="service-title">Compliance & Standards</div>
-                        <div class="service-description">Achieve and maintain HIPAA, PCI-DSS, SOC 2, and NIST compliance with expert guidance and continuous monitoring.</div>
                     </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                            </svg>
+                    <div class="reach-card reveal reveal-delay-2">
+                        <div class="reach-flag">&#127477;&#127462;</div>
+                        <h3>Panama</h3>
+                        <p>On-the-ground presence in Panama City. Ley 81 compliance experts for the banking and logistics hub.</p>
+                        <div class="reach-stat">
+                            <div><span class="rs-num">Ley 81</span><span class="rs-label">Compliance</span></div>
+                            <div><span class="rs-num">ES/EN</span><span class="rs-label">Bilingual</span></div>
                         </div>
-                        <div class="service-title">IoT Security</div>
-                        <div class="service-description">Comprehensive security assessments for Internet of Things devices and networks, from firmware analysis to communication protocol hardening.</div>
                     </div>
-                </div>
-            </div>
-
-            <div class="reveal">
-                <h3 class="category-title">Education & Consulting</h3>
-                <div class="service-cards">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2L2 7V12C2 16.5 7.5 20.5 12 22C16.5 20.5 22 16.5 22 12V7L12 2Z"/>
-                            </svg>
+                    <div class="reach-card reveal reveal-delay-3">
+                        <div class="reach-flag">&#127758;</div>
+                        <h3>Latin America</h3>
+                        <p>Costa Rica, Colombia, Mexico — wherever digital transformation outpaces cybersecurity investment.</p>
+                        <div class="reach-stat">
+                            <div><span class="rs-num">3,065</span><span class="rs-label">Attacks/Week</span></div>
+                            <div><span class="rs-num">+26%</span><span class="rs-label">YoY Growth</span></div>
                         </div>
-                        <div class="service-title">Security Training</div>
-                        <div class="service-description">Comprehensive training programs for employees covering security awareness, best practices, and threat recognition.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M13 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V9L13 2Z"/>
-                                <path d="M13 2V9H20"/>
-                            </svg>
-                        </div>
-                        <div class="service-title">Executive Briefings</div>
-                        <div class="service-description">C-level focused reports and briefings on security posture, risks, and strategic recommendations for business continuity.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22S22 17.52 22 12S17.52 2 12 2Z"/>
-                                <path d="M7 12.5C7.83 12.5 8.5 11.83 8.5 11C8.5 10.17 7.83 9.5 7 9.5C6.17 9.5 5.5 10.17 5.5 11C5.5 11.83 6.17 12.5 7 12.5Z"/>
-                                <path d="M17 12.5C17.83 12.5 18.5 11.83 18.5 11C18.5 10.17 17.83 9.5 17 9.5C16.17 9.5 15.5 10.17 15.5 11C15.5 11.83 16.17 12.5 17 12.5Z"/>
-                                <path d="M12 17C13.66 17 15 15.66 15 14H9C9 15.66 10.34 17 12 17Z"/>
-                            </svg>
-                        </div>
-                        <div class="service-title">SMB Packages</div>
-                        <div class="service-description">Affordable, scalable security solutions specifically designed for small and medium-sized businesses with limited budgets.</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px; color: var(--accent);">
-                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22S22 17.52 22 12S17.52 2 12 2Z"/>
-                                <path d="M12 6V12L16 14"/>
-                            </svg>
-                        </div>
-                        <div class="service-title">Policy Development</div>
-                        <div class="service-description">Creation and implementation of comprehensive security policies aligned with industry standards and your organization's needs.</div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Methodology Section -->
-    <section class="methodology" id="methodology">
-        <h2 class="section-title reveal">Our Proven Methodology</h2>
-        <div class="methodology-steps">
-            <div class="methodology-line"></div>
-            <div class="methodology-step reveal">
-                <div class="step-number">1</div>
-                <div class="step-title">Assess</div>
-                <div class="step-description">Comprehensive evaluation of your current security posture, vulnerabilities, and risks through detailed assessments and analysis.</div>
-            </div>
-            <div class="methodology-step reveal">
-                <div class="step-number">2</div>
-                <div class="step-title">Plan</div>
-                <div class="step-description">Strategic roadmap development based on assessment findings, industry standards, and your organizational goals and constraints.</div>
-            </div>
-            <div class="methodology-step reveal">
-                <div class="step-number">3</div>
-                <div class="step-title">Implement</div>
-                <div class="step-description">Deployment of security solutions, configurations, and controls with minimal disruption to your operations and business continuity.</div>
-            </div>
-            <div class="methodology-step reveal">
-                <div class="step-number">4</div>
-                <div class="step-title">Monitor</div>
-                <div class="step-description">Continuous monitoring, testing, and optimization to ensure ongoing effectiveness and adaptation to emerging threats and changes.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section class="certifications" id="certifications">
-        <h2 class="section-title reveal">Certifications & Credentials</h2>
-        <div class="cert-grid">
-            <div class="cert-card reveal">
-                <div class="cert-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: var(--accent);">
-                        <path d="M12 2L2 7V12C2 16.5 7.5 20.5 12 22C16.5 20.5 22 16.5 22 12V7L12 2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 12L11 15L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="cert-title">CompTIA Security+</div>
-                <div class="cert-details">Industry-leading certification validating expertise in security fundamentals, risk management, and threat mitigation. Demonstrates comprehensive knowledge of security concepts and protocols.</div>
-            </div>
-            <div class="cert-card reveal">
-                <div class="cert-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: var(--accent);">
-                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 6V12L16 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="cert-title">Cisco CCNA</div>
-                <div class="cert-details">Professional networking certification demonstrating mastery of network design, implementation, and security. Covers routing, switching, WAN technologies, and network security fundamentals.</div>
-            </div>
-            <div class="cert-card reveal">
-                <div class="cert-icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px; color: var(--accent);">
-                        <path d="M12 2L6 6V10C6 16.63 12 21 12 21C12 21 18 16.63 18 10V6L12 2Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 12L14 14L18 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <div class="cert-title">MS Cybersecurity & Privacy</div>
-                <div class="cert-details">Graduate degree from University of Central Florida. Advanced coursework in security architecture, threat intelligence, incident response, and compliance frameworks.</div>
-            </div>
-        </div>
-        <div class="coursework-bar reveal" style="max-width: 900px; margin: 2rem auto 0; padding: 1.5rem 2rem; background: rgba(0, 212, 255, 0.05); border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 12px; text-align: center;">
-            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.75rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Graduate Coursework</div>
-            <div style="color: var(--text-muted); line-height: 2; font-size: 0.9rem;">
-                <span style="color: var(--text-primary); font-weight: 500;">Computer Security & Privacy Foundations</span> &bull;
-                <span style="color: var(--text-primary); font-weight: 500;">Advanced Software Systems Security</span> &bull;
-                <span style="color: var(--text-primary); font-weight: 500;">Incident Response Technologies</span> &bull;
-                <span style="color: var(--text-primary); font-weight: 500;">IoT Security & Privacy</span> &bull;
-                <span style="color: var(--text-primary); font-weight: 500;">Malware & Software Vulnerability Analysis</span> &bull;
-                <span style="color: var(--text-primary); font-weight: 500;">Usable Cybersecurity & Privacy</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose Us Section -->
-    <section class="why-us" id="why-us">
-        <h2 class="section-title reveal">Why Choose Phantom Shield</h2>
-        <div class="why-grid">
-            <div class="why-card reveal">
-                <div class="why-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                        <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22S22 17.52 22 12S17.52 2 12 2Z"/>
-                        <path d="M10 16.5L7 13.5M10 16.5L17 9.5"/>
-                    </svg>
-                </div>
-                <div class="why-title">Academic + Practical Expertise</div>
-                <div class="why-description">Combine advanced graduate education with real-world penetration testing, incident response, and network security experience.</div>
-            </div>
-            <div class="why-card reveal">
-                <div class="why-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                        <circle cx="12" cy="12" r="1"/>
-                        <circle cx="19" cy="12" r="1"/>
-                        <circle cx="5" cy="12" r="1"/>
-                        <path d="M12 5V19M5 12H19"/>
-                    </svg>
-                </div>
-                <div class="why-title">SMB-Focused Solutions</div>
-                <div class="why-description">Affordable, scalable security packages tailored specifically for small and medium-sized businesses, not just enterprises.</div>
-            </div>
-            <div class="why-card reveal">
-                <div class="why-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                        <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22S22 17.52 22 12S17.52 2 12 2Z"/>
-                        <path d="M12 6V12L16 14"/>
-                    </svg>
-                </div>
-                <div class="why-title">Proactive Defense</div>
-                <div class="why-description">Identify and remediate vulnerabilities before attackers exploit them through continuous monitoring and assessment.</div>
-            </div>
-            <div class="why-card reveal">
-                <div class="why-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--accent);">
-                        <path d="M13 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V9L13 2Z"/>
-                        <path d="M13 2V9H20"/>
-                    </svg>
-                </div>
-                <div class="why-title">Continuous Learning</div>
-                <div class="why-description">Stay ahead of emerging threats with constant professional development and participation in security communities.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Banner -->
-    <section class="cta-banner">
-        <h2 class="cta-title reveal">Ready to Secure Your Business?</h2>
-        <p class="cta-description reveal">Get a free security assessment and discover vulnerabilities before attackers do.</p>
-        <button class="btn btn-primary reveal">Schedule Your Assessment Today</button>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title reveal">Get in Touch</h2>
-        <div class="contact-content">
-            <div class="contact-form-wrapper reveal">
-                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="contact" />
-                    <div style="display: none;">
-                        <input name="bot-field" />
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company Name</label>
-                        <input type="text" id="company" name="company" placeholder="Your company" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Service Interested In</label>
-                        <select id="service" name="service" required>
-                            <option value="">Select a service</option>
-                            <option value="assessment">Security Assessment</option>
-                            <option value="penetration">Penetration Testing</option>
-                            <option value="compliance">Compliance Consulting</option>
-                            <option value="training">Security Training</option>
-                            <option value="monitoring">24/7 Monitoring</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your security needs..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                </form>
-            </div>
-
-            <div class="contact-info">
-                <div class="info-card reveal">
-                    <div class="info-label">Email</div>
-                    <div class="info-value">contact@phantomshield.com</div>
-                </div>
-                <div class="info-card reveal">
-                    <div class="info-label">Phone</div>
-                    <div class="info-value">+1 (407) 555-0147</div>
-                </div>
-                <div class="info-card reveal">
-                    <div class="info-label">Location</div>
-                    <div class="info-value">Orlando, Florida</div>
-                </div>
-                <div class="info-card reveal">
-                    <div class="info-label">Response Time</div>
-                    <div class="info-value">Within 24 hours</div>
-                </div>
-                <div class="info-card reveal">
-                    <div class="info-label">Emergency Contact</div>
-                    <div class="info-value">+1 (407) 555-9999</div>
-                    <div class="social-links">
-                        <a href="#" class="social-icon" title="LinkedIn">In</a>
-                        <a href="#" class="social-icon" title="Twitter">X</a>
-                        <a href="#" class="social-icon" title="GitHub">GH</a>
+        <!-- CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box reveal">
+                    <h2>Ready to Secure<br><span class="gradient-text">Your Organization?</span></h2>
+                    <p>Get a free security assessment and discover your attack surface before someone else does.</p>
+                    <div class="cta-buttons">
+                        <a href="/contact" class="btn-primary">
+                            Schedule Assessment
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="tel:+14075550100" class="btn-secondary">&#128222; Emergency Hotline</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Phantom Shield</h3>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Advanced cybersecurity solutions built on expertise, integrity, and innovation.</p>
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="/" class="logo">
+                            <div class="logo-icon">
+                                <svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg>
+                            </div>
+                            <div class="logo-text"><span>Phantom</span> Shield</div>
+                        </a>
+                        <p>Enterprise cybersecurity consulting and defense. Your invisible armor in the digital world.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <a href="/services">Penetration Testing</a>
+                        <a href="/services">Managed Detection</a>
+                        <a href="/services">Compliance Audit</a>
+                        <a href="/services">Incident Response</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Markets</h4>
+                        <a href="/latin-america">Latin America</a>
+                        <a href="/panama">Panama</a>
+                        <a href="/small-business">Small Business</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="/blog">Blog</a>
+                        <a href="/contact">Contact</a>
+                        <a href="mailto:info@phantomshield.com">info@phantomshield.com</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <span>&copy; 2026 Phantom Shield. All rights reserved.</span>
+                    <span>Orlando, FL &middot; Panama City, PA</span>
+                </div>
             </div>
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#certifications">Certifications</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Services</h3>
-                <ul>
-                    <li><a href="#services">Security Assessments</a></li>
-                    <li><a href="#services">Penetration Testing</a></li>
-                    <li><a href="#services">Incident Response</a></li>
-                    <li><a href="#services">Compliance Services</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Security Disclosure</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-        </div>
+        </footer>
 
-        <div class="footer-bottom">
-            <div class="copyright">&copy; 2026 Phantom Shield. All rights reserved. | Cybersecurity Excellence</div>
-            <div class="footer-social">
-                <a href="#" title="LinkedIn">In</a>
-                <a href="#" title="Twitter">X</a>
-                <a href="#" title="GitHub">GH</a>
-                <a href="#" title="Email">@</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
-    <!-- Three.js and Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const preloader = document.querySelector('.preloader');
-                preloader.style.animation = 'fadeOutPreloader 0.6s ease-out forwards';
-            }, 1400);
-        });
+    // PRELOADER
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('preloader').classList.add('done'), 800);
+    });
 
-        // Scroll Progress Bar
-        const scrollProgress = document.querySelector('.scroll-progress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
+    // HEADER SCROLL
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-        // Header Shrink on Scroll
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('shrink');
-            } else {
-                header.classList.remove('shrink');
-            }
-        });
-
-        // Mobile Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        hamburger.addEventListener('click', () => {
-            mobileNav.classList.toggle('active');
-        });
-
-        document.querySelectorAll('#mobileNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-            });
-        });
-
-        // Typing Animation
-        const typingText = document.getElementById('typingText');
-        const fullText = 'Your Invisible Armor in the Digital World';
-        let currentIndex = 0;
-
-        function typeText() {
-            if (currentIndex < fullText.length) {
-                typingText.textContent += fullText[currentIndex];
-                currentIndex++;
-                setTimeout(typeText, 50);
-            }
+    // MOBILE NAV
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        const spans = hamburger.querySelectorAll('span');
+        if (mobileNav.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+            spans[0].style.transform = ''; spans[1].style.opacity = ''; spans[2].style.transform = '';
         }
+    });
 
-        setTimeout(typeText, 800);
+    // SCROLL REVEAL
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => revealObs.observe(el));
 
-        // Glitch Effect on Hover
-        const glitch = document.querySelector('.glitch');
-        if (glitch) {
-            glitch.addEventListener('mouseenter', () => {
-                glitch.style.animation = 'none';
-                setTimeout(() => {
-                    glitch.style.animation = '';
-                }, 10);
-            });
-        }
-
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        revealElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const statCards = document.querySelectorAll('.stat-number');
-            statCards.forEach(card => {
-                const target = parseFloat(card.getAttribute('data-target'));
-                if (target) {
-                    let current = 0;
-                    const increment = target / 30;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            card.textContent = target.toLocaleString();
-                            clearInterval(timer);
-                        } else {
-                            card.textContent = Math.floor(current);
-                        }
-                    }, 50);
-                }
-            });
-        }
-
-        // Trigger counters when stats section is visible
-        const statsSection = document.getElementById('stats');
-        const statsObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                animateCounters();
-                statsObserver.unobserve(statsSection);
-            }
-        }, { threshold: 0.5 });
-
-        statsObserver.observe(statsSection);
-
-        // Three.js Scene Setup
-        const canvas = document.getElementById('three-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-
+    // THREE.JS BACKGROUND
+    (function() {
+        const canvas = document.getElementById('bg-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setClearColor(0x080d1a, 0);
-        camera.position.z = 50;
 
-        // Particle System
-        const particleCount = 250;
-        const particleGeometry = new THREE.BufferGeometry();
-        const positions = [];
-        const sizes = [];
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 30;
 
+        // Particle field
+        const particleCount = 800;
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        const c1 = new THREE.Color(0x00d4ff);
+        const c2 = new THREE.Color(0x7b61ff);
+        const c3 = new THREE.Color(0x00ffa3);
         for (let i = 0; i < particleCount; i++) {
-            const x = (Math.random() - 0.5) * 100;
-            const y = (Math.random() - 0.5) * 100;
-            const z = (Math.random() - 0.5) * 100;
-            positions.push(x, y, z);
-            sizes.push(Math.random() * 0.5 + 0.2);
+            positions[i*3] = (Math.random() - 0.5) * 80;
+            positions[i*3+1] = (Math.random() - 0.5) * 80;
+            positions[i*3+2] = (Math.random() - 0.5) * 60;
+            const c = [c1, c2, c3][Math.floor(Math.random() * 3)];
+            colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
         }
+        const pGeo = new THREE.BufferGeometry();
+        pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        pGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-        particleGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
-        particleGeometry.setAttribute('size', new THREE.BufferAttribute(new Float32Array(sizes), 1));
-
-        const particleMaterial = new THREE.PointsMaterial({
-            color: 0x00d4ff,
-            size: 0.5,
-            sizeAttenuation: true,
-            transparent: true,
-            opacity: 0.8
+        const pMat = new THREE.PointsMaterial({
+            size: 1.2, vertexColors: true, transparent: true, opacity: 0.6,
+            blending: THREE.AdditiveBlending, depthWrite: false,
+            sizeAttenuation: true
         });
-
-        const particles = new THREE.Points(particleGeometry, particleMaterial);
+        const particles = new THREE.Points(pGeo, pMat);
         scene.add(particles);
 
-        // Lines between particles
-        const lineGeometry = new THREE.BufferGeometry();
-        const lineMaterial = new THREE.LineBasicMaterial({
-            color: 0x00d4ff,
-            transparent: true,
-            opacity: 0.3
-        });
-
-        // Central Wireframe Icosahedron (Shield)
-        const shieldGeometry = new THREE.IcosahedronGeometry(15, 3);
-        const shieldMaterial = new THREE.MeshPhongMaterial({
-            color: 0x00d4ff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.2,
-            emissive: 0x00d4ff,
-            emissiveIntensity: 0.3
-        });
-        const shield = new THREE.Mesh(shieldGeometry, shieldMaterial);
-        scene.add(shield);
-
-        // Light setup
-        const light = new THREE.PointLight(0x00d4ff, 1, 100);
-        light.position.set(0, 0, 50);
-        scene.add(light);
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-        scene.add(ambientLight);
-
-        // Animation variables
-        let particlePositions = new Float32Array(positions);
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        function updateLines() {
-            const positionArray = particles.geometry.attributes.position.array;
-            const lines = [];
-
-            for (let i = 0; i < particleCount; i++) {
-                for (let j = i + 1; j < particleCount; j++) {
-                    const dx = positionArray[i * 3] - positionArray[j * 3];
-                    const dy = positionArray[i * 3 + 1] - positionArray[j * 3 + 1];
-                    const dz = positionArray[i * 3 + 2] - positionArray[j * 3 + 2];
-                    const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-                    if (distance < 15) {
-                        lines.push(
-                            positionArray[i * 3], positionArray[i * 3 + 1], positionArray[i * 3 + 2],
-                            positionArray[j * 3], positionArray[j * 3 + 1], positionArray[j * 3 + 2]
-                        );
-                    }
-                }
-            }
-
-            lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(lines), 3));
+        // Wireframe icosahedrons
+        const shapes = [];
+        for (let i = 0; i < 5; i++) {
+            const geo = new THREE.IcosahedronGeometry(Math.random() * 3 + 1.5, 1);
+            const mat = new THREE.MeshBasicMaterial({
+                color: [0x00d4ff, 0x7b61ff, 0x00ffa3][i % 3],
+                wireframe: true, transparent: true,
+                opacity: 0.04 + Math.random() * 0.06
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set((Math.random()-0.5)*50, (Math.random()-0.5)*40, (Math.random()-0.5)*20 - 10);
+            mesh.userData = {
+                rotSpeed: { x: (Math.random()-0.5)*0.003, y: (Math.random()-0.5)*0.003 },
+                floatSpeed: Math.random() * 0.5 + 0.3,
+                floatAmp: Math.random() * 2 + 1,
+                baseY: mesh.position.y
+            };
+            scene.add(mesh);
+            shapes.push(mesh);
         }
 
-        const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-        scene.add(linesMesh);
-
-        // Animation loop
-        let frameCount = 0;
-        let isVisible = true;
-
-        document.addEventListener('visibilitychange', () => {
-            isVisible = !document.hidden;
+        // Mouse parallax
+        let mouseX = 0, mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         });
 
+        const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
-            if (!isVisible) return;
+            const t = clock.getElapsedTime();
 
-            frameCount++;
-            const time = performance.now();
-            const positionArray = particles.geometry.attributes.position.array;
+            particles.rotation.y = t * 0.02 + mouseX * 0.05;
+            particles.rotation.x = t * 0.01 + mouseY * 0.03;
 
-            // Update particle positions with organic motion
-            for (let i = 0; i < particleCount; i++) {
-                const originalX = positions[i * 3];
-                const originalY = positions[i * 3 + 1];
-                const originalZ = positions[i * 3 + 2];
+            shapes.forEach(s => {
+                s.rotation.x += s.userData.rotSpeed.x;
+                s.rotation.y += s.userData.rotSpeed.y;
+                s.position.y = s.userData.baseY + Math.sin(t * s.userData.floatSpeed) * s.userData.floatAmp;
+            });
 
-                positionArray[i * 3] = originalX + Math.sin(time * 0.0005 + i) * 2 + mouseX * 5;
-                positionArray[i * 3 + 1] = originalY + Math.cos(time * 0.0005 + i * 0.7) * 2 + mouseY * 5;
-                positionArray[i * 3 + 2] = originalZ + Math.sin(time * 0.0003 + i * 1.3) * 1;
-            }
-
-            particles.geometry.attributes.position.needsUpdate = true;
-
-            // Rotate particles
-            particles.rotation.x += 0.0001;
-            particles.rotation.y += 0.0002;
-
-            // Rotate shield with breathing scale
-            shield.rotation.x += 0.0005;
-            shield.rotation.y += 0.0008;
-            shield.rotation.z += 0.0003;
-            const breathe = 1 + Math.sin(time * 0.001) * 0.03;
-            shield.scale.set(breathe, breathe, breathe);
-
-            // Update connecting lines every 3rd frame for performance
-            if (frameCount % 3 === 0) {
-                updateLines();
-            }
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.02;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.02;
+            camera.lookAt(0, 0, 0);
 
             renderer.render(scene, camera);
         }
-
         animate();
 
-        // Handle window resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+    })();
+
+    // HERO 3D SHIELD
+    (function() {
+        const canvas = document.getElementById('hero-3d');
+        if (!canvas) return;
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+        camera.position.set(0, 0, 6);
+
+        // Shield geometry
+        const shape = new THREE.Shape();
+        shape.moveTo(0, 1.8);
+        shape.bezierCurveTo(0.6, 1.6, 1.2, 1.2, 1.4, 0.6);
+        shape.bezierCurveTo(1.5, 0.2, 1.5, -0.4, 1.3, -0.8);
+        shape.bezierCurveTo(1.0, -1.3, 0.5, -1.7, 0, -2.0);
+        shape.bezierCurveTo(-0.5, -1.7, -1.0, -1.3, -1.3, -0.8);
+        shape.bezierCurveTo(-1.5, -0.4, -1.5, 0.2, -1.4, 0.6);
+        shape.bezierCurveTo(-1.2, 1.2, -0.6, 1.6, 0, 1.8);
+
+        const extrudeSettings = { depth: 0.3, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.08, bevelSegments: 6 };
+        const shieldGeo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+        shieldGeo.center();
+
+        const shieldMat = new THREE.MeshPhysicalMaterial({
+            color: 0x00d4ff, metalness: 0.1, roughness: 0.15,
+            transparent: true, opacity: 0.35, side: THREE.DoubleSide,
+            envMapIntensity: 1.5
+        });
+        const shield = new THREE.Mesh(shieldGeo, shieldMat);
+        scene.add(shield);
+
+        // Wireframe overlay
+        const wireMat = new THREE.MeshBasicMaterial({ color: 0x00d4ff, wireframe: true, transparent: true, opacity: 0.15 });
+        const wireShield = new THREE.Mesh(shieldGeo.clone(), wireMat);
+        wireShield.scale.set(1.02, 1.02, 1.02);
+        scene.add(wireShield);
+
+        // Orbiting rings
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(2.2, 0.02, 16, 100),
+            new THREE.MeshBasicMaterial({ color: 0x7b61ff, transparent: true, opacity: 0.4 })
+        );
+        scene.add(ring);
+
+        const ring2 = new THREE.Mesh(
+            new THREE.TorusGeometry(2.6, 0.015, 16, 100),
+            new THREE.MeshBasicMaterial({ color: 0x00ffa3, transparent: true, opacity: 0.2 })
+        );
+        ring2.rotation.x = Math.PI / 6;
+        scene.add(ring2);
+
+        // Orbiting particles
+        const orbCount = 60;
+        const orbPositions = new Float32Array(orbCount * 3);
+        for (let i = 0; i < orbCount; i++) {
+            const angle = (i / orbCount) * Math.PI * 2;
+            const radius = 2.0 + Math.random() * 0.8;
+            orbPositions[i*3] = Math.cos(angle) * radius;
+            orbPositions[i*3+1] = (Math.random() - 0.5) * 1.5;
+            orbPositions[i*3+2] = Math.sin(angle) * radius;
+        }
+        const orbGeo = new THREE.BufferGeometry();
+        orbGeo.setAttribute('position', new THREE.BufferAttribute(orbPositions, 3));
+        const orbMat = new THREE.PointsMaterial({ color: 0x00d4ff, size: 0.06, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
+        const orbParticles = new THREE.Points(orbGeo, orbMat);
+        scene.add(orbParticles);
+
+        // Lighting
+        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+        const dir = new THREE.DirectionalLight(0x00d4ff, 1.2);
+        dir.position.set(3, 4, 5);
+        scene.add(dir);
+        const point = new THREE.PointLight(0x7b61ff, 0.8, 20);
+        point.position.set(-3, -2, 3);
+        scene.add(point);
+        const point2 = new THREE.PointLight(0x00ffa3, 0.5, 15);
+        point2.position.set(2, -3, 2);
+        scene.add(point2);
+
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const t = clock.getElapsedTime();
+
+            shield.rotation.y = t * 0.3;
+            shield.rotation.x = Math.sin(t * 0.5) * 0.1;
+            wireShield.rotation.y = t * 0.3;
+            wireShield.rotation.x = Math.sin(t * 0.5) * 0.1;
+
+            ring.rotation.z = t * 0.2;
+            ring.rotation.x = Math.PI / 3 + Math.sin(t * 0.3) * 0.1;
+            ring2.rotation.z = -t * 0.15;
+
+            orbParticles.rotation.y = t * 0.15;
+
+            shield.position.y = Math.sin(t * 0.8) * 0.15;
+            wireShield.position.y = shield.position.y;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+    })();
     </script>
 </body>
 </html>
