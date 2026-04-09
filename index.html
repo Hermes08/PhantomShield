@@ -982,16 +982,16 @@
         camera.position.z = 30;
 
         // Particle field
-        const particleCount = 800;
+        const particleCount = 400;
         const positions = new Float32Array(particleCount * 3);
         const colors = new Float32Array(particleCount * 3);
         const c1 = new THREE.Color(0x00d4ff);
         const c2 = new THREE.Color(0x7b61ff);
         const c3 = new THREE.Color(0x00ffa3);
         for (let i = 0; i < particleCount; i++) {
-            positions[i*3] = (Math.random() - 0.5) * 80;
-            positions[i*3+1] = (Math.random() - 0.5) * 80;
-            positions[i*3+2] = (Math.random() - 0.5) * 60;
+            positions[i*3] = (Math.random() - 0.5) * 120;
+            positions[i*3+1] = (Math.random() - 0.5) * 120;
+            positions[i*3+2] = (Math.random() - 0.5) * 80;
             const c = [c1, c2, c3][Math.floor(Math.random() * 3)];
             colors[i*3] = c.r; colors[i*3+1] = c.g; colors[i*3+2] = c.b;
         }
@@ -1000,7 +1000,7 @@
         pGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
         const pMat = new THREE.PointsMaterial({
-            size: 1.2, vertexColors: true, transparent: true, opacity: 0.6,
+            size: 0.3, vertexColors: true, transparent: true, opacity: 0.35,
             blending: THREE.AdditiveBlending, depthWrite: false,
             sizeAttenuation: true
         });
@@ -1010,11 +1010,11 @@
         // Wireframe icosahedrons
         const shapes = [];
         for (let i = 0; i < 5; i++) {
-            const geo = new THREE.IcosahedronGeometry(Math.random() * 3 + 1.5, 1);
+            const geo = new THREE.IcosahedronGeometry(Math.random() * 2 + 1, 1);
             const mat = new THREE.MeshBasicMaterial({
                 color: [0x00d4ff, 0x7b61ff, 0x00ffa3][i % 3],
                 wireframe: true, transparent: true,
-                opacity: 0.04 + Math.random() * 0.06
+                opacity: 0.02 + Math.random() * 0.03
             });
             const mesh = new THREE.Mesh(geo, mat);
             mesh.position.set((Math.random()-0.5)*50, (Math.random()-0.5)*40, (Math.random()-0.5)*20 - 10);
