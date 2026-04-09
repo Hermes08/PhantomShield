@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity for Small Business | Affordable Security Solutions | Phantom Shield</title>
+    <meta name="description" content="Enterprise-grade cybersecurity for small businesses at SMB-friendly prices. Vulnerability scanning, penetration testing, compliance support, and 24/7 incident response. Get your free security score.">
+    <meta name="keywords" content="cybersecurity for small business, security audit services, SMB security, affordable cybersecurity, small business protection, vulnerability assessment, penetration testing">
+    <meta name="author" content="Phantom Shield">
+    <meta name="theme-color" content="#080d1a">
+    <meta property="og:title" content="Cybersecurity for Small Business | Phantom Shield">
+    <meta property="og:description" content="Enterprise security at SMB prices. Vulnerability scanning, penetration testing, and compliance for small businesses.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phantomshield-cyber.netlify.app/small-business.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #080d1a;
+            --bg-secondary: #0d1526;
+            --accent: #00d4ff;
+            --accent-secondary: #7b61ff;
+            --text-primary: #e8edf5;
+            --text-muted: #8892a4;
+            --danger: #ff4757;
+            --success: #2ed573;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOutPreloader 0.6s ease-out 1.4s forwards;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .shield-loader {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .shield-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent);
+            border-right: 3px solid var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        .shield-loader::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 25px;
+            border: 2px solid var(--accent);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .preloader-text {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: pulse-text 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOutPreloader {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            width: 0;
+            z-index: 9998;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 13, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink {
+            padding: 1rem 0;
+            background: rgba(8, 13, 26, 0.9);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+        }
+
+        nav.desktop-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav.desktop-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav.desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav.desktop-nav a:hover {
+            color: var(--accent);
+        }
+
+        nav.desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(8, 13, 26, 0.95);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .emergency-btn {
+            padding: 10px 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            animation: pulse-emergency 2s ease-in-out infinite;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+        }
+
+        @keyframes pulse-emergency {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 100px 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding-top: 120px;
+            padding-bottom: 120px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--text-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stat-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .content-card h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .content-card h3 {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .content-card ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .content-card li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .content-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Vulnerability Cards Grid */
+        .vuln-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .vuln-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .vuln-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--danger);
+            transform: scale(1.05);
+        }
+
+        .vuln-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .vuln-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .vuln-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Pricing Grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--accent);
+            background: rgba(0, 212, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--bg-primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-tier {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .pricing-period {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* ROI Section */
+        .roi-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            align-items: center;
+        }
+
+        .roi-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .roi-box.danger {
+            border-color: rgba(255, 71, 87, 0.5);
+        }
+
+        .roi-number {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .roi-label {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Checklist */
+        .checklist {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            margin-top: 30px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .checklist-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .checklist-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover .checklist-checkbox {
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .checklist-text {
+            color: var(--text-primary);
+            font-size: 15px;
+        }
+
+        /* Testimonial Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--accent);
+        }
+
+        .testimonial-text {
+            color: var(--text-primary);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 14px;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        /* CTA Buttons */
+        .btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 16px;
+            padding: 80px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 60px 40px;
+            margin-top: 100px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-social a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            nav.desktop-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .emergency-btn {
+                padding: 8px 15px;
+                font-size: 11px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .breadcrumbs {
+                padding: 100px 20px 20px;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: scale(1) translateY(-10px);
+            }
+
+            .roi-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="shield-loader"></div>
+            <p class="preloader-text">PHANTOM SHIELD</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2C16 2 8 6 8 14C8 20 12 26 16 28C20 26 24 20 24 14C24 6 16 2 16 2Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 15L15.5 16.5L18.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span>Phantom Shield</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <div class="nav-dropdown">
+                    <a href="#">Markets ▼</a>
+                    <div class="nav-dropdown-menu">
+                        <a href="latin-america.html">Latin America</a>
+                        <a href="panama.html">Panama</a>
+                        <a href="small-business.html">SMB</a>
+                    </div>
+                </div>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <button class="emergency-btn">Experiencing a Breach?</button>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="latin-america.html">Markets - Latin America</a>
+            <a href="panama.html">Markets - Panama</a>
+            <a href="small-business.html">Markets - SMB</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <a href="index.html">Home</a> / <a href="#">Markets</a> / <strong>Small Business</strong>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="reveal">Enterprise-Grade Security at SMB Prices</h1>
+            <p class="subtitle reveal">Protect your business without breaking the bank</p>
+            <p class="description reveal">43% of cyberattacks target small businesses. But you don't have large enterprise budgets. Phantom Shield brings penetration testing, vulnerability scanning, compliance support, and 24/7 incident response to SMBs who need it most.</p>
+            <button class="btn btn-primary reveal">Get Your Free SMB Security Score</button>
+        </section>
+
+        <!-- Why This Matters Section -->
+        <section>
+            <h2 class="section-title reveal">Why Small Businesses Are Prime Targets</h2>
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-number">43%</div>
+                    <div class="stat-label">Of cyberattacks target small businesses</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">$4.88M</div>
+                    <div class="stat-label">Average cost of a data breach</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">60%</div>
+                    <div class="stat-label">Of SMBs close within 6 months of a breach</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">10 days</div>
+                    <div class="stat-label">Average time to detect a breach</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Common Vulnerabilities -->
+        <section>
+            <h2 class="section-title reveal">Common SMB Vulnerabilities</h2>
+            <p style="font-size: 18px; color: var(--text-muted); margin-bottom: 40px; text-align: center;">Small businesses often struggle with the fundamentals. These weaknesses create exploitable gaps:</p>
+            <div class="vuln-grid">
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">🔑</div>
+                    <h3>Weak Passwords</h3>
+                    <p>Default, reused, or easily guessable credentials across accounts</p>
+                </div>
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">📱</div>
+                    <h3>No MFA</h3>
+                    <p>Missing multi-factor authentication leaves accounts vulnerable to brute force</p>
+                </div>
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">🔧</div>
+                    <h3>Unpatched Software</h3>
+                    <p>Outdated systems with known vulnerabilities waiting to be exploited</p>
+                </div>
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">💾</div>
+                    <h3>No Backup Strategy</h3>
+                    <p>Missing or untested backups mean ransomware becomes catastrophic</p>
+                </div>
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">🎣</div>
+                    <h3>Phishing Susceptibility</h3>
+                    <p>Employees lack training to recognize social engineering attacks</p>
+                </div>
+                <div class="vuln-card reveal">
+                    <div class="vuln-icon">🚨</div>
+                    <h3>No Incident Plan</h3>
+                    <p>Unprepared response leads to costly mistakes and compliance violations</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SMB Packages -->
+        <section>
+            <h2 class="section-title reveal">Our SMB Security Packages</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal">
+                    <div class="pricing-tier">Shield Basic</div>
+                    <div class="pricing-price">$499</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>Monthly vulnerability scans</li>
+                        <li>Email security & phishing detection</li>
+                        <li>Basic security monitoring</li>
+                        <li>Threat alerts & notifications</li>
+                        <li>Monthly security report</li>
+                        <li>Email support (48hr response)</li>
+                    </ul>
+                    <button class="btn btn-secondary">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="pricing-badge">Most Popular</div>
+                    <div class="pricing-tier">Shield Pro</div>
+                    <div class="pricing-price">$1,499</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>All Shield Basic features</li>
+                        <li>Quarterly pen testing</li>
+                        <li>Advanced threat intelligence</li>
+                        <li>Compliance support (GDPR, HIPAA)</li>
+                        <li>Security policy review & updates</li>
+                        <li>Priority support (8x5 response)</li>
+                        <li>Incident response retainer</li>
+                    </ul>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <div class="pricing-tier">Shield Enterprise</div>
+                    <div class="pricing-price">$3,999</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>All Shield Pro features</li>
+                        <li>24/7 Security Operations Center</li>
+                        <li>Monthly penetration testing</li>
+                        <li>Dedicated security analyst</li>
+                        <li>Custom security roadmap</li>
+                        <li>Advanced incident response</li>
+                        <li>24/7 emergency support</li>
+                    </ul>
+                    <button class="btn btn-secondary">Contact Sales</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI Section -->
+        <section>
+            <h2 class="section-title reveal">ROI: Prevention vs. Recovery</h2>
+            <p style="text-align: center; font-size: 18px; color: var(--text-muted); margin-bottom: 40px;">The numbers are stark. Prevention is far cheaper than recovery.</p>
+            <div class="roi-comparison reveal">
+                <div class="roi-box danger">
+                    <div class="roi-number" style="color: var(--danger);">$4.88M</div>
+                    <div class="roi-label">Cost of a breach (downtime, recovery, legal)</div>
+                    <p style="margin-top: 15px; color: var(--text-muted); font-size: 14px;">Average breach impact for SMBs including lost business, compliance fines, and recovery costs</p>
+                </div>
+                <div class="roi-box">
+                    <div class="roi-number" style="color: var(--success);">$21.6K/year</div>
+                    <div class="roi-label">Cost of protection (Shield Pro)</div>
+                    <p style="margin-top: 15px; color: var(--text-muted); font-size: 14px;">Annual investment in comprehensive security monitoring and testing</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 16px; color: var(--accent); font-weight: 600;">Protect your business for $21.6K/year instead of recovering from a $4.88M breach. That's 226x ROI.</p>
+        </section>
+
+        <!-- Security Checklist -->
+        <section>
+            <h2 class="section-title reveal">SMB Security Checklist</h2>
+            <p style="text-align: center; font-size: 18px; color: var(--text-muted); margin-bottom: 30px;">Use this checklist to assess your current security posture. Most SMBs are missing several critical items.</p>
+            <div class="checklist reveal">
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">All systems using strong passwords (12+ characters, unique per account)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Multi-factor authentication (MFA) enabled on all critical accounts</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Operating systems and software fully patched and up-to-date</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Automated daily backups with offsite storage</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Employee security awareness training (annual minimum)</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Phishing testing and email security controls in place</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Incident response plan documented and tested</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Vulnerability scanning and penetration testing performed</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Data encryption in transit (HTTPS) and at rest</div>
+                </div>
+                <div class="checklist-item">
+                    <div class="checklist-checkbox">✓</div>
+                    <div class="checklist-text">Compliance requirements mapped to your industry (GDPR, HIPAA, PCI-DSS, etc.)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section>
+            <h2 class="section-title reveal">What SMB Leaders Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-text">"We didn't think we could afford professional security. Phantom Shield's Shield Pro package gave us peace of mind without draining our IT budget. When we had a minor phishing incident, their 8x5 support saved us hours of stress."</div>
+                    <div class="testimonial-author">Sarah Chen</div>
+                    <div class="testimonial-role">Operations Manager, Tech Consulting Firm (25 employees)</div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-text">"As a healthcare provider, HIPAA compliance was overwhelming. Phantom Shield walked us through every requirement and helped us document everything. The quarterly pen tests caught vulnerabilities before they became problems."</div>
+                    <div class="testimonial-author">Dr. Michael Torres</div>
+                    <div class="testimonial-role">Clinic Owner, Family Medicine Practice</div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-text">"We got hit with ransomware. Without Phantom Shield's backup strategy recommendation and incident response training, we would have lost everything. Their quick response minimized our downtime to 2 hours."</div>
+                    <div class="testimonial-author">James Rodriguez</div>
+                    <div class="testimonial-role">Owner, E-commerce Business (15 employees)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section>
+            <div class="cta-section reveal">
+                <h2>Get Your Free SMB Security Score</h2>
+                <p>Assess your security posture in 5 minutes. No credit card required.</p>
+                <form name="smb-assessment" method="POST" data-netlify="true" style="max-width: 600px; margin: 40px auto;">
+                    <input type="hidden" name="form-name" value="smb-assessment">
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" name="business_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Employees</label>
+                        <input type="number" name="employees" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Industry</label>
+                        <input type="text" name="industry" placeholder="e.g., Healthcare, E-commerce, Manufacturing" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Security Concerns (Optional)</label>
+                        <textarea name="concerns" placeholder="What security challenges are you facing?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Security Score</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Phantom Shield</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Advanced cybersecurity solutions built on expertise, integrity, and innovation. Protecting SMBs and enterprises since 2024.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="small-business.html">SMB Solutions</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Markets</h3>
+                <ul>
+                    <li><a href="latin-america.html">Latin America</a></li>
+                    <li><a href="panama.html">Panama</a></li>
+                    <li><a href="small-business.html">Small Business</a></li>
+                    <li><a href="services.html">Enterprise</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security Disclosure</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 Phantom Shield. All rights reserved. | Cybersecurity Excellence</div>
+            <div class="footer-social">
+                <a href="#" title="LinkedIn">In</a>
+                <a href="#" title="Twitter">X</a>
+                <a href="#" title="GitHub">GH</a>
+                <a href="#" title="Email">@</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.querySelector('.preloader');
+                preloader.style.animation = 'fadeOutPreloader 0.6s ease-out forwards';
+            }, 1400);
+        });
+
+        // Scroll Progress Bar
+        const scrollProgress = document.querySelector('.scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Header Shrink on Scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#mobileNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Emergency Button Handler
+        document.querySelectorAll('.emergency-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Emergency Contact: +1 (407) 555-9999\n\nFor immediate assistance, call our 24/7 breach response team.');
+            });
+        });
+    </script>
+</body>
+</html>

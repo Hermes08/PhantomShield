@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Blog & Resources | Latest Threat Intelligence | Phantom Shield</title>
+    <meta name="description" content="Cybersecurity insights, threat intelligence, compliance guides, and security best practices from expert analysts. Stay ahead of threats with Phantom Shield's blog.">
+    <meta name="keywords" content="cybersecurity blog, threat intelligence, compliance guides, security resources, LATAM threats, ransomware, penetration testing, SMB security">
+    <meta name="author" content="Phantom Shield">
+    <meta name="theme-color" content="#080d1a">
+    <meta property="og:title" content="Cybersecurity Blog & Resources | Phantom Shield">
+    <meta property="og:description" content="Expert insights on cybersecurity threats, compliance, and protection strategies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phantomshield-cyber.netlify.app/blog.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #080d1a;
+            --bg-secondary: #0d1526;
+            --accent: #00d4ff;
+            --accent-secondary: #7b61ff;
+            --text-primary: #e8edf5;
+            --text-muted: #8892a4;
+            --danger: #ff4757;
+            --success: #2ed573;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOutPreloader 0.6s ease-out 1.4s forwards;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .shield-loader {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .shield-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent);
+            border-right: 3px solid var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        .shield-loader::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 25px;
+            border: 2px solid var(--accent);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .preloader-text {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: pulse-text 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOutPreloader {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            width: 0;
+            z-index: 9998;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 13, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink {
+            padding: 1rem 0;
+            background: rgba(8, 13, 26, 0.9);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+        }
+
+        nav.desktop-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav.desktop-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav.desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav.desktop-nav a:hover {
+            color: var(--accent);
+        }
+
+        nav.desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(8, 13, 26, 0.95);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .emergency-btn {
+            padding: 10px 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            animation: pulse-emergency 2s ease-in-out infinite;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+        }
+
+        @keyframes pulse-emergency {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 100px 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Blog Hero */
+        .blog-hero {
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+
+        .blog-hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 40px;
+            background: rgba(13, 21, 38, 0.3);
+            border-radius: 12px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        /* Article Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+        }
+
+        .article-card {
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .article-card:nth-child(1) { animation-delay: 0.1s; }
+        .article-card:nth-child(2) { animation-delay: 0.2s; }
+        .article-card:nth-child(3) { animation-delay: 0.3s; }
+        .article-card:nth-child(4) { animation-delay: 0.4s; }
+        .article-card:nth-child(5) { animation-delay: 0.5s; }
+        .article-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .article-card:hover {
+            background: rgba(13, 21, 38, 0.8);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(123, 97, 255, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .article-date {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .article-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .article-author {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .article-read-time {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            transform: translateX(5px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 97, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .newsletter-section h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .newsletter-section p {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            background: rgba(8, 13, 26, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(8, 13, 26, 0.7);
+        }
+
+        .newsletter-form button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Featured Resources */
+        .resources-section {
+            margin: 80px 0;
+        }
+
+        .resources-section h2 {
+            font-size: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .resource-card {
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .resource-card:hover {
+            background: rgba(13, 21, 38, 0.8);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-10px);
+        }
+
+        .resource-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .resource-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .resource-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .download-btn:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-social a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            nav.desktop-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .emergency-btn {
+                display: none;
+            }
+
+            .mobile-nav.active .emergency-btn {
+                display: block;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .blog-hero {
+                padding: 80px 20px 40px;
+            }
+
+            .blog-hero h1 {
+                font-size: 36px;
+            }
+
+            .blog-hero p {
+                font-size: 16px;
+            }
+
+            .category-filter {
+                padding: 30px 20px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .newsletter-section {
+                padding: 40px 20px;
+            }
+
+            .newsletter-section h2 {
+                font-size: 28px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="shield-loader"></div>
+            <p class="preloader-text">PHANTOM SHIELD</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2C16 2 8 6 8 14C8 20 12 26 16 28C20 26 24 20 24 14C24 6 16 2 16 2Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 15L15.5 16.5L18.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span>Phantom Shield</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <div class="nav-dropdown">
+                    <a href="#">Markets ▼</a>
+                    <div class="nav-dropdown-menu">
+                        <a href="latin-america.html">Latin America</a>
+                        <a href="panama.html">Panama</a>
+                        <a href="small-business.html">SMB</a>
+                    </div>
+                </div>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <button class="emergency-btn">Experiencing a Breach?</button>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="latin-america.html">Markets: Latin America</a>
+            <a href="panama.html">Markets: Panama</a>
+            <a href="small-business.html">Markets: SMB</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <button class="emergency-btn" style="width: 100%;">Experiencing a Breach?</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> / <span>Blog</span>
+        </div>
+
+        <!-- Blog Hero -->
+        <section class="blog-hero">
+            <h1 class="reveal">Security Intelligence Hub</h1>
+            <p class="reveal">Expert insights on cybersecurity threats, compliance, and protection strategies. Stay informed with the latest threat intelligence and best practices.</p>
+        </section>
+
+        <!-- Category Filter -->
+        <section>
+            <div class="category-filter">
+                <button class="category-btn active" onclick="filterArticles('all')">All</button>
+                <button class="category-btn" onclick="filterArticles('latam')">LATAM Threats</button>
+                <button class="category-btn" onclick="filterArticles('compliance')">Compliance</button>
+                <button class="category-btn" onclick="filterArticles('smb')">SMB Security</button>
+                <button class="category-btn" onclick="filterArticles('threat')">Threat Intelligence</button>
+                <button class="category-btn" onclick="filterArticles('tutorials')">Tutorials</button>
+            </div>
+        </section>
+
+        <!-- Articles Grid -->
+        <section>
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <div class="article-card reveal" data-category="latam">
+                    <div class="article-image">🌎</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">LATAM Threats</span>
+                            <span class="article-date">March 15, 2026</span>
+                        </div>
+                        <h3>Why Latin America is the #1 Target for Cyberattacks in 2025</h3>
+                        <p class="article-excerpt">Latin America has become the primary target for cybercriminals in 2025, facing 40% more attacks than the global average. Explore the geopolitical, economic, and infrastructure factors driving this surge in regional cyber threats.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">8 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="article-card reveal" data-category="smb">
+                    <div class="article-image">✅</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">SMB Security</span>
+                            <span class="article-date">March 8, 2026</span>
+                        </div>
+                        <h3>5 Signs Your Business Needs a Penetration Test</h3>
+                        <p class="article-excerpt">Is your small business truly secure? Learn the critical warning signs that indicate it's time to conduct a penetration test, from lack of recent security assessments to unexplained network activity and employee security concerns.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">5 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-card reveal" data-category="compliance">
+                    <div class="article-image">📋</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">Compliance</span>
+                            <span class="article-date">Feb 28, 2026</span>
+                        </div>
+                        <h3>HIPAA Compliance Checklist for Healthcare Providers</h3>
+                        <p class="article-excerpt">Healthcare organizations must maintain strict HIPAA compliance to protect patient data. This comprehensive checklist covers administrative safeguards, physical security, technical controls, and audit procedures required for full regulatory compliance.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">12 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="article-card reveal" data-category="latam">
+                    <div class="article-image">⚠️</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">LATAM Threats</span>
+                            <span class="article-date">Feb 20, 2026</span>
+                        </div>
+                        <h3>Costa Rica Ransomware Attack: Lessons for Central America</h3>
+                        <p class="article-excerpt">The recent ransomware attack on Costa Rica's government infrastructure exposed critical vulnerabilities affecting the entire Central American region. Discover what this attack reveals about regional cybersecurity gaps and recovery strategies.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">10 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="article-card reveal" data-category="smb">
+                    <div class="article-image">💰</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">SMB Security</span>
+                            <span class="article-date">Feb 12, 2026</span>
+                        </div>
+                        <h3>Cybersecurity on a Budget: The SMB Protection Guide</h3>
+                        <p class="article-excerpt">Budget constraints shouldn't compromise security. Learn cost-effective strategies for small and medium businesses to implement robust cybersecurity measures without breaking the bank, from free tools to prioritized spending.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">7 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="article-card reveal" data-category="latam">
+                    <div class="article-image">🏦</div>
+                    <div class="article-content">
+                        <div class="article-meta">
+                            <span class="article-category">LATAM Threats</span>
+                            <span class="article-date">Feb 5, 2026</span>
+                        </div>
+                        <h3>Panama Banking Security: Protecting Financial Data in 2026</h3>
+                        <p class="article-excerpt">As a major financial hub for Latin America, Panama faces unique cybersecurity challenges. This guide covers regulatory requirements, best practices for financial institutions, and strategies to protect sensitive banking infrastructure.</p>
+                        <div class="article-footer">
+                            <span class="article-author">Phantom Shield Team</span>
+                            <span class="article-read-time">9 min read</span>
+                        </div>
+                        <a href="#" class="read-more-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section>
+            <div class="newsletter-section">
+                <h2>Stay Ahead of Threats</h2>
+                <p>Get weekly cybersecurity insights, threat alerts, and compliance updates delivered straight to your inbox.</p>
+                <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="newsletter">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Featured Resources -->
+        <section class="resources-section">
+            <h2>Featured Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card reveal">
+                    <div class="resource-icon">📊</div>
+                    <h3>LATAM Cybersecurity Report 2026</h3>
+                    <p>Comprehensive analysis of cybersecurity trends, threats, and investment priorities across Latin America for 2026.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+                <div class="resource-card reveal">
+                    <div class="resource-icon">🛡️</div>
+                    <h3>SMB Security Starter Kit</h3>
+                    <p>An actionable guide for small businesses implementing foundational security controls and best practices on limited budgets.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+                <div class="resource-card reveal">
+                    <div class="resource-icon">📋</div>
+                    <h3>Compliance Framework Comparison Guide</h3>
+                    <p>Side-by-side comparison of HIPAA, PCI-DSS, SOC2, GDPR, and other major compliance frameworks for quick reference.</p>
+                    <a href="#" class="download-btn">Download PDF</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Phantom Shield</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Advanced cybersecurity solutions built on expertise, integrity, and innovation.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">Security Assessments</a></li>
+                    <li><a href="services.html">Penetration Testing</a></li>
+                    <li><a href="services.html">Incident Response</a></li>
+                    <li><a href="services.html">Compliance Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security Disclosure</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 Phantom Shield. All rights reserved. | Cybersecurity Excellence</div>
+            <div class="footer-social">
+                <a href="#" title="LinkedIn">In</a>
+                <a href="#" title="Twitter">X</a>
+                <a href="#" title="GitHub">GH</a>
+                <a href="#" title="Email">@</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.querySelector('.preloader');
+                preloader.style.animation = 'fadeOutPreloader 0.6s ease-out forwards';
+            }, 1400);
+        });
+
+        // Scroll Progress Bar
+        const scrollProgress = document.querySelector('.scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Header Shrink on Scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#mobileNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Emergency Button Handler
+        document.querySelectorAll('.emergency-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Emergency Contact: +1 (407) 555-9999\n\nFor immediate assistance, call our 24/7 breach response team.');
+            });
+        });
+
+        // Category Filter
+        function filterArticles(category) {
+            const articles = document.querySelectorAll('.article-card');
+            const buttons = document.querySelectorAll('.category-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            articles.forEach(article => {
+                if (category === 'all' || article.dataset.category === category) {
+                    article.style.display = 'block';
+                    setTimeout(() => article.classList.add('visible'), 10);
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

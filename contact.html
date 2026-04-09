@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Phantom Shield | Cybersecurity Consultation | Emergency Response</title>
+    <meta name="description" content="Contact Phantom Shield for cybersecurity consulting, penetration testing, incident response, and compliance services. 24/7 emergency hotline available.">
+    <meta name="keywords" content="cybersecurity consulting, contact, emergency response, penetration testing, security assessment, incident response hotline">
+    <meta name="author" content="Phantom Shield">
+    <meta name="theme-color" content="#080d1a">
+    <meta property="og:title" content="Contact Phantom Shield | Cybersecurity Consultation">
+    <meta property="og:description" content="Let's secure your future. Contact our cybersecurity experts for consultations and emergency response.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://phantomshield-cyber.netlify.app/contact.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #080d1a;
+            --bg-secondary: #0d1526;
+            --accent: #00d4ff;
+            --accent-secondary: #7b61ff;
+            --text-primary: #e8edf5;
+            --text-muted: #8892a4;
+            --danger: #ff4757;
+            --success: #2ed573;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOutPreloader 0.6s ease-out 1.4s forwards;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .shield-loader {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .shield-loader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent);
+            border-right: 3px solid var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+        }
+
+        .shield-loader::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 25px;
+            border: 2px solid var(--accent);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .preloader-text {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            animation: pulse-text 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeOutPreloader {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes pulse-text {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            width: 0;
+            z-index: 9998;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(8, 13, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 1.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        header.shrink {
+            padding: 1rem 0;
+            background: rgba(8, 13, 26, 0.9);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .logo-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
+        }
+
+        nav.desktop-nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav.desktop-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav.desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav.desktop-nav a:hover {
+            color: var(--accent);
+        }
+
+        nav.desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(8, 13, 26, 0.95);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+        }
+
+        .emergency-btn {
+            padding: 10px 20px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            animation: pulse-emergency 2s ease-in-out infinite;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+        }
+
+        @keyframes pulse-emergency {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: rgba(8, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 12px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 100px 40px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Contact Hero */
+        .contact-hero {
+            padding: 100px 40px 60px;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .emergency-hotline-prominent {
+            font-size: 20px;
+            color: var(--danger);
+            font-weight: 700;
+            margin-top: 15px;
+            animation: pulse-emergency 2s ease-in-out infinite;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 16px;
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(13, 21, 38, 0.8);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2300d4ff' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        .honeypot {
+            display: none;
+        }
+
+        .submit-btn {
+            padding: 14px 30px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Contact Info Cards */
+        .contact-info-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(13, 21, 38, 0.8);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .info-card h3 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            word-break: break-word;
+        }
+
+        .info-card a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-card a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Locations Section */
+        .locations-section {
+            margin-top: 80px;
+        }
+
+        .locations-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .location-card {
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            background: rgba(13, 21, 38, 0.8);
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-10px);
+        }
+
+        .location-map {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 97, 255, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .location-info {
+            padding: 30px;
+        }
+
+        .location-info h3 {
+            font-size: 20px;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .location-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        /* Response Time Guarantee */
+        .response-guarantee {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(123, 97, 255, 0.1) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .response-guarantee h3 {
+            color: var(--accent);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .response-guarantee p {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(13, 21, 38, 0.5);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            background: rgba(13, 21, 38, 0.8);
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .faq-question h4 {
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .faq-toggle {
+            color: var(--accent);
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 25px 25px;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.8;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 60px 40px 30px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-social a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+
+            nav.desktop-nav {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .emergency-btn {
+                display: none;
+            }
+
+            .mobile-nav.active .emergency-btn {
+                display: block;
+            }
+
+            section {
+                padding: 50px 20px;
+            }
+
+            .contact-hero {
+                padding: 80px 20px 40px;
+            }
+
+            .contact-hero h1 {
+                font-size: 36px;
+            }
+
+            .contact-section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-container {
+                max-width: 100%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .locations-section {
+                margin-top: 50px;
+            }
+
+            .response-guarantee {
+                padding: 30px 20px;
+            }
+
+            .faq-section {
+                margin: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="shield-loader"></div>
+            <p class="preloader-text">PHANTOM SHIELD</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2C16 2 8 6 8 14C8 20 12 26 16 28C20 26 24 20 24 14C24 6 16 2 16 2Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 15L15.5 16.5L18.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <span>Phantom Shield</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <div class="nav-dropdown">
+                    <a href="#">Markets ▼</a>
+                    <div class="nav-dropdown-menu">
+                        <a href="latin-america.html">Latin America</a>
+                        <a href="panama.html">Panama</a>
+                        <a href="small-business.html">SMB</a>
+                    </div>
+                </div>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <button class="emergency-btn">Experiencing a Breach?</button>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="latin-america.html">Markets: Latin America</a>
+            <a href="panama.html">Markets: Panama</a>
+            <a href="small-business.html">Markets: SMB</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <button class="emergency-btn" style="width: 100%;">Experiencing a Breach?</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> / <span>Contact</span>
+        </div>
+
+        <!-- Contact Hero -->
+        <section class="contact-hero">
+            <h1 class="reveal">Let's Secure Your Future</h1>
+            <p class="reveal">Get expert cybersecurity solutions tailored to your organization's needs. Our team is ready to help protect your assets and respond to threats.</p>
+            <div class="emergency-hotline-prominent reveal">📞 EMERGENCY: +1 (407) 555-9999 | Available 24/7</div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="reveal">
+            <div class="contact-section">
+                <!-- Contact Form -->
+                <div>
+                    <form class="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="contact">
+
+                        <div class="honeypot">
+                            <input name="bot-field">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company-size">Company Size *</label>
+                            <select id="company-size" name="company-size" required>
+                                <option value="">Select company size...</option>
+                                <option value="1-10">1-10 Employees</option>
+                                <option value="11-50">11-50 Employees</option>
+                                <option value="51-200">51-200 Employees</option>
+                                <option value="200+">200+ Employees</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interest *</label>
+                            <select id="service" name="service" required>
+                                <option value="">Select a service...</option>
+                                <option value="security-assessment">Security Assessment</option>
+                                <option value="penetration-testing">Penetration Testing</option>
+                                <option value="compliance-consulting">Compliance Consulting</option>
+                                <option value="managed-security">Managed Security</option>
+                                <option value="incident-response">Incident Response</option>
+                                <option value="smb-package">SMB Package</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="language">Preferred Language *</label>
+                            <select id="language" name="language" required>
+                                <option value="">Select language...</option>
+                                <option value="english">English</option>
+                                <option value="spanish">Spanish</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your security needs..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <div class="contact-info-cards">
+                        <div class="info-card reveal">
+                            <h3>Email</h3>
+                            <p><a href="mailto:contact@phantomshield.com">contact@phantomshield.com</a></p>
+                        </div>
+                        <div class="info-card reveal">
+                            <h3>Phone</h3>
+                            <p><a href="tel:+14075559999">+1 (407) 555-9999</a></p>
+                        </div>
+                        <div class="info-card reveal">
+                            <h3>Emergency Hotline</h3>
+                            <p style="color: var(--danger); font-weight: 600;">+1 (407) 555-0147</p>
+                            <p style="font-size: 12px; margin-top: 8px;">Available 24/7 for active breaches</p>
+                        </div>
+                        <div class="info-card reveal">
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/14075550147" target="_blank">+1 (407) 555-0147</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Office Locations -->
+        <section class="locations-section">
+            <h2 class="locations-title reveal">Our Locations</h2>
+            <div class="locations-grid">
+                <div class="location-card reveal">
+                    <div class="location-map">📍</div>
+                    <div class="location-info">
+                        <h3>Orlando, FL - Primary Office</h3>
+                        <p><strong>Address:</strong></p>
+                        <p>123 Cybersecurity Boulevard<br>Orlando, FL 32801<br>United States</p>
+                        <p style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">Main headquarters for North American operations</p>
+                    </div>
+                </div>
+                <div class="location-card reveal">
+                    <div class="location-map">🌎</div>
+                    <div class="location-info">
+                        <h3>Panama City - LATAM Operations</h3>
+                        <p><strong>Address:</strong></p>
+                        <p>Oceania Business Plaza<br>Panama City, Panama</p>
+                        <p style="margin-top: 15px; font-size: 12px; color: var(--text-muted);">Regional hub for Latin American clients and operations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Response Time Guarantee -->
+        <section>
+            <div class="response-guarantee reveal">
+                <h3>⏱️ Response Time Guarantee</h3>
+                <p>We respond within <strong>2 hours for emergencies</strong> and <strong>24 hours for general inquiries</strong>. Your security is our priority.</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="faq-title reveal">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item reveal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>What happens after I submit the form?</h4>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        After you submit your information, our team will review your request within 24 hours. We'll contact you via your preferred method to understand your specific needs, discuss available services, and provide a customized quote or security assessment timeline. For emergency breach inquiries, we'll contact you immediately.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Do you offer free assessments?</h4>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We offer a free 30-minute consultation to discuss your security concerns and recommend services that fit your organization's needs and budget. This consultation allows us to understand your environment before proposing any paid services. For organizations interested in deeper assessment, we offer flexible pricing options including starter packages for smaller businesses.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>What languages do you support?</h4>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Phantom Shield provides full support in both English and Spanish. Our team is fluent in both languages and can conduct assessments, consultations, and reports in your preferred language. This is especially valuable for our LATAM operations and clients across Latin America and the Caribbean.
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>How quickly can you respond to an active breach?</h4>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Our emergency incident response team can be mobilized within 2 hours of your call. We have 24/7 on-call specialists trained in immediate containment, forensic investigation, and threat mitigation. Simply call our emergency hotline at +1 (407) 555-0147, and we'll guide you through the critical first steps while assembling our response team.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Phantom Shield</h3>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Advanced cybersecurity solutions built on expertise, integrity, and innovation.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="services.html">Security Assessments</a></li>
+                    <li><a href="services.html">Penetration Testing</a></li>
+                    <li><a href="services.html">Incident Response</a></li>
+                    <li><a href="services.html">Compliance Services</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Security Disclosure</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="copyright">&copy; 2026 Phantom Shield. All rights reserved. | Cybersecurity Excellence</div>
+            <div class="footer-social">
+                <a href="#" title="LinkedIn">In</a>
+                <a href="#" title="Twitter">X</a>
+                <a href="#" title="GitHub">GH</a>
+                <a href="#" title="Email">@</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.querySelector('.preloader');
+                preloader.style.animation = 'fadeOutPreloader 0.6s ease-out forwards';
+            }, 1400);
+        });
+
+        // Scroll Progress Bar
+        const scrollProgress = document.querySelector('.scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Header Shrink on Scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('#mobileNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Emergency Button Handler
+        document.querySelectorAll('.emergency-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Emergency Contact: +1 (407) 555-9999\n\nFor immediate assistance, call our 24/7 breach response team.');
+            });
+        });
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

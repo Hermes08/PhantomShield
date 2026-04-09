@@ -215,6 +215,47 @@
             width: 100%;
         }
 
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(8, 13, 26, 0.95);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--accent);
+        }
+
         .emergency-btn {
             padding: 10px 20px;
             background: var(--danger);
@@ -1334,11 +1375,18 @@
             </a>
 
             <nav class="desktop-nav">
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#certifications">Certifications</a>
-                <a href="#why-us">Why Us</a>
-                <a href="#contact">Contact</a>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <div class="nav-dropdown">
+                    <a href="#">Markets ▼</a>
+                    <div class="nav-dropdown-menu">
+                        <a href="latin-america.html">Latin America</a>
+                        <a href="panama.html">Panama</a>
+                        <a href="small-business.html">SMB</a>
+                    </div>
+                </div>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
             </nav>
 
             <button class="emergency-btn">Experiencing a Breach?</button>
@@ -1351,11 +1399,13 @@
         </div>
 
         <nav class="mobile-nav" id="mobileNav">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#certifications">Certifications</a>
-            <a href="#why-us">Why Us</a>
-            <a href="#contact">Contact</a>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="latin-america.html">Markets: Latin America</a>
+            <a href="panama.html">Markets: Panama</a>
+            <a href="small-business.html">Markets: SMB</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
             <button class="emergency-btn" style="width: 100%;">Experiencing a Breach?</button>
         </nav>
     </header>
