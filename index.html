@@ -48,35 +48,36 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #gfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .page-content{position:relative;z-index:1}
 
+/* ===== GFX OVERLAY — mazehq-style hotspot constellation ===== */
+#s-gfx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:hidden;transition:opacity .6s}
+/* Each hotspot: a floating circle ring */
+.hs{position:absolute;pointer-events:none;opacity:0;will-change:transform,opacity}
+.hs.visible{opacity:1}
+.hs svg.svg-circle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hs svg.svg-circle circle{fill:none;stroke-width:1;stroke-dasharray:4 3;animation:ring-spin var(--spin-dur,18s) linear infinite}
+.hs svg.svg-circle circle{stroke:rgba(255,71,87,0.18)}
+.hs.hs--neutral svg.svg-circle circle{stroke:rgba(131,145,155,0.12)}
+@keyframes ring-spin{to{stroke-dashoffset:-300}}
+/* Hotspot float */
+.hs{animation:hs-float var(--float-dur,7s) ease-in-out infinite;animation-delay:var(--float-delay,0s)}
+@keyframes hs-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.03)}}
+/* CVE card hotspot */
+.hs--card .hs-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,15,28,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(131,145,155,0.18);border-radius:10px;padding:13px 17px;white-space:nowrap;z-index:3}
+.hs--card .hs-card__id{font-size:13px;font-weight:600;color:var(--text-bright);margin-bottom:8px;letter-spacing:.02em}
+.hs--card .hs-card__badges{display:flex;gap:5px;flex-wrap:wrap}
+
 /* GRID SYSTEM (mazehq-style 12-col) */
 .grid-wrap{max-width:1280px;margin:0 auto;padding:0 48px}
 
-/* ===== FLOATING THREAT CARDS (mazehq hotspots) ===== */
-.s-gfx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:hidden}
-.hotspot{position:absolute;opacity:0;animation:hotspot-in 1.2s ease-out forwards;animation-delay:var(--delay,0ms)}
-.hotspot__inner{position:relative}
-.hotspot__ui{background:rgba(15,21,35,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(131,145,155,0.15);border-radius:12px;padding:14px 18px;white-space:nowrap;position:relative;z-index:2}
-.hotspot__text{font-size:13px;font-weight:600;color:var(--text-bright);margin-bottom:8px;letter-spacing:.02em}
-.hotspot__badges{display:flex;gap:6px;flex-wrap:wrap}
+/* ===== BADGE STYLES (shared) ===== */
 .badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
 .badge--red{background:rgba(255,71,87,0.12);color:#ff6b7a;border:1px solid rgba(255,71,87,0.18)}
 .badge--yellow{background:rgba(255,193,7,0.1);color:#ffc107;border:1px solid rgba(255,193,7,0.18)}
 .badge--cyan{background:rgba(0,212,255,0.08);color:var(--accent);border:1px solid rgba(0,212,255,0.18)}
-/* Animated SVG ring around hotspot (mazehq signature) */
-.hotspot__ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:220px;z-index:1;pointer-events:none}
-.hotspot__ring circle{fill:none;stroke:rgba(255,71,87,0.12);stroke-width:1;stroke-dasharray:4 4;animation:ring-rotate 20s linear infinite}
-.hotspot:nth-child(2) .hotspot__ring circle{stroke:rgba(0,212,255,0.12);animation-direction:reverse}
-.hotspot:nth-child(3) .hotspot__ring circle{stroke:rgba(212,9,254,0.12);animation-duration:25s}
-@keyframes ring-rotate{to{stroke-dashoffset:-300}}
-/* Dotted line connector (mazehq signature element) */
+@keyframes ring-spin{to{stroke-dashoffset:-300}}
+/* Dotted line connector */
 .dotted-line{border:none;border-top:1px dashed var(--text-dim);opacity:.18;margin:60px 0}
 .gradient-divider{height:1px;border:none;background:linear-gradient(90deg,transparent,rgba(0,212,255,0.15),rgba(212,9,254,0.1),transparent);margin:0}
-@keyframes hotspot-in{0%{opacity:0;transform:translateY(20px) scale(0.9)}100%{opacity:1;transform:translateY(0) scale(1)}}
-/* Float animation for hotspots */
-.hotspot{animation:hotspot-in 1.2s ease-out forwards,hotspot-float 6s ease-in-out infinite}
-.hotspot:nth-child(2){animation-delay:var(--delay,0ms),2s}
-.hotspot:nth-child(3){animation-delay:var(--delay,0ms),4s}
-@keyframes hotspot-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 /* ===== ALERT BANNER (mazehq c-alert) ===== */
 .c-alert{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 20px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.08);border-radius:100px;font-size:13px;font-weight:500;color:var(--text-muted);text-decoration:none;transition:all .3s;margin-bottom:32px}
@@ -343,48 +344,8 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 <!-- Three.js Canvas -->
 <canvas id="gfx-canvas"></canvas>
 
-<!-- Floating Threat Cards (mazehq hotspots) -->
-<div class="s-gfx" id="gfx-overlay">
-    <div class="hotspot" style="top:12%;right:6%;--delay:200ms">
-        <div class="hotspot__inner">
-            <svg class="hotspot__ring" viewBox="0 0 220 220"><circle cx="110" cy="110" r="100"/></svg>
-            <div class="hotspot__ui">
-                <div class="hotspot__text">CVE-2025-29824</div>
-                <div class="hotspot__badges">
-                    <span class="badge badge--red">Exploitable</span>
-                    <span class="badge badge--red">High Likelihood</span>
-                    <span class="badge badge--red">Critical Impact</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="hotspot" style="top:35%;left:4%;--delay:900ms">
-        <div class="hotspot__inner">
-            <svg class="hotspot__ring" viewBox="0 0 220 220"><circle cx="110" cy="110" r="100"/></svg>
-            <div class="hotspot__ui">
-                <div class="hotspot__text">CVE-2025-21613</div>
-                <div class="hotspot__badges">
-                    <span class="badge badge--red">Exploitable</span>
-                    <span class="badge badge--yellow">Medium Likelihood</span>
-                    <span class="badge badge--red">Critical Impact</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="hotspot" style="bottom:18%;right:3%;--delay:1500ms">
-        <div class="hotspot__inner">
-            <svg class="hotspot__ring" viewBox="0 0 220 220"><circle cx="110" cy="110" r="100"/></svg>
-            <div class="hotspot__ui">
-                <div class="hotspot__text">CVE-2025-30406</div>
-                <div class="hotspot__badges">
-                    <span class="badge badge--red">Exploitable</span>
-                    <span class="badge badge--red">High Likelihood</span>
-                    <span class="badge badge--cyan">Monitored</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- GFX overlay: mazehq-style hotspot constellation (40 circles + 3 CVE cards) -->
+<div id="s-gfx"></div>
 
 <div class="page-content">
 
@@ -844,13 +805,88 @@ window.addEventListener('scroll',()=>{
     });
 },{passive:true});
 
-/* Hotspot parallax + fade on scroll */
-const gfxOverlay=document.getElementById('gfx-overlay');
+/* GFX overlay fade on scroll */
+const sGfx=document.getElementById('s-gfx');
 window.addEventListener('scroll',()=>{
     const progress=window.scrollY/(document.body.scrollHeight-window.innerHeight);
-    const opacity=Math.max(0,1-progress*3);
-    gfxOverlay.style.opacity=opacity;
+    sGfx.style.opacity=Math.max(0,1-progress*2.5);
 },{passive:true});
+
+/* ===== BUILD mazehq-style HOTSPOT CONSTELLATION ===== */
+(function(){
+    const container=document.getElementById('s-gfx');
+    const W=window.innerWidth,H=window.innerHeight;
+
+    // 3 CVE card hotspots (mazehq shows 3 main ones)
+    const cards=[
+        {x:.82,y:.12,id:'CVE-2025-29824',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Critical Impact',c:'red'}],size:200,red:true,delay:123},
+        {x:.06,y:.32,id:'CVE-2025-21613',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Critical Impact',c:'red'}],size:200,red:true,delay:1979},
+        {x:.78,y:.70,id:'CVE-2025-30406',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Monitored',c:'cyan'}],size:200,red:true,delay:782},
+    ];
+
+    // 37 plain ring hotspots (scattered constellation - like mazehq's 37 plain rings)
+    const plainRings=[
+        {x:.12,y:.08,s:140,red:true,d:88},{x:.92,y:.22,s:110,red:false,d:268},
+        {x:.25,y:.18,s:90,red:false,d:305},{x:.55,y:.07,s:120,red:true,d:460},
+        {x:.70,y:.28,s:160,red:false,d:1092},{x:.38,y:.42,s:80,red:true,d:491},
+        {x:.88,y:.45,s:130,red:false,d:1163},{x:.15,y:.55,s:100,red:true,d:690},
+        {x:.48,y:.60,s:150,red:false,d:1196},{x:.72,y:.52,s:95,red:true,d:321},
+        {x:.32,y:.68,s:175,red:false,d:1430},{x:.62,y:.78,s:115,red:true,d:198},
+        {x:.08,y:.75,s:85,red:false,d:1469},{x:.90,y:.82,s:140,red:true,d:495},
+        {x:.20,y:.88,s:105,red:false,d:1501},{x:.50,y:.92,s:120,red:true,d:1529},
+        {x:.78,y:.90,s:90,red:false,d:1555},{x:.42,y:.80,s:160,red:true,d:1629},
+        {x:.65,y:.15,s:80,red:false,d:1656},{x:.18,y:.38,s:130,red:true,d:1671},
+        {x:.85,y:.60,s:100,red:false,d:1761},{x:.30,y:.95,s:110,red:true,d:1846},
+        {x:.95,y:.38,s:75,red:false,d:1855},{x:.10,y:.22,s:145,red:true,d:1868},
+        {x:.58,y:.38,s:95,red:false,d:1897},{x:.75,y:.05,s:120,red:true,d:307},
+        {x:.40,y:.12,s:85,red:false,d:204},{x:.22,y:.62,s:150,red:true,d:332},
+        {x:.68,y:.65,s:105,red:false,d:399},{x:.35,y:.30,s:80,red:true,d:1149},
+        {x:.82,y:.35,s:130,red:false,d:758},{x:.05,y:.90,s:115,red:true,d:1491},
+        {x:.92,y:.10,s:95,red:false,d:1511},{x:.48,y:.25,s:140,red:true,d:1555},
+        {x:.18,y:.78,s:110,red:false,d:1196},{x:.60,y:.50,s:160,red:true,d:493},
+        {x:.35,y:.55,s:75,red:false,d:1850}
+    ];
+
+    function makeSvg(size,red){
+        const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
+        s.setAttribute('viewBox','0 0 220 220');
+        s.style.cssText=`width:${size}px;height:${size}px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)`;
+        s.classList.add('svg-circle');
+        const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx','110');c.setAttribute('cy','110');c.setAttribute('r','100');
+        c.style.cssText=`fill:none;stroke-width:1;stroke-dasharray:4 3;stroke:${red?'rgba(255,71,87,0.2)':'rgba(131,145,155,0.12)'};animation:ring-spin ${14+Math.random()*12}s linear infinite${Math.random()>.5?';animation-direction:reverse':''}`;
+        s.appendChild(c);
+        return s;
+    }
+
+    // Build card hotspots
+    cards.forEach(cfg=>{
+        const el=document.createElement('div');
+        el.className='hs hs--card'+(cfg.red?' hs--red':'');
+        el.style.cssText=`left:${cfg.x*100}%;top:${cfg.y*100}%;--float-dur:${6+Math.random()*4}s;--float-delay:${(cfg.delay/1000).toFixed(2)}s`;
+        el.appendChild(makeSvg(cfg.size,cfg.red));
+        const card=document.createElement('div');
+        card.className='hs-card';
+        const id=document.createElement('div');id.className='hs-card__id';id.textContent=cfg.id;
+        const badges=document.createElement('div');badges.className='hs-card__badges';
+        cfg.badges.forEach(b=>{
+            const sp=document.createElement('span');sp.className='badge badge--'+b.c;sp.textContent=b.t;badges.appendChild(sp);
+        });
+        card.appendChild(id);card.appendChild(badges);el.appendChild(card);
+        container.appendChild(el);
+        setTimeout(()=>el.classList.add('visible'),cfg.delay+200);
+    });
+
+    // Build plain ring hotspots
+    plainRings.forEach(cfg=>{
+        const el=document.createElement('div');
+        el.className='hs'+(cfg.red?' hs--red':' hs--neutral');
+        el.style.cssText=`left:${cfg.x*100}%;top:${cfg.y*100}%;--float-dur:${5+Math.random()*6}s;--float-delay:${(Math.random()*3).toFixed(2)}s`;
+        el.appendChild(makeSvg(cfg.s,cfg.red));
+        container.appendChild(el);
+        setTimeout(()=>el.classList.add('visible'),cfg.d+300);
+    });
+})();
 
 /* Testimonials slider */
 let currentSlide=0;
@@ -867,134 +903,167 @@ document.querySelectorAll('.m-slider__dot').forEach(d=>d.addEventListener('click
 // Auto-advance
 setInterval(()=>goToSlide(currentSlide+1),6000);
 
-/* ===== THREE.JS — MORPHING BLOB (mazehq-style particle blob) ===== */
+/* ===== THREE.JS — mazehq-style FBM PARTICLE BLOB ===== */
 (function(){
     const canvas=document.getElementById('gfx-canvas');
-    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
     renderer.setSize(window.innerWidth,window.innerHeight);
     const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,0.1,100);
-    camera.position.set(0,0,4);
+    const camera=new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,0.1,200);
+    camera.position.set(0,0,5);
 
-    // Particle system - morphing blob (high density like mazehq)
-    const COUNT=6000;
+    // === Create circular point texture (mazehq uses sampler2D pointTexture) ===
+    const texCanvas=document.createElement('canvas');
+    texCanvas.width=64;texCanvas.height=64;
+    const ctx=texCanvas.getContext('2d');
+    const grad=ctx.createRadialGradient(32,32,0,32,32,32);
+    grad.addColorStop(0,'rgba(255,255,255,1)');
+    grad.addColorStop(0.3,'rgba(255,255,255,0.8)');
+    grad.addColorStop(0.7,'rgba(255,255,255,0.2)');
+    grad.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=grad;ctx.fillRect(0,0,64,64);
+    const pointTexture=new THREE.CanvasTexture(texCanvas);
+
+    // === Particle attributes (mazehq-style) ===
+    const COUNT=8000;
     const positions=new Float32Array(COUNT*3);
-    const colors=new Float32Array(COUNT*3);
-    const sizes=new Float32Array(COUNT);
-    const seeds=new Float32Array(COUNT);
+    const aAlpha=new Float32Array(COUNT);
+    const aIndex=new Float32Array(COUNT);
 
-    // Initialize particles on sphere surface
+    // Distribute on sphere surface
     for(let i=0;i<COUNT;i++){
         const theta=Math.random()*Math.PI*2;
         const phi=Math.acos(2*Math.random()-1);
-        const r=1.2;
+        const r=1.0+Math.random()*0.05; // slight shell thickness
         positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
         positions[i*3+1]=r*Math.cos(phi);
         positions[i*3+2]=r*Math.sin(phi)*Math.sin(theta);
-        // Colors: mazehq-style red/cyan/purple dynamic palette
-        const t=Math.random();
-        if(t<0.35){
-            // Cyan particles
-            colors[i*3]=0;colors[i*3+1]=0.6+Math.random()*0.23;colors[i*3+2]=1.0;
-        } else if(t<0.6){
-            // Red/orange particles (mazehq signature)
-            colors[i*3]=1.0;colors[i*3+1]=0.18+Math.random()*0.1;colors[i*3+2]=0.28+Math.random()*0.1;
-        } else if(t<0.85){
-            // Purple particles
-            colors[i*3]=0.6+Math.random()*0.23;colors[i*3+1]=0.02;colors[i*3+2]=0.95;
-        } else {
-            // Green accent particles
-            colors[i*3]=0;colors[i*3+1]=0.9;colors[i*3+2]=0.5+Math.random()*0.14;
-        }
-        sizes[i]=1.2+Math.random()*2.5;
-        seeds[i]=Math.random()*1000;
+        aAlpha[i]=0.5+Math.random()*0.5;
+        aIndex[i]=i;
     }
 
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
-    geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
-    geo.setAttribute('size',new THREE.BufferAttribute(sizes,1));
+    geo.setAttribute('aAlpha',new THREE.BufferAttribute(aAlpha,1));
+    geo.setAttribute('aIndex',new THREE.BufferAttribute(aIndex,1));
 
-    // Custom shader for particles
+    // === Vertex shader: 4D simplex FBM (matching mazehq's approach) ===
     const vertexShader=`
-        attribute float size;
-        varying vec3 vColor;
+        attribute float aAlpha;
+        attribute float aIndex;
         varying float vAlpha;
+        varying vec3 vColor;
         uniform float uTime;
         uniform float uAmplitude;
+        uniform float uFrequency;
+        uniform float uSize;
+        uniform float uRcolor;uniform float uGcolor;uniform float uBcolor;
+        uniform float uRnoise;uniform float uGnoise;uniform float uBnoise;
 
-        // Simplex noise
-        vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
-        vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
-        vec4 perm(vec4 x){return mod289(((x*34.0)+1.0)*x);}
-        float noise(vec3 p){
-            vec3 a=floor(p);vec3 d=p-a;d=d*d*(3.0-2.0*d);
-            vec4 b=a.xxyy+vec4(0.0,1.0,0.0,1.0);
-            vec4 k1=perm(b.xyxy);vec4 k2=perm(k1.xyxy+b.zzww);
-            vec4 c=k2+a.zzzz;vec4 k3=perm(c);vec4 k4=perm(c+1.0);
-            vec4 o1=fract(k3*(1.0/41.0));vec4 o2=fract(k4*(1.0/41.0));
-            vec4 o3=o2*d.z+o1*(1.0-d.z);vec2 o4=o3.yw*d.x+o3.xz*(1.0-d.x);
-            return o4.y*d.y+o4.x*(1.0-d.y);
+        // 4D Simplex noise (mazehq uses this)
+        vec4 _permute(vec4 x){return mod(((x*34.0)+1.0)*x,289.0);}
+        float _permute(float x){return floor(mod(((x*34.0)+1.0)*x,289.0));}
+        vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+        float taylorInvSqrt(float r){return 1.79284291400159-0.85373472095314*r;}
+        vec4 grad4(float j,vec4 ip){
+            const vec4 ones=vec4(1.0,1.0,1.0,-1.0);vec4 p,s;
+            p.xyz=floor(fract(vec3(j)*ip.xyz)*7.0)*ip.z-1.0;
+            p.w=1.5-dot(abs(p.xyz),ones.xyz);
+            s=vec4(lessThan(p,vec4(0.0)));
+            p.xyz=p.xyz+(s.xyz*2.0-1.0)*s.www;
+            return p;
+        }
+        float snoise4(vec4 v){
+            const vec2 C=vec2(0.138196601125010504,0.309016994374947451);
+            vec4 i=floor(v+dot(v,C.yyyy));
+            vec4 x0=v-i+dot(i,C.xxxx);
+            vec4 i0;
+            vec3 isX=step(x0.yzw,x0.xxx);
+            vec3 isYZ=step(x0.zww,x0.yyz);
+            i0.x=isX.x+isX.y+isX.z;i0.yzw=1.0-isX;
+            i0.y+=isYZ.x+isYZ.y;i0.zw+=1.0-isYZ.xy;
+            i0.z+=isYZ.z;i0.w+=1.0-isYZ.z;
+            vec4 i3=clamp(i0,0.0,1.0);vec4 i2=clamp(i0-1.0,0.0,1.0);vec4 i1=clamp(i0-2.0,0.0,1.0);
+            vec4 x1=x0-i1+C.xxxx;vec4 x2=x0-i2+2.0*C.xxxx;vec4 x3=x0-i3+3.0*C.xxxx;vec4 x4=x0-1.0+4.0*C.xxxx;
+            i=mod(i,289.0);
+            float j0=_permute(_permute(_permute(_permute(i.w)+i.z)+i.y)+i.x);
+            vec4 j1=_permute(_permute(_permute(_permute(i.w+vec4(i1.w,i2.w,i3.w,1.0))+i.z+vec4(i1.z,i2.z,i3.z,1.0))+i.y+vec4(i1.y,i2.y,i3.y,1.0))+i.x+vec4(i1.x,i2.x,i3.x,1.0));
+            vec4 ip=vec4(1.0/294.0,1.0/49.0,1.0/7.0,0.0);
+            vec4 p0=grad4(j0,ip);vec4 p1=grad4(j1.x,ip);vec4 p2=grad4(j1.y,ip);vec4 p3=grad4(j1.z,ip);vec4 p4=grad4(j1.w,ip);
+            vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+            p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;p4*=taylorInvSqrt(dot(p4,p4));
+            vec3 m0=max(0.6-vec3(dot(x0,x0),dot(x1,x1),dot(x2,x2)),0.0);
+            vec2 m1=max(0.6-vec2(dot(x3,x3),dot(x4,x4)),0.0);
+            m0=m0*m0;m1=m1*m1;
+            return 49.0*(dot(m0*m0,vec3(dot(p0,x0),dot(p1,x1),dot(p2,x2)))+dot(m1*m1,vec2(dot(p3,x3),dot(p4,x4))));
+        }
+        // 5-octave FBM (mazehq uses NUM_OCTAVES 5)
+        float fbm(vec3 x){
+            float v=0.0;float a=0.5;vec3 shift=vec3(100.0);
+            for(int i=0;i<5;i++){v+=a*snoise4(vec4(x,uTime));x=x*2.0+shift;a*=0.5;}
+            return v;
         }
 
         void main(){
-            vColor=color;
-            vec3 pos=position;
-            float n1=noise(pos*1.5+uTime*0.3)*0.7;
-            float n2=noise(pos*3.0-uTime*0.15)*0.3;
-            float n=(n1+n2)*uAmplitude;
-            vec3 dir=normalize(pos);
-            pos+=dir*n;
-            // Pulse color brightness
-            vAlpha=0.5+0.5*smoothstep(-0.1,0.4,n);
-            vec4 mvPos=modelViewMatrix*vec4(pos,1.0);
-            gl_PointSize=size*(200.0/length(mvPos.xyz));
+            float noise=fbm(position*uFrequency);
+            // Color blending: base color -> noise color (mazehq pattern)
+            float r=uRcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uRnoise-uRcolor)/255.0);
+            float g=uGcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uGnoise-uGcolor)/255.0);
+            float b=uBcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uBnoise-uBcolor)/255.0);
+            vColor=vec3(r,g,b);
+            // Blob displacement
+            vec3 displaced=position*(1.0+uAmplitude*noise);
+            vAlpha=aAlpha*(0.6+0.4*clamp(noise,0.0,1.0));
+            vec4 mvPos=modelViewMatrix*vec4(displaced,1.0);
+            gl_PointSize=uSize*120.0/(-mvPos.z);
+            gl_PointSize=clamp(gl_PointSize,0.5,20.0);
             gl_Position=projectionMatrix*mvPos;
         }
     `;
     const fragmentShader=`
-        varying vec3 vColor;
+        uniform sampler2D pointTexture;
         varying float vAlpha;
+        varying vec3 vColor;
         void main(){
-            float d=length(gl_PointCoord-vec2(0.5));
-            if(d>0.5)discard;
-            float alpha=smoothstep(0.5,0.05,d)*vAlpha;
-            // Soft glow core
-            float glow=exp(-d*8.0)*0.3;
-            gl_FragColor=vec4(vColor,alpha+glow);
+            vec4 tex=texture2D(pointTexture,gl_PointCoord);
+            gl_FragColor=vec4(vColor,vAlpha)*tex;
         }
     `;
 
+    // mazehq uses red/salmon base with near-white noise highlight
     const mat=new THREE.ShaderMaterial({
         vertexShader,fragmentShader,
-        uniforms:{uTime:{value:0},uAmplitude:{value:0.3}},
-        vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
+        uniforms:{
+            uTime:{value:0},
+            uAmplitude:{value:0.45},
+            uFrequency:{value:0.55},
+            uSize:{value:2.2},
+            pointTexture:{value:pointTexture},
+            // Base color: warm red/salmon (mazehq signature red blob)
+            uRcolor:{value:200},uGcolor:{value:55},uBcolor:{value:70},
+            // Noise highlight: near-white with warm tint
+            uRnoise:{value:255},uGnoise:{value:220},uBnoise:{value:230},
+        },
+        transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
     });
 
     const points=new THREE.Points(geo,mat);
     scene.add(points);
 
-    // Inner glow sphere (subtle wireframe core)
-    const innerGeo=new THREE.IcosahedronGeometry(0.5,4);
-    const innerMat=new THREE.MeshBasicMaterial({color:0x00d4ff,wireframe:true,transparent:true,opacity:0.025});
-    const innerSphere=new THREE.Mesh(innerGeo,innerMat);
-    scene.add(innerSphere);
-
-    // Outer atmospheric glow (mazehq has a soft ambient glow)
-    const glowGeo=new THREE.SphereGeometry(1.8,32,32);
+    // Outer atmospheric glow shell (backlighting effect)
+    const glowGeo=new THREE.SphereGeometry(2.0,32,32);
     const glowMat=new THREE.ShaderMaterial({
         transparent:true,depthWrite:false,side:THREE.BackSide,
         uniforms:{uTime:{value:0}},
         vertexShader:`varying vec3 vNormal;void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-        fragmentShader:`varying vec3 vNormal;uniform float uTime;void main(){float intensity=pow(0.6-dot(vNormal,vec3(0.0,0.0,1.0)),3.0);vec3 col=mix(vec3(0.0,0.83,1.0),vec3(0.83,0.04,1.0),sin(uTime*0.2)*0.5+0.5);gl_FragColor=vec4(col,intensity*0.08);}`
+        fragmentShader:`varying vec3 vNormal;uniform float uTime;void main(){float i=pow(0.55-dot(vNormal,vec3(0.0,0.0,1.0)),2.5);float pulse=0.5+0.5*sin(uTime*0.3);vec3 col=mix(vec3(0.9,0.2,0.28),vec3(0.85,0.05,0.95),pulse);gl_FragColor=vec4(col,i*0.06);}`
     });
     const glowSphere=new THREE.Mesh(glowGeo,glowMat);
     scene.add(glowSphere);
 
-    // Mouse + scroll
-    let mx=0,my=0,scrollP=0;
-    document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2});
+    let mx=0,my=0,scrollP=0,targetAmp=0.45;
+    document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2},{passive:true});
     window.addEventListener('scroll',()=>{scrollP=window.scrollY/(document.body.scrollHeight-window.innerHeight)},{passive:true});
     window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
 
@@ -1002,24 +1071,21 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
     function animate(){
         requestAnimationFrame(animate);
         const t=clock.getElapsedTime();
-        mat.uniforms.uTime.value=t;
-        mat.uniforms.uAmplitude.value=0.3+scrollP*0.5;
-        points.rotation.y=t*0.05+mx*0.1;
-        points.rotation.x=-0.1+my*0.05;
-        innerSphere.rotation.y=t*0.08;
-        innerSphere.rotation.x=t*0.05;
+        mat.uniforms.uTime.value=t*0.18; // slow time like mazehq
         glowMat.uniforms.uTime.value=t;
-        glowSphere.rotation.y=t*0.03;
-        // Fade out with scroll
-        const opacity=Math.max(0.1,1-scrollP*2);
-        mat.opacity=opacity;
-        innerMat.opacity=0.03*opacity;
-        camera.position.z=4-scrollP*1.2;
-        camera.position.x+=(.3*mx-camera.position.x)*.025;
-        camera.position.y+=(-.2*my-camera.position.y)*.025;
-        // Subtle scale pulse on the blob
-        const pulse=1+Math.sin(t*0.5)*0.02;
-        points.scale.set(pulse,pulse,pulse);
+        // Dynamic amplitude
+        targetAmp=0.35+scrollP*0.4+Math.abs(mx)*0.08;
+        mat.uniforms.uAmplitude.value+=(targetAmp-mat.uniforms.uAmplitude.value)*0.03;
+        // Slow rotation matching mazehq
+        points.rotation.y=t*0.04+mx*0.08;
+        points.rotation.x=-0.05+my*0.04;
+        glowSphere.rotation.y=t*0.02;
+        // Scroll-based fade
+        const fade=Math.max(0.05,1-scrollP*2.2);
+        mat.uniforms.uSize.value=2.2*fade;
+        camera.position.z=5-scrollP*1.5;
+        camera.position.x+=(.25*mx-camera.position.x)*.03;
+        camera.position.y+=(-.18*my-camera.position.y)*.03;
         renderer.render(scene,camera);
     }
     animate();
