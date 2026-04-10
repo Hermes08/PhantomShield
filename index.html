@@ -193,6 +193,24 @@ nav.mobile-nav{display:none}
 /* Big stat highlight */
 .big-stat{font-family:var(--font-heading);font-size:clamp(72px,12vw,140px);font-weight:900;letter-spacing:-.06em;line-height:.85;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:32px 0 20px}
 
+/* ===== STREAM FLOW DIAGRAM (mazehq c-stream style) ===== */
+.c-stream-diagram{overflow:hidden;border-radius:16px;background:rgba(15,21,35,0.4);border:1px solid var(--border);padding:24px 0 0}
+.stream-bg-paths path{stroke-dasharray:6;animation:stream-dash 8s linear infinite}
+@keyframes stream-dash{to{stroke-dashoffset:-100}}
+.stream-hotspots{display:flex;justify-content:space-around;align-items:center;padding:24px 32px;gap:16px;position:relative}
+.stream-point{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px}
+.stream-hotspot{width:60px;height:60px;position:relative;flex-shrink:0}
+.stream-hotspot svg{width:60px;height:60px;animation:ring-spin 16s linear infinite}
+.stream-hotspot--red svg circle{stroke:rgba(255,71,87,0.3)!important;animation-direction:reverse}
+.stream-popup{background:rgba(10,15,28,0.9);border:1px solid var(--border);border-radius:8px;padding:10px 14px;white-space:nowrap;font-size:11px}
+.stream-popup--red{border-color:rgba(255,71,87,0.2)}
+.stream-popup__cat{font-size:10px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.stream-popup__name{font-size:12px;font-weight:600;color:var(--text-bright);margin-bottom:3px}
+.stream-popup__label{font-size:10px;font-weight:600;color:#ff6b7a}
+.stream-popup__label--safe{color:#00ffa3}
+.stream-popup__detail{font-size:10px;color:var(--text-muted);margin-top:3px}
+@media(max-width:768px){.stream-hotspots{flex-wrap:wrap;gap:12px}.stream-popup{display:none}}
+
 /* ===== GRAPH MODULE (mazehq section-graph) ===== */
 .module--graph{padding:160px 0;text-align:center;background:var(--bg);position:relative}
 .module--graph .grid-wrap{display:flex;flex-direction:column;align-items:center}
@@ -257,35 +275,44 @@ nav.mobile-nav{display:none}
 .m-slider__dot{width:8px;height:8px;border-radius:50%;background:var(--text-dim);cursor:pointer;transition:all .3s}
 .m-slider__dot.active{background:var(--accent);box-shadow:0 0 8px rgba(0,212,255,0.3)}
 
-/* ===== CTA MODULE (mazehq module--cta) ===== */
-.module--cta{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px;background:var(--bg);position:relative}
-.module--cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.04) 0%,rgba(212,9,254,0.02) 30%,transparent 60%)}
+/* ===== CTA MODULE (mazehq module--cta with PCB canvas) ===== */
+.module--cta{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px;background:var(--bg);position:relative;overflow:hidden}
+.module--cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.06) 0%,rgba(212,9,254,0.03) 30%,transparent 65%)}
+#pcb-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0.55}
+.m-cta__inner{position:relative;z-index:2}
 .m-cta__title{font-family:var(--font-heading);font-size:clamp(36px,5vw,62px);font-weight:800;letter-spacing:-.04em;margin-bottom:24px;color:var(--text-bright);line-height:1.06}
 .m-cta__text{font-size:18px;color:var(--text-muted);max-width:460px;margin:0 auto 36px}
 .m-cta__buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 
 /* ===== BLOG ARTICLES (mazehq module--articles) ===== */
 .module--articles{padding:100px 0;background:var(--bg);border-top:1px solid var(--border)}
-.articles-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}
-.articles-header h2{font-size:20px;font-weight:700;color:var(--text-bright)}
-.articles-header a{font-size:14px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 20px;border-radius:45px;transition:all .3s}
-.articles-header a:hover{border-color:var(--accent);color:var(--accent)}
-.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.article-card{border-radius:14px;overflow:hidden;background:var(--surface);border:1px solid var(--border);transition:all .4s;text-decoration:none;display:block}
-.article-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
-.article-card__image{height:200px;background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(212,9,254,0.08));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.article-card__image::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(255,255,255,0.02) 30px,rgba(255,255,255,0.02) 31px),repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(255,255,255,0.02) 30px,rgba(255,255,255,0.02) 31px);pointer-events:none}
-.article-card__image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(15,21,35,0.8),transparent);pointer-events:none}
-.article-card__image svg{width:48px;height:48px;stroke:var(--accent);fill:none;stroke-width:1;opacity:.4}
-.article-card:nth-child(1) .article-card__image{background:linear-gradient(135deg,rgba(255,71,87,0.1),rgba(212,9,254,0.06))}
-.article-card:nth-child(2) .article-card__image{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(0,255,163,0.06))}
-.article-card:nth-child(3) .article-card__image{background:linear-gradient(135deg,rgba(212,9,254,0.08),rgba(0,212,255,0.08))}
-.article-card__body{padding:24px}
-.article-card__meta{font-size:11px;font-weight:600;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
-.article-card__meta span{color:var(--accent)}
-.article-card__title{font-size:16px;font-weight:700;color:var(--text-bright);line-height:1.4;margin-bottom:12px}
-.article-card__link{font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
-.article-card:hover .article-card__link{gap:10px}
+.articles-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.articles-header h2{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim)}
+.articles-header-line{height:1px;background:var(--border);margin-bottom:48px}
+/* mazehq a-button basic (outline style with dual-text) */
+.a-button{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:45px;border:1px solid var(--border);background:transparent;color:var(--text-bright);font-weight:600;font-size:14px;text-decoration:none;transition:all .3s;cursor:pointer;font-family:var(--font);position:relative;overflow:hidden}
+.a-button:hover{border-color:rgba(131,145,155,0.35);background:rgba(255,255,255,0.03)}
+.a-button__text{display:flex;flex-direction:column;height:1.2em;overflow:hidden;transition:none;line-height:1.2em}
+.a-button__text .primary,.a-button__text .secondary{display:block;transition:transform .3s cubic-bezier(.4,0,.2,1);white-space:nowrap}
+.a-button__text .secondary{margin-top:-1.2em}
+.a-button:hover .a-button__text .primary{transform:translateY(-100%)}
+.a-button:hover .a-button__text .secondary{transform:translateY(-100%)}
+/* mazehq dotted arrow (for article links) */
+.svg-arrow-dot{display:inline-block;width:30px;height:28px;vertical-align:middle}
+.articles-grid{display:flex;flex-direction:column;gap:0}
+.article-card{padding:28px 0;border-bottom:1px solid var(--border);text-decoration:none;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;transition:all .3s}
+.article-card:hover{padding-left:8px}
+.article-card__left{display:flex;flex-direction:column;gap:8px}
+.article-card__meta{display:flex;align-items:center;gap:12px}
+.article-card__date{font-size:12px;color:var(--text-dim);font-weight:500}
+.article-card__tag{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-muted);letter-spacing:.04em}
+.article-card__tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.article-card__title{font-size:17px;font-weight:700;color:var(--text-bright);line-height:1.4;transition:color .2s}
+.article-card:hover .article-card__title{color:var(--accent)}
+.article-card__right{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:13px;font-weight:500;white-space:nowrap;transition:color .2s}
+.article-card:hover .article-card__right{color:var(--text-bright)}
+.article-card__right svg{flex-shrink:0;transition:transform .3s}
+.article-card:hover .article-card__right svg{transform:translateX(4px)}
 
 /* ===== FOOTER ===== */
 footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--bg)}
@@ -309,6 +336,9 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 [data-observe="children"].visible > *:nth-child(7){transition-delay:.45s}
 [data-observe="children"].visible > *:nth-child(8){transition-delay:.5s}
 
+/* Desktop-only helper */
+.desktop-only{display:block}
+@media(max-width:768px){.desktop-only{display:none!important}}
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
     .solution-flow{grid-template-columns:repeat(2,1fr)}
@@ -411,7 +441,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     <p class="m-welcome__subtitle" data-observe>AI-driven consulting that investigates and resolves security vulnerabilities before attackers exploit them</p>
     <div class="m-welcome__buttons" data-observe>
         <a href="/contact.html" class="btn-dot">Book Consultation</a>
-        <a href="/services.html" class="btn-primary">Explore Services</a>
+        <a href="/services.html" class="a-button"><span class="a-button__text"><span class="primary">Explore Services</span><span class="secondary">Explore Services</span></span></a>
     </div>
     <div class="m-welcome__clients" data-observe>
         <span class="client-logo"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 7.18 3.84 13.44 9 15 5.16-1.56 9-7.82 9-15V7l-9-5z"/></svg>CompTIA</span>
@@ -576,31 +606,38 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
             </div>
         </div>
 
-        <!-- Flow diagram SVG (mazehq-style) -->
-        <div style="margin:0 auto 80px;max-width:700px" data-observe>
-            <svg viewBox="0 0 700 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;opacity:.7">
-                <!-- Nodes -->
-                <rect x="10" y="35" width="130" height="50" rx="8" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
-                <text x="75" y="64" text-anchor="middle" fill="#83919B" font-size="11" font-weight="600" font-family="DM Sans,Inter,sans-serif">Scan & Detect</text>
-                <!-- Arrow 1 -->
-                <line x1="145" y1="60" x2="185" y2="60" stroke="rgba(131,145,155,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
-                <polygon points="185,56 193,60 185,64" fill="rgba(0,212,255,0.3)"/>
-                <!-- Node 2 -->
-                <rect x="195" y="35" width="130" height="50" rx="8" fill="rgba(212,9,254,0.05)" stroke="rgba(212,9,254,0.15)" stroke-width="1"/>
-                <text x="260" y="64" text-anchor="middle" fill="#83919B" font-size="11" font-weight="600" font-family="DM Sans,Inter,sans-serif">Investigate</text>
-                <!-- Arrow 2 -->
-                <line x1="330" y1="60" x2="370" y2="60" stroke="rgba(131,145,155,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
-                <polygon points="370,56 378,60 370,64" fill="rgba(212,9,254,0.3)"/>
-                <!-- Node 3 -->
-                <rect x="380" y="35" width="130" height="50" rx="8" fill="rgba(255,71,87,0.05)" stroke="rgba(255,71,87,0.15)" stroke-width="1"/>
-                <text x="445" y="64" text-anchor="middle" fill="#83919B" font-size="11" font-weight="600" font-family="DM Sans,Inter,sans-serif">Prioritize</text>
-                <!-- Arrow 3 -->
-                <line x1="515" y1="60" x2="555" y2="60" stroke="rgba(131,145,155,0.2)" stroke-width="1" stroke-dasharray="4 3"/>
-                <polygon points="555,56 563,60 555,64" fill="rgba(0,255,163,0.3)"/>
-                <!-- Node 4 -->
-                <rect x="565" y="35" width="125" height="50" rx="8" fill="rgba(0,255,163,0.05)" stroke="rgba(0,255,163,0.15)" stroke-width="1"/>
-                <text x="627" y="64" text-anchor="middle" fill="#83919B" font-size="11" font-weight="600" font-family="DM Sans,Inter,sans-serif">Remediate</text>
+        <!-- Animated stream flow diagram (mazehq c-stream style) -->
+        <div class="c-stream-diagram" data-observe style="margin:0 0 80px;position:relative">
+            <!-- Background flow SVG with wavy paths like mazehq -->
+            <svg class="stream-bg-paths" viewBox="0 0 1100 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;opacity:.18">
+                <path d="M1080,40C800,40,700,60,550,60S300,30,20,30" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,60C800,60,700,40,550,40S300,70,20,70" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,80C800,80,680,100,550,100S310,60,20,60" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,120C830,120,700,90,550,90S290,130,20,130" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,140C830,140,700,170,550,170S290,110,20,110" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,160C830,160,720,190,550,190S280,150,20,150" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,180C830,180,700,160,550,160S290,200,20,200" stroke="#37c6f4" stroke-miterlimit="10"/>
+                <path d="M1080,200C830,200,680,140,550,140S300,180,20,180" stroke="#37c6f4" stroke-miterlimit="10"/>
             </svg>
+            <!-- Stream hotspots -->
+            <div class="stream-hotspots">
+                <div class="stream-point">
+                    <div class="stream-hotspot"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(131,145,155,0.15)" stroke-width="1" stroke-dasharray="4 3"/></svg></div>
+                    <div class="stream-popup"><div class="stream-popup__cat">Requirement</div><div class="stream-popup__name">KDC Server Running</div><div class="stream-popup__label stream-popup__label--safe">Not present</div></div>
+                </div>
+                <div class="stream-point">
+                    <div class="stream-hotspot stream-hotspot--red"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(255,71,87,0.25)" stroke-width="1" stroke-dasharray="4 3"/></svg></div>
+                    <div class="stream-popup stream-popup--red"><div class="stream-popup__cat">Requirement</div><div class="stream-popup__name">Access to package repos</div><div class="stream-popup__label">Present</div><div class="stream-popup__detail">Highly privileged IAM role</div></div>
+                </div>
+                <div class="stream-point">
+                    <div class="stream-hotspot stream-hotspot--red"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(255,71,87,0.25)" stroke-width="1" stroke-dasharray="4 3"/></svg></div>
+                    <div class="stream-popup stream-popup--red"><div class="stream-popup__cat">Requirement</div><div class="stream-popup__name">JSON Payload Processing</div><div class="stream-popup__label">Present</div><div class="stream-popup__detail">Ticket created (SLA 7 days)</div></div>
+                </div>
+                <div class="stream-point">
+                    <div class="stream-hotspot"><svg viewBox="0 0 220 220"><circle cx="110" cy="110" r="100" fill="none" stroke="rgba(131,145,155,0.15)" stroke-width="1" stroke-dasharray="4 3"/></svg></div>
+                    <div class="stream-popup"><div class="stream-popup__cat">Requirement</div><div class="stream-popup__name">Framebuffer console</div><div class="stream-popup__label stream-popup__label--safe">Not present</div></div>
+                </div>
+            </div>
         </div>
 
         <!-- Feature stories (mazehq 3 story items) -->
@@ -698,11 +735,12 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 
 <!-- ===== CTA ===== -->
 <section class="module--cta" id="section-cta" data-observe>
-    <div style="position:relative">
+    <canvas id="pcb-canvas"></canvas>
+    <div class="m-cta__inner">
         <h2 class="m-cta__title">Get cybersecurity threats<br>under control</h2>
         <p class="m-cta__text">Expert consulting that investigates and resolves security vulnerabilities.</p>
         <div class="m-cta__buttons">
-            <a href="/contact.html" class="btn-primary">Contact</a>
+            <a href="/contact.html" class="a-button"><span class="a-button__text"><span class="primary">Contact</span><span class="secondary">Contact</span></span></a>
             <a href="/contact.html" class="btn-dot">Book Consultation</a>
         </div>
     </div>
@@ -712,32 +750,48 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 <section class="module--articles" id="section-blog">
     <div class="grid-wrap">
         <div class="articles-header" data-observe>
-            <h2>Our Insights</h2>
-            <a href="/blog.html">All articles</a>
+            <h2>Our Blog</h2>
+            <a href="/blog.html" class="a-button"><span class="a-button__text"><span class="primary">All articles</span><span class="secondary">All articles</span></span></a>
         </div>
+        <div class="articles-header-line"></div>
         <div class="articles-grid" data-observe="children">
             <a href="/blog.html" class="article-card">
-                <div class="article-card__image"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                <div class="article-card__body">
-                    <div class="article-card__meta">April 2026 &bull; <span>Security</span></div>
+                <div class="article-card__left">
+                    <div class="article-card__meta">
+                        <span class="article-card__date">April 9, 2026</span>
+                        <span class="article-card__tag">Security</span>
+                    </div>
                     <div class="article-card__title">The State of Cybersecurity in Latin America: 2026 Threat Report</div>
-                    <div class="article-card__link">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg></div>
+                </div>
+                <div class="article-card__right desktop-only">
+                    <svg class="svg-arrow-dot" viewBox="0 0 38 36"><path d="M1,18h37" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18L16,3" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18l15,15" fill="none" stroke="#83919b" stroke-dasharray="1 2"/></svg>
+                    <span>Read more</span>
                 </div>
             </a>
             <a href="/blog.html" class="article-card">
-                <div class="article-card__image"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-                <div class="article-card__body">
-                    <div class="article-card__meta">March 2026 &bull; <span>Compliance</span></div>
+                <div class="article-card__left">
+                    <div class="article-card__meta">
+                        <span class="article-card__date">March 12, 2026</span>
+                        <span class="article-card__tag">Compliance</span>
+                    </div>
                     <div class="article-card__title">Ley 81 Compliance: What Every Business Operating in Panama Needs to Know</div>
-                    <div class="article-card__link">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg></div>
+                </div>
+                <div class="article-card__right desktop-only">
+                    <svg class="svg-arrow-dot" viewBox="0 0 38 36"><path d="M1,18h37" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18L16,3" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18l15,15" fill="none" stroke="#83919b" stroke-dasharray="1 2"/></svg>
+                    <span>Read more</span>
                 </div>
             </a>
             <a href="/blog.html" class="article-card">
-                <div class="article-card__image"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-                <div class="article-card__body">
-                    <div class="article-card__meta">February 2026 &bull; <span>Product</span></div>
+                <div class="article-card__left">
+                    <div class="article-card__meta">
+                        <span class="article-card__date">February 28, 2026</span>
+                        <span class="article-card__tag">Product</span>
+                    </div>
                     <div class="article-card__title">Why Manual Vulnerability Triage Is Failing Your Security Team</div>
-                    <div class="article-card__link">Read more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg></div>
+                </div>
+                <div class="article-card__right desktop-only">
+                    <svg class="svg-arrow-dot" viewBox="0 0 38 36"><path d="M1,18h37" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18L16,3" fill="none" stroke="#83919b" stroke-dasharray="1 2"/><path d="M1,18l15,15" fill="none" stroke="#83919b" stroke-dasharray="1 2"/></svg>
+                    <span>Read more</span>
                 </div>
             </a>
         </div>
@@ -956,6 +1010,86 @@ document.getElementById('slider-next').addEventListener('click',()=>goToSlide(cu
 document.querySelectorAll('.m-slider__dot').forEach(d=>d.addEventListener('click',()=>goToSlide(parseInt(d.dataset.slide))));
 // Auto-advance
 setInterval(()=>goToSlide(currentSlide+1),6000);
+
+/* ===== PCB CANVAS EFFECT (mazehq CTA data-gfx="pcb") ===== */
+(function(){
+    const canvas=document.getElementById('pcb-canvas');
+    if(!canvas)return;
+    const section=canvas.closest('.module--cta');
+    function resize(){canvas.width=section.offsetWidth;canvas.height=section.offsetHeight}
+    resize();
+    window.addEventListener('resize',resize);
+    const ctx=canvas.getContext('2d');
+    const GRID=48;
+    // Build nodes on a grid
+    const cols=Math.ceil(canvas.width/GRID)+2;
+    const rows=Math.ceil(canvas.height/GRID)+2;
+    // Random PCB trace paths
+    const traces=[];
+    function buildTraces(){
+        traces.length=0;
+        const gw=Math.ceil(canvas.width/GRID)+2;
+        const gh=Math.ceil(canvas.height/GRID)+2;
+        for(let t=0;t<60;t++){
+            let x=Math.floor(Math.random()*gw)*GRID;
+            let y=Math.floor(Math.random()*gh)*GRID;
+            const path=[[x,y]];
+            const len=4+Math.floor(Math.random()*6);
+            const dirs=[[1,0],[-1,0],[0,1],[0,-1]];
+            let lastDir=null;
+            for(let s=0;s<len;s++){
+                const avail=dirs.filter(d=>!(lastDir&&d[0]===-lastDir[0]&&d[1]===-lastDir[1]));
+                const dir=avail[Math.floor(Math.random()*avail.length)];
+                lastDir=dir;
+                x+=dir[0]*GRID;y+=dir[1]*GRID;
+                path.push([x,y]);
+            }
+            const hue=Math.random()<0.3?'255,71,87':Math.random()<0.5?'0,212,255':'131,145,155';
+            traces.push({path,hue,alpha:Math.random()*0.35+0.05,pulse:Math.random()*Math.PI*2,speed:0.4+Math.random()*0.6,lit:Math.random()>0.6,litPos:Math.random()});
+        }
+    }
+    buildTraces();
+    window.addEventListener('resize',buildTraces);
+    let t=0;
+    function draw(){
+        t+=0.01;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        traces.forEach(tr=>{
+            const pulse=0.4+0.3*Math.sin(t*tr.speed+tr.pulse);
+            ctx.strokeStyle=`rgba(${tr.hue},${tr.alpha*pulse})`;
+            ctx.lineWidth=1;
+            ctx.beginPath();
+            tr.path.forEach(([px,py],i)=>{i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)});
+            ctx.stroke();
+            // Nodes (small filled circles at corners)
+            tr.path.forEach(([px,py])=>{
+                ctx.beginPath();
+                ctx.arc(px,py,2,0,Math.PI*2);
+                ctx.fillStyle=`rgba(${tr.hue},${tr.alpha*pulse*1.4})`;
+                ctx.fill();
+            });
+            // Traveling light dot on lit traces
+            if(tr.lit){
+                tr.litPos=(tr.litPos+0.004*tr.speed)%1;
+                const idx=Math.floor(tr.litPos*(tr.path.length-1));
+                const frac=tr.litPos*(tr.path.length-1)-idx;
+                if(idx<tr.path.length-1){
+                    const [ax,ay]=tr.path[idx];
+                    const [bx,by]=tr.path[idx+1];
+                    const lx=ax+(bx-ax)*frac;
+                    const ly=ay+(by-ay)*frac;
+                    const grd=ctx.createRadialGradient(lx,ly,0,lx,ly,8);
+                    grd.addColorStop(0,`rgba(${tr.hue},0.9)`);
+                    grd.addColorStop(1,`rgba(${tr.hue},0)`);
+                    ctx.beginPath();ctx.arc(lx,ly,8,0,Math.PI*2);
+                    ctx.fillStyle=grd;ctx.fill();
+                }
+            }
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
 
 /* ===== THREE.JS — mazehq-style FBM PARTICLE BLOB ===== */
 (function(){
