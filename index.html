@@ -204,6 +204,11 @@ nav.mobile-nav{display:none}
 .feature-story__text p{font-size:15px;color:var(--text-muted);line-height:1.8}
 .feature-story__visual{border-radius:16px;background:var(--surface);border:1px solid var(--border);padding:32px;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden}
 .feature-story__visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(0,212,255,0.03),transparent 60%);pointer-events:none}
+.feature-story__visual .c-ui-box,.feature-story__visual .event-step{opacity:0;transform:translateY(12px);transition:all .5s cubic-bezier(.4,0,.2,1)}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(1),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(1){opacity:1;transform:translateY(0);transition-delay:.2s}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(2),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(2){opacity:1;transform:translateY(0);transition-delay:.35s}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(3),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(3){opacity:1;transform:translateY(0);transition-delay:.5s}
+.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(4){opacity:1;transform:translateY(0);transition-delay:.65s}
 
 /* UI Box cards (mazehq CVE-style cards in feature visuals) */
 .c-ui-box{background:rgba(15,21,35,0.9);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:all .4s;position:relative;overflow:hidden}
@@ -639,6 +644,16 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
                 <div class="m-slider__author">VP of Engineering</div>
                 <div class="m-slider__role">Technology Scale-up</div>
             </div>
+            <div class="m-slider__slide">
+                <div class="m-slider__quote">"Phantom Shield is going to revolutionize how companies approach vulnerability management and remediation. They don't just find issues — they automate the path to resolution."</div>
+                <div class="m-slider__author">Kyle Morrison</div>
+                <div class="m-slider__role">Head of Attack Surface Management, Enterprise SaaS</div>
+            </div>
+            <div class="m-slider__slide">
+                <div class="m-slider__quote">"This is the future of cybersecurity consulting. The combination of deep expertise with modern tooling gives you an unfair advantage."</div>
+                <div class="m-slider__author">Staff Security Engineer</div>
+                <div class="m-slider__role">Technology Scale-up</div>
+            </div>
         </div>
         <div class="m-slider__controls">
             <button class="m-slider__button" id="slider-prev"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
@@ -649,6 +664,8 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
             <div class="m-slider__dot" data-slide="1"></div>
             <div class="m-slider__dot" data-slide="2"></div>
             <div class="m-slider__dot" data-slide="3"></div>
+            <div class="m-slider__dot" data-slide="4"></div>
+            <div class="m-slider__dot" data-slide="5"></div>
         </div>
     </div>
 </section>
@@ -821,7 +838,7 @@ window.addEventListener('scroll',()=>{
 /* Testimonials slider */
 let currentSlide=0;
 const track=document.getElementById('slider-track');
-const totalSlides=4;
+const totalSlides=6;
 function goToSlide(n){
     currentSlide=((n%totalSlides)+totalSlides)%totalSlides;
     track.style.transform=`translateX(-${currentSlide*100}%)`;
@@ -907,10 +924,13 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
         void main(){
             vColor=color;
             vec3 pos=position;
-            float n=noise(pos*1.5+uTime*0.3)*uAmplitude;
+            float n1=noise(pos*1.5+uTime*0.3)*0.7;
+            float n2=noise(pos*3.0-uTime*0.15)*0.3;
+            float n=(n1+n2)*uAmplitude;
             vec3 dir=normalize(pos);
             pos+=dir*n;
-            vAlpha=0.6+0.4*n;
+            // Pulse color brightness
+            vAlpha=0.5+0.5*smoothstep(-0.1,0.4,n);
             vec4 mvPos=modelViewMatrix*vec4(pos,1.0);
             gl_PointSize=size*(200.0/length(mvPos.xyz));
             gl_Position=projectionMatrix*mvPos;
@@ -922,8 +942,10 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
         void main(){
             float d=length(gl_PointCoord-vec2(0.5));
             if(d>0.5)discard;
-            float alpha=smoothstep(0.5,0.1,d)*vAlpha;
-            gl_FragColor=vec4(vColor,alpha);
+            float alpha=smoothstep(0.5,0.05,d)*vAlpha;
+            // Soft glow core
+            float glow=exp(-d*8.0)*0.3;
+            gl_FragColor=vec4(vColor,alpha+glow);
         }
     `;
 
