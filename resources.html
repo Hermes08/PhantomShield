@@ -982,4 +982,34 @@ version && console.log(` version: %c${version}`, 'color: yellow');
   }, true);
 })();
 </script>
+<script>
+/* Reset staggered transition-delays on article tiles so they
+   all appear at once instead of one-by-one on mobile.          */
+(function() {
+  function resetDelays() {
+    try {
+      var delayed = document.querySelectorAll('[style*="transition-delay"]');
+      for (var i = 0; i < delayed.length; i++) {
+        delayed[i].style.transitionDelay = '0ms';
+      }
+      var cssAnims = document.querySelectorAll('[data-cssanimate]');
+      for (var j = 0; j < cssAnims.length; j++) {
+        cssAnims[j].style.transitionDelay = '0ms';
+        cssAnims[j].style.animationDelay  = '0ms';
+        cssAnims[j].classList.add('is-in-view');
+      }
+      var wrappers = document.querySelectorAll('.wrapper, #wrapper, #content, main');
+      for (var k = 0; k < wrappers.length; k++) {
+        wrappers[k].style.opacity = '1';
+        wrappers[k].classList.add('is-in-view');
+      }
+    } catch(e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resetDelays);
+  } else {
+    resetDelays();
+  }
+})();
+</script>
 </body></html>

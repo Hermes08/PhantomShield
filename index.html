@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="https://mazehq.com/public/theme/styles.css?v=1.0.46">
 <style>/* Override mazehq is-not-ready for cross-domain */
 body.is-not-ready .wrapper{opacity:1!important}body.is-not-ready .m-welcome{opacity:1!important}body.is-not-ready .s-header{translate:none!important}body.is-not-ready .s-header__nav-item{translate:none!important;opacity:1!important}body.is-not-ready .quick-access__link{display:block!important}
+/* ── ps-loaded: garantiza que el wrapper sea visible al revelar la página ── */
+body.ps-loaded .wrapper,body.ps-loaded #wrapper,body.ps-loaded #content,body.ps-loaded main{opacity:1!important}
+/* ── Elimina stagger de tiles de blog para que no aparezcan uno por uno ── */
+body.ps-loaded .c-tile-article{transition-delay:0ms!important}
 
 /* =============================================
    PHANTOM SHIELD — PAGE LOADER
@@ -2017,11 +2021,43 @@ version && console.log(` version: %c${version}`, 'color: yellow');
     observers = [];
   }
 
+  /* — Pre-reveal: fuerza todo el contenido a su estado final ANTES de que
+       el loader desaparezca. Así la página revela de golpe, sin el efecto
+       de "carga en partes" que se ve feo en móvil.                        — */
+  function preRevealAll() {
+    try {
+      // (a) Elementos con data-cssanimate (botones, etc.) — mazehq los anima
+      //     via IntersectionObserver. Los forzamos ya visibles.
+      var cssAnims = document.querySelectorAll('[data-cssanimate]');
+      for (var a = 0; a < cssAnims.length; a++) {
+        cssAnims[a].style.transitionDelay = '0ms';
+        cssAnims[a].style.animationDelay  = '0ms';
+        cssAnims[a].classList.add('is-in-view');
+      }
+      // (b) Eliminar transition-delay inline en los tiles de artículos
+      //     (100ms → 1300ms de stagger — los tarjetas aparecían una por una)
+      var delayed = document.querySelectorAll('[style*="transition-delay"]');
+      for (var b = 0; b < delayed.length; b++) {
+        delayed[b].style.transitionDelay = '0ms';
+      }
+      // (c) Forzar wrapper y contenido principal completamente visibles
+      //     para evitar fade-in del wrapper al quitar is-not-ready
+      var wrappers = document.querySelectorAll('.wrapper, #wrapper, #content, main');
+      for (var c = 0; c < wrappers.length; c++) {
+        wrappers[c].style.opacity = '1';
+        wrappers[c].classList.add('is-in-view');
+      }
+      // (d) Marcar body para que los overrides CSS también apliquen
+      document.body.classList.add('ps-loaded');
+    } catch(e) {}
+  }
+
   /* — Fade out del loader — */
   function hideLoader() {
     if (hiding) return;
     hiding = true;
     cleanupObservers();
+    preRevealAll(); // ← pre-revelar TODO antes de que el overlay desaparezca
     var loader = document.getElementById('ps-loader');
     if (!loader) return;
     loader.classList.add('ps-ready');
