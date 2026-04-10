@@ -4,228 +4,252 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Shield | Advanced Cybersecurity Consulting & Defense</title>
-    <meta name="description" content="Phantom Shield - Expert cybersecurity consulting, penetration testing, network defense, compliance assessments, and security education.">
-    <meta name="keywords" content="cybersecurity, consulting, network security, penetration testing, compliance, incident response, HIPAA, PCI-DSS, SOC2, Orlando, Florida">
+    <meta name="description" content="Phantom Shield delivers elite cybersecurity consulting, penetration testing, compliance, and managed defense — protecting businesses at the speed of threat.">
+    <meta name="keywords" content="cybersecurity, consulting, penetration testing, compliance, incident response, HIPAA, PCI-DSS, SOC2, Orlando, Florida, Latin America, Panama">
     <meta name="author" content="Phantom Shield">
     <meta name="theme-color" content="#050816">
     <meta property="og:title" content="Phantom Shield | Advanced Cybersecurity Consulting">
-    <meta property="og:description" content="Expert cybersecurity consulting, penetration testing, and security education. Founded by a UCF MS Cybersecurity & Privacy graduate.">
+    <meta property="og:description" content="Elite cybersecurity consulting, penetration testing, and security education.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        :root{
-            --bg:#050816;--bg2:#0a0f1e;--bg3:#0f1528;
-            --glass:rgba(242,244,245,0.04);--glass-hover:rgba(242,244,245,0.07);
-            --border:rgba(242,244,245,0.08);--border-hover:rgba(0,212,255,0.2);
-            --accent:#00d4ff;--accent2:#d409fe;--accent3:#00ffa3;
-            --grad:linear-gradient(90deg,#00d4ff 0%,#d409fe 100%);
-            --grad2:linear-gradient(90deg,#00ffa3 0%,#00d4ff 100%);
-            --text:#d6d8d8;--text-bright:#f2f4f5;--text-muted:#7a8599;--text-dim:#4a5568;
-            --radius:12px;--radius-lg:20px;--radius-xl:28px;
-        }
-        body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased}
-        html{scroll-behavior:smooth}
+/* =============================================
+   PHANTOM SHIELD — Maze-Inspired Dark Cyber UI
+   ============================================= */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --bg:#050816;--bg2:#0a0f1e;--bg3:#0f1528;
+    --surface:rgba(255,255,255,0.03);--surface-hover:rgba(255,255,255,0.06);
+    --border:rgba(255,255,255,0.06);--border-hover:rgba(0,212,255,0.15);
+    --accent:#00d4ff;--accent2:#d409fe;--accent3:#00ffa3;--accent4:#ff4757;
+    --grad:linear-gradient(135deg,#00d4ff 0%,#d409fe 100%);
+    --grad2:linear-gradient(135deg,#00ffa3 0%,#00d4ff 100%);
+    --text:#c8cad0;--text-bright:#f0f2f5;--text-muted:#7a8599;--text-dim:#4a5568;
+    --radius:12px;--radius-lg:20px;--radius-xl:28px;
+    --nav-height:72px;
+    --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
-        /* PRELOADER */
-        .preloader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
-        .preloader.done{opacity:0;visibility:hidden;pointer-events:none}
-        .preloader svg{width:80px;height:80px;animation:pulse-shield 1.5s ease-in-out infinite}
-        @keyframes pulse-shield{0%,100%{filter:drop-shadow(0 0 12px rgba(0,212,255,0.3));transform:scale(1)}50%{filter:drop-shadow(0 0 30px var(--accent));transform:scale(1.08)}}
+/* PRELOADER */
+.preloader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.preloader.done{opacity:0;visibility:hidden;pointer-events:none}
+.preloader svg{width:72px;height:72px;animation:pulse-shield 1.5s ease-in-out infinite}
+@keyframes pulse-shield{0%,100%{filter:drop-shadow(0 0 12px rgba(0,212,255,0.3));transform:scale(1)}50%{filter:drop-shadow(0 0 30px var(--accent));transform:scale(1.08)}}
 
-        /* 3D CANVAS */
-        #gfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+/* 3D CANVAS — fixed behind content */
+#gfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
-        /* LAYOUT */
-        .page-content{position:relative;z-index:1}
-        .container{max-width:1200px;margin:0 auto;padding:0 40px}
-        .module{position:relative}
-        .module--full-height{min-height:100vh;display:flex;align-items:center}
+/* PAGE SHELL */
+.page-content{position:relative;z-index:1}
 
-        /* HEADER */
-        header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .4s cubic-bezier(.4,0,.2,1)}
-        header.scrolled{background:rgba(5,8,22,0.85);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid rgba(0,212,255,0.06);padding:12px 0}
-        .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 40px}
-        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-bright)}
-        .logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,212,255,0.25);position:relative;overflow:hidden}
-        .logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15) 50%,transparent 60%);animation:shimmer 3s infinite}
-        @keyframes shimmer{0%{transform:translateX(-100%) rotate(25deg)}100%{transform:translateX(200%) rotate(25deg)}}
-        .logo-icon svg{width:20px;height:20px;fill:white;position:relative;z-index:1}
-        .logo-text{font-weight:700;font-size:19px;letter-spacing:-.02em}
-        .logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+/* ========== 1. ANNOUNCEMENT BANNER (Maze-style top bar) ========== */
+.banner{position:fixed;top:0;left:0;right:0;z-index:1001;background:linear-gradient(90deg,rgba(0,212,255,0.08),rgba(212,9,254,0.08));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,212,255,0.08);padding:10px 0;text-align:center;font-size:13px;font-weight:500;color:var(--text);transition:transform .4s}
+.banner a{color:var(--accent);text-decoration:none;font-weight:600;margin-left:8px}
+.banner a:hover{text-decoration:underline}
+.banner .banner-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);margin-right:10px;animation:blink 2s infinite}
+.banner-close{position:absolute;right:20px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:18px;line-height:1;padding:4px}
+.banner-close:hover{color:var(--text-bright)}
+.banner.hidden{transform:translateY(-100%)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-        nav.desktop-nav{display:flex;align-items:center;gap:4px}
-        nav.desktop-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .25s}
-        nav.desktop-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
-        .nav-dropdown{position:relative}
-        .nav-dropdown-trigger{cursor:pointer;display:flex;align-items:center;gap:4px}
-        .nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);min-width:180px;padding:8px;background:rgba(10,15,30,0.95);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:14px;opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
-        .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
-        .nav-dropdown-menu a{display:block;padding:10px 14px;color:var(--text-muted);font-size:13px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s}
-        .nav-dropdown-menu a:hover{color:var(--accent);background:rgba(0,212,255,0.06)}
-        .cta-nav{padding:10px 22px !important;background:var(--grad) !important;color:white !important;border-radius:45px !important;font-weight:600 !important;font-size:13px !important;box-shadow:0 4px 20px rgba(0,212,255,0.25);transition:all .3s !important;text-decoration:none}
-        .cta-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
-        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
-        .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
-        nav.mobile-nav{display:none}
+/* ========== 2. NAVIGATION (Maze-style sticky) ========== */
+header{position:fixed;top:40px;left:0;right:0;z-index:1000;padding:14px 0;transition:all .4s cubic-bezier(.4,0,.2,1)}
+header.scrolled{top:0;background:rgba(5,8,22,0.88);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid rgba(0,212,255,0.04);padding:10px 0}
+header.no-banner{top:0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 48px}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-bright)}
+.logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,212,255,0.25);position:relative;overflow:hidden}
+.logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15) 50%,transparent 60%);animation:shimmer 3s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%) rotate(25deg)}100%{transform:translateX(200%) rotate(25deg)}}
+.logo-icon svg{width:20px;height:20px;fill:white;position:relative;z-index:1}
+.logo-text{font-weight:700;font-size:19px;letter-spacing:-.02em}
+.logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* TYPOGRAPHY */
-        .gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav.desktop-nav{display:flex;align-items:center;gap:4px}
+nav.desktop-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .25s}
+nav.desktop-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
+.nav-dropdown{position:relative}
+.nav-dropdown-trigger{cursor:pointer;display:flex;align-items:center;gap:4px}
+.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);min-width:180px;padding:8px;background:rgba(10,15,30,0.95);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:14px;opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.nav-dropdown-menu a{display:block;padding:10px 14px;color:var(--text-muted);font-size:13px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s}
+.nav-dropdown-menu a:hover{color:var(--accent);background:rgba(0,212,255,0.06)}
+.cta-nav{padding:10px 22px !important;background:var(--grad) !important;color:white !important;border-radius:45px !important;font-weight:600 !important;font-size:13px !important;box-shadow:0 4px 20px rgba(0,212,255,0.25);transition:all .3s !important;text-decoration:none}
+.cta-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
+.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+nav.mobile-nav{display:none}
 
-        /* HERO MODULE */
-        .hero-content{text-align:center;max-width:800px;margin:0 auto;padding:160px 0 80px}
-        .hero-alert{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px;text-decoration:none;transition:all .3s}
-        .hero-alert:hover{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25)}
-        .hero-alert .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:blink 2s infinite}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        .hero h1{font-size:clamp(36px,5.5vw,72px);font-weight:800;line-height:1.06;letter-spacing:-.04em;margin-bottom:28px;color:var(--text-bright)}
-        .hero-sub{font-size:18px;color:var(--text-muted);line-height:1.7;max-width:560px;margin:0 auto 44px}
-        .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-        .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:var(--grad);color:white;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 8px 30px rgba(0,212,255,0.25);transition:all .3s cubic-bezier(.4,0,.2,1);border:none;cursor:pointer}
-        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,212,255,0.35)}
-        .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:transparent;color:var(--text-bright);font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,0.12);transition:all .3s;cursor:pointer}
-        .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+/* ========== 3. HERO (Maze-style massive typography + floating elements) ========== */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:160px 48px 80px;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.1);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:36px;text-decoration:none;transition:all .3s;animation:fade-up .8s ease-out both}
+.hero-badge:hover{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:blink 2s infinite}
+.hero h1{font-size:clamp(40px,6vw,82px);font-weight:800;line-height:1.04;letter-spacing:-.045em;margin-bottom:28px;color:var(--text-bright);animation:fade-up .8s ease-out .1s both;max-width:900px}
+.hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:18px;color:var(--text-muted);line-height:1.7;max-width:540px;margin:0 auto 44px;animation:fade-up .8s ease-out .2s both}
+.hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fade-up .8s ease-out .3s both}
+@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 
-        /* TRUST BAR (like Maze client logos) */
-        .trust-bar{padding:48px 0;border-top:1px solid rgba(255,255,255,0.03)}
-        .trust-label{text-align:center;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--text-dim);margin-bottom:28px}
-        .trust-logos{display:flex;justify-content:center;align-items:center;gap:44px;flex-wrap:wrap;opacity:.35}
-        .trust-logos span{font-size:16px;font-weight:700;letter-spacing:-.02em;color:var(--text-muted)}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:var(--grad);color:white;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 8px 30px rgba(0,212,255,0.25);transition:all .3s cubic-bezier(.4,0,.2,1);border:none;cursor:pointer;font-family:var(--font)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,212,255,0.35)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:transparent;color:var(--text-bright);font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,0.12);transition:all .3s;cursor:pointer;font-family:var(--font)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
 
-        /* STORY MODULES (Maze-style scroll-driven narrative) */
-        .module--story{padding:140px 0}
-        .story-header{max-width:720px;margin-bottom:80px}
-        .story-header h2{font-size:clamp(28px,3.8vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--text-bright)}
+/* Scroll hint (Maze-style bouncing button) */
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:var(--text-muted);font-size:13px;font-weight:600;animation:small-bounce 2s ease-in-out infinite;pointer-events:none}
+@keyframes small-bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.scroll-hint svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
 
-        /* DATA POINTS - scroll-animated counters */
-        .data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:80px}
-        .data-card{padding:40px 32px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
-        .data-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-4px)}
-        .data-num{font-size:clamp(42px,5vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}
-        .data-num.cyan{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .data-num.green{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .data-num.magenta{background:linear-gradient(90deg,#d409fe,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-        .data-label{font-size:14px;color:var(--text-muted);font-weight:500}
-        .data-sublabel{font-size:12px;color:var(--text-dim);margin-top:4px}
+/* ========== 4. SCROLL STORY SECTION (Maze "Don't keep up" with 3 tabs + videos) ========== */
+.section-story{position:relative;z-index:10;padding:0}
+.story-scroll{height:300vh;position:relative}
+.story-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--bg)}
+.story-inner{max-width:1280px;margin:0 auto;padding:0 48px;width:100%}
+.story-header{text-align:center;margin-bottom:48px}
+.story-header h2{font-size:clamp(28px,4vw,52px);font-weight:800;line-height:1.08;letter-spacing:-.035em;color:var(--text-bright);max-width:700px;margin:0 auto}
+.story-tabs{display:flex;justify-content:center;gap:4px;margin-bottom:40px;background:rgba(255,255,255,0.03);border-radius:14px;padding:4px;max-width:500px;margin-left:auto;margin-right:auto}
+.story-tab{flex:1;padding:12px 20px;border-radius:10px;cursor:pointer;text-align:center;font-size:14px;font-weight:600;color:var(--text-muted);transition:all .4s;border:none;background:none;font-family:var(--font)}
+.story-tab.active{background:rgba(0,212,255,0.1);color:var(--accent);box-shadow:0 0 20px rgba(0,212,255,0.08)}
+.story-panels{position:relative;min-height:320px}
+.story-panel{display:none;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.story-panel.active{display:grid}
+.story-panel-text h3{font-size:24px;font-weight:700;color:var(--text-bright);margin-bottom:16px;letter-spacing:-.02em}
+.story-panel-text p{font-size:15px;color:var(--text-muted);line-height:1.8;margin-bottom:24px}
+.story-panel-text .panel-link{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:14px;font-weight:600;text-decoration:none;transition:gap .3s}
+.story-panel-text .panel-link:hover{gap:12px}
+.story-panel-visual{border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(0,212,255,0.05),rgba(212,9,254,0.05));border:1px solid var(--border);padding:40px;display:flex;align-items:center;justify-content:center;min-height:300px;position:relative;overflow:hidden}
+.story-panel-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(0,212,255,0.06) 0%,transparent 70%)}
+.visual-icon{width:120px;height:120px;stroke:var(--accent);stroke-width:1;fill:none;opacity:.8}
 
-        /* TIMELINE (like Maze's time-to-exploit) */
-        .timeline{display:flex;align-items:stretch;gap:0;margin:60px 0;position:relative}
-        .timeline::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));opacity:.2}
-        .timeline-item{flex:1;text-align:center;position:relative;padding:24px 16px}
-        .timeline-item::before{content:'';width:12px;height:12px;border-radius:50%;background:var(--accent);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(0,212,255,0.4);z-index:1;transition:all .4s}
-        .timeline-item:nth-child(2)::before{background:var(--accent2);box-shadow:0 0 20px rgba(212,9,254,0.4)}
-        .timeline-item:nth-child(3)::before{background:var(--accent3);box-shadow:0 0 20px rgba(0,255,163,0.4)}
-        .timeline-item:nth-child(4)::before{background:#ff4757;box-shadow:0 0 20px rgba(255,71,87,0.4)}
-        .tl-year{font-size:13px;font-weight:600;color:var(--text-dim);margin-bottom:32px}
-        .tl-num{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.03em;margin-top:32px}
-        .tl-unit{font-size:13px;color:var(--text-muted);font-weight:500}
+/* ========== 5. FEATURE MARQUEE (Maze-style infinite scroll ribbons) ========== */
+.section-marquee{position:relative;z-index:10;padding:80px 0;overflow:hidden;background:var(--bg)}
+.marquee-track{display:flex;animation:marquee-scroll 40s linear infinite;width:max-content}
+.marquee-track.reverse{animation-direction:reverse}
+.marquee-item{display:flex;align-items:center;gap:12px;padding:12px 28px;margin:0 8px;border-radius:100px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);white-space:nowrap;font-size:14px;font-weight:500;color:var(--text-muted);transition:all .3s}
+.marquee-item:hover{background:rgba(0,212,255,0.06);color:var(--text-bright);border-color:rgba(0,212,255,0.12)}
+.marquee-item svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:1.5;flex-shrink:0}
+@keyframes marquee-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* PROBLEM CARDS (like Maze's feature items) */
-        .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-        .problem-card{padding:36px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
-        .problem-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-4px)}
-        .problem-card .pc-stat{font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;letter-spacing:-.02em}
-        .problem-card p{font-size:15px;color:var(--text-muted);line-height:1.7}
+/* ========== 6. TABBED PILLARS (Maze "Versatility/Scale/Influence/AI") ========== */
+.section-pillars{position:relative;z-index:10;padding:140px 0;background:var(--bg)}
+.pillars-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+.pillars-nav{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:60px}
+.pillar-tab{padding:16px 28px;font-size:15px;font-weight:600;color:var(--text-dim);cursor:pointer;border:none;background:none;font-family:var(--font);position:relative;transition:color .3s}
+.pillar-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--grad);transform:scaleX(0);transition:transform .4s}
+.pillar-tab.active{color:var(--accent)}
+.pillar-tab.active::after{transform:scaleX(1)}
+.pillar-panel{display:none;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center}
+.pillar-panel.active{display:grid}
+.pillar-text h3{font-size:clamp(28px,3.5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--text-bright);margin-bottom:20px}
+.pillar-text p{font-size:16px;color:var(--text-muted);line-height:1.8;margin-bottom:32px}
+.pillar-links{display:flex;gap:12px;flex-wrap:wrap}
+.pillar-visual{border-radius:var(--radius-xl);background:linear-gradient(135deg,rgba(0,212,255,0.04),rgba(212,9,254,0.04));border:1px solid var(--border);overflow:hidden;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;position:relative}
+.pillar-visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,212,255,0.08) 0%,transparent 60%)}
+.pillar-visual-icon{width:200px;height:200px;stroke:var(--accent);fill:none;stroke-width:.75;opacity:.6}
 
-        /* SOLUTION SECTION */
-        .solution-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-        .sol-card{padding:40px 32px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
-        .sol-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 40px rgba(0,212,255,0.06)}
-        .sol-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .4s}
-        .sol-card:hover::after{opacity:1}
-        .sol-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
-        .sol-icon svg{width:26px;height:26px;stroke-width:1.5;fill:none;stroke:currentColor}
-        .sol-icon.si-1{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.12)}
-        .sol-icon.si-2{background:rgba(212,9,254,0.1);box-shadow:0 4px 20px rgba(212,9,254,0.12)}
-        .sol-icon.si-3{background:rgba(0,255,163,0.1);box-shadow:0 4px 20px rgba(0,255,163,0.12)}
-        .sol-icon.si-4{background:rgba(255,71,87,0.1);box-shadow:0 4px 20px rgba(255,71,87,0.12)}
-        .sol-icon.si-5{background:rgba(255,193,7,0.1);box-shadow:0 4px 20px rgba(255,193,7,0.12)}
-        .sol-icon.si-6{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.12)}
-        .sol-card h3{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.01em;color:var(--text-bright)}
-        .sol-card p{font-size:14px;color:var(--text-muted);line-height:1.7}
-        .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;transition:gap .3s}
-        .card-link:hover{gap:10px}
+/* ========== 7. BIG STAT MODULE (Maze-style "graph" section) ========== */
+.section-stat{position:relative;z-index:10;padding:120px 0;text-align:center;background:var(--bg)}
+.stat-number{font-size:clamp(80px,14vw,180px);font-weight:900;letter-spacing:-.06em;line-height:.85;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.stat-label{font-size:22px;color:var(--text-muted);font-weight:500;max-width:500px;margin:0 auto}
+.stat-sub{font-size:15px;color:var(--text-dim);max-width:440px;margin:16px auto 0}
 
-        /* ANIMATED GRADIENT BORDER */
-        @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
-        @keyframes rotate-gradient{to{--angle:360deg}}
-        .glow-border{position:relative;overflow:visible}
-        .glow-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--angle),transparent 40%,var(--accent) 50%,var(--accent2) 60%,transparent 70%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rotate-gradient 4s linear infinite;opacity:0;transition:opacity .4s}
-        .glow-border:hover::before{opacity:1}
+/* ========== 8. FRESH INSIGHTS (Maze-style featured report card) ========== */
+.section-insights{position:relative;z-index:10;padding:100px 0;background:var(--bg)}
+.insights-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+.insights-card{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:60px;border-radius:var(--radius-xl);background:linear-gradient(135deg,rgba(0,212,255,0.03),rgba(212,9,254,0.03));border:1px solid var(--border);position:relative;overflow:hidden}
+.insights-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(0,212,255,0.06) 0%,transparent 50%)}
+.insights-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:16px}
+.insights-card h3{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.03em;color:var(--text-bright);margin-bottom:16px;line-height:1.15}
+.insights-card p{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:28px}
+.insights-visual{border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(212,9,254,0.08));display:flex;align-items:center;justify-content:center;padding:40px;min-height:300px;position:relative;overflow:hidden}
+.insights-visual svg{width:200px;height:200px;stroke:var(--accent);fill:none;stroke-width:.5;opacity:.5}
 
-        /* GRAPH MODULE (large stat + visual) */
-        .module--graph{padding:120px 0;text-align:center}
-        .graph-big-stat{font-size:clamp(80px,12vw,160px);font-weight:900;letter-spacing:-.06em;line-height:.9;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
-        .graph-label{font-size:20px;color:var(--text-muted);font-weight:500}
-        .graph-sub{font-size:15px;color:var(--text-dim);max-width:500px;margin:12px auto 0}
+/* ========== 9. LOGO CAROUSEL (Maze-style infinite scroll) ========== */
+.section-logos{position:relative;z-index:10;padding:80px 0;background:var(--bg);overflow:hidden}
+.logos-label{text-align:center;font-size:18px;font-weight:600;color:var(--text-muted);margin-bottom:40px}
+.logo-track{display:flex;animation:logo-scroll 30s linear infinite;width:max-content}
+.logo-track.reverse{animation-direction:reverse}
+.logo-item{display:flex;align-items:center;justify-content:center;padding:16px 36px;margin:0 12px;border-radius:var(--radius);background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);min-width:160px;height:60px}
+.logo-item span{font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--text-dim);transition:color .3s}
+.logo-item:hover span{color:var(--text-muted)}
+@keyframes logo-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* REACH SECTION */
-        .reach-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-        .reach-card{padding:36px 30px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .4s;position:relative;overflow:visible}
-        .reach-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.25);border-color:var(--border-hover)}
-        .reach-flag{font-size:36px;margin-bottom:16px}
-        .reach-card h3{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text-bright)}
-        .reach-card p{font-size:14px;color:var(--text-muted);margin-bottom:16px}
-        .reach-stat{display:flex;gap:20px}
-        .reach-stat .rs-num{font-size:22px;font-weight:800;color:var(--accent)}
-        .reach-stat .rs-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em}
+/* ========== 10. TRUST & SECURITY GRID (Maze-style) ========== */
+.section-trust{position:relative;z-index:10;padding:120px 0;background:var(--bg)}
+.trust-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+.trust-header{text-align:center;margin-bottom:60px}
+.trust-header h2{font-size:clamp(28px,3.5vw,44px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--text-bright);margin-bottom:16px}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.trust-card{padding:36px 30px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);transition:all .4s}
+.trust-card:hover{background:var(--surface-hover);border-color:var(--border-hover);transform:translateY(-4px)}
+.trust-card-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:rgba(0,212,255,0.06)}
+.trust-card-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:1.5}
+.trust-card h3{font-size:17px;font-weight:700;color:var(--text-bright);margin-bottom:8px}
+.trust-card p{font-size:14px;color:var(--text-muted);line-height:1.7}
 
-        /* CTA MODULE (Maze-style centered, full-height) */
-        .module--cta{text-align:center;padding:160px 0}
-        .cta-inner{max-width:640px;margin:0 auto}
-        .cta-inner h2{font-size:clamp(32px,4.5vw,56px);font-weight:800;letter-spacing:-.03em;margin-bottom:24px;color:var(--text-bright);line-height:1.08}
-        .cta-inner p{font-size:18px;color:var(--text-muted);max-width:480px;margin:0 auto 40px}
-        .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+/* ========== 11. CTA SECTION (Maze "Shape change together") ========== */
+.section-cta{position:relative;z-index:10;padding:160px 0;text-align:center;background:var(--bg);overflow:hidden}
+.section-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.04) 0%,transparent 60%)}
+.cta-inner{max-width:640px;margin:0 auto;padding:0 48px;position:relative}
+.cta-inner h2{font-size:clamp(32px,5vw,60px);font-weight:800;letter-spacing:-.04em;margin-bottom:24px;color:var(--text-bright);line-height:1.06}
+.cta-inner p{font-size:18px;color:var(--text-muted);max-width:480px;margin:0 auto 40px}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
-        /* FOOTER */
-        footer{padding:80px 0 40px;border-top:1px solid rgba(255,255,255,0.04)}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:60px}
-        .footer-brand p{font-size:14px;color:var(--text-muted);margin-top:16px;max-width:280px}
-        .footer-col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin-bottom:20px}
-        .footer-col a{display:block;font-size:14px;color:var(--text-muted);text-decoration:none;padding:6px 0;transition:color .2s}
-        .footer-col a:hover{color:var(--accent)}
-        .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--text-dim)}
+/* ========== 12. FOOTER (Maze-style columns) ========== */
+footer{position:relative;z-index:10;padding:80px 0 40px;border-top:1px solid rgba(255,255,255,0.04);background:var(--bg)}
+.footer-inner{max-width:1280px;margin:0 auto;padding:0 48px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:60px}
+.footer-brand p{font-size:14px;color:var(--text-muted);margin-top:16px;max-width:280px;line-height:1.7}
+.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:20px}
+.footer-col a{display:block;font-size:14px;color:var(--text-muted);text-decoration:none;padding:6px 0;transition:color .2s}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--text-dim)}
 
-        /* SCROLL OBSERVE ANIMATIONS */
-        [data-observe]{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
-        [data-observe].visible{opacity:1;transform:translateY(0)}
-        [data-observe][data-delay="1"]{transition-delay:.1s}
-        [data-observe][data-delay="2"]{transition-delay:.2s}
-        [data-observe][data-delay="3"]{transition-delay:.3s}
-        [data-observe][data-delay="4"]{transition-delay:.4s}
-        [data-observe][data-delay="5"]{transition-delay:.5s}
+/* ========== SCROLL OBSERVE ANIMATIONS ========== */
+[data-observe]{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+[data-observe].visible{opacity:1;transform:translateY(0)}
+[data-observe][data-delay="1"]{transition-delay:.1s}
+[data-observe][data-delay="2"]{transition-delay:.2s}
+[data-observe][data-delay="3"]{transition-delay:.3s}
+[data-observe][data-delay="4"]{transition-delay:.4s}
+[data-observe][data-delay="5"]{transition-delay:.5s}
 
-        /* COUNTER ANIMATION */
-        .counter-animated{font-variant-numeric:tabular-nums}
+/* COUNTER ANIMATION */
+.counter-animated{font-variant-numeric:tabular-nums}
 
-        /* RESPONSIVE */
-        @media(max-width:1024px){
-            .data-grid{grid-template-columns:repeat(2,1fr)}
-            .solution-grid{grid-template-columns:repeat(2,1fr)}
-            .problem-grid{grid-template-columns:1fr}
-            .reach-cards{grid-template-columns:repeat(2,1fr)}
-            .footer-grid{grid-template-columns:1fr 1fr}
-            .timeline{flex-wrap:wrap}
-            .timeline-item{flex:0 0 50%}
-        }
-        @media(max-width:768px){
-            nav.desktop-nav{display:none}
-            .hamburger{display:flex}
-            nav.mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,22,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);flex-direction:column;padding:100px 32px 40px;gap:8px;z-index:999}
-            nav.mobile-nav.active{display:flex}
-            nav.mobile-nav a{color:var(--text-muted);text-decoration:none;font-size:18px;font-weight:600;padding:14px 16px;border-radius:12px;transition:all .2s}
-            nav.mobile-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
-            .data-grid{grid-template-columns:1fr}
-            .solution-grid{grid-template-columns:1fr}
-            .reach-cards{grid-template-columns:1fr}
-            .footer-grid{grid-template-columns:1fr}
-            .module--story{padding:80px 0}
-            .container{padding:0 24px}
-            .header-inner{padding:0 24px}
-            .timeline-item{flex:0 0 50%}
-        }
+/* GRADIENT TEXT */
+.gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ========== RESPONSIVE ========== */
+@media(max-width:1024px){
+    .pillar-panel.active{grid-template-columns:1fr}
+    .insights-card{grid-template-columns:1fr}
+    .story-panel.active{grid-template-columns:1fr}
+    .trust-grid{grid-template-columns:repeat(2,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+    nav.desktop-nav{display:none}
+    .hamburger{display:flex}
+    nav.mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,22,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);flex-direction:column;padding:100px 32px 40px;gap:8px;z-index:999}
+    nav.mobile-nav.active{display:flex}
+    nav.mobile-nav a{color:var(--text-muted);text-decoration:none;font-size:18px;font-weight:600;padding:14px 16px;border-radius:12px;transition:all .2s}
+    nav.mobile-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
+    .hero{padding:140px 24px 80px}
+    .header-inner{padding:0 24px}
+    .trust-grid{grid-template-columns:1fr}
+    .pillars-inner,.insights-inner,.trust-inner,.footer-inner,.cta-inner{padding:0 24px}
+    .story-inner{padding:0 24px}
+    .story-tabs{max-width:100%}
+    .pillars-nav{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .footer-grid{grid-template-columns:1fr}
+    .banner{font-size:12px;padding:8px 40px 8px 16px}
+}
     </style>
 </head>
 <body>
@@ -238,765 +262,804 @@
         </svg>
     </div>
 
-    <!-- Three.js Shield-Earth Canvas -->
+    <!-- Three.js 3D Canvas -->
     <canvas id="gfx-canvas"></canvas>
 
     <div class="page-content">
 
-        <!-- HEADER -->
+        <!-- ===== 1. ANNOUNCEMENT BANNER ===== -->
+        <div class="banner" id="banner">
+            <span class="banner-dot"></span>
+            Now offering Ley 81 compliance consulting for Latin America
+            <a href="/panama.html">Learn more &rarr;</a>
+            <button class="banner-close" id="banner-close" aria-label="Close">&times;</button>
+        </div>
+
+        <!-- ===== 2. NAVIGATION ===== -->
         <header id="header">
             <div class="header-inner">
                 <a href="/" class="logo">
                     <div class="logo-icon">
-                        <svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg>
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v5c0 7.18 3.84 13.44 9 15 5.16-1.56 9-7.82 9-15V7l-9-5z"/></svg>
                     </div>
-                    <div class="logo-text"><span>Phantom</span> Shield</div>
+                    <div class="logo-text">Phantom<span>Shield</span></div>
                 </a>
                 <nav class="desktop-nav">
-                    <a href="/">Home</a>
-                    <a href="/services">Services</a>
                     <div class="nav-dropdown">
-                        <a href="#" class="nav-dropdown-trigger">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:2px"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+                        <a class="nav-dropdown-trigger">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></a>
                         <div class="nav-dropdown-menu">
-                            <a href="/latin-america">Latin America</a>
-                            <a href="/panama">Panama</a>
-                            <a href="/small-business">SMB</a>
+                            <a href="/services.html">All Services</a>
+                            <a href="/services.html#penetration-testing">Penetration Testing</a>
+                            <a href="/services.html#compliance">Compliance & Audits</a>
+                            <a href="/services.html#incident-response">Incident Response</a>
+                            <a href="/services.html#managed-defense">Managed Defense</a>
                         </div>
                     </div>
-                    <a href="/blog">Blog</a>
-                    <a href="/contact">Contact</a>
-                    <a href="/contact" class="cta-nav">Get Protected</a>
+                    <div class="nav-dropdown">
+                        <a class="nav-dropdown-trigger">Markets <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></a>
+                        <div class="nav-dropdown-menu">
+                            <a href="/latin-america.html">Latin America</a>
+                            <a href="/panama.html">Panama &mdash; Ley 81</a>
+                            <a href="/small-business.html">Small Business</a>
+                        </div>
+                    </div>
+                    <a href="/blog.html">Insights</a>
+                    <a href="/contact.html" class="cta-nav">Get Protected</a>
                 </nav>
-                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+                <div class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </div>
             </div>
         </header>
 
-        <nav class="mobile-nav" id="mobileNav">
+        <!-- Mobile Nav -->
+        <nav class="mobile-nav" id="mobile-nav">
             <a href="/">Home</a>
-            <a href="/services">Services</a>
-            <a href="/latin-america">Latin America</a>
-            <a href="/panama">Panama</a>
-            <a href="/small-business">SMB</a>
-            <a href="/blog">Blog</a>
-            <a href="/contact">Contact</a>
+            <a href="/services.html">Services</a>
+            <a href="/latin-america.html">Latin America</a>
+            <a href="/panama.html">Panama</a>
+            <a href="/small-business.html">Small Business</a>
+            <a href="/blog.html">Insights</a>
+            <a href="/contact.html">Contact</a>
         </nav>
 
-        <!-- ==========================================
-             MODULE 1: HERO (full-height, centered)
-             ========================================== -->
-        <section class="module module--full-height hero" id="section-hero">
-            <div class="container">
-                <div class="hero-content">
-                    <a href="/contact" class="hero-alert" data-observe>
-                        <span class="dot"></span> Now protecting LATAM & North America
+        <!-- ===== 3. HERO SECTION ===== -->
+        <section class="hero" id="hero">
+            <a href="/services.html" class="hero-badge">
+                <span class="dot"></span>
+                Now offering AI-powered threat detection
+            </a>
+            <h1>Security at the<br><em>pace of threat</em></h1>
+            <p class="hero-sub">In a world where attacks evolve faster than ever, Phantom Shield turns intelligence into protection your organization can rely on</p>
+            <div class="hero-ctas">
+                <a href="/contact.html" class="btn-primary">
+                    Get protected
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+                <a href="/services.html" class="btn-secondary">Explore services</a>
+            </div>
+            <div class="scroll-hint">
+                Scroll to continue
+                <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+        </section>
+
+        <!-- ===== 4. SCROLL STORY ("Don't react to threats, prevent them") ===== -->
+        <section class="section-story" id="story">
+            <div class="story-scroll">
+                <div class="story-sticky">
+                    <div class="story-inner">
+                        <div class="story-header" data-observe>
+                            <h2>Don't react to threats,<br>prevent them</h2>
+                        </div>
+                        <div class="story-tabs" data-observe data-delay="1">
+                            <button class="story-tab active" data-panel="detect">Detect</button>
+                            <button class="story-tab" data-panel="protect">Protect</button>
+                            <button class="story-tab" data-panel="respond">Respond</button>
+                        </div>
+                        <div class="story-panels">
+                            <div class="story-panel active" id="panel-detect">
+                                <div class="story-panel-text">
+                                    <h3>Find threats before they find you</h3>
+                                    <p>Our continuous monitoring and penetration testing uncovers vulnerabilities across your entire attack surface. We simulate real-world adversaries using the same tools and techniques as nation-state actors, so you know exactly where you stand.</p>
+                                    <a href="/services.html#penetration-testing" class="panel-link">
+                                        Explore detection
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+                                    </a>
+                                </div>
+                                <div class="story-panel-visual">
+                                    <svg class="visual-icon" viewBox="0 0 120 120">
+                                        <circle cx="60" cy="60" r="40" stroke-dasharray="6 4"/>
+                                        <circle cx="60" cy="60" r="20" stroke-dasharray="4 3"/>
+                                        <circle cx="60" cy="60" r="4" fill="var(--accent)" stroke="none"/>
+                                        <line x1="60" y1="16" x2="60" y2="8"/>
+                                        <line x1="60" y1="112" x2="60" y2="104"/>
+                                        <line x1="16" y1="60" x2="8" y2="60"/>
+                                        <line x1="112" y1="60" x2="104" y2="60"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="story-panel" id="panel-protect">
+                                <div class="story-panel-text">
+                                    <h3>Harden every layer of defense</h3>
+                                    <p>From network segmentation to zero-trust architecture, we design and implement defense strategies that make breaches exponentially harder. Compliance frameworks like SOC 2, HIPAA, PCI-DSS, and Ley 81 become second nature.</p>
+                                    <a href="/services.html#compliance" class="panel-link">
+                                        Explore protection
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+                                    </a>
+                                </div>
+                                <div class="story-panel-visual">
+                                    <svg class="visual-icon" viewBox="0 0 120 120">
+                                        <path d="M60 10L20 30v30c0 28 17 54 40 60 23-6 40-32 40-60V30L60 10z" stroke-dasharray="6 4"/>
+                                        <path d="M50 62l8 8 16-20" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="story-panel" id="panel-respond">
+                                <div class="story-panel-text">
+                                    <h3>Contain and recover in minutes, not months</h3>
+                                    <p>When incidents occur, our rapid-response team isolates threats, preserves forensic evidence, and restores operations. Detailed post-incident reports ensure the same attack vector never works twice.</p>
+                                    <a href="/services.html#incident-response" class="panel-link">
+                                        Explore response
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
+                                    </a>
+                                </div>
+                                <div class="story-panel-visual">
+                                    <svg class="visual-icon" viewBox="0 0 120 120">
+                                        <circle cx="60" cy="60" r="45" stroke-dasharray="8 4"/>
+                                        <polyline points="60,30 60,60 80,70"/>
+                                        <path d="M90 35l10-8m0 8l-10 0" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 5. FEATURE MARQUEE (Maze-style scrolling ribbons) ===== -->
+        <section class="section-marquee" data-observe>
+            <div class="marquee-track" id="marquee1">
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Penetration Testing</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>SOC 2 Compliance</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>Incident Response</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Zero-Trust Architecture</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M12 4v16m-8-4 8-12 8 12"/></svg>Network Segmentation</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10A15 15 0 0 1 12 2z"/></svg>HIPAA Audits</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Phishing Simulation</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Managed SIEM</div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Penetration Testing</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>SOC 2 Compliance</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>Incident Response</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Zero-Trust Architecture</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M2 20h20M12 4v16m-8-4 8-12 8 12"/></svg>Network Segmentation</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10A15 15 0 0 1 12 2z"/></svg>HIPAA Audits</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Phishing Simulation</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>Managed SIEM</div>
+            </div>
+            <div style="height:12px"></div>
+            <div class="marquee-track reverse" id="marquee2">
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Threat Intelligence</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>Vulnerability Scanning</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>24/7 Monitoring</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/></svg>Security Training</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Endpoint Protection</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>PCI-DSS Audits</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Ley 81 Compliance</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>Dark Web Monitoring</div>
+                <!-- Duplicate -->
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Threat Intelligence</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>Vulnerability Scanning</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>24/7 Monitoring</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75"/></svg>Security Training</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Endpoint Protection</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>PCI-DSS Audits</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Ley 81 Compliance</div>
+                <div class="marquee-item"><svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>Dark Web Monitoring</div>
+            </div>
+        </section>
+
+        <!-- ===== 6. TABBED PILLARS (Maze Versatility/Scale/Influence/AI) ===== -->
+        <section class="section-pillars" id="pillars">
+            <div class="pillars-inner">
+                <div class="pillars-nav" data-observe>
+                    <button class="pillar-tab active" data-pillar="detection">Detection</button>
+                    <button class="pillar-tab" data-pillar="protection">Protection</button>
+                    <button class="pillar-tab" data-pillar="compliance">Compliance</button>
+                    <button class="pillar-tab" data-pillar="ai">AI-Powered Defense</button>
+                </div>
+                <div class="pillar-panels">
+                    <div class="pillar-panel active" id="pillar-detection">
+                        <div class="pillar-text" data-observe>
+                            <h3>Security needs<br>visibility</h3>
+                            <p>See your entire attack surface in real time. Run penetration tests, vulnerability scans, and red-team exercises that uncover what automated tools miss. Reach across networks, cloud infrastructure, and endpoints to find threats at any depth.</p>
+                            <div class="pillar-links">
+                                <a href="/services.html" class="btn-primary" style="padding:12px 28px;font-size:14px">Platform overview</a>
+                                <a href="/contact.html" class="btn-secondary" style="padding:12px 28px;font-size:14px">Get a demo</a>
+                            </div>
+                        </div>
+                        <div class="pillar-visual" data-observe data-delay="2">
+                            <svg class="pillar-visual-icon" viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="80" stroke-dasharray="8 5"/>
+                                <circle cx="100" cy="100" r="55" stroke-dasharray="5 4"/>
+                                <circle cx="100" cy="100" r="30" stroke-dasharray="3 3"/>
+                                <circle cx="100" cy="100" r="6" fill="var(--accent)" stroke="none"/>
+                                <line x1="100" y1="12" x2="100" y2="4" stroke-width="1.5"/>
+                                <line x1="100" y1="196" x2="100" y2="188" stroke-width="1.5"/>
+                                <line x1="12" y1="100" x2="4" y2="100" stroke-width="1.5"/>
+                                <line x1="196" y1="100" x2="188" y2="100" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pillar-panel" id="pillar-protection">
+                        <div class="pillar-text" data-observe>
+                            <h3>Security needs<br>resilience</h3>
+                            <p>Make defense a shared capability. Give every team in your organization intuitive security tools and clear policies, ensuring protection flows without bottlenecks. Zero-trust architecture, network segmentation, and hardened configurations become second nature.</p>
+                            <div class="pillar-links">
+                                <a href="/services.html" class="btn-primary" style="padding:12px 28px;font-size:14px">Platform overview</a>
+                                <a href="/contact.html" class="btn-secondary" style="padding:12px 28px;font-size:14px">Get a demo</a>
+                            </div>
+                        </div>
+                        <div class="pillar-visual" data-observe data-delay="2">
+                            <svg class="pillar-visual-icon" viewBox="0 0 200 200">
+                                <path d="M100 15L30 50v50c0 46 30 88 70 100 40-12 70-54 70-100V50L100 15z" stroke-dasharray="8 5"/>
+                                <path d="M80 105l15 15 30-38" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pillar-panel" id="pillar-compliance">
+                        <div class="pillar-text" data-observe>
+                            <h3>Security needs<br>accountability</h3>
+                            <p>Turn audits into assets. Keep all your compliance documentation in one place, automate evidence collection, and share reports that make decisions easier for regulators, stakeholders, and your board. SOC 2, HIPAA, PCI-DSS, GDPR, Ley 81 &mdash; all covered.</p>
+                            <div class="pillar-links">
+                                <a href="/services.html" class="btn-primary" style="padding:12px 28px;font-size:14px">Platform overview</a>
+                                <a href="/contact.html" class="btn-secondary" style="padding:12px 28px;font-size:14px">Get a demo</a>
+                            </div>
+                        </div>
+                        <div class="pillar-visual" data-observe data-delay="2">
+                            <svg class="pillar-visual-icon" viewBox="0 0 200 200">
+                                <rect x="40" y="20" width="120" height="160" rx="8" stroke-dasharray="8 5"/>
+                                <line x1="65" y1="60" x2="135" y2="60" stroke-width="1.5"/>
+                                <line x1="65" y1="85" x2="135" y2="85" stroke-width="1.5"/>
+                                <line x1="65" y1="110" x2="115" y2="110" stroke-width="1.5"/>
+                                <path d="M75 135l8 8 18-22" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="pillar-panel" id="pillar-ai">
+                        <div class="pillar-text" data-observe>
+                            <h3>Defense amplified<br>by AI</h3>
+                            <p>Automate the busywork. AI handles the heavy lifting &mdash; log analysis, anomaly detection, threat correlation, and automated response playbooks &mdash; while your team concentrates on strategy and staying one step ahead of adversaries.</p>
+                            <div class="pillar-links">
+                                <a href="/services.html" class="btn-primary" style="padding:12px 28px;font-size:14px">Platform overview</a>
+                                <a href="/contact.html" class="btn-secondary" style="padding:12px 28px;font-size:14px">Get a demo</a>
+                            </div>
+                        </div>
+                        <div class="pillar-visual" data-observe data-delay="2">
+                            <svg class="pillar-visual-icon" viewBox="0 0 200 200">
+                                <circle cx="100" cy="80" r="35" stroke-dasharray="6 4"/>
+                                <path d="M70 130c0-16.57 13.43-30 30-30s30 13.43 30 30" stroke-dasharray="6 4"/>
+                                <circle cx="90" cy="72" r="4" fill="var(--accent)" stroke="none"/>
+                                <circle cx="110" cy="72" r="4" fill="var(--accent)" stroke="none"/>
+                                <path d="M88 90a14 14 0 0 0 24 0" stroke-width="1.5"/>
+                                <line x1="100" y1="130" x2="100" y2="165" stroke-dasharray="4 3"/>
+                                <line x1="80" y1="145" x2="120" y2="145" stroke-dasharray="4 3"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 7. BIG STAT MODULE ===== -->
+        <section class="section-stat" data-observe>
+            <div style="max-width:1280px;margin:0 auto;padding:0 48px">
+                <div class="stat-number" data-count="3065" data-suffix="+">0</div>
+                <div class="stat-label">Average weekly cyberattacks per organization in LATAM</div>
+                <div class="stat-sub">The threat landscape is accelerating. Is your defense keeping pace?</div>
+            </div>
+        </section>
+
+        <!-- ===== 8. FRESH INSIGHTS (Maze-style featured report) ===== -->
+        <section class="section-insights" data-observe>
+            <div class="insights-inner">
+                <div class="insights-card">
+                    <div style="position:relative;z-index:1">
+                        <div class="insights-eyebrow">Fresh Insights</div>
+                        <h3>The State of Cybersecurity in Latin America 2026</h3>
+                        <p>Explore the top security trends, emerging threats, and compliance requirements across LATAM, with data from hundreds of organizations and security professionals.</p>
+                        <a href="/blog.html" class="btn-primary" style="padding:12px 28px;font-size:14px">Read the report</a>
+                    </div>
+                    <div class="insights-visual">
+                        <svg viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="80" stroke-dasharray="4 6"/>
+                            <path d="M100 20a80 80 0 0 1 0 160" stroke-dasharray="2 4" stroke="var(--accent2)"/>
+                            <path d="M100 20a80 80 0 0 0 0 160" stroke-dasharray="2 4" stroke="var(--accent3)"/>
+                            <circle cx="100" cy="20" r="4" fill="var(--accent)"/>
+                            <circle cx="160" cy="60" r="3" fill="var(--accent2)"/>
+                            <circle cx="40" cy="140" r="3" fill="var(--accent3)"/>
+                            <circle cx="145" cy="150" r="3" fill="var(--accent4)"/>
+                            <text x="100" y="95" text-anchor="middle" fill="var(--text-bright)" font-size="28" font-weight="800" font-family="Inter,sans-serif">2026</text>
+                            <text x="100" y="115" text-anchor="middle" fill="var(--text-muted)" font-size="10" font-family="Inter,sans-serif">LATAM REPORT</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 9. LOGO CAROUSEL (Maze-style "From startups to enterprises") ===== -->
+        <section class="section-logos" data-observe>
+            <div class="logos-label">Trusted by organizations worldwide</div>
+            <div class="logo-track" id="logoTrack1">
+                <div class="logo-item"><span>CompTIA</span></div>
+                <div class="logo-item"><span>Cisco</span></div>
+                <div class="logo-item"><span>AWS</span></div>
+                <div class="logo-item"><span>Microsoft</span></div>
+                <div class="logo-item"><span>Palo Alto</span></div>
+                <div class="logo-item"><span>CrowdStrike</span></div>
+                <div class="logo-item"><span>Splunk</span></div>
+                <div class="logo-item"><span>Fortinet</span></div>
+                <div class="logo-item"><span>SentinelOne</span></div>
+                <div class="logo-item"><span>Elastic</span></div>
+                <!-- Duplicate -->
+                <div class="logo-item"><span>CompTIA</span></div>
+                <div class="logo-item"><span>Cisco</span></div>
+                <div class="logo-item"><span>AWS</span></div>
+                <div class="logo-item"><span>Microsoft</span></div>
+                <div class="logo-item"><span>Palo Alto</span></div>
+                <div class="logo-item"><span>CrowdStrike</span></div>
+                <div class="logo-item"><span>Splunk</span></div>
+                <div class="logo-item"><span>Fortinet</span></div>
+                <div class="logo-item"><span>SentinelOne</span></div>
+                <div class="logo-item"><span>Elastic</span></div>
+            </div>
+        </section>
+
+        <!-- ===== 10. TRUST & SECURITY GRID ===== -->
+        <section class="section-trust" id="trust">
+            <div class="trust-inner">
+                <div class="trust-header" data-observe>
+                    <h2>Trust and security at every level</h2>
+                </div>
+                <div class="trust-grid">
+                    <div class="trust-card" data-observe data-delay="1">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <h3>Encrypted Transmission</h3>
+                        <p>All traffic, including client data, is transported securely and encrypted via TLS 1.3 with forward secrecy.</p>
+                    </div>
+                    <div class="trust-card" data-observe data-delay="2">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3>Access Control</h3>
+                        <p>Role-based access policies with MFA enforcement ensure only authorized personnel interact with sensitive systems.</p>
+                    </div>
+                    <div class="trust-card" data-observe data-delay="3">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>SOC 2 Type II</h3>
+                        <p>Our operations meet the rigorous standards of SOC 2 Type II, ensuring continuous security, availability, and confidentiality.</p>
+                    </div>
+                    <div class="trust-card" data-observe data-delay="1">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM2 12h20M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10A15 15 0 0 1 12 2z"/></svg>
+                        </div>
+                        <h3>GDPR Compliance</h3>
+                        <p>We protect your data according to GDPR standards and make it easy for your organization to be compliant too.</p>
+                    </div>
+                    <div class="trust-card" data-observe data-delay="2">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/></svg>
+                        </div>
+                        <h3>SSO Integration</h3>
+                        <p>Reduce security risk by authenticating access with SAML-based Single Sign-On across your entire organization.</p>
+                    </div>
+                    <div class="trust-card" data-observe data-delay="3">
+                        <div class="trust-card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                        </div>
+                        <h3>Private Environments</h3>
+                        <p>Enable isolated testing environments with role-based access, so your most sensitive assessments remain confidential.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 11. CTA SECTION ===== -->
+        <section class="section-cta" data-observe>
+            <div class="cta-inner">
+                <h2>Secure your future<br><span class="gradient-text">together</span></h2>
+                <p>Join the organizations that trust Phantom Shield to keep them protected, compliant, and ahead of threats.</p>
+                <div class="cta-buttons">
+                    <a href="/contact.html" class="btn-primary">
+                        Get protected
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
-                    <h1 data-observe>Enterprise Cybersecurity<br>That Shields <span class="gradient-text">Your Future</span></h1>
-                    <p class="hero-sub" data-observe data-delay="1">Threat detection, penetration testing, and compliance consulting — from Orlando to Panama City. We find vulnerabilities before attackers do.</p>
-                    <div class="hero-ctas" data-observe data-delay="2">
-                        <a href="/contact" class="btn-primary">
-                            Get a Free Assessment
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                        <a href="/services" class="btn-secondary">Explore Services</a>
-                    </div>
+                    <a href="/services.html" class="btn-secondary">Explore services</a>
                 </div>
             </div>
         </section>
 
-        <!-- Trust Bar -->
-        <section class="trust-bar" data-observe>
-            <div class="container">
-                <p class="trust-label">Frameworks & compliance standards we work with</p>
-                <div class="trust-logos">
-                    <span>NIST</span><span>ISO 27001</span><span>SOC 2</span><span>HIPAA</span><span>PCI-DSS</span><span>GDPR</span><span>CMMC</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 2: STORY — The Problem
-             (Maze-style scroll-driven narrative)
-             ========================================== -->
-        <section class="module module--story" id="section-story-1">
-            <div class="container">
-                <div class="story-header" data-observe>
-                    <h2>Cyber threats are accelerating, and most organizations can't keep up</h2>
-                </div>
-
-                <!-- Data Points Grid -->
-                <div class="data-grid">
-                    <div class="data-card glow-border" data-observe data-delay="1">
-                        <div class="data-num cyan counter-animated" data-count="40000">0</div>
-                        <div class="data-label">Vulnerabilities published in 2024</div>
-                        <div class="data-sublabel">Up 38% from 2023</div>
-                    </div>
-                    <div class="data-card glow-border" data-observe data-delay="2">
-                        <div class="data-num magenta counter-animated" data-count="34" data-suffix="%">0%</div>
-                        <div class="data-label">Increase in exploited vulnerabilities</div>
-                        <div class="data-sublabel">Used for initial access in 2024</div>
-                    </div>
-                    <div class="data-card glow-border" data-observe data-delay="3">
-                        <div class="data-num green counter-animated" data-count="15" data-prefix="<" data-suffix="min">0</div>
-                        <div class="data-label">Our average response time</div>
-                        <div class="data-sublabel">Industry average: 277 days</div>
-                    </div>
-                </div>
-
-                <!-- Timeline: Time to Exploit (inspired by Maze) -->
-                <div data-observe>
-                    <h2 style="font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;color:var(--text-bright);margin-bottom:8px">Time to exploit is collapsing</h2>
-                    <p style="font-size:15px;color:var(--text-muted);margin-bottom:0">Attackers are weaponizing vulnerabilities faster than ever</p>
-                </div>
-                <div class="timeline" data-observe>
-                    <div class="timeline-item">
-                        <div class="tl-year">2019</div>
-                        <div class="tl-num" style="color:var(--accent)">63</div>
-                        <div class="tl-unit">days</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="tl-year">2022</div>
-                        <div class="tl-num" style="color:var(--accent2)">32</div>
-                        <div class="tl-unit">days</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="tl-year">2023</div>
-                        <div class="tl-num" style="color:var(--accent3)">5</div>
-                        <div class="tl-unit">days</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="tl-year">2025</div>
-                        <div class="tl-num" style="color:#ff4757">&lt;1</div>
-                        <div class="tl-unit">day</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 3: BIG STAT (Maze graph-style)
-             ========================================== -->
-        <section class="module module--graph" id="section-graph" data-observe>
-            <div class="container">
-                <div class="graph-big-stat counter-animated" data-count="99" data-suffix=".9%">0</div>
-                <div class="graph-label">Threat detection rate</div>
-                <div class="graph-sub">Our SOC monitors 24/7 with SIEM integration, threat hunting, and automated response playbooks</div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 4: STORY — The Problem (continued)
-             ========================================== -->
-        <section class="module module--story" id="section-story-2">
-            <div class="container">
-                <div class="story-header" data-observe>
-                    <h2>Most security teams are buried in false positives and can't prioritize what actually matters</h2>
-                </div>
-                <div class="problem-grid">
-                    <div class="problem-card glow-border" data-observe data-delay="1">
-                        <div class="pc-stat">90%</div>
-                        <p>Of all vulnerability findings are false positives when investigated in context — wasting critical analyst time</p>
-                    </div>
-                    <div class="problem-card glow-border" data-observe data-delay="2">
-                        <div class="pc-stat">277 days</div>
-                        <p>Average time to identify and contain a breach — attackers move in hours, defenders move in months</p>
-                    </div>
-                    <div class="problem-card glow-border" data-observe data-delay="3">
-                        <div class="pc-stat">3,065</div>
-                        <p>Average weekly cyberattacks per organization in Latin America — a 26% year-over-year increase</p>
-                    </div>
-                    <div class="problem-card glow-border" data-observe data-delay="4">
-                        <div class="pc-stat">$4.88M</div>
-                        <p>Average cost of a data breach in 2024 — with healthcare and financial sectors paying significantly more</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 5: STORY — The Solution
-             ========================================== -->
-        <section class="module module--story" id="section-solution">
-            <div class="container">
-                <div class="story-header" data-observe>
-                    <h2>Full-spectrum cyber defense that finds and fixes vulnerabilities <span class="gradient-text">before attackers do</span></h2>
-                </div>
-                <div class="solution-grid">
-                    <div class="sol-card glow-border" data-observe data-delay="1">
-                        <div class="sol-icon si-1" style="color:var(--accent)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg></div>
-                        <h3>Penetration Testing</h3>
-                        <p>Advanced red-team simulations across networks, web apps, cloud infrastructure, and social engineering vectors.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                    <div class="sol-card glow-border" data-observe data-delay="2">
-                        <div class="sol-icon si-2" style="color:var(--accent2)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                        <h3>Managed Detection & Response</h3>
-                        <p>24/7 SOC monitoring with SIEM integration, threat hunting, and automated incident response playbooks.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                    <div class="sol-card glow-border" data-observe data-delay="3">
-                        <div class="sol-icon si-3" style="color:var(--accent3)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
-                        <h3>Compliance & Audit</h3>
-                        <p>Gap analysis, policy development, and audit preparation for HIPAA, PCI-DSS, SOC 2, GDPR, and CMMC.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                    <div class="sol-card glow-border" data-observe data-delay="1">
-                        <div class="sol-icon si-4" style="color:#ff4757"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                        <h3>Incident Response</h3>
-                        <p>Rapid containment, forensic investigation, evidence preservation, and recovery with sub-15-minute SLA.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                    <div class="sol-card glow-border" data-observe data-delay="2">
-                        <div class="sol-icon si-5" style="color:#ffc107"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-                        <h3>Security Training</h3>
-                        <p>Custom phishing simulations, role-based awareness programs, and executive-level security workshops.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                    <div class="sol-card glow-border" data-observe data-delay="3">
-                        <div class="sol-icon si-6" style="color:var(--accent)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
-                        <h3>Cloud Security</h3>
-                        <p>Architecture reviews, IAM hardening, misconfiguration detection across AWS, Azure, and GCP environments.</p>
-                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 6: GLOBAL REACH
-             ========================================== -->
-        <section class="module module--story" style="background:linear-gradient(180deg,transparent,rgba(0,212,255,0.012),transparent)">
-            <div class="container">
-                <div class="story-header" data-observe style="text-align:center;max-width:none">
-                    <h2>Protecting organizations <span class="gradient-text">across the Americas</span></h2>
-                </div>
-                <div class="reach-cards">
-                    <div class="reach-card glow-border" data-observe data-delay="1">
-                        <div class="reach-flag">&#127482;&#127480;</div>
-                        <h3>United States</h3>
-                        <p>Headquartered in Orlando, FL. Specializing in healthcare, finance, and government compliance.</p>
-                        <div class="reach-stat">
-                            <div><span class="rs-num">HIPAA</span><span class="rs-label">Focus</span></div>
-                            <div><span class="rs-num">SOC 2</span><span class="rs-label">Certified</span></div>
-                        </div>
-                    </div>
-                    <div class="reach-card glow-border" data-observe data-delay="2">
-                        <div class="reach-flag">&#127477;&#127462;</div>
-                        <h3>Panama</h3>
-                        <p>On-the-ground presence in Panama City. Ley 81 compliance experts for the banking and logistics hub.</p>
-                        <div class="reach-stat">
-                            <div><span class="rs-num">Ley 81</span><span class="rs-label">Compliance</span></div>
-                            <div><span class="rs-num">ES/EN</span><span class="rs-label">Bilingual</span></div>
-                        </div>
-                    </div>
-                    <div class="reach-card glow-border" data-observe data-delay="3">
-                        <div class="reach-flag">&#127758;</div>
-                        <h3>Latin America</h3>
-                        <p>Costa Rica, Colombia, Mexico — wherever digital transformation outpaces cybersecurity investment.</p>
-                        <div class="reach-stat">
-                            <div><span class="rs-num">3,065</span><span class="rs-label">Attacks/Week</span></div>
-                            <div><span class="rs-num">+26%</span><span class="rs-label">YoY Growth</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================
-             MODULE 7: CTA (Maze-style centered)
-             ========================================== -->
-        <section class="module module--cta" id="section-cta" data-observe>
-            <div class="container">
-                <div class="cta-inner">
-                    <h2>Get your cybersecurity <span class="gradient-text">under control</span></h2>
-                    <p>Free security assessment. Discover your attack surface before someone else does.</p>
-                    <div class="cta-buttons">
-                        <a href="/contact" class="btn-primary">
-                            Schedule Assessment
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </a>
-                        <a href="tel:+14075550100" class="btn-secondary">&#128222; Emergency Hotline</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
+        <!-- ===== 12. FOOTER ===== -->
         <footer>
-            <div class="container">
+            <div class="footer-inner">
                 <div class="footer-grid">
                     <div class="footer-brand">
-                        <a href="/" class="logo">
-                            <div class="logo-icon"><svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg></div>
-                            <div class="logo-text"><span>Phantom</span> Shield</div>
+                        <a href="/" class="logo" style="margin-bottom:0">
+                            <div class="logo-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v5c0 7.18 3.84 13.44 9 15 5.16-1.56 9-7.82 9-15V7l-9-5z"/></svg>
+                            </div>
+                            <div class="logo-text">Phantom<span>Shield</span></div>
                         </a>
-                        <p>Enterprise cybersecurity consulting and defense. Your invisible armor in the digital world.</p>
+                        <p>Elite cybersecurity consulting, penetration testing, and managed defense. Founded in Orlando, FL.</p>
                     </div>
                     <div class="footer-col">
                         <h4>Services</h4>
-                        <a href="/services">Penetration Testing</a>
-                        <a href="/services">Managed Detection</a>
-                        <a href="/services">Compliance Audit</a>
-                        <a href="/services">Incident Response</a>
+                        <a href="/services.html">All Services</a>
+                        <a href="/services.html#penetration-testing">Penetration Testing</a>
+                        <a href="/services.html#compliance">Compliance</a>
+                        <a href="/services.html#incident-response">Incident Response</a>
                     </div>
                     <div class="footer-col">
                         <h4>Markets</h4>
-                        <a href="/latin-america">Latin America</a>
-                        <a href="/panama">Panama</a>
-                        <a href="/small-business">Small Business</a>
+                        <a href="/latin-america.html">Latin America</a>
+                        <a href="/panama.html">Panama &mdash; Ley 81</a>
+                        <a href="/small-business.html">Small Business</a>
                     </div>
                     <div class="footer-col">
                         <h4>Company</h4>
-                        <a href="/blog">Blog</a>
-                        <a href="/contact">Contact</a>
-                        <a href="mailto:info@phantomshield.com">info@phantomshield.com</a>
+                        <a href="/blog.html">Insights</a>
+                        <a href="/contact.html">Contact</a>
                     </div>
                 </div>
                 <div class="footer-bottom">
                     <span>&copy; 2026 Phantom Shield. All rights reserved.</span>
-                    <span>Orlando, FL &middot; Panama City, PA</span>
+                    <span>Orlando, FL &bull; Panama City, PA</span>
                 </div>
             </div>
         </footer>
-    </div>
 
+    </div><!-- .page-content -->
+
+    <!-- ===================================================================
+         JAVASCRIPT
+         =================================================================== -->
     <script>
-    // ============================================================
-    // PRELOADER
-    // ============================================================
-    window.addEventListener('load', () => { setTimeout(() => document.getElementById('preloader').classList.add('done'), 600); });
-    setTimeout(() => { const p = document.getElementById('preloader'); if (p) p.classList.add('done'); }, 3000);
+    /* ---- Preloader ---- */
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('preloader').classList.add('done'), 800);
+    });
+    setTimeout(() => document.getElementById('preloader').classList.add('done'), 3500);
 
-    // ============================================================
-    // HEADER SCROLL
-    // ============================================================
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); });
-
-    // ============================================================
-    // MOBILE NAV
-    // ============================================================
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-        mobileNav.classList.toggle('active');
-        const spans = hamburger.querySelectorAll('span');
-        if (mobileNav.classList.contains('active')) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-        } else { spans[0].style.transform = ''; spans[1].style.opacity = ''; spans[2].style.transform = ''; }
+    /* ---- Banner close ---- */
+    document.getElementById('banner-close').addEventListener('click', () => {
+        document.getElementById('banner').classList.add('hidden');
+        document.getElementById('header').classList.add('no-banner');
     });
 
-    // ============================================================
-    // SCROLL OBSERVE (Maze-style data-observe reveals)
-    // ============================================================
-    const observeEls = document.querySelectorAll('[data-observe]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-    observeEls.forEach(el => observer.observe(el));
+    /* ---- Header scroll state ---- */
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const h = document.getElementById('header');
+        if (window.scrollY > 80) h.classList.add('scrolled');
+        else h.classList.remove('scrolled');
+        lastScroll = window.scrollY;
+    }, { passive: true });
 
-    // ============================================================
-    // COUNTER ANIMATIONS (scroll-triggered number counting)
-    // ============================================================
-    const counters = document.querySelectorAll('[data-count]');
-    const counterObs = new IntersectionObserver((entries) => {
+    /* ---- Mobile menu ---- */
+    document.getElementById('hamburger').addEventListener('click', () => {
+        document.getElementById('mobile-nav').classList.toggle('active');
+    });
+
+    /* ---- Scroll observe ---- */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+
+    /* ---- Counter animation ---- */
+    const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(e => {
             if (!e.isIntersecting) return;
             const el = e.target;
             const target = parseInt(el.dataset.count);
-            const prefix = el.dataset.prefix || '';
             const suffix = el.dataset.suffix || '';
             const duration = 2000;
-            const startTime = performance.now();
-            function update(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 4);
-                const current = Math.round(eased * target);
-                el.textContent = prefix + current.toLocaleString() + suffix;
-                if (progress < 1) requestAnimationFrame(update);
+            const start = performance.now();
+            const ease = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+            function tick(now) {
+                const t = Math.min((now - start) / duration, 1);
+                el.textContent = Math.round(ease(t) * target).toLocaleString() + suffix;
+                if (t < 1) requestAnimationFrame(tick);
             }
-            requestAnimationFrame(update);
-            counterObs.unobserve(el);
+            requestAnimationFrame(tick);
+            counterObserver.unobserve(el);
         });
     }, { threshold: 0.3 });
-    counters.forEach(el => counterObs.observe(el));
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
-    // ============================================================
-    // SIMPLEX NOISE (GLSL)
-    // ============================================================
-    const NOISE_GLSL = `
-    vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
-    vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
-    vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
-    vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
-    float snoise(vec3 v){
-        const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
-        vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
-        vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;
-        vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
-        vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
-        i=mod289(i);
-        vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
-        float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;
-        vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);
-        vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
-        vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
-        vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;
-        vec4 sh=-step(h,vec4(0.0));
-        vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-        vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
-        vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-        p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
-        vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
-        return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-    }`;
+    /* ---- Story tabs ---- */
+    document.querySelectorAll('.story-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.story-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+        });
+    });
 
-    // ============================================================
-    // THREE.JS — SHIELD-EARTH HYBRID 3D MESH
-    // Morphing globe + shield silhouette + data points + connections
-    // ============================================================
+    /* ---- Scroll-driven story tab switching ---- */
+    const storySection = document.querySelector('.story-scroll');
+    if (storySection) {
+        window.addEventListener('scroll', () => {
+            const rect = storySection.getBoundingClientRect();
+            const progress = -rect.top / (rect.height - window.innerHeight);
+            if (progress < 0 || progress > 1) return;
+            const tabs = ['detect', 'protect', 'respond'];
+            const idx = Math.min(Math.floor(progress * 3), 2);
+            const target = tabs[idx];
+            const activeTab = document.querySelector('.story-tab.active');
+            if (activeTab && activeTab.dataset.panel !== target) {
+                document.querySelectorAll('.story-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.story-panel').forEach(p => p.classList.remove('active'));
+                document.querySelector(`.story-tab[data-panel="${target}"]`).classList.add('active');
+                document.getElementById('panel-' + target).classList.add('active');
+            }
+        }, { passive: true });
+    }
+
+    /* ---- Pillar tabs ---- */
+    document.querySelectorAll('.pillar-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.pillar-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.pillar-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById('pillar-' + tab.dataset.pillar).classList.add('active');
+            // Re-observe elements in newly active panel
+            document.querySelectorAll('#pillar-' + tab.dataset.pillar + ' [data-observe]').forEach(el => {
+                el.classList.remove('visible');
+                observer.observe(el);
+            });
+        });
+    });
+
+    /* ============================================================
+       THREE.JS — EARTH GLOBE WITH PROTRUDING DATA POINTS
+       ============================================================ */
     (function() {
         const canvas = document.getElementById('gfx-canvas');
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 4.5;
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 0, 4.2);
 
-        // --- VERTEX SHADER: Shield-Earth morphing ---
-        const vertexShader = `
-            ${NOISE_GLSL}
-            uniform float uTime;
-            uniform float uScroll;
-            uniform vec2 uMouse;
-            uniform float uMorph; // 0=sphere, 1=shield shape
-            varying vec3 vNormal;
-            varying vec3 vPosition;
-            varying float vDisplacement;
-            varying float vShieldMask;
+        // --- Earth Globe (wireframe sphere with lat/lng grid) ---
+        const globeGroup = new THREE.Group();
+        scene.add(globeGroup);
 
-            // Shield shape SDF (signed distance to shield outline)
-            float shieldSDF(vec3 p) {
-                // Normalize to unit sphere coords
-                float lat = asin(clamp(p.y, -1.0, 1.0));
-                float lon = atan(p.x, p.z);
-                // Shield shape: wider at top, pointed at bottom
-                float shieldWidth = 0.7 * cos(lat * 0.8) * step(lat, 1.2);
-                float inside = step(abs(lon), shieldWidth) * step(-0.8, lat);
-                return inside;
-            }
-
-            void main() {
-                vec3 pos = position;
-
-                // Multi-octave noise displacement
-                float n1 = snoise(pos * 1.0 + uTime * 0.2) * 0.5;
-                float n2 = snoise(pos * 2.0 + uTime * 0.35) * 0.25;
-                float n3 = snoise(pos * 4.0 + uTime * 0.15) * 0.12;
-                float displacement = (n1 + n2 + n3) * 0.35;
-
-                // Mouse attraction
-                vec3 mouseDir = normalize(vec3(uMouse.x * 1.5, uMouse.y * 1.5, 1.0) - pos);
-                displacement += dot(normalize(pos), mouseDir) * 0.12;
-
-                // Scroll-based morphing — more displacement as user scrolls
-                float scrollFactor = uScroll * 0.0005;
-                displacement += sin(pos.y * 4.0 + uScroll * 0.002) * 0.06 * min(scrollFactor, 1.0);
-
-                // Shield mask — used for color variation
-                vShieldMask = shieldSDF(normalize(pos));
-
-                // Shield-shape morph: slightly extrude shield region
-                displacement += vShieldMask * 0.08 * (0.5 + 0.5 * sin(uTime * 0.5));
-
-                pos += normal * displacement;
-
-                vNormal = normalize(normalMatrix * normal);
-                vPosition = pos;
-                vDisplacement = displacement;
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-            }
-        `;
-
-        // --- FRAGMENT SHADER: Gradient + shield glow + fresnel ---
-        const fragmentShader = `
-            uniform float uTime;
-            uniform float uScroll;
-            uniform vec3 uColor1;
-            uniform vec3 uColor2;
-            uniform vec3 uColor3;
-            varying vec3 vNormal;
-            varying vec3 vPosition;
-            varying float vDisplacement;
-            varying float vShieldMask;
-
-            void main() {
-                // Base gradient: cyan bottom → magenta top → green accent
-                float mixFactor = (vPosition.y + 1.8) / 3.6;
-                vec3 color = mix(uColor1, uColor2, smoothstep(0.0, 0.5, mixFactor));
-                color = mix(color, uColor3, smoothstep(0.6, 1.0, mixFactor));
-
-                // Shield region glow
-                color += vShieldMask * uColor1 * 0.4 * (0.7 + 0.3 * sin(uTime * 1.5));
-
-                // Fresnel rim glow
-                vec3 viewDir = normalize(cameraPosition - vPosition);
-                float fresnel = pow(1.0 - abs(dot(viewDir, vNormal)), 3.0);
-                color += fresnel * mix(uColor1, uColor2, 0.5) * 0.7;
-
-                // Displacement-based brightness
-                color += vDisplacement * 0.25 * uColor1;
-
-                // Alpha: translucent with rim emphasis
-                float alpha = 0.10 + fresnel * 0.22 + abs(vDisplacement) * 0.12;
-                alpha += vShieldMask * 0.06;
-
-                gl_FragColor = vec4(color, alpha);
-            }
-        `;
-
-        // Shared uniforms
-        const uniforms = {
-            uTime: { value: 0 },
-            uScroll: { value: 0 },
-            uMouse: { value: new THREE.Vector2(0, 0) },
-            uMorph: { value: 0 },
-            uColor1: { value: new THREE.Color(0x00d4ff) },
-            uColor2: { value: new THREE.Color(0xd409fe) },
-            uColor3: { value: new THREE.Color(0x00ffa3) }
-        };
-
-        // Main morphing globe (high-res icosphere)
-        const globeGeo = new THREE.IcosahedronGeometry(1.6, 64);
-        const globeMat = new THREE.ShaderMaterial({
-            vertexShader, fragmentShader, uniforms,
-            transparent: true, side: THREE.DoubleSide, depthWrite: false
-        });
-        const globe = new THREE.Mesh(globeGeo, globeMat);
-        scene.add(globe);
-
-        // Wireframe mesh overlay
-        const wireFragShader = `
-            uniform float uTime;
-            uniform vec3 uColor1;
-            uniform vec3 uColor2;
-            varying vec3 vPosition;
-            varying float vDisplacement;
-            varying float vShieldMask;
-            varying vec3 vNormal;
-            void main() {
-                float mixFactor = (vPosition.y + 1.8) / 3.6;
-                vec3 color = mix(uColor1, uColor2, mixFactor);
-                color += vShieldMask * uColor1 * 0.3;
-                float alpha = 0.06 + abs(vDisplacement) * 0.08 + vShieldMask * 0.04;
-                gl_FragColor = vec4(color, alpha);
-            }
-        `;
-        const wireMat = new THREE.ShaderMaterial({
-            vertexShader, fragmentShader: wireFragShader, uniforms,
-            transparent: true, wireframe: true, depthWrite: false
-        });
-        const wireGlobe = new THREE.Mesh(globeGeo.clone(), wireMat);
-        wireGlobe.scale.set(1.004, 1.004, 1.004);
-        scene.add(wireGlobe);
-
-        // --- DATA POINTS on globe surface ---
-        // These represent threat locations / protection nodes
-        const dataPointCount = 50;
-        const dpPositions = [];
-        const dpColors = [];
-        const dpSizes = [];
-        const dpBasePositions = []; // Store normalized positions for scroll-driven reveal
-        for (let i = 0; i < dataPointCount; i++) {
-            // Random point on sphere
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            const r = 1.65;
-            const x = r * Math.sin(phi) * Math.cos(theta);
-            const y = r * Math.sin(phi) * Math.sin(theta);
-            const z = r * Math.cos(phi);
-            dpPositions.push(x, y, z);
-            dpBasePositions.push(x, y, z);
-            // Color: cyan, magenta, green, red
-            const colors = [[0, 0.83, 1], [0.83, 0.035, 0.996], [0, 1, 0.64], [1, 0.28, 0.34]];
-            const c = colors[Math.floor(Math.random() * colors.length)];
-            dpColors.push(c[0], c[1], c[2]);
-            dpSizes.push(3 + Math.random() * 6);
-        }
-        const dpGeo = new THREE.BufferGeometry();
-        dpGeo.setAttribute('position', new THREE.Float32BufferAttribute(dpPositions, 3));
-        dpGeo.setAttribute('color', new THREE.Float32BufferAttribute(dpColors, 3));
-        dpGeo.setAttribute('size', new THREE.Float32BufferAttribute(dpSizes, 1));
-        const dpMat = new THREE.ShaderMaterial({
-            vertexShader: `
-                attribute float size;
-                varying vec3 vColor;
-                uniform float uTime;
-                uniform float uRevealProgress;
-                void main() {
-                    vColor = color;
-                    vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
-                    // Pulse size
-                    float pulse = 1.0 + 0.3 * sin(uTime * 2.0 + position.x * 5.0);
-                    gl_PointSize = size * pulse * (200.0 / -mvPos.z) * uRevealProgress;
-                    gl_Position = projectionMatrix * mvPos;
-                }
-            `,
-            fragmentShader: `
-                varying vec3 vColor;
-                void main() {
-                    float d = length(gl_PointCoord - 0.5);
-                    if (d > 0.5) discard;
-                    float glow = 1.0 - smoothstep(0.0, 0.5, d);
-                    gl_FragColor = vec4(vColor, glow * 0.8);
-                }
-            `,
-            uniforms: {
-                uTime: uniforms.uTime,
-                uRevealProgress: { value: 0 }
-            },
+        // Main sphere wireframe
+        const sphereGeo = new THREE.IcosahedronGeometry(1.2, 5);
+        const sphereMat = new THREE.MeshBasicMaterial({
+            color: 0x00d4ff,
+            wireframe: true,
             transparent: true,
-            vertexColors: true,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
+            opacity: 0.06
         });
-        const dataPoints = new THREE.Points(dpGeo, dpMat);
-        scene.add(dataPoints);
+        const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+        globeGroup.add(sphere);
 
-        // --- CONNECTION LINES between data points ---
-        const linePositions = [];
-        const lineColors = [];
-        for (let i = 0; i < 30; i++) {
-            const a = Math.floor(Math.random() * dataPointCount);
-            const b = Math.floor(Math.random() * dataPointCount);
-            if (a === b) continue;
-            linePositions.push(
-                dpPositions[a*3], dpPositions[a*3+1], dpPositions[a*3+2],
-                dpPositions[b*3], dpPositions[b*3+1], dpPositions[b*3+2]
-            );
-            lineColors.push(0, 0.83, 1, 0, 0.83, 1);
-        }
-        const lineGeo = new THREE.BufferGeometry();
-        lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
-        lineGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
-        const lineMat = new THREE.LineBasicMaterial({
-            vertexColors: true, transparent: true, opacity: 0,
-            blending: THREE.AdditiveBlending, depthWrite: false
+        // Outer glow sphere
+        const glowGeo = new THREE.IcosahedronGeometry(1.22, 4);
+        const glowMat = new THREE.MeshBasicMaterial({
+            color: 0x00d4ff,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.02
         });
-        const lines = new THREE.LineSegments(lineGeo, lineMat);
-        scene.add(lines);
+        globeGroup.add(new THREE.Mesh(glowGeo, glowMat));
+
+        // Latitude rings
+        for (let lat = -60; lat <= 60; lat += 30) {
+            const r = 1.2 * Math.cos(lat * Math.PI / 180);
+            const y = 1.2 * Math.sin(lat * Math.PI / 180);
+            const ringGeo = new THREE.RingGeometry(r - 0.002, r + 0.002, 80);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0x00d4ff,
+                transparent: true,
+                opacity: 0.08,
+                side: THREE.DoubleSide
+            });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.position.y = y;
+            ring.rotation.x = Math.PI / 2;
+            globeGroup.add(ring);
+        }
+
+        // Longitude lines
+        for (let lon = 0; lon < 360; lon += 30) {
+            const points = [];
+            for (let i = 0; i <= 64; i++) {
+                const lat = (i / 64) * Math.PI - Math.PI / 2;
+                const x = 1.2 * Math.cos(lat) * Math.cos(lon * Math.PI / 180);
+                const y = 1.2 * Math.sin(lat);
+                const z = 1.2 * Math.cos(lat) * Math.sin(lon * Math.PI / 180);
+                points.push(new THREE.Vector3(x, y, z));
+            }
+            const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+            const lineMat = new THREE.LineBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.06 });
+            globeGroup.add(new THREE.Line(lineGeo, lineMat));
+        }
+
+        // --- Data Points (protruding spikes from globe surface) ---
+        const dataPoints = [
+            { lat: 28.5, lon: -81.4, label: 'Orlando, FL — HQ', color: 0x00d4ff, height: 0.35 },
+            { lat: 9.0, lon: -79.5, label: 'Panama City — Ley 81', color: 0xd409fe, height: 0.3 },
+            { lat: -23.5, lon: -46.6, label: 'S\u00e3o Paulo — SOC Ops', color: 0x00ffa3, height: 0.28 },
+            { lat: 19.4, lon: -99.1, label: 'Mexico City — LATAM', color: 0xff4757, height: 0.25 },
+            { lat: 51.5, lon: -0.1, label: 'London — EU Compliance', color: 0x00d4ff, height: 0.22 },
+            { lat: 4.6, lon: -74.1, label: 'Bogot\u00e1 — Partner Hub', color: 0xd409fe, height: 0.2 },
+            { lat: 40.7, lon: -74.0, label: 'New York — Finance', color: 0x00ffa3, height: 0.26 },
+            { lat: -34.6, lon: -58.4, label: 'Buenos Aires — Expansion', color: 0xff4757, height: 0.18 },
+            { lat: 35.7, lon: 139.7, label: 'Tokyo — APAC Intel', color: 0x00d4ff, height: 0.2 },
+            { lat: -12.0, lon: -77.0, label: 'Lima — Andean Ops', color: 0xd409fe, height: 0.18 },
+            { lat: 48.9, lon: 2.35, label: 'Paris — GDPR Center', color: 0x00ffa3, height: 0.2 },
+            { lat: 1.35, lon: 103.8, label: 'Singapore — APAC SOC', color: 0xff4757, height: 0.2 },
+        ];
+
+        const spikeGroup = new THREE.Group();
+        globeGroup.add(spikeGroup);
+
+        dataPoints.forEach(dp => {
+            const phi = (90 - dp.lat) * Math.PI / 180;
+            const theta = (dp.lon + 180) * Math.PI / 180;
+            const x = 1.2 * Math.sin(phi) * Math.cos(theta);
+            const y = 1.2 * Math.cos(phi);
+            const z = 1.2 * Math.sin(phi) * Math.sin(theta);
+
+            // Spike (cylinder from surface outward)
+            const spikeGeo = new THREE.CylinderGeometry(0.008, 0.003, dp.height, 6);
+            const spikeMat = new THREE.MeshBasicMaterial({ color: dp.color, transparent: true, opacity: 0.8 });
+            const spike = new THREE.Mesh(spikeGeo, spikeMat);
+
+            // Position at surface and orient outward
+            const dir = new THREE.Vector3(x, y, z).normalize();
+            spike.position.set(x, y, z).addScaledVector(dir, dp.height / 2);
+            spike.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
+            spikeGroup.add(spike);
+
+            // Glowing dot at tip
+            const dotGeo = new THREE.SphereGeometry(0.018, 8, 8);
+            const dotMat = new THREE.MeshBasicMaterial({ color: dp.color, transparent: true, opacity: 0.9 });
+            const dot = new THREE.Mesh(dotGeo, dotMat);
+            dot.position.set(x, y, z).addScaledVector(dir, dp.height);
+            spikeGroup.add(dot);
+
+            // Pulse ring at base
+            const pulseGeo = new THREE.RingGeometry(0.02, 0.04, 16);
+            const pulseMat = new THREE.MeshBasicMaterial({ color: dp.color, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+            const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+            pulse.position.set(x, y, z);
+            pulse.lookAt(new THREE.Vector3(0, 0, 0));
+            pulse.userData = { baseOpacity: 0.3, phase: Math.random() * Math.PI * 2 };
+            spikeGroup.add(pulse);
+        });
+
+        // --- HTML Labels (projected from 3D to 2D) ---
+        const labelContainer = document.createElement('div');
+        labelContainer.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:hidden';
+        document.body.appendChild(labelContainer);
+
+        const labelElements = dataPoints.map(dp => {
+            const el = document.createElement('div');
+            el.style.cssText = `position:absolute;font-size:11px;font-weight:600;color:${dp.color === 0x00d4ff ? '#00d4ff' : dp.color === 0xd409fe ? '#d409fe' : dp.color === 0x00ffa3 ? '#00ffa3' : '#ff4757'};font-family:Inter,sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .5s;text-shadow:0 0 8px rgba(0,0,0,0.8);letter-spacing:.02em`;
+            el.textContent = dp.label;
+            labelContainer.appendChild(el);
+            return { el, lat: dp.lat, lon: dp.lon, height: dp.height };
+        });
 
         // --- Ambient particles ---
-        const pCount = 250;
-        const pPos = new Float32Array(pCount * 3);
-        const pCol = new Float32Array(pCount * 3);
-        const pc1 = new THREE.Color(0x00d4ff), pc2 = new THREE.Color(0xd409fe), pc3 = new THREE.Color(0x00ffa3);
-        for (let i = 0; i < pCount; i++) {
-            pPos[i*3] = (Math.random()-0.5)*25;
-            pPos[i*3+1] = (Math.random()-0.5)*25;
-            pPos[i*3+2] = (Math.random()-0.5)*15 - 5;
-            const c = [pc1, pc2, pc3][Math.floor(Math.random() * 3)];
-            pCol[i*3] = c.r; pCol[i*3+1] = c.g; pCol[i*3+2] = c.b;
+        const particleCount = 150;
+        const pPositions = new Float32Array(particleCount * 3);
+        for (let i = 0; i < particleCount; i++) {
+            pPositions[i * 3] = (Math.random() - 0.5) * 8;
+            pPositions[i * 3 + 1] = (Math.random() - 0.5) * 8;
+            pPositions[i * 3 + 2] = (Math.random() - 0.5) * 8;
         }
         const pGeo = new THREE.BufferGeometry();
-        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-        pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
-        const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
-            size: 0.08, vertexColors: true, transparent: true, opacity: 0.25,
-            blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
-        }));
-        scene.add(particles);
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+        const pMat = new THREE.PointsMaterial({ color: 0x00d4ff, size: 0.015, transparent: true, opacity: 0.3 });
+        scene.add(new THREE.Points(pGeo, pMat));
 
-        // --- ORBIT RINGS ---
-        const ring1 = new THREE.Mesh(
-            new THREE.TorusGeometry(2.2, 0.01, 16, 120),
-            new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.12 })
-        );
-        ring1.rotation.x = Math.PI / 3;
-        scene.add(ring1);
-        const ring2 = new THREE.Mesh(
-            new THREE.TorusGeometry(2.5, 0.008, 16, 120),
-            new THREE.MeshBasicMaterial({ color: 0xd409fe, transparent: true, opacity: 0.08 })
-        );
-        ring2.rotation.x = Math.PI / 5;
-        ring2.rotation.z = 0.3;
-        scene.add(ring2);
-
-        // Mouse & scroll tracking
-        let mx = 0, my = 0, tmx = 0, tmy = 0, scrollY = 0;
+        // --- Mouse tracking ---
+        let mouseX = 0, mouseY = 0;
         document.addEventListener('mousemove', e => {
-            tmx = (e.clientX / window.innerWidth - 0.5) * 2;
-            tmy = (e.clientY / window.innerHeight - 0.5) * 2;
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         });
-        window.addEventListener('scroll', () => { scrollY = window.scrollY; });
 
-        const pageHeight = () => document.documentElement.scrollHeight - window.innerHeight;
+        // --- Scroll progress ---
+        let scrollProgress = 0;
+        window.addEventListener('scroll', () => {
+            scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        }, { passive: true });
 
-        const clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-            const t = clock.getElapsedTime();
-            const scrollProgress = scrollY / Math.max(pageHeight(), 1);
-
-            // Smooth mouse
-            mx += (tmx - mx) * 0.03;
-            my += (tmy - my) * 0.03;
-
-            // Update uniforms
-            uniforms.uTime.value = t;
-            uniforms.uMouse.value.set(mx, my);
-            uniforms.uScroll.value = scrollY;
-
-            // Globe rotation — slow, organic + mouse influence
-            globe.rotation.y = t * 0.06 + mx * 0.2;
-            globe.rotation.x = t * 0.03 + my * 0.12;
-            wireGlobe.rotation.copy(globe.rotation);
-            dataPoints.rotation.copy(globe.rotation);
-            lines.rotation.copy(globe.rotation);
-
-            // Globe position — drift + scroll push
-            globe.position.y = Math.sin(t * 0.25) * 0.15 - scrollY * 0.0006;
-            globe.position.x = Math.cos(t * 0.18) * 0.2 + mx * 0.4;
-            wireGlobe.position.copy(globe.position);
-            dataPoints.position.copy(globe.position);
-            lines.position.copy(globe.position);
-
-            // Rings orbit
-            ring1.rotation.z = t * 0.12;
-            ring1.position.copy(globe.position);
-            ring2.rotation.z = -t * 0.08;
-            ring2.position.copy(globe.position);
-
-            // Data points reveal — appear as user scrolls past hero
-            const revealTarget = Math.min(scrollProgress * 4, 1);
-            dpMat.uniforms.uRevealProgress.value += (revealTarget - dpMat.uniforms.uRevealProgress.value) * 0.03;
-
-            // Connection lines fade in with data points
-            lineMat.opacity = dpMat.uniforms.uRevealProgress.value * 0.12;
-
-            // Particles
-            particles.rotation.y = t * 0.012 + mx * 0.02;
-            particles.rotation.x = t * 0.006 + my * 0.015;
-
-            // Camera
-            camera.position.x += (mx * 0.4 - camera.position.x) * 0.012;
-            camera.position.y += (-my * 0.25 - camera.position.y) * 0.012;
-            camera.lookAt(0, 0, 0);
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
+        // --- Resize ---
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        // --- Animation loop ---
+        const clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+            const t = clock.getElapsedTime();
+
+            // Rotate globe slowly + mouse influence
+            globeGroup.rotation.y = t * 0.08 + mouseX * 0.15;
+            globeGroup.rotation.x = -0.15 + mouseY * 0.08;
+
+            // Scroll-driven zoom and position
+            const scrollZoom = 4.2 - scrollProgress * 1.5;
+            camera.position.z += (scrollZoom - camera.position.z) * 0.05;
+            camera.position.x += (mouseX * 0.3 - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY * 0.2 - camera.position.y) * 0.03;
+
+            // Pulse rings animation
+            spikeGroup.children.forEach(child => {
+                if (child.userData && child.userData.baseOpacity !== undefined) {
+                    child.material.opacity = child.userData.baseOpacity * (0.5 + 0.5 * Math.sin(t * 2 + child.userData.phase));
+                    child.scale.setScalar(1 + 0.3 * Math.sin(t * 1.5 + child.userData.phase));
+                }
+            });
+
+            // Globe opacity fade based on scroll
+            const globeOpacity = Math.max(0.15, 1 - scrollProgress * 2.5);
+            sphereMat.opacity = 0.06 * globeOpacity;
+            glowMat.opacity = 0.02 * globeOpacity;
+
+            // Update HTML labels
+            const halfW = window.innerWidth / 2;
+            const halfH = window.innerHeight / 2;
+            labelElements.forEach(lbl => {
+                const phi = (90 - lbl.lat) * Math.PI / 180;
+                const theta = (lbl.lon + 180) * Math.PI / 180;
+                const x = 1.2 * Math.sin(phi) * Math.cos(theta);
+                const y = 1.2 * Math.cos(phi);
+                const z = 1.2 * Math.sin(phi) * Math.sin(theta);
+                const dir = new THREE.Vector3(x, y, z).normalize();
+                const tipPos = new THREE.Vector3(x, y, z).addScaledVector(dir, lbl.height + 0.05);
+
+                // Apply globe rotation
+                tipPos.applyEuler(globeGroup.rotation);
+
+                // Project to 2D
+                const projected = tipPos.clone().project(camera);
+                const sx = projected.x * halfW + halfW;
+                const sy = -projected.y * halfH + halfH;
+
+                // Only show if facing camera
+                const facing = tipPos.z < 0;
+                const onScreen = sx > 0 && sx < window.innerWidth && sy > 0 && sy < window.innerHeight;
+                lbl.el.style.opacity = (facing && onScreen && scrollProgress < 0.4) ? (0.85 * globeOpacity).toString() : '0';
+                lbl.el.style.left = sx + 'px';
+                lbl.el.style.top = sy + 'px';
+            });
+
+            renderer.render(scene, camera);
+        }
+        animate();
     })();
     </script>
+
 </body>
 </html>
