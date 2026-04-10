@@ -3,1337 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Services Panama | Ciberseguridad Panamá | Phantom Shield</title>
-    <meta name="description" content="Cybersecurity services in Panama with bilingual support. Expert penetration testing, compliance with Panama data protection law, and banking sector security. Protecting Panama's financial hub.">
-    <meta name="keywords" content="ciberseguridad panama, cybersecurity services panama, seguridad bancaria, Panama compliance, Ley 81, SBP requirements, penetration testing">
+    <title>Cybersecurity Services Panama | Ciberseguridad Panama | Phantom Shield</title>
+    <meta name="description" content="Cybersecurity services in Panama with bilingual support. Penetration testing, Ley 81 compliance, and banking sector security for Panama's financial hub.">
     <meta name="author" content="Phantom Shield">
-    <meta name="theme-color" content="#080d1a">
-    <meta property="og:title" content="Cybersecurity Services Panama | Phantom Shield">
-    <meta property="og:description" content="Bilingual cybersecurity expertise for Panama's banking, finance, and logistics sectors.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://phantomshield-cyber.netlify.app/panama.html">
+    <meta name="theme-color" content="#050816">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z' fill='%2300d4ff' opacity='0.8'/%3E%3C/svg%3E">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-primary: #080d1a;
-            --bg-secondary: #0d1526;
-            --accent: #00d4ff;
-            --accent-secondary: #7b61ff;
-            --text-primary: #e8edf5;
-            --text-muted: #8892a4;
-            --danger: #ff4757;
-            --success: #2ed573;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Preloader */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeOutPreloader 0.6s ease-out 1.4s forwards;
-        }
-
-        .preloader-content {
-            text-align: center;
-        }
-
-        .shield-loader {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-
-        .shield-loader::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top: 3px solid var(--accent);
-            border-right: 3px solid var(--accent-secondary);
-            border-radius: 50%;
-            animation: spin 2s linear infinite;
-        }
-
-        .shield-loader::after {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 25px;
-            border: 2px solid var(--accent);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .preloader-text {
-            color: var(--accent);
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            animation: pulse-text 1.5s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeOutPreloader {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        @keyframes pulse-text {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Scroll Progress Bar */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            width: 0;
-            z-index: 9998;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(8, 13, 26, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
-        }
-
-        header.shrink {
-            padding: 1rem 0;
-            background: rgba(8, 13, 26, 0.9);
-        }
-
-        .header-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--accent);
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            position: relative;
-        }
-
-        .logo-icon svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.6));
-        }
-
-        nav.desktop-nav {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        nav.desktop-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        nav.desktop-nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav.desktop-nav a:hover {
-            color: var(--accent);
-        }
-
-        nav.desktop-nav a:hover::after {
-            width: 100%;
-        }
-
-        .nav-dropdown {
-            position: relative;
-        }
-
-        .nav-dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: rgba(8, 13, 26, 0.95);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 8px;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .nav-dropdown:hover .nav-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .nav-dropdown-menu a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-muted);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .nav-dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-
-        .nav-dropdown-menu a:hover {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent);
-        }
-
-        .emergency-btn {
-            padding: 10px 20px;
-            background: var(--danger);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.3s ease;
-            animation: pulse-emergency 2s ease-in-out infinite;
-        }
-
-        .emergency-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
-        }
-
-        @keyframes pulse-emergency {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(10px, 10px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            background: rgba(8, 13, 26, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-            flex-direction: column;
-            padding: 20px;
-            gap: 10px;
-            z-index: 999;
-        }
-
-        .mobile-nav.active {
-            display: flex;
-        }
-
-        .mobile-nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 12px;
-            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .mobile-nav a:hover {
-            color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 4px;
-        }
-
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            color: var(--bg-primary);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            z-index: 500;
-            transition: all 0.3s ease;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        }
-
-        .back-to-top.show {
-            display: flex;
-        }
-
-        /* Breadcrumbs */
-        .breadcrumbs {
-            padding: 100px 40px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-            font-size: 14px;
-        }
-
-        .breadcrumbs a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .breadcrumbs a:hover {
-            color: var(--text-primary);
-        }
-
-        /* Main Content */
-        main {
-            padding-top: 80px;
-        }
-
-        section {
-            padding: 80px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding-top: 120px;
-            padding-bottom: 120px;
-        }
-
-        .hero h1 {
-            font-size: 64px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--text-primary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 24px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .hero .description {
-            font-size: 18px;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
-        }
-
-        .bilingual-subtitle {
-            color: var(--accent);
-            font-size: 16px;
-            font-weight: 500;
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-
-        /* Stats Section */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .stat-card {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .stat-card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: rgba(0, 212, 255, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .stat-number {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Content Cards */
-        .content-card {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .content-card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: rgba(0, 212, 255, 0.5);
-        }
-
-        .content-card h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .content-card h3 {
-            font-size: 18px;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-
-        .content-card ul {
-            list-style: none;
-            margin-left: 0;
-        }
-
-        .content-card li {
-            padding: 10px 0;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text-muted);
-        }
-
-        .content-card li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Industry Cards Grid */
-        .industry-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .industry-card {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .industry-card:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: var(--accent);
-            transform: scale(1.05);
-        }
-
-        .industry-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .industry-card h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        .industry-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* FAQ Section */
-        .faq-container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        .faq-item {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0, 212, 255, 0.05);
-            transition: background 0.3s ease;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .faq-question:hover {
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .faq-toggle {
-            color: var(--accent);
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 20px;
-            color: var(--text-muted);
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-            padding: 20px;
-        }
-
-        .faq-item.active .faq-toggle {
-            transform: rotate(180deg);
-        }
-
-        /* CTA Buttons */
-        .btn {
-            padding: 14px 35px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            color: var(--bg-primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 16px;
-            padding: 80px 40px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-section h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-section p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
-
-        /* Netlify Form */
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-secondary);
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            padding: 60px 40px;
-            margin-top: 100px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column a {
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 14px;
-        }
-
-        .footer-column a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding-top: 40px;
-            border-top: 1px solid rgba(0, 212, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-social a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .footer-social a:hover {
-            color: var(--accent);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 42px;
-            }
-
-            .hero .subtitle {
-                font-size: 18px;
-            }
-
-            .section-title {
-                font-size: 36px;
-            }
-
-            nav.desktop-nav {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .emergency-btn {
-                padding: 8px 15px;
-                font-size: 11px;
-            }
-
-            section {
-                padding: 60px 20px;
-            }
-
-            .breadcrumbs {
-                padding: 100px 20px 20px;
-            }
-
-            .content-card {
-                padding: 25px;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
+        *{margin:0;padding:0;box-sizing:border-box}:root{--bg:#050816;--glass:rgba(242,244,245,0.04);--glass-hover:rgba(242,244,245,0.07);--border:rgba(242,244,245,0.08);--border-hover:rgba(0,212,255,0.2);--accent:#00d4ff;--accent2:#d409fe;--accent3:#00ffa3;--grad:linear-gradient(90deg,#00d4ff 0%,#d409fe 100%);--text:#d6d8d8;--text-bright:#f2f4f5;--text-muted:#7a8599;--text-dim:#4a5568;--radius:12px;--radius-lg:20px;--radius-xl:28px}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.7;-webkit-font-smoothing:antialiased}html{scroll-behavior:smooth}.container{max-width:1200px;margin:0 auto;padding:0 32px}
+        .preloader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}.preloader.done{opacity:0;visibility:hidden;pointer-events:none}.preloader svg{width:64px;height:64px;animation:pulse-s 1.5s ease-in-out infinite}@keyframes pulse-s{0%,100%{filter:drop-shadow(0 0 8px rgba(0,212,255,.3));transform:scale(1)}50%{filter:drop-shadow(0 0 24px #00d4ff);transform:scale(1.06)}}
+        header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .4s}header.scrolled{background:rgba(5,8,22,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 0}.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 32px}.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-bright)}.logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,212,255,.25)}.logo-icon svg{width:20px;height:20px;fill:white}.logo-text{font-weight:700;font-size:18px;letter-spacing:-.02em}.logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        nav.desktop-nav{display:flex;align-items:center;gap:4px}nav.desktop-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:8px;transition:all .25s}nav.desktop-nav a:hover{color:var(--text-bright);background:var(--glass)}.nav-dropdown{position:relative}.nav-dropdown-trigger{cursor:pointer;display:flex;align-items:center;gap:4px}.nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);min-width:170px;padding:6px;background:rgba(15,21,40,.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:12px;opacity:0;visibility:hidden;pointer-events:none;transition:all .25s;box-shadow:0 16px 40px rgba(0,0,0,.4)}.nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}.nav-dropdown-menu a{display:block;padding:10px 14px;color:var(--text-muted);font-size:13px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s}.nav-dropdown-menu a:hover{color:var(--accent);background:rgba(0,212,255,.05)}.cta-nav{padding:10px 22px!important;background:var(--grad)!important;color:white!important;border-radius:10px!important;font-weight:600!important;font-size:13px!important;box-shadow:0 4px 16px rgba(0,212,255,.25);text-decoration:none}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}nav.mobile-nav{display:none}
+        .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:var(--grad);color:white;font-weight:600;font-size:14px;text-decoration:none;box-shadow:0 4px 20px rgba(0,212,255,.25);transition:all .3s;border:none;cursor:pointer}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.35)}.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:transparent;color:var(--text-bright);font-weight:600;font-size:14px;text-decoration:none;border:1px solid var(--border);transition:all .3s;cursor:pointer}.btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+        .hero{min-height:70vh;display:flex;align-items:center;padding:160px 0 80px;text-align:center}.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.12);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px}.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:blink 2s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}.hero h1{font-size:clamp(36px,5vw,60px);font-weight:500;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px;color:var(--text-bright)}.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero-sub{font-size:17px;color:var(--text-muted);max-width:560px;margin:0 auto 40px}.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+        .grad-line{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,255,.3),rgba(212,9,254,.3),transparent)}.num-section{padding:100px 0}.num-label{display:flex;align-items:center;gap:12px;margin-bottom:40px}.num{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em;padding:6px 12px;border-radius:6px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.12)}.num-text{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim)}.section-title{font-size:clamp(28px,3.5vw,44px);font-weight:500;line-height:1.15;letter-spacing:-.02em;color:var(--text-bright);margin-bottom:16px}.section-sub{font-size:16px;color:var(--text-muted);max-width:520px;margin-bottom:48px}
+        .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.info-card{padding:36px 28px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .4s}.info-card:hover{background:var(--glass-hover);transform:translateY(-3px)}.info-card h3{font-size:17px;font-weight:600;color:var(--text-bright);margin-bottom:10px}.info-card p{font-size:14px;color:var(--text-muted);line-height:1.7}.info-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:8px}.info-list li{font-size:13px;color:var(--text-muted);padding-left:18px;position:relative}.info-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+        .industry-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.industry-card{padding:28px 24px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);transition:all .3s;text-align:center}.industry-card:hover{background:var(--glass-hover);transform:translateY(-2px)}.industry-icon{font-size:32px;margin-bottom:10px}.industry-card h3{font-size:15px;font-weight:600;color:var(--text-bright);margin-bottom:6px}.industry-card p{font-size:13px;color:var(--text-muted)}
+        .compliance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.compliance-card{padding:32px 28px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .4s}.compliance-card:hover{background:var(--glass-hover);transform:translateY(-3px)}.compliance-card h3{font-size:16px;font-weight:600;color:var(--text-bright);margin-bottom:10px}.compliance-card p{font-size:14px;color:var(--text-muted);margin-bottom:12px}
+        .form-section{padding:100px 0}.form-box{max-width:560px;margin:0 auto;padding:48px 40px;background:var(--glass);border:1px solid var(--border);border-radius:var(--radius-xl)}.form-box label{display:block;font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}.form-box input,.form-box select,.form-box textarea{width:100%;padding:12px 16px;background:rgba(242,244,245,.04);border:1px solid var(--border);border-radius:10px;color:var(--text-bright);font-size:14px;font-family:inherit;margin-bottom:20px;transition:border-color .2s}.form-box input:focus,.form-box select:focus,.form-box textarea:focus{outline:none;border-color:var(--accent)}.form-box textarea{resize:vertical;min-height:100px}.form-box .btn-primary{width:100%;justify-content:center}
+        .cta-section{padding:100px 0}.cta-box{text-align:center;padding:80px 48px;border-radius:var(--radius-xl);background:var(--glass);border:1px solid var(--border);position:relative;overflow:hidden}.cta-box::before{content:'';position:absolute;top:-1px;left:20%;right:20%;height:1px;background:var(--grad)}.cta-box::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(0,212,255,.06),transparent 60%);pointer-events:none}.cta-box h2{font-size:clamp(28px,3vw,40px);font-weight:500;color:var(--text-bright);margin-bottom:14px;letter-spacing:-.02em;position:relative;z-index:1}.cta-box p{font-size:16px;color:var(--text-muted);max-width:480px;margin:0 auto 32px;position:relative;z-index:1}.cta-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+        footer{padding:80px 0 40px;border-top:1px solid var(--border)}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:60px}.footer-brand p{font-size:14px;color:var(--text-muted);margin-top:14px;max-width:260px}.footer-col h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-dim);margin-bottom:18px}.footer-col a{display:block;font-size:14px;color:var(--text-muted);text-decoration:none;padding:5px 0;transition:color .2s}.footer-col a:hover{color:var(--accent)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);font-size:13px;color:var(--text-dim)}
+        .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}.reveal.visible{opacity:1;transform:translateY(0)}.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+        @media(max-width:1024px){.info-grid,.compliance-grid,.industry-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
+        @media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:flex}nav.mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(5,8,22,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;padding:100px 32px 40px;gap:6px;z-index:999}nav.mobile-nav.active{display:flex}nav.mobile-nav a{color:var(--text-muted);text-decoration:none;font-size:18px;font-weight:600;padding:14px 16px;border-radius:10px;transition:all .2s}.hero{padding:130px 0 60px}.footer-grid{grid-template-columns:1fr}.form-box{padding:32px 24px}}
+        .ambient{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(80px)}.amb-1{width:500px;height:500px;background:rgba(0,212,255,.04);top:-200px;right:-150px;animation:drift 22s ease-in-out infinite}.amb-2{width:400px;height:400px;background:rgba(212,9,254,.03);bottom:20%;left:-120px;animation:drift 28s ease-in-out infinite reverse}@keyframes drift{0%,100%{transform:translate(0,0)}33%{transform:translate(25px,-15px)}66%{transform:translate(-15px,20px)}}.page-content{position:relative;z-index:1}
+
+        /* === MAZE 3D EFFECTS === */
+        /* Animated gradient border using conic-gradient */
+        @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+        @keyframes rotate-gradient{to{--angle:360deg}}
+        .glow-border{position:relative;overflow:visible}
+        .glow-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--angle),transparent 40%,var(--accent) 50%,var(--accent2) 60%,transparent 70%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rotate-gradient 4s linear infinite;opacity:0;transition:opacity .4s}
+        .glow-border:hover::before{opacity:1}
+
+        /* 3D perspective tilt */
+        .tilt-card{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.4,0,.2,1),box-shadow .4s}
+        .tilt-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.3),0 0 30px rgba(0,212,255,.06)}
+
+        /* Floating background orbs */
+        .bg-orbs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+        .bg-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.06;animation:float-orb 20s ease-in-out infinite}
+        .bg-orb:nth-child(1){width:600px;height:600px;background:var(--accent);top:-10%;left:-10%;animation-delay:0s}
+        .bg-orb:nth-child(2){width:500px;height:500px;background:var(--accent2);bottom:-10%;right:-10%;animation-delay:-7s}
+        .bg-orb:nth-child(3){width:400px;height:400px;background:var(--accent3);top:40%;left:50%;animation-delay:-14s}
+        @keyframes float-orb{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.05)}50%{transform:translate(-20px,30px) scale(.95)}75%{transform:translate(40px,20px) scale(1.02)}}
+
+        /* Parallax depth layers */
+        .parallax-layer{will-change:transform;transition:transform .1s linear}
+
+        /* Hero glow pulse */
+        .hero h1 .grad{animation:text-glow 4s ease-in-out infinite alternate}
+        @keyframes text-glow{0%{filter:drop-shadow(0 0 12px rgba(0,212,255,.2))}100%{filter:drop-shadow(0 0 24px rgba(212,9,254,.3))}}
+
+        /* Card 3D shine on hover */
+        .shine-card{position:relative;overflow:hidden}
+        .shine-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(225deg,transparent 45%,rgba(255,255,255,.03) 50%,transparent 55%);transform:translateX(-100%) rotate(0deg);transition:none;pointer-events:none}
+        .shine-card:hover::after{animation:shine-sweep .8s ease-out forwards}
+        @keyframes shine-sweep{to{transform:translateX(50%) rotate(0deg)}}
+
+        /* Stagger reveal children */
+        .stagger-children .reveal{transition-delay:calc(var(--i,0) * .1s)}
     </style>
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <div class="shield-loader"></div>
-            <p class="preloader-text">PHANTOM SHIELD</p>
-        </div>
-    </div>
+    <div class="ambient amb-1"></div><div class="ambient amb-2"></div>
+    <div class="preloader" id="preloader"><svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z" fill="url(#pg)"/><defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#d409fe"/></linearGradient></defs></svg></div>
+    <div class="page-content">
+        <header id="header"><div class="header-inner"><a href="/" class="logo"><div class="logo-icon"><svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg></div><div class="logo-text"><span>Phantom</span> Shield</div></a><nav class="desktop-nav"><a href="/">Home</a><a href="/services">Services</a><div class="nav-dropdown"><a href="#" class="nav-dropdown-trigger">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:2px"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a><div class="nav-dropdown-menu"><a href="/latin-america">Latin America</a><a href="/panama">Panama</a><a href="/small-business">SMB</a></div></div><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="/contact" class="cta-nav">Get Protected</a></nav><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div></div></header>
+        <nav class="mobile-nav" id="mobileNav"><a href="/">Home</a><a href="/services">Services</a><a href="/latin-america">Latin America</a><a href="/panama">Panama</a><a href="/small-business">SMB</a><a href="/blog">Blog</a><a href="/contact">Contact</a></nav>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress"></div>
+        <section class="hero"><div class="container">
+            <div class="hero-badge reveal"><span class="dot"></span> Bilingual Cybersecurity Experts</div>
+            <h1 class="reveal">Cybersecurity for<br><span class="grad">Panama's</span> Digital Future</h1>
+            <p class="hero-sub reveal">Protecting Panama's financial hub with bilingual expertise. Ley 81 compliance, SBP banking regulation, and 24/7 incident response from our Panama City office.</p>
+            <div class="hero-ctas reveal"><a href="#inquiry" class="btn-primary">Schedule Panama Assessment <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a href="#threats" class="btn-secondary">View Threats</a></div>
+        </div></section>
 
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 2C16 2 8 6 8 14C8 20 12 26 16 28C20 26 24 20 24 14C24 6 16 2 16 2Z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14 15L15.5 16.5L18.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-                <span>Phantom Shield</span>
-            </a>
+        <div class="grad-line"></div>
 
-            <nav class="desktop-nav">
-                <a href="index.html">Home</a>
-                <a href="services.html">Services</a>
-                <div class="nav-dropdown">
-                    <a href="#">Markets ▼</a>
-                    <div class="nav-dropdown-menu">
-                        <a href="latin-america.html">Latin America</a>
-                        <a href="panama.html">Panama</a>
-                        <a href="small-business.html">SMB</a>
-                    </div>
-                </div>
-                <a href="blog.html">Blog</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-
-            <button class="emergency-btn">Experiencing a Breach?</button>
-
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+        <section class="num-section" id="threats"><div class="container">
+            <div class="num-label reveal"><span class="num">01</span><span class="num-text">Panama's Threat Landscape</span></div>
+            <h2 class="section-title reveal">Critical Threats to Panama</h2>
+            <p class="section-sub reveal">As a global financial hub, Panama faces sophisticated attacks targeting banking, logistics, and government systems.</p>
+            <div class="info-grid">
+                <div class="info-card tilt-card glow-border shine-card reveal rd1"><h3>Financial Sector Under Siege</h3><p>Targeted attacks on banking systems, SWIFT networks, and financial data.</p><ul class="info-list"><li>Banking trojan campaigns</li><li>SWIFT network attacks</li><li>Insider threat exploitation</li><li>ATM jackpotting</li></ul></div>
+                <div class="info-card tilt-card glow-border shine-card reveal rd2"><h3>Logistics & Maritime Risks</h3><p>Panama Canal zone and Free Trade Zone face critical infrastructure threats.</p><ul class="info-list"><li>Supply chain compromise</li><li>OT/SCADA attacks</li><li>Shipping data theft</li><li>GPS spoofing threats</li></ul></div>
+                <div class="info-card tilt-card glow-border shine-card reveal rd3"><h3>Regulatory Pressures</h3><p>Evolving compliance landscape demands specialized local expertise.</p><ul class="info-list"><li>Ley 81 data protection</li><li>SBP banking regulations</li><li>AML/KYC requirements</li><li>International obligations</li></ul></div>
             </div>
-        </div>
+        </div></section>
 
-        <nav class="mobile-nav" id="mobileNav">
-            <a href="/">Home</a>
-            <a href="/services">Services</a>
-            <a href="/latin-america">Markets - Latin America</a>
-            <a href="/panama">Markets - Panama</a>
-            <a href="/small-business">Markets - SMB</a>
-            <a href="/blog">Blog</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
+        <div class="grad-line"></div>
 
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        <a href="index.html">Home</a> / <a href="#">Markets</a> / <strong>Panama</strong>
-    </div>
-
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1 class="reveal">Cybersecurity for Panama's Digital Future</h1>
-            <p class="bilingual-subtitle reveal">Ciberseguridad para el Futuro Digital de Panamá</p>
-            <p class="description reveal">Panama stands at the crossroads of global commerce. As a premier financial hub with the Canal, logistics networks, and a rapidly digitalizing economy, Panama faces unique cybersecurity challenges. Phantom Shield brings Orlando-based expertise with Panama City presence to protect your critical infrastructure.</p>
-            <button class="btn btn-primary reveal">Schedule a Panama Security Assessment</button>
-        </section>
-
-        <!-- Panama Stats Section -->
-        <section>
-            <h2 class="section-title reveal">Panama's Digital Landscape</h2>
-            <div class="stats-grid">
-                <div class="stat-card reveal">
-                    <div class="stat-number">$40B+</div>
-                    <div class="stat-label">Annual banking sector activity</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-number">2M+</div>
-                    <div class="stat-label">Vessels transiting the Canal annually</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-number">23%</div>
-                    <div class="stat-label">Year-over-year digital economy growth</div>
-                </div>
-                <div class="stat-card reveal">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Free trade zones in operation</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Panama's Threat Landscape -->
-        <section>
-            <h2 class="section-title reveal">Panama's Threat Landscape</h2>
-            <div class="content-card reveal">
-                <h2>Financial Sector Under Siege</h2>
-                <p>Panama's prominence as a financial gateway makes it a prime target for cybercriminals. The region experiences sophisticated attacks targeting:</p>
-                <h3>Targeted Attack Vectors:</h3>
-                <ul>
-                    <li><strong>Banking Infrastructure</strong> — Account takeovers, wire fraud, and deposit manipulation</li>
-                    <li><strong>Money Laundering Schemes</strong> — Digital channels used for AML evasion</li>
-                    <li><strong>Trade Finance Fraud</strong> — Digitally altered shipment documents and payment diversion</li>
-                    <li><strong>Ransomware Operations</strong> — Targeting critical banking and logistics providers</li>
-                    <li><strong>Data Breaches</strong> — High-value customer and transaction data exfiltration</li>
-                </ul>
-                <p style="margin-top: 20px; color: var(--accent);">LATAM financial institutions report 3.7x higher breach frequency than global average. Panama's centrality puts you in the crosshairs.</p>
-            </div>
-
-            <div class="content-card reveal">
-                <h2>Logistics & Maritime Vulnerabilities</h2>
-                <p>The Panama Canal and associated maritime infrastructure face evolving cyber threats:</p>
-                <h3>Critical Risks:</h3>
-                <ul>
-                    <li>Operational Technology (OT) system compromise affecting Canal operations</li>
-                    <li>Port management system breaches disrupting logistics chains</li>
-                    <li>Vessel tracking and navigation system hijacking</li>
-                    <li>Supply chain partner vulnerabilities creating cascading failures</li>
-                </ul>
-            </div>
-
-            <div class="content-card reveal">
-                <h2>Regulatory & Compliance Pressures</h2>
-                <p>Panama's role in international commerce brings regulatory scrutiny from multiple jurisdictions. Non-compliance creates legal and operational risks:</p>
-                <h3>Key Compliance Challenges:</h3>
-                <ul>
-                    <li>AML/CFT (Anti-Money Laundering / Combating Financing of Terrorism) enforcement</li>
-                    <li>FATCA and US financial reporting requirements</li>
-                    <li>Cross-border data protection obligations</li>
-                    <li>Industry-specific regulations (Banking, Insurance, Digital Assets)</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Our Panama Presence -->
-        <section>
-            <h2 class="section-title reveal">Our Panama Presence</h2>
-            <div class="content-card reveal">
-                <h2>Orlando + Panama City: Bilingual Expertise</h2>
-                <p>Phantom Shield bridges Florida and Panama with a unique value proposition:</p>
-                <h3>What We Bring:</h3>
-                <ul>
-                    <li><strong>Bilingual Team</strong> — English and Spanish fluency ensures clear communication and cultural understanding</li>
-                    <li><strong>Florida Proximity</strong> — Rapid on-site support from our Orlando headquarters when needed</li>
-                    <li><strong>Panama City Office</strong> — Local presence for compliance audits, assessments, and emergency response</li>
-                    <li><strong>LATAM Expertise</strong> — Deep knowledge of regional threat actors, compliance trends, and banking practices</li>
-                    <li><strong>US-Panama Regulatory Bridge</strong> — Navigate both US and Panamanian legal requirements seamlessly</li>
-                    <li><strong>24/7 Support</strong> — Across both time zones with dedicated incident response team</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Compliance Section -->
-        <section>
+        <section class="num-section"><div class="container">
+            <div class="num-label reveal"><span class="num">02</span><span class="num-text">Compliance</span></div>
             <h2 class="section-title reveal">Panama Compliance & Regulations</h2>
-            <div class="content-card reveal">
-                <h2>Ley 81 de 2013 - Data Protection Law</h2>
-                <p>Panama's primary data protection legislation governs the collection, processing, and storage of personal data. Phantom Shield helps you achieve and maintain compliance:</p>
-                <h3>Key Requirements:</h3>
-                <ul>
-                    <li>Obtain explicit consent for data collection</li>
-                    <li>Implement adequate security measures to prevent unauthorized access</li>
-                    <li>Establish data breach notification procedures (72-hour window)</li>
-                    <li>Maintain accurate and updated data registries</li>
-                    <li>Grant individuals rights to access, rectify, and delete their data</li>
-                </ul>
+            <p class="section-sub reveal">Navigate Panama's regulatory landscape with confidence.</p>
+            <div class="compliance-grid">
+                <div class="compliance-card tilt-card glow-border shine-card reveal rd1"><h3>Ley 81 de 2019 — Data Protection</h3><p>Panama's comprehensive data protection law. We ensure full compliance with data processing, storage, and transfer requirements.</p><ul class="info-list"><li>Consent management frameworks</li><li>Data processing agreements</li><li>Cross-border transfer compliance</li><li>Breach notification procedures</li></ul></div>
+                <div class="compliance-card tilt-card glow-border shine-card reveal rd2"><h3>SBP Banking Requirements</h3><p>Superintendencia de Bancos requirements for financial institutions operating in Panama.</p><ul class="info-list"><li>Information security policies</li><li>Risk management frameworks</li><li>Business continuity planning</li><li>Cybersecurity incident reporting</li></ul></div>
+                <div class="compliance-card tilt-card glow-border shine-card reveal rd3"><h3>Banking Secrecy & International</h3><p>Balancing Panama's banking secrecy with international compliance obligations.</p><ul class="info-list"><li>FATF recommendations</li><li>AML/CFT compliance</li><li>International data sharing</li><li>Tax transparency requirements</li></ul></div>
             </div>
+        </div></section>
 
-            <div class="content-card reveal">
-                <h2>SBP (Superintendencia de Bancos de Panamá) Requirements</h2>
-                <p>Banking institutions must adhere to SBP cybersecurity guidelines and capital adequacy requirements. Our compliance team specializes in:</p>
-                <h3>SBP Compliance Areas:</h3>
-                <ul>
-                    <li>Business continuity and disaster recovery planning</li>
-                    <li>Cybersecurity risk assessments and incident response protocols</li>
-                    <li>Third-party vendor security evaluation</li>
-                    <li>IT governance and audit trail maintenance</li>
-                    <li>AML/CFT compliance integration with security frameworks</li>
-                </ul>
-            </div>
+        <div class="grad-line"></div>
 
-            <div class="content-card reveal">
-                <h2>Banking Secrecy & International Obligations</h2>
-                <p>Panama maintains banking secrecy while complying with international anti-corruption standards. We navigate this complex landscape:</p>
-                <h3>Key Considerations:</h3>
-                <ul>
-                    <li>FATCA (Foreign Account Tax Compliance Act) data sharing requirements</li>
-                    <li>International Sanctions Compliance (OFAC, EU)</li>
-                    <li>Beneficial Ownership disclosure requirements</li>
-                    <li>Cross-border transaction monitoring and reporting</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Industries We Protect -->
-        <section>
+        <section class="num-section"><div class="container">
+            <div class="num-label reveal"><span class="num">03</span><span class="num-text">Industries</span></div>
             <h2 class="section-title reveal">Industries We Protect in Panama</h2>
-            <div class="industry-grid">
-                <div class="industry-card reveal">
-                    <div class="industry-icon">🏦</div>
-                    <h3>Banking & Finance</h3>
-                    <p>Secure payment systems, customer data, and regulatory compliance for financial institutions</p>
-                </div>
-                <div class="industry-card reveal">
-                    <div class="industry-icon">⛴️</div>
-                    <h3>Logistics & Maritime</h3>
-                    <p>Protect supply chains, port systems, and vessel tracking infrastructure</p>
-                </div>
-                <div class="industry-card reveal">
-                    <div class="industry-icon">🏗️</div>
-                    <h3>Real Estate & Construction</h3>
-                    <p>Safeguard development projects, contracts, and financial transactions</p>
-                </div>
-                <div class="industry-card reveal">
-                    <div class="industry-icon">🏥</div>
-                    <h3>Healthcare</h3>
-                    <p>HIPAA-equivalent compliance and patient data protection</p>
-                </div>
-                <div class="industry-card reveal">
-                    <div class="industry-icon">🏛️</div>
-                    <h3>Government & Public Sector</h3>
-                    <p>Critical infrastructure protection and digital government security</p>
-                </div>
+            <div class="industry-grid" style="margin-top:32px">
+                <div class="industry-card reveal rd1"><div class="industry-icon">&#127974;</div><h3>Banking & Finance</h3><p>Transaction security, fraud detection, SBP compliance</p></div>
+                <div class="industry-card reveal rd2"><div class="industry-icon">&#128674;</div><h3>Logistics & Maritime</h3><p>Canal zone protection, supply chain security</p></div>
+                <div class="industry-card reveal rd3"><div class="industry-icon">&#127970;</div><h3>Real Estate & Construction</h3><p>Transaction fraud prevention, data protection</p></div>
+                <div class="industry-card reveal rd1"><div class="industry-icon">&#127973;</div><h3>Healthcare</h3><p>Patient data protection, medical device security</p></div>
+                <div class="industry-card reveal rd2"><div class="industry-icon">&#127963;</div><h3>Government</h3><p>Critical infrastructure, citizen data protection</p></div>
+                <div class="industry-card reveal rd3"><div class="industry-icon">&#127758;</div><h3>Free Trade Zone</h3><p>Colon Free Zone cybersecurity for import/export</p></div>
             </div>
-        </section>
+        </div></section>
 
-        <!-- FAQ Section -->
-        <section>
-            <h2 class="section-title reveal">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>Can foreign companies hire cybersecurity services in Panama?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Panama welcomes foreign investment and international business. However, you must comply with Panamanian data protection laws (Ley 81) and any industry-specific regulations. We help foreign companies navigate these requirements with our bilingual expertise and local presence.
-                    </div>
-                </div>
+        <div class="grad-line"></div>
 
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>What compliance frameworks apply to my business?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        This depends on your industry and activities. Financial institutions must comply with SBP requirements, AML/CFT regulations, and Ley 81. Insurance companies fall under SSIF oversight. Healthcare providers follow HIPAA-equivalent standards. Real estate and trade companies have specific data protection obligations. We conduct a comprehensive compliance audit to identify your specific requirements.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>How does Phantom Shield handle data sovereignty in Panama?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Data sovereignty is critical in Panama. We ensure that customer data and sensitive information remain within Panamanian jurisdiction unless explicitly approved for international transfer. Our Panama City office maintains local infrastructure and ensures compliance with data residency requirements under Ley 81.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>What happens in case of a data breach?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Under Ley 81, you have 72 hours to notify affected individuals. Phantom Shield provides 24/7 incident response with immediate forensic investigation, breach containment, root cause analysis, and regulatory notification support. Our bilingual team coordinates with Panamanian authorities and ensures legal compliance throughout the process.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>Can you help with digital assets and cryptocurrency compliance?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Panama is emerging as a digital asset hub in LATAM. We provide cybersecurity for cryptocurrency exchanges, blockchain companies, and digital asset custodians, with expertise in AML/CFT requirements specific to Panama's evolving digital asset regulations.
-                    </div>
-                </div>
-
-                <div class="faq-item reveal">
-                    <div class="faq-question">
-                        <span>How quickly can you respond to emergencies?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        Phantom Shield offers 24/7 breach response with our Orlando and Panama City teams. We provide immediate triage (within 1 hour), on-site forensics (available same-day), and coordinated incident response. For critical situations, our proximity to Panama enables rapid deployment.
-                    </div>
-                </div>
+        <section class="num-section"><div class="container">
+            <div class="num-label reveal"><span class="num">04</span><span class="num-text">Our Presence</span></div>
+            <h2 class="section-title reveal">Orlando + Panama City</h2>
+            <p class="section-sub reveal">Bilingual expertise bridging North and Central America.</p>
+            <div class="info-grid" style="grid-template-columns:1fr 1fr">
+                <div class="info-card tilt-card glow-border shine-card reveal rd1"><h3>What We Bring</h3><ul class="info-list"><li>Bilingual team (English/Spanish)</li><li>On-ground Panama City presence</li><li>Understanding of local business culture</li><li>Relationships with local authorities</li><li>Regional threat intelligence</li><li>24/7 support in your timezone</li></ul></div>
+                <div class="info-card tilt-card glow-border shine-card reveal rd2"><h3>Why It Matters</h3><p>International firms often struggle with LATAM-specific threats because they lack local context. We combine US-grade security methodologies with deep Panama expertise — the best of both worlds.</p></div>
             </div>
-        </section>
+        </div></section>
 
-        <!-- Contact CTA -->
-        <section>
-            <div class="cta-section reveal">
-                <h2>Schedule Your Panama Security Assessment</h2>
-                <p>Protect Panama's most critical assets with expert cybersecurity services</p>
-                <form name="panama-inquiry" method="POST" data-netlify="true" style="max-width: 600px; margin: 40px auto;">
-                    <input type="hidden" name="form-name" value="panama-inquiry">
-                    <div class="form-group">
-                        <label>Name / Nombre</label>
-                        <input type="text" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Company / Empresa</label>
-                        <input type="text" name="company" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Industry / Sector</label>
-                        <select name="industry" required>
-                            <option>Select Industry</option>
-                            <option>Banking & Finance</option>
-                            <option>Logistics & Maritime</option>
-                            <option>Real Estate & Construction</option>
-                            <option>Healthcare</option>
-                            <option>Government</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Assessment Focus / Enfoque</label>
-                        <textarea name="focus" placeholder="What security concerns do you have? ¿Cuáles son sus preocupaciones de seguridad?"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Schedule Assessment</button>
+        <div class="grad-line"></div>
+
+        <!-- INQUIRY FORM -->
+        <section class="form-section" id="inquiry"><div class="container" style="text-align:center">
+            <div class="num-label reveal" style="justify-content:center"><span class="num">05</span><span class="num-text">Get Started</span></div>
+            <h2 class="section-title reveal">Schedule Your Panama Assessment</h2>
+            <p class="section-sub reveal" style="margin:0 auto 40px">Complete the form below and our bilingual team will reach out within 24 hours.</p>
+            <div class="form-box reveal">
+                <form name="panama-inquiry" method="POST" data-netlify="true">
+                    <label>Full Name / Nombre Completo</label><input type="text" name="name" placeholder="Juan Perez" required>
+                    <label>Company / Empresa</label><input type="text" name="company" placeholder="Your company name">
+                    <label>Email</label><input type="email" name="email" placeholder="juan@company.com" required>
+                    <label>Industry / Industria</label>
+                    <select name="industry"><option value="">Select industry...</option><option>Banking & Finance</option><option>Logistics & Maritime</option><option>Real Estate</option><option>Healthcare</option><option>Government</option><option>Technology</option><option>Other</option></select>
+                    <label>Message / Mensaje</label><textarea name="message" placeholder="Tell us about your security needs..." rows="4"></textarea>
+                    <button type="submit" class="btn-primary">Submit Inquiry / Enviar</button>
                 </form>
             </div>
-        </section>
-    </main>
+        </div></section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Phantom Shield</h3>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Advanced cybersecurity solutions built on expertise, integrity, and innovation. Serving Panama and LATAM since 2024.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="panama.html">Panama Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Markets</h3>
-                <ul>
-                    <li><a href="latin-america.html">Latin America</a></li>
-                    <li><a href="panama.html">Panama</a></li>
-                    <li><a href="small-business.html">Small Business</a></li>
-                    <li><a href="services.html">Enterprise</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Security Disclosure</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="copyright">&copy; 2026 Phantom Shield. All rights reserved. | Cybersecurity Excellence</div>
-            <div class="footer-social">
-                <a href="#" title="LinkedIn">In</a>
-                <a href="#" title="Twitter">X</a>
-                <a href="#" title="GitHub">GH</a>
-                <a href="#" title="Email">@</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">↑</button>
-
+        <footer><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="/" class="logo"><div class="logo-icon"><svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg></div><div class="logo-text"><span>Phantom</span> Shield</div></a><p>Enterprise cybersecurity consulting and defense. Your invisible armor in the digital world.</p></div><div class="footer-col"><h4>Services</h4><a href="/services">Penetration Testing</a><a href="/services">Managed Detection</a><a href="/services">Compliance Audit</a><a href="/services">Incident Response</a></div><div class="footer-col"><h4>Markets</h4><a href="/latin-america">Latin America</a><a href="/panama">Panama</a><a href="/small-business">Small Business</a></div><div class="footer-col"><h4>Company</h4><a href="/blog">Blog</a><a href="/contact">Contact</a><a href="mailto:info@phantomshield.com">info@phantomshield.com</a></div></div><div class="footer-bottom"><span>&copy; 2026 Phantom Shield. All rights reserved.</span><span>Orlando, FL &middot; Panama City, PA</span></div></div></footer>
+    </div>
     <script>
-        // Preloader
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const preloader = document.querySelector('.preloader');
-                preloader.style.animation = 'fadeOutPreloader 0.6s ease-out forwards';
-            }, 1400);
-        });
+    window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('preloader').classList.add('done'),600)});const header=document.getElementById('header');window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>50)});const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');hamburger.addEventListener('click',()=>{mobileNav.classList.toggle('active');const s=hamburger.querySelectorAll('span');if(mobileNav.classList.contains('active')){s[0].style.transform='rotate(45deg) translate(5px,5px)';s[1].style.opacity='0';s[2].style.transform='rotate(-45deg) translate(5px,-5px)'}else{s[0].style.transform='';s[1].style.opacity='';s[2].style.transform=''}});const ro=new IntersectionObserver((e)=>{e.forEach(i=>{if(i.isIntersecting){i.target.classList.add('visible');ro.unobserve(i.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-        // Scroll Progress Bar
-        const scrollProgress = document.querySelector('.scroll-progress');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
-        });
+    // Floating orbs
+    (function(){const o=document.createElement('div');o.className='bg-orbs';o.innerHTML='<div class="bg-orb"></div><div class="bg-orb"></div><div class="bg-orb"></div>';document.body.prepend(o)})();
 
-        // Header Shrink on Scroll
-        const header = document.querySelector('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('shrink');
-            } else {
-                header.classList.remove('shrink');
-            }
+    // 3D tilt on mouse move for cards
+    document.querySelectorAll('.tilt-card').forEach(card=>{
+        card.addEventListener('mousemove',e=>{
+            const r=card.getBoundingClientRect();
+            const x=(e.clientX-r.left)/r.width-.5;
+            const y=(e.clientY-r.top)/r.height-.5;
+            card.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg) scale3d(1.02,1.02,1.02)`;
         });
+        card.addEventListener('mouseleave',()=>{card.style.transform=''});
+    });
 
-        // Mobile Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-        });
+    // Subtle parallax on scroll
+    let ticking=false;
+    window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{const s=window.scrollY;document.querySelectorAll('.bg-orb').forEach((orb,i)=>{orb.style.transform=`translateY(${s*(.03+i*.01)}px)`});ticking=false});ticking=true}});
 
-        document.querySelectorAll('#mobileNav a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileNav.classList.remove('active');
-            });
-        });
-
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        revealElements.forEach(element => {
-            observer.observe(element);
-        });
-
-        // Back to Top Button
-        const backToTopBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Emergency Button Handler
-        document.querySelectorAll('.emergency-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Emergency Contact: +1 (407) 555-9999\n\nFor immediate assistance, call our 24/7 breach response team.');
-            });
-        });
-
-        // FAQ Toggle
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-            });
-        });
+    // Stagger reveal indices
+    document.querySelectorAll('.stagger-children').forEach(g=>{g.querySelectorAll('.reveal').forEach((el,i)=>el.style.setProperty('--i',i))});
     </script>
 </body>
 </html>
