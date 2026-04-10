@@ -5,6 +5,21 @@
 /contact     /contact.html     200
 /privacy-policy  /index.html  200
 
+# Blog article routes
+/blog/security-awareness-training     /blog/security-awareness-training.html     200
+/blog/cybersecurity-consulting-guide  /blog/cybersecurity-consulting-guide.html  200
+/blog/dark-web-monitoring             /blog/dark-web-monitoring.html             200
+/blog/penetration-testing-guide       /blog/penetration-testing-guide.html       200
+/blog/cybersecurity-risk-assessment   /blog/cybersecurity-risk-assessment.html   200
+/blog/small-business-cybersecurity    /blog/small-business-cybersecurity.html    200
+/blog/checkbox-security               /blog/checkbox-security.html               200
+/blog/cloud-security-guide            /blog/cloud-security-guide.html            200
+/blog/iso-27001-consulting            /blog/iso-27001-consulting.html            200
+/blog/real-estate-wire-fraud          /blog/real-estate-wire-fraud.html          200
+/blog/cmmc-consulting                 /blog/cmmc-consulting.html                 200
+/blog/soc-as-a-service                /blog/soc-as-a-service.html                200
+/blog/law-firm-cybersecurity          /blog/law-firm-cybersecurity.html          200
+
 # Proxy missing assets from mazehq.com (3D models, fonts, images, blog thumbnails)
 /public/theme/models/*  https://mazehq.com/public/theme/models/:splat  200
 /public/theme/fonts/*   https://mazehq.com/public/theme/fonts/:splat   200
