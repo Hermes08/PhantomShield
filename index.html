@@ -87,6 +87,21 @@ body.ps-loaded .c-tile-article{transition-delay:0ms!important}
   0%   { transform: translateX(-220%); }
   100% { transform: translateX(340%); }
 }
+/* ps-confirming: barra se expande hasta llenar → "todo listo" */
+#ps-loader.ps-confirming .ps-loader__bar::after {
+  animation: ps-confirm-fill 0.55s cubic-bezier(0.25,0.46,0.45,0.94) forwards !important;
+  background: linear-gradient(90deg, #60A5FA 0%, #818CF8 50%, #A78BFA 100%) !important;
+  transform: none !important;
+  left: 0 !important;
+}
+@keyframes ps-confirm-fill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+#ps-loader.ps-confirming .ps-loader__name {
+  opacity: 0.55;
+  transition: opacity 0.3s;
+}
 </style>
 <script type="application/ld+json">
 {
@@ -2125,14 +2140,20 @@ version && console.log(` version: %c${version}`, 'color: yellow');
 
 <script>
 /* ============================================================
-   PHANTOM SHIELD — LOADER CONTROLLER v2
-   Espera la señal real de mazehq (remoción de is-not-ready)
-   + buffer de frames RAF para que el globe 3D renderice
-   antes de mostrar la página.
+   PHANTOM SHIELD — LOADER CONTROLLER v3
+   Espera confirmación REAL de que el arte 3D está renderizado:
+   1) MutationObserver detecta remoción de is-not-ready (mazehq)
+   2) Verifica que el canvas WebGL tenga dimensiones (pintado)
+   3) Buffer de frames RAF para el primer frame completo
+   4) Tiempo mínimo de 1.5s para evitar flash en móvil
+   Sin page-reload — solo espera con paciencia.
    ============================================================ */
 (function () {
-  var hiding = false;
+  var hiding    = false;
+  var confirmed = false; // true cuando mazehq señalizó listo
   var observers = [];
+  var startTime = Date.now();
+  var MIN_MS    = 1500; // tiempo mínimo de loader visible
 
   function cleanupObservers() {
     for (var i = 0; i < observers.length; i++) {
@@ -2146,38 +2167,31 @@ version && console.log(` version: %c${version}`, 'color: yellow');
        de "carga en partes" que se ve feo en móvil.                        — */
   function preRevealAll() {
     try {
-      // (a) Elementos con data-cssanimate (botones, etc.) — mazehq los anima
-      //     via IntersectionObserver. Los forzamos ya visibles.
       var cssAnims = document.querySelectorAll('[data-cssanimate]');
       for (var a = 0; a < cssAnims.length; a++) {
         cssAnims[a].style.transitionDelay = '0ms';
         cssAnims[a].style.animationDelay  = '0ms';
         cssAnims[a].classList.add('is-in-view');
       }
-      // (b) Eliminar transition-delay inline en los tiles de artículos
-      //     (100ms → 1300ms de stagger — los tarjetas aparecían una por una)
       var delayed = document.querySelectorAll('[style*="transition-delay"]');
       for (var b = 0; b < delayed.length; b++) {
         delayed[b].style.transitionDelay = '0ms';
       }
-      // (c) Forzar wrapper y contenido principal completamente visibles
-      //     para evitar fade-in del wrapper al quitar is-not-ready
       var wrappers = document.querySelectorAll('.wrapper, #wrapper, #content, main');
       for (var c = 0; c < wrappers.length; c++) {
         wrappers[c].style.opacity = '1';
         wrappers[c].classList.add('is-in-view');
       }
-      // (d) Marcar body para que los overrides CSS también apliquen
       document.body.classList.add('ps-loaded');
     } catch(e) {}
   }
 
-  /* — Fade out del loader — */
+  /* — Fade out del loader (respeta tiempo mínimo) — */
   function hideLoader() {
     if (hiding) return;
     hiding = true;
     cleanupObservers();
-    preRevealAll(); // ← pre-revelar TODO antes de que el overlay desaparezca
+    preRevealAll();
     var loader = document.getElementById('ps-loader');
     if (!loader) return;
     loader.classList.add('ps-ready');
@@ -2186,11 +2200,17 @@ version && console.log(` version: %c${version}`, 'color: yellow');
     }, 700);
   }
 
-  /* — Espera N frames de RAF antes de mostrar (da tiempo al WebGL) — */
+  /* — Programa hideLoader respetando el tiempo mínimo de loading — */
+  function scheduleHide() {
+    var elapsed   = Date.now() - startTime;
+    var remaining = Math.max(0, MIN_MS - elapsed);
+    setTimeout(hideLoader, remaining);
+  }
+
+  /* — Espera N frames de RAF antes de ejecutar fn — */
   function afterFrames(n, fn) {
     if (typeof requestAnimationFrame !== 'function') {
-      setTimeout(fn, n * 18);
-      return;
+      setTimeout(fn, n * 18); return;
     }
     var count = 0;
     (function frame() {
@@ -2199,23 +2219,55 @@ version && console.log(` version: %c${version}`, 'color: yellow');
     })();
   }
 
-  /* — Trigger principal: MutationObserver en html y body — */
-  /* mazehq añade is-not-ready al parsear su JS (defer),      */
-  /* y lo remueve cuando el escenario 3D está listo.           */
+  /* — Verifica si el canvas WebGL ya tiene dimensiones reales (renderizado) — */
+  function isCanvasReady() {
+    var canvases = document.querySelectorAll('canvas');
+    for (var i = 0; i < canvases.length; i++) {
+      if (canvases[i].width > 100 && canvases[i].height > 100) return true;
+    }
+    return false;
+  }
+
+  /* — Espera a que el canvas esté listo (polling RAF) hasta maxWait ms — */
+  function waitForCanvas(callback, maxWait) {
+    if (isCanvasReady()) { callback(); return; }
+    var deadline = Date.now() + maxWait;
+    (function check() {
+      if (isCanvasReady() || Date.now() >= deadline) {
+        callback();
+      } else {
+        requestAnimationFrame(check);
+      }
+    })();
+  }
+
+  /* — Llamado cuando mazehq quita is-not-ready (escena 3D inicializada) — */
+  function onMazehqReady() {
+    if (confirmed) return;
+    confirmed = true;
+    cleanupObservers();
+    // Mostrar estado "confirmando" en la barra del loader
+    var loader = document.getElementById('ps-loader');
+    if (loader) loader.classList.add('ps-confirming');
+    // Esperar a que el canvas WebGL pinte (hasta 3s extra)
+    // luego 12 frames RAF para el primer frame completo, luego ocultar
+    waitForCanvas(function () {
+      afterFrames(12, scheduleHide);
+    }, 3000);
+  }
+
+  /* — Trigger principal: MutationObserver en <html> y <body> — */
   function watchEl(el) {
     if (!el) return;
     var obs = new MutationObserver(function () {
       if (el.classList && !el.classList.contains('is-not-ready')) {
-        cleanupObservers();
-        // Dar 6 frames para que el canvas WebGL pinte el primer frame
-        afterFrames(6, hideLoader);
+        onMazehqReady();
       }
     });
     obs.observe(el, { attributes: true, attributeFilter: ['class'] });
     observers.push(obs);
   }
 
-  // Empezar a observar INMEDIATAMENTE (antes de que corran los defer scripts)
   watchEl(document.documentElement);
   if (document.body) {
     watchEl(document.body);
@@ -2225,34 +2277,28 @@ version && console.log(` version: %c${version}`, 'color: yellow');
     });
   }
 
-  /* — Fallback A: si is-not-ready ya fue quitado cuando chequeamos (DOMContentLoaded) — */
+  /* — Fallback A: is-not-ready ya fue quitado antes de nuestro observer — */
   document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
-      var html = document.documentElement;
-      var body = document.body;
+      if (confirmed) return;
+      var html = document.documentElement, body = document.body;
       var notReady = (html && html.classList.contains('is-not-ready')) ||
                      (body && body.classList.contains('is-not-ready'));
-      if (!notReady) {
-        // Nunca se añadió o ya fue removido → mostrar con buffer de frames
-        afterFrames(8, hideLoader);
-      }
-    }, 400);
+      if (!notReady) onMazehqReady();
+    }, 300);
   });
 
-  /* — Fallback B: 5.5s — mazehq script puede haber fallado en cargar — */
+  /* — Fallback B: 9s — mazehq tardó demasiado, mostrar página igual — */
+  /* NO tocamos classList de mazehq para evitar el efecto "refresh" visual */
   setTimeout(function () {
-    var html = document.documentElement, body = document.body;
-    if (html) html.classList.remove('is-not-ready');
-    if (body) body.classList.remove('is-not-ready');
-    hiding = false; // override en caso de race condition
-    hideLoader();
-  }, 5500);
+    if (!hiding) { hiding = false; hideLoader(); }
+  }, 9000);
 
-  /* — Fallback C: 8s absoluto — página siempre aparece — */
+  /* — Fallback C: 12s absoluto — página siempre aparece — */
   setTimeout(function () {
     hiding = false;
     hideLoader();
-  }, 8000);
+  }, 12000);
 
 })();
 </script>
