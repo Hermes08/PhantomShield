@@ -19,6 +19,11 @@
 /blog/cmmc-consulting                 /blog/cmmc-consulting.html                 200
 /blog/soc-as-a-service                /blog/soc-as-a-service.html                200
 /blog/law-firm-cybersecurity          /blog/law-firm-cybersecurity.html          200
+/blog/soc-2-consulting                /blog/soc-2-consulting.html                200
+/blog/gdpr-consulting                 /blog/gdpr-consulting.html                 200
+/blog/phishing-training-employees     /blog/phishing-training-employees.html     200
+/blog/managed-detection-response      /blog/managed-detection-response.html      200
+/blog/ai-cybersecurity-consulting     /blog/ai-cybersecurity-consulting.html     200
 
 # Proxy missing assets from mazehq.com (3D models, fonts, images, blog thumbnails)
 /public/theme/models/*  https://mazehq.com/public/theme/models/:splat  200
