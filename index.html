@@ -26,6 +26,8 @@ body.is-not-ready .wrapper{opacity:1!important}body.is-not-ready .m-welcome{opac
   inset: 0;
   width: 100%;
   height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* cubre la barra de dirección en Safari móvil */
   background: #13151A;
   z-index: 999999;
   display: flex;
@@ -33,7 +35,7 @@ body.is-not-ready .wrapper{opacity:1!important}body.is-not-ready .m-welcome{opac
   justify-content: center;
   flex-direction: column;
   gap: 28px;
-  transition: opacity 0.55s ease, visibility 0.55s ease;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
   will-change: opacity;
 }
 #ps-loader.ps-ready {
@@ -1999,62 +2001,102 @@ version && console.log(` version: %c${version}`, 'color: yellow');
 
 <script>
 /* ============================================================
-   PHANTOM SHIELD — LOADER CONTROLLER
-   Maneja el loading screen y el is-not-ready de mazehq.
-   Múltiples triggers para que siempre funcione, en cualquier
-   dispositivo y velocidad de conexión.
+   PHANTOM SHIELD — LOADER CONTROLLER v2
+   Espera la señal real de mazehq (remoción de is-not-ready)
+   + buffer de frames RAF para que el globe 3D renderice
+   antes de mostrar la página.
    ============================================================ */
 (function () {
-  var dismissed = false;
+  var hiding = false;
+  var observers = [];
 
-  /* — 1. Quita el loading screen — */
-  function hideLoader() {
-    if (dismissed) return;
-    dismissed = true;
-
-    // Quitar is-not-ready de mazehq (animaciones de entrada)
-    var body = document.body;
-    var html = document.documentElement;
-    if (body) body.classList.remove('is-not-ready');
-    if (html) html.classList.remove('is-not-ready');
-
-    // Ocultar el loader con fade
-    var loader = document.getElementById('ps-loader');
-    if (loader) {
-      loader.classList.add('ps-ready');
-      // Eliminar del DOM después del fade para no bloquear eventos
-      setTimeout(function () {
-        if (loader && loader.parentNode) {
-          loader.parentNode.removeChild(loader);
-        }
-      }, 650);
+  function cleanupObservers() {
+    for (var i = 0; i < observers.length; i++) {
+      try { observers[i].disconnect(); } catch(e) {}
     }
+    observers = [];
   }
 
-  /* — 2. Triggers en orden de prioridad — */
+  /* — Fade out del loader — */
+  function hideLoader() {
+    if (hiding) return;
+    hiding = true;
+    cleanupObservers();
+    var loader = document.getElementById('ps-loader');
+    if (!loader) return;
+    loader.classList.add('ps-ready');
+    setTimeout(function () {
+      if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+    }, 700);
+  }
 
-  // Trigger A: Todo cargado (imágenes, fuentes, scripts externos)
-  window.addEventListener('load', function () {
-    setTimeout(hideLoader, 250);
-  });
+  /* — Espera N frames de RAF antes de mostrar (da tiempo al WebGL) — */
+  function afterFrames(n, fn) {
+    if (typeof requestAnimationFrame !== 'function') {
+      setTimeout(fn, n * 18);
+      return;
+    }
+    var count = 0;
+    (function frame() {
+      if (++count >= n) { fn(); return; }
+      requestAnimationFrame(frame);
+    })();
+  }
 
-  // Trigger B: DOM listo + delay (conexiones rápidas)
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(hideLoader, 900);
+  /* — Trigger principal: MutationObserver en html y body — */
+  /* mazehq añade is-not-ready al parsear su JS (defer),      */
+  /* y lo remueve cuando el escenario 3D está listo.           */
+  function watchEl(el) {
+    if (!el) return;
+    var obs = new MutationObserver(function () {
+      if (el.classList && !el.classList.contains('is-not-ready')) {
+        cleanupObservers();
+        // Dar 6 frames para que el canvas WebGL pinte el primer frame
+        afterFrames(6, hideLoader);
+      }
+    });
+    obs.observe(el, { attributes: true, attributeFilter: ['class'] });
+    observers.push(obs);
+  }
+
+  // Empezar a observar INMEDIATAMENTE (antes de que corran los defer scripts)
+  watchEl(document.documentElement);
+  if (document.body) {
+    watchEl(document.body);
   } else {
     document.addEventListener('DOMContentLoaded', function () {
-      setTimeout(hideLoader, 900);
+      watchEl(document.body);
     });
   }
 
-  // Trigger C: Timeout máximo — SIEMPRE muestra la página (3s en móvil lento)
-  setTimeout(hideLoader, 3000);
+  /* — Fallback A: si is-not-ready ya fue quitado cuando chequeamos (DOMContentLoaded) — */
+  document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      var html = document.documentElement;
+      var body = document.body;
+      var notReady = (html && html.classList.contains('is-not-ready')) ||
+                     (body && body.classList.contains('is-not-ready'));
+      if (!notReady) {
+        // Nunca se añadió o ya fue removido → mostrar con buffer de frames
+        afterFrames(8, hideLoader);
+      }
+    }, 400);
+  });
 
-  // Trigger D: Respaldo extra para conexiones muy lentas (5s)
+  /* — Fallback B: 5.5s — mazehq script puede haber fallado en cargar — */
   setTimeout(function () {
-    dismissed = false; // fuerza ejecución aunque haya fallado antes
+    var html = document.documentElement, body = document.body;
+    if (html) html.classList.remove('is-not-ready');
+    if (body) body.classList.remove('is-not-ready');
+    hiding = false; // override en caso de race condition
     hideLoader();
-  }, 5000);
+  }, 5500);
+
+  /* — Fallback C: 8s absoluto — página siempre aparece — */
+  setTimeout(function () {
+    hiding = false;
+    hideLoader();
+  }, 8000);
 
 })();
 </script>
