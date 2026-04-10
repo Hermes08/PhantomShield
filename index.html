@@ -85,9 +85,12 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .c-alert__bell{width:16px;height:16px;color:var(--accent);flex-shrink:0;animation:bell-ring 4s ease-in-out infinite}
 .c-alert__bell svg{width:16px;height:16px;fill:currentColor}
 .c-alert__text{font-size:13px;font-weight:500}
-.c-alert__arrow{display:flex;align-items:center;color:var(--accent);margin-left:2px}
-.c-alert__arrow svg{width:14px;height:14px;stroke:currentColor;fill:none;transition:transform .3s}
-.c-alert:hover .c-alert__arrow svg{transform:translateX(3px)}
+.c-alert__arrow{display:flex;align-items:center;color:var(--accent);margin-left:2px;overflow:hidden;width:17px;height:16px;position:relative}
+.c-alert__arrow svg{width:17px;height:16px;stroke:currentColor;fill:none;position:absolute;transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.c-alert__arrow svg:first-child{transform:translateX(0)}
+.c-alert__arrow svg:last-child{transform:translateX(-100%)}
+.c-alert:hover .c-alert__arrow svg:first-child{transform:translateX(100%)}
+.c-alert:hover .c-alert__arrow svg:last-child{transform:translateX(0)}
 @keyframes bell-ring{0%,90%,100%{transform:rotate(0)}92%{transform:rotate(-8deg)}94%{transform:rotate(8deg)}96%{transform:rotate(-5deg)}98%{transform:rotate(5deg)}}
 
 /* ===== HEADER (mazehq s-header) ===== */
@@ -212,9 +215,14 @@ nav.mobile-nav{display:none}
 @media(max-width:768px){.stream-hotspots{flex-wrap:wrap;gap:12px}.stream-popup{display:none}}
 
 /* ===== GRAPH MODULE (mazehq section-graph) ===== */
-.module--graph{padding:160px 0;text-align:center;background:var(--bg);position:relative}
-.module--graph .grid-wrap{display:flex;flex-direction:column;align-items:center}
+.module--graph{padding:140px 0;text-align:center;background:var(--bg);position:relative}
+.module--graph .grid-wrap{display:flex;flex-direction:column;align-items:center;gap:64px}
 .graph-question{font-family:var(--font-heading);font-size:clamp(26px,3.8vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.035em;color:var(--text-bright);max-width:680px}
+.m-graph__steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;width:100%;text-align:left}
+.m-graph__step{padding:24px;border-top:1px solid var(--border);position:relative}
+.m-graph__step-number{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.08em;margin-bottom:16px;font-family:var(--font-heading)}
+.m-graph__step-text{font-size:14px;color:var(--text-muted);line-height:1.7}
+@media(max-width:768px){.m-graph__steps{grid-template-columns:1fr 1fr}}
 
 /* ===== SOLUTION FLOW (mazehq 4-step process) ===== */
 .module--solution{padding:140px 0;background:var(--bg);position:relative}
@@ -344,7 +352,6 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     .solution-flow{grid-template-columns:repeat(2,1fr)}
     .feature-story{grid-template-columns:1fr}
     .feature-story:nth-child(even){direction:ltr}
-    .articles-grid{grid-template-columns:1fr 1fr}
     .footer-grid{grid-template-columns:1fr 1fr}
     .s-progress{display:none}
 }
@@ -360,7 +367,6 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     .module--cta{padding:100px 24px}
     .solution-flow{grid-template-columns:1fr}
     .timeline{flex-direction:column;align-items:stretch}
-    .articles-grid{grid-template-columns:1fr}
     .footer-grid{grid-template-columns:1fr}
     .m-story__stats{grid-template-columns:1fr}
     .m-welcome__clients{gap:16px;padding:16px 0}
@@ -435,7 +441,7 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     <a href="/blog.html" class="c-alert" data-observe>
         <span class="c-alert__bell"><svg viewBox="0 0 17 16" xmlns="http://www.w3.org/2000/svg"><path d="M14.15,11.12c-.6-1.03-.9-2.41-.9-4.12,0-1.26-.5-2.47-1.39-3.36-.89-.89-2.1-1.39-3.36-1.39s-2.47.5-3.36,1.39c-.89.89-1.39,2.1-1.39,3.36,0,1.71-.3,3.1-.9,4.12-.07.11-.1.24-.1.37,0,.13.03.26.1.37.07.11.16.21.27.27.11.07.24.1.37.1h10c.13,0,.26-.04.37-.1s.21-.16.27-.27c.07-.11.1-.24.1-.37,0-.13-.03-.26-.1-.37Z"/></svg></span>
         <span class="c-alert__text">Phantom Shield launches AI-powered threat analysis</span>
-        <span class="c-alert__arrow"><svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 15.071L16.571 8 9.5.929M16 8H.5" stroke="currentColor" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span>
+        <span class="c-alert__arrow"><svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 15.071L16.571 8 9.5.929M16 8H.5" stroke="currentColor" stroke-linecap="square" stroke-linejoin="bevel"/></svg><svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 15.071L16.571 8 9.5.929M16 8H.5" stroke="currentColor" stroke-linecap="square" stroke-linejoin="bevel"/></svg></span>
     </a>
     <h2 class="m-welcome__title" data-observe>Get cybersecurity threats<em>under control</em></h2>
     <p class="m-welcome__subtitle" data-observe>AI-driven consulting that investigates and resolves security vulnerabilities before attackers exploit them</p>
@@ -547,24 +553,47 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     <div class="grid-wrap">
         <div data-observe="children">
             <h2 class="m-story__title">Most threats generate false positives, but security teams have no way to identify them at scale</h2>
-            <!-- Icon stat boxes like mazehq's c-ui-box--icon -->
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:32px 0">
+            <!-- Icon stat boxes like mazehq's c-ui-box--icon with dotted borders -->
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:32px 0">
                 <div class="stat-card" style="padding:28px">
-                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" style="margin-bottom:16px;opacity:.7">
-                        <circle cx="10" cy="19" r="4" fill="rgba(131,145,155,0.4)"/>
-                        <circle cx="19" cy="19" r="4" fill="rgba(131,145,155,0.6)"/>
-                        <circle cx="28" cy="19" r="4" fill="rgba(131,145,155,0.8)"/>
+                    <!-- Dots icon (mazehq svg-ui-icon-dots) -->
+                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" style="margin-bottom:16px">
+                        <path vector-effect="non-scaling-stroke" fill="none" stroke="#83919b" stroke-dasharray="1 2" d="M5 1h28s4 0 4 4v28s0 4 -4 4h-28s-4 0 -4 -4v-28s0 -4 4 -4"/>
+                        <circle cx="13" cy="13" r="4.5" fill="none" stroke="rgba(239,240,240,0.7)" stroke-width=".75"/>
+                        <circle cx="25" cy="13" r="4.5" fill="none" stroke="rgba(239,240,240,0.7)" stroke-width=".75"/>
+                        <circle cx="13" cy="25" r="4.5" fill="none" stroke="rgba(239,240,240,0.7)" stroke-width=".75"/>
+                        <path d="M25 20.5v9M20.5 25h9" stroke="rgba(239,240,240,0.85)" stroke-width=".75" stroke-linecap="round"/>
                     </svg>
                     <div style="height:1px;background:var(--border);margin:0 0 14px;opacity:.5"></div>
-                    <p style="font-size:14px;color:var(--text-muted);line-height:1.7">Rule-based logic and CVSS scoring can't accurately identify real vs. false-positive vulnerabilities in context</p>
+                    <p style="font-size:13px;color:var(--text-muted);line-height:1.7">Rule-based logic can't accurately identify real vs. false-positive vulnerabilities in context</p>
                 </div>
                 <div class="stat-card" style="padding:28px">
-                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" style="margin-bottom:16px;opacity:.7">
-                        <path d="M21 6v10M21 26v10M6 21h10M26 21h10" stroke="rgba(131,145,155,0.6)" stroke-width="2" stroke-linecap="round"/>
-                        <circle cx="21" cy="21" r="8" stroke="rgba(131,145,155,0.4)" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+                    <!-- Hourglass/funnel icon (mazehq svg-ui-icon-hourglass) -->
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" style="margin-bottom:16px">
+                        <path vector-effect="non-scaling-stroke" fill="none" stroke="#83919b" stroke-dasharray="1 2" d="M5 1h32s4 0 4 4v32s0 4 -4 4h-32s-4 0 -4 -4v-32s0 -4 4 -4"/>
+                        <g opacity=".6">
+                        <path d="M29 12H13l8 9 8-9zm-8 18v-7" stroke="rgba(239,240,240,0.8)" stroke-width=".8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M13 30h16" stroke="rgba(239,240,240,0.8)" stroke-width=".8" stroke-linecap="round"/>
+                        </g>
                     </svg>
                     <div style="height:1px;background:var(--border);margin:0 0 14px;opacity:.5"></div>
-                    <p style="font-size:14px;color:var(--text-muted);line-height:1.7">Manual triage is slow, expensive, and can't keep up with the volume of findings across cloud environments</p>
+                    <p style="font-size:13px;color:var(--text-muted);line-height:1.7">Manual triage is slow and can't keep up with the volume of findings across environments</p>
+                </div>
+                <div class="stat-card" style="padding:28px">
+                    <!-- Network icon (mazehq svg-ui-icon-network) -->
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" style="margin-bottom:16px">
+                        <path vector-effect="non-scaling-stroke" fill="none" stroke="#83919b" stroke-dasharray="1 2" d="M5 1h32s4 0 4 4v32s0 4 -4 4h-32s-4 0 -4 -4v-32s0 -4 4 -4"/>
+                        <g opacity=".6">
+                        <circle cx="21" cy="14" r="3" fill="none" stroke="rgba(239,240,240,0.8)" stroke-width=".8"/>
+                        <circle cx="13" cy="28" r="3" fill="none" stroke="rgba(239,240,240,0.8)" stroke-width=".8"/>
+                        <circle cx="29" cy="28" r="3" fill="none" stroke="rgba(239,240,240,0.8)" stroke-width=".8"/>
+                        <line x1="21" y1="17" x2="13" y2="25" stroke="rgba(239,240,240,0.4)" stroke-width=".8"/>
+                        <line x1="21" y1="17" x2="29" y2="25" stroke="rgba(239,240,240,0.4)" stroke-width=".8"/>
+                        <line x1="13" y1="28" x2="29" y2="28" stroke="rgba(239,240,240,0.3)" stroke-width=".8" stroke-dasharray="2 2"/>
+                        </g>
+                    </svg>
+                    <div style="height:1px;background:var(--border);margin:0 0 14px;opacity:.5"></div>
+                    <p style="font-size:13px;color:var(--text-muted);line-height:1.7">90% of all findings are false positives when investigated in context of your environment</p>
                 </div>
             </div>
             <div class="big-stat" data-count="90" data-suffix="%">0</div>
@@ -577,34 +606,32 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 <!-- ===== GRAPH: TRANSITION QUESTION ===== -->
 <section class="module--graph" id="section-graph" data-observe>
     <div class="grid-wrap">
-        <h2 class="graph-question">How can we eliminate the threats that matter, before attackers beat us to it?</h2>
+        <h2 class="graph-question">Expert-driven security that detects, prioritizes, and resolves threats before attackers strike</h2>
+        <!-- 4-step numbered process (mazehq m-graph__steps) -->
+        <div class="m-graph__steps" data-observe="children">
+            <div class="m-graph__step">
+                <div class="m-graph__step-number">01</div>
+                <p class="m-graph__step-text">Threats identified across your entire attack surface through penetration testing and monitoring</p>
+            </div>
+            <div class="m-graph__step">
+                <div class="m-graph__step-number">02</div>
+                <p class="m-graph__step-text">Every vulnerability investigated in the context of your specific environment and infrastructure</p>
+            </div>
+            <div class="m-graph__step">
+                <div class="m-graph__step-number">03</div>
+                <p class="m-graph__step-text">False positives removed and truly critical vulnerabilities identified and prioritized</p>
+            </div>
+            <div class="m-graph__step">
+                <div class="m-graph__step-number">04</div>
+                <p class="m-graph__step-text">Remediation plans and compliance documentation delivered with ongoing managed defense</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- ===== SOLUTION FLOW (mazehq 4-step) ===== -->
 <section class="module--solution" id="section-solution">
     <div class="grid-wrap">
-        <div class="solution-header" data-observe>
-            <h2>Expert-driven security that detects, prioritizes, and resolves threats</h2>
-        </div>
-        <div class="solution-flow" data-observe="children">
-            <div class="flow-step">
-                <div class="flow-step__number">01</div>
-                <div class="flow-step__text">Threats identified across your entire attack surface through penetration testing and continuous monitoring</div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-step__number">02</div>
-                <div class="flow-step__text">Every vulnerability investigated in the context of your specific environment and infrastructure</div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-step__number">03</div>
-                <div class="flow-step__text">False positives eliminated and truly critical vulnerabilities identified and prioritized</div>
-            </div>
-            <div class="flow-step">
-                <div class="flow-step__number">04</div>
-                <div class="flow-step__text">Remediation plans and compliance documentation delivered with ongoing managed defense</div>
-            </div>
-        </div>
 
         <!-- Animated stream flow diagram (mazehq c-stream style) -->
         <div class="c-stream-diagram" data-observe style="margin:0 0 80px;position:relative">
