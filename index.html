@@ -16,6 +16,71 @@
 <link rel="stylesheet" href="https://mazehq.com/public/theme/styles.css?v=1.0.46">
 <style>/* Override mazehq is-not-ready for cross-domain */
 body.is-not-ready .wrapper{opacity:1!important}body.is-not-ready .m-welcome{opacity:1!important}body.is-not-ready .s-header{translate:none!important}body.is-not-ready .s-header__nav-item{translate:none!important;opacity:1!important}body.is-not-ready .quick-access__link{display:block!important}
+
+/* =============================================
+   PHANTOM SHIELD — PAGE LOADER
+   Aparece inmediatamente, se oculta al cargar
+   ============================================= */
+#ps-loader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #13151A;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 28px;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+  will-change: opacity;
+}
+#ps-loader.ps-ready {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ps-loader__shield {
+  width: 72px;
+  height: 72px;
+  filter: drop-shadow(0 0 18px rgba(99,102,241,0.5));
+  animation: ps-breathe 2s ease-in-out infinite;
+}
+.ps-loader__name {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.82);
+  text-transform: uppercase;
+}
+.ps-loader__bar {
+  width: 180px;
+  height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.ps-loader__bar::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  width: 45%;
+  background: linear-gradient(90deg, transparent 0%, #60A5FA 40%, #818CF8 60%, transparent 100%);
+  border-radius: 2px;
+  animation: ps-slide 1.6s ease-in-out infinite;
+}
+@keyframes ps-breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(0.94); }
+}
+@keyframes ps-slide {
+  0%   { transform: translateX(-220%); }
+  100% { transform: translateX(340%); }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -66,6 +131,26 @@ body.is-not-ready .wrapper{opacity:1!important}body.is-not-ready .m-welcome{opac
 
 </head>
 <body>
+
+<!-- ======================================================
+     PHANTOM SHIELD PAGE LOADER
+     CSS-driven: visible inmediatamente sin esperar JS.
+     Se oculta cuando todo el contenido está listo.
+     ====================================================== -->
+<div id="ps-loader" role="status" aria-label="Cargando Phantom Shield">
+  <svg class="ps-loader__shield" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="psl-g1" x1="0" y1="0" x2="64" y2="72" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#60A5FA"/>
+        <stop offset="100%" stop-color="#6366F1"/>
+      </linearGradient>
+    </defs>
+    <path d="M32 2L4 14v22c0 15.9 12.1 30.7 28 34 15.9-3.3 28-18.1 28-34V14L32 2z" fill="url(#psl-g1)"/>
+    <path d="M20 36l9 9 16-16" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="ps-loader__name">Phantom Shield</div>
+  <div class="ps-loader__bar"></div>
+</div>
 
 <nav class="quick-access">
 <ul class="quick-access__list quick-access__list--main">
@@ -2237,17 +2322,64 @@ version && console.log(` version: %c${version}`, 'color: yellow');
     <script src="https://mazehq.com/public/theme/scripts.min.js?v=1.0.46" defer=""></script>
 
 <script>
-/* PS Fallback: remove is-not-ready if mazehq animation doesn't auto-trigger */
-(function(){
-  function unblock(){
-    var el = document.body || document.documentElement;
-    if(el){ el.classList.remove('is-not-ready'); }
-    document.documentElement.classList.remove('is-not-ready');
+/* ============================================================
+   PHANTOM SHIELD — LOADER CONTROLLER
+   Maneja el loading screen y el is-not-ready de mazehq.
+   Múltiples triggers para que siempre funcione, en cualquier
+   dispositivo y velocidad de conexión.
+   ============================================================ */
+(function () {
+  var dismissed = false;
+
+  /* — 1. Quita el loading screen — */
+  function hideLoader() {
+    if (dismissed) return;
+    dismissed = true;
+
+    // Quitar is-not-ready de mazehq (animaciones de entrada)
+    var body = document.body;
+    var html = document.documentElement;
+    if (body) body.classList.remove('is-not-ready');
+    if (html) html.classList.remove('is-not-ready');
+
+    // Ocultar el loader con fade
+    var loader = document.getElementById('ps-loader');
+    if (loader) {
+      loader.classList.add('ps-ready');
+      // Eliminar del DOM después del fade para no bloquear eventos
+      setTimeout(function () {
+        if (loader && loader.parentNode) {
+          loader.parentNode.removeChild(loader);
+        }
+      }, 650);
+    }
   }
-  // Fire at 600ms and 1500ms to cover slow/fast load scenarios
-  setTimeout(unblock, 600);
-  setTimeout(unblock, 1500);
-  window.addEventListener('load', function(){ setTimeout(unblock, 300); });
+
+  /* — 2. Triggers en orden de prioridad — */
+
+  // Trigger A: Todo cargado (imágenes, fuentes, scripts externos)
+  window.addEventListener('load', function () {
+    setTimeout(hideLoader, 250);
+  });
+
+  // Trigger B: DOM listo + delay (conexiones rápidas)
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(hideLoader, 900);
+  } else {
+    document.addEventListener('DOMContentLoaded', function () {
+      setTimeout(hideLoader, 900);
+    });
+  }
+
+  // Trigger C: Timeout máximo — SIEMPRE muestra la página (3s en móvil lento)
+  setTimeout(hideLoader, 3000);
+
+  // Trigger D: Respaldo extra para conexiones muy lentas (5s)
+  setTimeout(function () {
+    dismissed = false; // fuerza ejecución aunque haya fallado antes
+    hideLoader();
+  }, 5000);
+
 })();
 </script>
 </body></html>
