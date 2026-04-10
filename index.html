@@ -260,28 +260,42 @@ nav.mobile-nav{display:none}
 .c-ui-box__text{font-size:13px;font-weight:600;color:var(--text-bright);letter-spacing:.02em}
 .c-ui-box__badges{display:flex;gap:6px}
 
-/* Event steps (incident workflow) */
-.event-steps{display:flex;flex-direction:column;gap:10px}
-.event-step{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(15,21,35,0.7);border:1px solid var(--border);transition:all .3s}
-.event-step:hover{border-color:var(--border-hover);transform:translateX(4px)}
-.event-step__num{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:.04em;flex-shrink:0}
-.event-step__text{font-size:13px;color:var(--text-muted);font-weight:500}
+/* Event steps (mazehq c-ui-box--checkmark style) */
+.event-steps{display:flex;flex-direction:column;gap:0}
+.event-step{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);transition:all .3s;position:relative}
+.event-step:last-child{border-bottom:none}
+.event-step__num{position:relative;width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.event-step__num svg{position:absolute;inset:0;width:28px;height:28px}
+.event-step__num span{font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:.02em;position:relative;z-index:1}
+.event-step__text{font-size:13px;color:var(--text-muted);font-weight:500;flex:1}
+.event-step__check{opacity:0;transition:opacity .3s;flex-shrink:0}
+.event-step.checked .event-step__check{opacity:1}
+.event-step.checked .event-step__text{color:var(--text-bright)}
 
 /* ===== TESTIMONIALS SLIDER (mazehq module--slider) ===== */
 .module--slider{padding:120px 0;background:var(--bg);overflow:hidden}
 .m-slider{max-width:900px;margin:0 auto;padding:0 48px;position:relative}
+/* Controls on top like mazehq */
+.m-slider__controls{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:48px}
+.m-slider__button{width:48px;height:38px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity .3s;color:var(--text-muted);padding:0}
+.m-slider__button:hover{opacity:.7}
+.m-slider__button svg{width:38px;height:36px}
+.m-slider__controls-line{flex:1;max-width:60px;height:1px;background:none;border-top:1px dashed var(--border)}
 .m-slider__track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1);will-change:transform}
 .m-slider__slide{min-width:100%;padding:0 20px}
-.m-slider__quote{font-size:clamp(18px,2.4vw,26px);font-weight:400;line-height:1.65;color:var(--text-bright);margin-bottom:36px;font-style:italic;position:relative;padding-left:28px;border-left:2px solid rgba(0,212,255,0.15)}
+/* mazehq c-tile-quote style — no italic, no border-left */
+.m-slider__quote{font-size:clamp(20px,2.6vw,28px);font-weight:400;line-height:1.6;color:var(--text-bright);margin-bottom:40px}
+.m-slider__author-line{display:flex;align-items:center;gap:14px}
+.m-slider__author-dot{position:relative;width:24px;height:24px;flex-shrink:0}
+.m-slider__author-dot::before,.m-slider__author-dot::after{content:'';position:absolute;background:var(--border)}
+.m-slider__author-dot::before{width:100%;height:1px;top:50%;left:0}
+.m-slider__author-dot::after{width:1px;height:100%;left:50%;top:0}
+.m-slider__author-plus{width:5px;height:5px;border-radius:50%;background:var(--accent);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .m-slider__author{font-size:14px;font-weight:700;color:var(--text-bright)}
 .m-slider__role{font-size:13px;color:var(--text-muted);margin-top:4px}
-.m-slider__controls{display:flex;gap:16px;justify-content:center;margin-top:40px}
-.m-slider__button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--text-muted)}
-.m-slider__button:hover{border-color:var(--accent);color:var(--accent)}
-.m-slider__button svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5}
-.m-slider__dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
-.m-slider__dot{width:8px;height:8px;border-radius:50%;background:var(--text-dim);cursor:pointer;transition:all .3s}
-.m-slider__dot.active{background:var(--accent);box-shadow:0 0 8px rgba(0,212,255,0.3)}
+.m-slider__dots{display:flex;gap:8px;justify-content:center;margin-top:32px}
+.m-slider__dot{width:6px;height:6px;border-radius:50%;background:var(--text-dim);cursor:pointer;transition:all .3s}
+.m-slider__dot.active{background:var(--text-bright);box-shadow:0 0 6px rgba(239,240,240,0.3)}
 
 /* ===== CTA MODULE (mazehq module--cta with PCB canvas) ===== */
 .module--cta{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 48px;background:var(--bg);position:relative;overflow:hidden}
@@ -699,10 +713,26 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
             </div>
             <div class="feature-story__visual">
                 <div class="event-steps">
-                    <div class="event-step"><span class="event-step__num">01.</span><span class="event-step__text">Incident created and triaged</span></div>
-                    <div class="event-step"><span class="event-step__num">02.</span><span class="event-step__text">WAF policy deployed</span></div>
-                    <div class="event-step"><span class="event-step__num">03.</span><span class="event-step__text">Remediation ticket created</span></div>
-                    <div class="event-step"><span class="event-step__num">04.</span><span class="event-step__text">Stakeholders notified via #phantom-alerts</span></div>
+                    <div class="event-step checked">
+                        <div class="event-step__num"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="#83919b" stroke-dasharray="1.26 1.89" stroke-width=".5"/></svg><span>01.</span></div>
+                        <span class="event-step__text">Incident created and triaged</span>
+                        <div class="event-step__check"><svg width="14" height="13" viewBox="0 0 14 13" fill="none"><path d="M1.198 7.191l4.215 4.496L13.56 1.01" stroke="#2FD48D" stroke-width=".7"/></svg></div>
+                    </div>
+                    <div class="event-step checked">
+                        <div class="event-step__num"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="#83919b" stroke-dasharray="1.26 1.89" stroke-width=".5"/></svg><span>02.</span></div>
+                        <span class="event-step__text">WAF policy deployed</span>
+                        <div class="event-step__check"><svg width="14" height="13" viewBox="0 0 14 13" fill="none"><path d="M1.198 7.191l4.215 4.496L13.56 1.01" stroke="#2FD48D" stroke-width=".7"/></svg></div>
+                    </div>
+                    <div class="event-step checked">
+                        <div class="event-step__num"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="#83919b" stroke-dasharray="1.26 1.89" stroke-width=".5"/></svg><span>03.</span></div>
+                        <span class="event-step__text">Remediation ticket created</span>
+                        <div class="event-step__check"><svg width="14" height="13" viewBox="0 0 14 13" fill="none"><path d="M1.198 7.191l4.215 4.496L13.56 1.01" stroke="#2FD48D" stroke-width=".7"/></svg></div>
+                    </div>
+                    <div class="event-step checked">
+                        <div class="event-step__num"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="#83919b" stroke-dasharray="1.26 1.89" stroke-width=".5"/></svg><span>04.</span></div>
+                        <span class="event-step__text">Stakeholders notified via #phantom-alerts</span>
+                        <div class="event-step__check"><svg width="14" height="13" viewBox="0 0 14 13" fill="none"><path d="M1.198 7.191l4.215 4.496L13.56 1.01" stroke="#2FD48D" stroke-width=".7"/></svg></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -713,41 +743,41 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
 <!-- ===== TESTIMONIALS SLIDER ===== -->
 <section class="module--slider" id="section-slider">
     <div class="m-slider">
+        <!-- Controls on top (mazehq style) -->
+        <div class="m-slider__controls">
+            <button class="m-slider__button" id="slider-prev" aria-label="Previous">
+                <svg viewBox="0 0 38 36"><path d="M37,18H1" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/><path d="M37,18L22,3" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/><path d="M37,18l-15,15" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/></svg>
+            </button>
+            <div class="m-slider__controls-line"></div>
+            <button class="m-slider__button" id="slider-next" aria-label="Next">
+                <svg viewBox="0 0 38 36"><path d="M1,18h37" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/><path d="M1,18L16,3" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/><path d="M1,18l15,15" fill="none" stroke="#83919b" stroke-dasharray="1 2" vector-effect="non-scaling-stroke"/></svg>
+            </button>
+        </div>
         <div class="m-slider__track" id="slider-track">
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"Phantom Shield's approach to vulnerability management is game-changing. They don't just find issues — they contextualize them and tell you exactly what to fix first."</div>
-                <div class="m-slider__author">Security Engineering Leader</div>
-                <div class="m-slider__role">Fortune 500 Financial Services</div>
+                <div class="m-slider__quote">Phantom Shield's approach to vulnerability management is game-changing. They don't just find issues — they contextualize them and tell you exactly what to fix first.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">Security Engineering Leader</div><div class="m-slider__role">Fortune 500 Financial Services</div></div></div>
             </div>
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"After working with Phantom Shield, our vulnerability backlog dropped by 85%. They separated the real threats from the noise in a way our tools never could."</div>
-                <div class="m-slider__author">CISO</div>
-                <div class="m-slider__role">Healthcare SaaS Company</div>
+                <div class="m-slider__quote">After working with Phantom Shield, our vulnerability backlog dropped by 85%. They separated the real threats from the noise in a way our tools never could.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">CISO</div><div class="m-slider__role">Healthcare SaaS Company</div></div></div>
             </div>
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"Their Ley 81 compliance expertise saved us months of work. The combination of deep technical knowledge and regulatory understanding is rare."</div>
-                <div class="m-slider__author">Head of IT Security</div>
-                <div class="m-slider__role">Panamanian Enterprise</div>
+                <div class="m-slider__quote">Their Ley 81 compliance expertise saved us months of work. The combination of deep technical knowledge and regulatory understanding is rare.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">Head of IT Security</div><div class="m-slider__role">Panamanian Enterprise</div></div></div>
             </div>
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"The penetration testing was thorough beyond anything we've experienced. They found critical vulnerabilities three other firms missed."</div>
-                <div class="m-slider__author">VP of Engineering</div>
-                <div class="m-slider__role">Technology Scale-up</div>
+                <div class="m-slider__quote">The penetration testing was thorough beyond anything we've experienced. They found critical vulnerabilities three other firms missed.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">VP of Engineering</div><div class="m-slider__role">Technology Scale-up</div></div></div>
             </div>
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"Phantom Shield is going to revolutionize how companies approach vulnerability management and remediation. They don't just find issues — they automate the path to resolution."</div>
-                <div class="m-slider__author">Kyle Morrison</div>
-                <div class="m-slider__role">Head of Attack Surface Management, Enterprise SaaS</div>
+                <div class="m-slider__quote">Phantom Shield is going to revolutionize how companies approach vulnerability management. They don't just find issues — they automate the path to resolution.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">Kyle Morrison</div><div class="m-slider__role">Head of Attack Surface Management, Enterprise SaaS</div></div></div>
             </div>
             <div class="m-slider__slide">
-                <div class="m-slider__quote">"This is the future of cybersecurity consulting. The combination of deep expertise with modern tooling gives you an unfair advantage."</div>
-                <div class="m-slider__author">Staff Security Engineer</div>
-                <div class="m-slider__role">Technology Scale-up</div>
+                <div class="m-slider__quote">This is the future of cybersecurity consulting. The combination of deep expertise with modern tooling gives you an unfair advantage.</div>
+                <div class="m-slider__author-line"><div class="m-slider__author-dot"><div class="m-slider__author-plus"></div></div><div><div class="m-slider__author">Staff Security Engineer</div><div class="m-slider__role">Technology Scale-up</div></div></div>
             </div>
-        </div>
-        <div class="m-slider__controls">
-            <button class="m-slider__button" id="slider-prev"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-            <button class="m-slider__button" id="slider-next"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
         </div>
         <div class="m-slider__dots" id="slider-dots">
             <div class="m-slider__dot active" data-slide="0"></div>
