@@ -1584,4 +1584,19 @@ version && console.log(` version: %c${version}`, 'color: yellow');
 </script>
 <script src="https://mazehq.com/public/theme/libs.min.js?v=1.0.46" defer=""></script>
     <script src="https://mazehq.com/public/theme/scripts.min.js?v=1.0.46" defer=""></script>
+
+<script>
+/* PS Fallback: remove is-not-ready if mazehq animation doesn't auto-trigger */
+(function(){
+  function unblock(){
+    var el = document.body || document.documentElement;
+    if(el){ el.classList.remove('is-not-ready'); }
+    document.documentElement.classList.remove('is-not-ready');
+  }
+  // Fire at 600ms and 1500ms to cover slow/fast load scenarios
+  setTimeout(unblock, 600);
+  setTimeout(unblock, 1500);
+  window.addEventListener('load', function(){ setTimeout(unblock, 300); });
+})();
+</script>
 </body></html>
