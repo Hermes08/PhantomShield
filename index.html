@@ -48,22 +48,16 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 #gfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .page-content{position:relative;z-index:1}
 
-/* ===== GFX OVERLAY — mazehq-style hotspot constellation ===== */
-#s-gfx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;overflow:hidden;transition:opacity .6s}
-/* Each hotspot: a floating circle ring */
+/* ===== GFX OVERLAY — hero-only CVE badge constellation ===== */
+#s-gfx{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:2;pointer-events:none;overflow:hidden;transition:opacity .8s}
 .hs{position:absolute;pointer-events:none;opacity:0;will-change:transform,opacity}
 .hs.visible{opacity:1}
-.hs svg.svg-circle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-.hs svg.svg-circle circle{fill:none;stroke-width:1;stroke-dasharray:4 3;animation:ring-spin var(--spin-dur,18s) linear infinite}
-.hs svg.svg-circle circle{stroke:rgba(255,71,87,0.18)}
-.hs.hs--neutral svg.svg-circle circle{stroke:rgba(131,145,155,0.12)}
 @keyframes ring-spin{to{stroke-dashoffset:-300}}
-/* Hotspot float */
-.hs{animation:hs-float var(--float-dur,7s) ease-in-out infinite;animation-delay:var(--float-delay,0s)}
-@keyframes hs-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-14px) scale(1.03)}}
-/* CVE card hotspot */
-.hs--card .hs-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,15,28,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(131,145,155,0.18);border-radius:10px;padding:13px 17px;white-space:nowrap;z-index:3}
-.hs--card .hs-card__id{font-size:13px;font-weight:600;color:var(--text-bright);margin-bottom:8px;letter-spacing:.02em}
+.hs{animation:hs-float var(--float-dur,8s) ease-in-out infinite;animation-delay:var(--float-delay,0s)}
+@keyframes hs-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+/* CVE card */
+.hs--card .hs-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(10,15,28,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(131,145,155,0.15);border-radius:10px;padding:12px 16px;white-space:nowrap;z-index:3}
+.hs--card .hs-card__id{font-size:12px;font-weight:600;color:var(--text-bright);margin-bottom:6px;letter-spacing:.02em}
 .hs--card .hs-card__badges{display:flex;gap:5px;flex-wrap:wrap}
 
 /* GRID SYSTEM (mazehq-style 12-col) */
@@ -126,7 +120,9 @@ nav.mobile-nav{display:none}
 
 /* ===== WELCOME / HERO (mazehq module--welcome) ===== */
 .module--welcome{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:140px 48px 80px;position:relative}
-.module--welcome::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(255,71,87,0.035) 0%,rgba(212,9,254,0.015) 40%,transparent 65%);pointer-events:none}
+/* Dark vignette behind hero text so it stays readable over globe */
+.module--welcome::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:860px;height:700px;background:radial-gradient(ellipse at center,rgba(15,21,35,0.55) 0%,rgba(15,21,35,0.28) 50%,transparent 75%);pointer-events:none;z-index:0}
+.module--welcome .c-alert,.module--welcome .m-welcome__title,.module--welcome .m-welcome__subtitle,.module--welcome .m-welcome__buttons,.module--welcome .m-welcome__clients,.module--welcome .m-welcome__scroll{position:relative;z-index:1}
 .m-welcome{display:flex;flex-direction:column;align-items:center;width:100%}
 .m-welcome__title{font-family:var(--font-heading);font-size:clamp(38px,5.5vw,66px);font-weight:800;line-height:1.04;letter-spacing:-.045em;color:var(--text-bright);margin-bottom:24px;max-width:700px;animation:title-in 1s cubic-bezier(.4,0,.2,1) both;animation-delay:.35s}
 @keyframes title-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
@@ -251,11 +247,11 @@ nav.mobile-nav{display:none}
 .feature-story__text p{font-size:15px;color:var(--text-muted);line-height:1.8}
 .feature-story__visual{border-radius:16px;background:var(--surface);border:1px solid var(--border);padding:32px;min-height:300px;display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden}
 .feature-story__visual::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(0,212,255,0.03),transparent 60%);pointer-events:none}
-.feature-story__visual .c-ui-box,.feature-story__visual .event-step{opacity:0;transform:translateY(12px);transition:all .5s cubic-bezier(.4,0,.2,1)}
-.feature-story.visible .feature-story__visual .c-ui-box:nth-child(1),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(1){opacity:1;transform:translateY(0);transition-delay:.2s}
-.feature-story.visible .feature-story__visual .c-ui-box:nth-child(2),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(2){opacity:1;transform:translateY(0);transition-delay:.35s}
-.feature-story.visible .feature-story__visual .c-ui-box:nth-child(3),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(3){opacity:1;transform:translateY(0);transition-delay:.5s}
-.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(4){opacity:1;transform:translateY(0);transition-delay:.65s}
+.feature-story__visual .c-ui-box,.feature-story__visual .event-step{transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(1),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(1){transition-delay:.2s}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(2),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(2){transition-delay:.35s}
+.feature-story.visible .feature-story__visual .c-ui-box:nth-child(3),.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(3){transition-delay:.5s}
+.feature-story.visible .feature-story__visual .event-steps .event-step:nth-child(4){transition-delay:.65s}
 
 /* UI Box cards (mazehq CVE-style cards in feature visuals) */
 .c-ui-box{background:rgba(15,21,35,0.9);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;transition:all .4s;position:relative;overflow:hidden}
@@ -341,27 +337,34 @@ nav.mobile-nav{display:none}
 .article-card__right svg{flex-shrink:0;transition:transform .3s}
 .article-card:hover .article-card__right svg{transform:translateX(4px)}
 
-/* ===== FOOTER ===== */
-footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--bg)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
-.footer-brand p{font-size:14px;color:var(--text-muted);margin-top:16px;max-width:280px;line-height:1.7}
-.footer-col h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:18px}
-.footer-col a{display:block;font-size:14px;color:var(--text-muted);text-decoration:none;padding:5px 0;transition:color .2s}
-.footer-col a:hover{color:var(--accent)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--text-dim)}
+/* ===== FOOTER (mazehq s-footer style — minimal) ===== */
+.s-footer{padding:80px 0 48px;background:var(--bg)}
+.s-footer__wrap{max-width:1280px;margin:0 auto;padding:0 48px}
+.s-footer__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:64px;gap:32px;flex-wrap:wrap}
+.s-footer__title{font-family:var(--font-heading);font-size:clamp(24px,3vw,40px);font-weight:700;letter-spacing:-.03em;color:var(--text-bright);line-height:1.2;max-width:500px}
+.s-footer__inner{border-top:1px dashed rgba(131,145,155,0.2);padding-top:32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.s-footer__left{display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.s-footer__link{font-size:13px;color:var(--text-dim);text-decoration:none;transition:color .2s;font-weight:500}
+.s-footer__link:hover{color:var(--text-bright)}
+.s-footer__right{display:flex;align-items:center;gap:20px}
+.s-footer__social{color:var(--text-dim);transition:color .2s;display:flex;align-items:center}
+.s-footer__social:hover{color:var(--text-bright)}
+.s-footer__social svg{width:15px;height:15px;fill:currentColor}
+.s-footer__copy{font-size:11px;color:var(--text-dim);opacity:.5}
+@media(max-width:768px){.s-footer__wrap{padding:0 24px}.s-footer__top{flex-direction:column;align-items:flex-start}.s-footer__inner{flex-direction:column;align-items:flex-start}.s-footer__left{gap:16px}}
 
-/* ===== SCROLL OBSERVE ===== */
-[data-observe]{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+/* ===== SCROLL OBSERVE — subtle fade-up, never fully hidden ===== */
+[data-observe]{opacity:1;transform:translateY(18px);transition:transform .7s cubic-bezier(.4,0,.2,1)}
 [data-observe].visible{opacity:1;transform:translateY(0)}
-[data-observe="children"] > *{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
-[data-observe="children"].visible > *{opacity:1;transform:translateY(0)}
-[data-observe="children"].visible > *:nth-child(2){transition-delay:.1s}
-[data-observe="children"].visible > *:nth-child(3){transition-delay:.2s}
-[data-observe="children"].visible > *:nth-child(4){transition-delay:.3s}
-[data-observe="children"].visible > *:nth-child(5){transition-delay:.35s}
-[data-observe="children"].visible > *:nth-child(6){transition-delay:.4s}
-[data-observe="children"].visible > *:nth-child(7){transition-delay:.45s}
-[data-observe="children"].visible > *:nth-child(8){transition-delay:.5s}
+[data-observe="children"] > *{transform:translateY(12px);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+[data-observe="children"].visible > *{transform:translateY(0)}
+[data-observe="children"].visible > *:nth-child(2){transition-delay:.08s}
+[data-observe="children"].visible > *:nth-child(3){transition-delay:.16s}
+[data-observe="children"].visible > *:nth-child(4){transition-delay:.24s}
+[data-observe="children"].visible > *:nth-child(5){transition-delay:.3s}
+[data-observe="children"].visible > *:nth-child(6){transition-delay:.36s}
+[data-observe="children"].visible > *:nth-child(7){transition-delay:.42s}
+[data-observe="children"].visible > *:nth-child(8){transition-delay:.48s}
 
 /* Desktop-only helper */
 .desktop-only{display:block}
@@ -864,25 +867,31 @@ footer{padding:60px 0 32px;border-top:1px solid var(--border);background:var(--b
     </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-    <div class="grid-wrap">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="/" class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 7.18 3.84 13.44 9 15 5.16-1.56 9-7.82 9-15V7l-9-5z"/></svg></div><div class="logo-text">Phantom<span>Shield</span></div></a>
-                <p>Elite cybersecurity consulting, penetration testing, and managed defense. Based in Orlando, FL.</p>
-            </div>
-            <div class="footer-col"><h4>Services</h4><a href="/services.html">All Services</a><a href="/services.html#penetration-testing">Penetration Testing</a><a href="/services.html#compliance">Compliance</a><a href="/services.html#incident-response">Incident Response</a></div>
-            <div class="footer-col"><h4>Markets</h4><a href="/latin-america.html">Latin America</a><a href="/panama.html">Panama</a><a href="/small-business.html">Small Business</a></div>
-            <div class="footer-col"><h4>Company</h4><a href="/blog.html">Insights</a><a href="/contact.html">Contact</a></div>
+<!-- ===== FOOTER (mazehq s-footer style) ===== -->
+<footer class="s-footer" id="footer">
+    <div class="s-footer__wrap">
+        <div class="s-footer__top">
+            <p class="s-footer__title">Get cybersecurity threats<br>under control</p>
+            <a href="/contact.html" class="btn-dot">Book Consultation</a>
         </div>
-        <div class="footer-bottom">
-            <span>&copy; 2026 Phantom Shield. All rights reserved.</span>
-            <span style="display:flex;align-items:center;gap:16px">
-                <span>Orlando, FL &bull; Panama City, PA</span>
-                <a href="#" style="color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-                <a href="#" style="color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-dim)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            </span>
+        <div class="s-footer__inner">
+            <div class="s-footer__left">
+                <a class="s-footer__link" href="/services.html">Services</a>
+                <a class="s-footer__link" href="/latin-america.html">Latin America</a>
+                <a class="s-footer__link" href="/panama.html">Panama</a>
+                <a class="s-footer__link" href="/blog.html">Blog</a>
+                <a class="s-footer__link" href="/contact.html">Contact</a>
+                <span class="s-footer__copy">&copy; 2026 Phantom Shield</span>
+            </div>
+            <div class="s-footer__right">
+                <a class="s-footer__link" href="/contact.html">Orlando, FL</a>
+                <a class="s-footer__social" href="https://linkedin.com/company/phantomshield" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.594.432H1.802A1.071 1.071 0 00.73 1.505v11.811a1.075 1.075 0 001.072 1.074h11.792a1.07 1.07 0 001.072-1.074V1.506A1.074 1.074 0 0013.594.431zm-8.04 10.2a.537.537 0 01-.915.38.537.537 0 01-.157-.38V6.337a.537.537 0 01.915-.38c.101.101.157.238.157.38v4.295zm-.536-5.369a.803.803 0 01-.788-.962.806.806 0 011.096-.587.804.804 0 01-.308 1.55zm6.432 5.369a.537.537 0 11-1.072 0V8.216a1.343 1.343 0 00-1.34-1.342 1.339 1.339 0 00-1.34 1.342v2.416a.537.537 0 01-.915.38.537.537 0 01-.157-.38V6.337a.537.537 0 01.845-.436c.154.109.382.204.552.124a2.409 2.409 0 013.082.946c.226.376.345.806.345 1.245v2.416z" fill="currentColor"/></svg>
+                </a>
+                <a class="s-footer__social" href="https://x.com/phantomshield" target="_blank" aria-label="X">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
         </div>
     </div>
 </footer>
@@ -986,79 +995,34 @@ window.addEventListener('scroll',()=>{
     sGfx.style.opacity=Math.max(0,1-progress*2.5);
 },{passive:true});
 
-/* ===== BUILD mazehq-style HOTSPOT CONSTELLATION ===== */
+/* ===== Hero CVE badge overlay — 3 subtle cards only in hero viewport ===== */
 (function(){
     const container=document.getElementById('s-gfx');
-    const W=window.innerWidth,H=window.innerHeight;
-
-    // 3 CVE card hotspots (mazehq shows 3 main ones)
     const cards=[
-        {x:.82,y:.12,id:'CVE-2025-29824',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Critical Impact',c:'red'}],size:200,red:true,delay:123},
-        {x:.06,y:.32,id:'CVE-2025-21613',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Critical Impact',c:'red'}],size:200,red:true,delay:1979},
-        {x:.78,y:.70,id:'CVE-2025-30406',badges:[{t:'Exploitable',c:'red'},{t:'High Likelihood',c:'red'},{t:'Monitored',c:'cyan'}],size:200,red:true,delay:782},
+        {x:82,y:14,id:'CVE-2025-29824',badges:[{t:'Critical',c:'red'},{t:'Exploitable',c:'red'}],delay:800},
+        {x:6,y:30,id:'CVE-2025-21613',badges:[{t:'Critical',c:'red'},{t:'Monitored',c:'cyan'}],delay:1400},
     ];
-
-    // 37 plain ring hotspots (scattered constellation - like mazehq's 37 plain rings)
-    const plainRings=[
-        {x:.12,y:.08,s:140,red:true,d:88},{x:.92,y:.22,s:110,red:false,d:268},
-        {x:.25,y:.18,s:90,red:false,d:305},{x:.55,y:.07,s:120,red:true,d:460},
-        {x:.70,y:.28,s:160,red:false,d:1092},{x:.38,y:.42,s:80,red:true,d:491},
-        {x:.88,y:.45,s:130,red:false,d:1163},{x:.15,y:.55,s:100,red:true,d:690},
-        {x:.48,y:.60,s:150,red:false,d:1196},{x:.72,y:.52,s:95,red:true,d:321},
-        {x:.32,y:.68,s:175,red:false,d:1430},{x:.62,y:.78,s:115,red:true,d:198},
-        {x:.08,y:.75,s:85,red:false,d:1469},{x:.90,y:.82,s:140,red:true,d:495},
-        {x:.20,y:.88,s:105,red:false,d:1501},{x:.50,y:.92,s:120,red:true,d:1529},
-        {x:.78,y:.90,s:90,red:false,d:1555},{x:.42,y:.80,s:160,red:true,d:1629},
-        {x:.65,y:.15,s:80,red:false,d:1656},{x:.18,y:.38,s:130,red:true,d:1671},
-        {x:.85,y:.60,s:100,red:false,d:1761},{x:.30,y:.95,s:110,red:true,d:1846},
-        {x:.95,y:.38,s:75,red:false,d:1855},{x:.10,y:.22,s:145,red:true,d:1868},
-        {x:.58,y:.38,s:95,red:false,d:1897},{x:.75,y:.05,s:120,red:true,d:307},
-        {x:.40,y:.12,s:85,red:false,d:204},{x:.22,y:.62,s:150,red:true,d:332},
-        {x:.68,y:.65,s:105,red:false,d:399},{x:.35,y:.30,s:80,red:true,d:1149},
-        {x:.82,y:.35,s:130,red:false,d:758},{x:.05,y:.90,s:115,red:true,d:1491},
-        {x:.92,y:.10,s:95,red:false,d:1511},{x:.48,y:.25,s:140,red:true,d:1555},
-        {x:.18,y:.78,s:110,red:false,d:1196},{x:.60,y:.50,s:160,red:true,d:493},
-        {x:.35,y:.55,s:75,red:false,d:1850}
-    ];
-
     function makeSvg(size,red){
         const s=document.createElementNS('http://www.w3.org/2000/svg','svg');
         s.setAttribute('viewBox','0 0 220 220');
         s.style.cssText=`width:${size}px;height:${size}px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)`;
-        s.classList.add('svg-circle');
         const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
         c.setAttribute('cx','110');c.setAttribute('cy','110');c.setAttribute('r','100');
-        c.style.cssText=`fill:none;stroke-width:1;stroke-dasharray:4 3;stroke:${red?'rgba(255,71,87,0.2)':'rgba(131,145,155,0.12)'};animation:ring-spin ${14+Math.random()*12}s linear infinite${Math.random()>.5?';animation-direction:reverse':''}`;
-        s.appendChild(c);
-        return s;
+        c.style.cssText=`fill:none;stroke-width:1;stroke-dasharray:4 3;stroke:${red?'rgba(255,71,87,0.18)':'rgba(0,212,255,0.10)'};animation:ring-spin 20s linear infinite`;
+        s.appendChild(c);return s;
     }
-
-    // Build card hotspots
     cards.forEach(cfg=>{
         const el=document.createElement('div');
-        el.className='hs hs--card'+(cfg.red?' hs--red':'');
-        el.style.cssText=`left:${cfg.x*100}%;top:${cfg.y*100}%;--float-dur:${6+Math.random()*4}s;--float-delay:${(cfg.delay/1000).toFixed(2)}s`;
-        el.appendChild(makeSvg(cfg.size,cfg.red));
-        const card=document.createElement('div');
-        card.className='hs-card';
+        el.className='hs hs--card hs--red';
+        el.style.cssText=`left:${cfg.x}%;top:${cfg.y}%;--float-dur:8s;--float-delay:${(cfg.delay/1000).toFixed(1)}s`;
+        el.appendChild(makeSvg(160,true));
+        const card=document.createElement('div');card.className='hs-card';
         const id=document.createElement('div');id.className='hs-card__id';id.textContent=cfg.id;
         const badges=document.createElement('div');badges.className='hs-card__badges';
-        cfg.badges.forEach(b=>{
-            const sp=document.createElement('span');sp.className='badge badge--'+b.c;sp.textContent=b.t;badges.appendChild(sp);
-        });
+        cfg.badges.forEach(b=>{const sp=document.createElement('span');sp.className='badge badge--'+b.c;sp.textContent=b.t;badges.appendChild(sp);});
         card.appendChild(id);card.appendChild(badges);el.appendChild(card);
         container.appendChild(el);
-        setTimeout(()=>el.classList.add('visible'),cfg.delay+200);
-    });
-
-    // Build plain ring hotspots
-    plainRings.forEach(cfg=>{
-        const el=document.createElement('div');
-        el.className='hs'+(cfg.red?' hs--red':' hs--neutral');
-        el.style.cssText=`left:${cfg.x*100}%;top:${cfg.y*100}%;--float-dur:${5+Math.random()*6}s;--float-delay:${(Math.random()*3).toFixed(2)}s`;
-        el.appendChild(makeSvg(cfg.s,cfg.red));
-        container.appendChild(el);
-        setTimeout(()=>el.classList.add('visible'),cfg.d+300);
+        setTimeout(()=>el.classList.add('visible'),cfg.delay);
     });
 })();
 
@@ -1157,121 +1121,82 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
     draw();
 })();
 
-/* ===== THREE.JS — mazehq-style FBM PARTICLE BLOB ===== */
+/* ===== THREE.JS — Earth particle globe (clean sphere, planet-like) ===== */
 (function(){
     const canvas=document.getElementById('gfx-canvas');
     const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5));
     renderer.setSize(window.innerWidth,window.innerHeight);
     const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,0.1,200);
+    const camera=new THREE.PerspectiveCamera(38,window.innerWidth/window.innerHeight,0.1,200);
     camera.position.set(0,0,5);
 
-    // === Create circular point texture (mazehq uses sampler2D pointTexture) ===
+    // === Soft circular point sprite ===
     const texCanvas=document.createElement('canvas');
     texCanvas.width=64;texCanvas.height=64;
-    const ctx=texCanvas.getContext('2d');
-    const grad=ctx.createRadialGradient(32,32,0,32,32,32);
-    grad.addColorStop(0,'rgba(255,255,255,1)');
-    grad.addColorStop(0.3,'rgba(255,255,255,0.8)');
-    grad.addColorStop(0.7,'rgba(255,255,255,0.2)');
-    grad.addColorStop(1,'rgba(255,255,255,0)');
-    ctx.fillStyle=grad;ctx.fillRect(0,0,64,64);
-    const pointTexture=new THREE.CanvasTexture(texCanvas);
+    const ctx2=texCanvas.getContext('2d');
+    const g=ctx2.createRadialGradient(32,32,0,32,32,32);
+    g.addColorStop(0,'rgba(255,255,255,1)');
+    g.addColorStop(0.45,'rgba(255,255,255,0.7)');
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    ctx2.fillStyle=g;ctx2.fillRect(0,0,64,64);
+    const pointTex=new THREE.CanvasTexture(texCanvas);
 
-    // === Particle attributes (mazehq-style) ===
-    const COUNT=8000;
+    // === Fibonacci sphere — most uniform distribution ===
+    const COUNT=13000;
     const positions=new Float32Array(COUNT*3);
     const aAlpha=new Float32Array(COUNT);
-    const aIndex=new Float32Array(COUNT);
+    const aColor=new Float32Array(COUNT*3);
+    const golden=Math.PI*(3-Math.sqrt(5));
 
-    // Distribute on sphere surface
     for(let i=0;i<COUNT;i++){
-        const theta=Math.random()*Math.PI*2;
-        const phi=Math.acos(2*Math.random()-1);
-        const r=1.0+Math.random()*0.05; // slight shell thickness
-        positions[i*3]=r*Math.sin(phi)*Math.cos(theta);
-        positions[i*3+1]=r*Math.cos(phi);
-        positions[i*3+2]=r*Math.sin(phi)*Math.sin(theta);
-        aAlpha[i]=0.5+Math.random()*0.5;
-        aIndex[i]=i;
+        const y=1-(i/(COUNT-1))*2; // -1 to 1
+        const r=Math.sqrt(Math.max(0,1-y*y));
+        const theta=golden*i;
+        const x=r*Math.cos(theta);
+        const z=r*Math.sin(theta);
+        positions[i*3]=x;positions[i*3+1]=y;positions[i*3+2]=z;
+
+        // Latitude-based color: poles=white, equator=cyan-blue, mid=blue
+        const latAbs=Math.abs(y); // 0=equator, 1=pole
+        const isPole=latAbs>0.82;
+        const isMid=latAbs>0.45&&latAbs<=0.82;
+        // Simple 3D hash for continent-like variation
+        const h=(Math.sin(x*12.9898+y*78.233+z*43.17)*43758.5453)%1;
+        const patch=Math.abs(h); // 0-1
+
+        let cr,cg,cb;
+        if(isPole){
+            // White ice caps
+            cr=0.75+patch*0.2;cg=0.88+patch*0.1;cb=1.0;
+        } else if(isMid){
+            // Blue-cyan mid latitudes with some variation
+            cr=0.0;cg=0.55+patch*0.2;cb=0.85+patch*0.1;
+        } else {
+            // Deep blue/cyan equatorial band — most vivid part
+            cr=0.0;cg=0.7+patch*0.15;cb=1.0;
+        }
+        aColor[i*3]=cr;aColor[i*3+1]=cg;aColor[i*3+2]=cb;
+        aAlpha[i]=(isPole?0.5:0.35)+patch*0.4;
     }
 
     const geo=new THREE.BufferGeometry();
     geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
     geo.setAttribute('aAlpha',new THREE.BufferAttribute(aAlpha,1));
-    geo.setAttribute('aIndex',new THREE.BufferAttribute(aIndex,1));
+    geo.setAttribute('aColor',new THREE.BufferAttribute(aColor,3));
 
-    // === Vertex shader: 4D simplex FBM (matching mazehq's approach) ===
     const vertexShader=`
         attribute float aAlpha;
-        attribute float aIndex;
+        attribute vec3 aColor;
         varying float vAlpha;
         varying vec3 vColor;
-        uniform float uTime;
-        uniform float uAmplitude;
-        uniform float uFrequency;
         uniform float uSize;
-        uniform float uRcolor;uniform float uGcolor;uniform float uBcolor;
-        uniform float uRnoise;uniform float uGnoise;uniform float uBnoise;
-
-        // 4D Simplex noise (mazehq uses this)
-        vec4 _permute(vec4 x){return mod(((x*34.0)+1.0)*x,289.0);}
-        float _permute(float x){return floor(mod(((x*34.0)+1.0)*x,289.0));}
-        vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
-        float taylorInvSqrt(float r){return 1.79284291400159-0.85373472095314*r;}
-        vec4 grad4(float j,vec4 ip){
-            const vec4 ones=vec4(1.0,1.0,1.0,-1.0);vec4 p,s;
-            p.xyz=floor(fract(vec3(j)*ip.xyz)*7.0)*ip.z-1.0;
-            p.w=1.5-dot(abs(p.xyz),ones.xyz);
-            s=vec4(lessThan(p,vec4(0.0)));
-            p.xyz=p.xyz+(s.xyz*2.0-1.0)*s.www;
-            return p;
-        }
-        float snoise4(vec4 v){
-            const vec2 C=vec2(0.138196601125010504,0.309016994374947451);
-            vec4 i=floor(v+dot(v,C.yyyy));
-            vec4 x0=v-i+dot(i,C.xxxx);
-            vec4 i0;
-            vec3 isX=step(x0.yzw,x0.xxx);
-            vec3 isYZ=step(x0.zww,x0.yyz);
-            i0.x=isX.x+isX.y+isX.z;i0.yzw=1.0-isX;
-            i0.y+=isYZ.x+isYZ.y;i0.zw+=1.0-isYZ.xy;
-            i0.z+=isYZ.z;i0.w+=1.0-isYZ.z;
-            vec4 i3=clamp(i0,0.0,1.0);vec4 i2=clamp(i0-1.0,0.0,1.0);vec4 i1=clamp(i0-2.0,0.0,1.0);
-            vec4 x1=x0-i1+C.xxxx;vec4 x2=x0-i2+2.0*C.xxxx;vec4 x3=x0-i3+3.0*C.xxxx;vec4 x4=x0-1.0+4.0*C.xxxx;
-            i=mod(i,289.0);
-            float j0=_permute(_permute(_permute(_permute(i.w)+i.z)+i.y)+i.x);
-            vec4 j1=_permute(_permute(_permute(_permute(i.w+vec4(i1.w,i2.w,i3.w,1.0))+i.z+vec4(i1.z,i2.z,i3.z,1.0))+i.y+vec4(i1.y,i2.y,i3.y,1.0))+i.x+vec4(i1.x,i2.x,i3.x,1.0));
-            vec4 ip=vec4(1.0/294.0,1.0/49.0,1.0/7.0,0.0);
-            vec4 p0=grad4(j0,ip);vec4 p1=grad4(j1.x,ip);vec4 p2=grad4(j1.y,ip);vec4 p3=grad4(j1.z,ip);vec4 p4=grad4(j1.w,ip);
-            vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-            p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;p4*=taylorInvSqrt(dot(p4,p4));
-            vec3 m0=max(0.6-vec3(dot(x0,x0),dot(x1,x1),dot(x2,x2)),0.0);
-            vec2 m1=max(0.6-vec2(dot(x3,x3),dot(x4,x4)),0.0);
-            m0=m0*m0;m1=m1*m1;
-            return 49.0*(dot(m0*m0,vec3(dot(p0,x0),dot(p1,x1),dot(p2,x2)))+dot(m1*m1,vec2(dot(p3,x3),dot(p4,x4))));
-        }
-        // 5-octave FBM (mazehq uses NUM_OCTAVES 5)
-        float fbm(vec3 x){
-            float v=0.0;float a=0.5;vec3 shift=vec3(100.0);
-            for(int i=0;i<5;i++){v+=a*snoise4(vec4(x,uTime));x=x*2.0+shift;a*=0.5;}
-            return v;
-        }
-
         void main(){
-            float noise=fbm(position*uFrequency);
-            // Color blending: base color -> noise color (mazehq pattern)
-            float r=uRcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uRnoise-uRcolor)/255.0);
-            float g=uGcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uGnoise-uGcolor)/255.0);
-            float b=uBcolor/255.0+(clamp(noise,0.0,1.0)*4.0*(uBnoise-uBcolor)/255.0);
-            vColor=vec3(r,g,b);
-            // Blob displacement
-            vec3 displaced=position*(1.0+uAmplitude*noise);
-            vAlpha=aAlpha*(0.6+0.4*clamp(noise,0.0,1.0));
-            vec4 mvPos=modelViewMatrix*vec4(displaced,1.0);
-            gl_PointSize=uSize*120.0/(-mvPos.z);
-            gl_PointSize=clamp(gl_PointSize,0.5,20.0);
+            vAlpha=aAlpha;
+            vColor=aColor;
+            vec4 mvPos=modelViewMatrix*vec4(position,1.0);
+            gl_PointSize=uSize*140.0/(-mvPos.z);
+            gl_PointSize=clamp(gl_PointSize,0.4,4.5);
             gl_Position=projectionMatrix*mvPos;
         }
     `;
@@ -1284,39 +1209,50 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
             gl_FragColor=vec4(vColor,vAlpha)*tex;
         }
     `;
-
-    // mazehq uses red/salmon base with near-white noise highlight
     const mat=new THREE.ShaderMaterial({
         vertexShader,fragmentShader,
-        uniforms:{
-            uTime:{value:0},
-            uAmplitude:{value:0.45},
-            uFrequency:{value:0.55},
-            uSize:{value:2.2},
-            pointTexture:{value:pointTexture},
-            // Base color: warm red/salmon (mazehq signature red blob)
-            uRcolor:{value:200},uGcolor:{value:55},uBcolor:{value:70},
-            // Noise highlight: near-white with warm tint
-            uRnoise:{value:255},uGnoise:{value:220},uBnoise:{value:230},
-        },
+        uniforms:{uSize:{value:1.6},pointTexture:{value:pointTex}},
         transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
     });
-
     const points=new THREE.Points(geo,mat);
+    // Earth's axial tilt ~23.5°
+    points.rotation.z=23.5*Math.PI/180;
     scene.add(points);
 
-    // Outer atmospheric glow shell (backlighting effect)
-    const glowGeo=new THREE.SphereGeometry(2.0,32,32);
+    // Grid lines overlay for latitude/longitude feel
+    const gridMat=new THREE.LineBasicMaterial({color:0x00d4ff,transparent:true,opacity:0.04,depthWrite:false});
+    for(let lat=-60;lat<=60;lat+=30){
+        const pts=[];const latR=lat*Math.PI/180;const cosL=Math.cos(latR),sinL=Math.sin(latR);
+        for(let lng=0;lng<=360;lng+=4){const lngR=lng*Math.PI/180;pts.push(new THREE.Vector3(cosL*Math.cos(lngR),sinL,cosL*Math.sin(lngR)));}
+        scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),gridMat));
+    }
+    for(let lng=0;lng<360;lng+=45){
+        const pts=[];const lngR=lng*Math.PI/180;
+        for(let lat=-90;lat<=90;lat+=3){const latR=lat*Math.PI/180;pts.push(new THREE.Vector3(Math.cos(latR)*Math.cos(lngR),Math.sin(latR),Math.cos(latR)*Math.sin(lngR)));}
+        scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),gridMat));
+    }
+
+    // Atmospheric edge glow — deep blue
+    const glowGeo=new THREE.SphereGeometry(1.16,32,32);
     const glowMat=new THREE.ShaderMaterial({
         transparent:true,depthWrite:false,side:THREE.BackSide,
-        uniforms:{uTime:{value:0}},
+        uniforms:{},
         vertexShader:`varying vec3 vNormal;void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
-        fragmentShader:`varying vec3 vNormal;uniform float uTime;void main(){float i=pow(0.55-dot(vNormal,vec3(0.0,0.0,1.0)),2.5);float pulse=0.5+0.5*sin(uTime*0.3);vec3 col=mix(vec3(0.9,0.2,0.28),vec3(0.85,0.05,0.95),pulse);gl_FragColor=vec4(col,i*0.06);}`
+        fragmentShader:`varying vec3 vNormal;void main(){float i=pow(0.65-dot(vNormal,vec3(0.0,0.0,1.0)),3.0);gl_FragColor=vec4(0.0,0.65,1.0,i*0.18);}`
     });
-    const glowSphere=new THREE.Mesh(glowGeo,glowMat);
-    scene.add(glowSphere);
+    scene.add(new THREE.Mesh(glowGeo,glowMat));
 
-    let mx=0,my=0,scrollP=0,targetAmp=0.45;
+    // Subtle outer corona
+    const coronaGeo=new THREE.SphereGeometry(1.35,32,32);
+    const coronaMat=new THREE.ShaderMaterial({
+        transparent:true,depthWrite:false,side:THREE.BackSide,
+        uniforms:{},
+        vertexShader:`varying vec3 vNormal;void main(){vNormal=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+        fragmentShader:`varying vec3 vNormal;void main(){float i=pow(0.5-dot(vNormal,vec3(0.0,0.0,1.0)),4.0);gl_FragColor=vec4(0.0,0.5,0.9,i*0.07);}`
+    });
+    scene.add(new THREE.Mesh(coronaGeo,coronaMat));
+
+    let mx=0,my=0,scrollP=0;
     document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2},{passive:true});
     window.addEventListener('scroll',()=>{scrollP=window.scrollY/(document.body.scrollHeight-window.innerHeight)},{passive:true});
     window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
@@ -1325,21 +1261,14 @@ setInterval(()=>goToSlide(currentSlide+1),6000);
     function animate(){
         requestAnimationFrame(animate);
         const t=clock.getElapsedTime();
-        mat.uniforms.uTime.value=t*0.18; // slow time like mazehq
-        glowMat.uniforms.uTime.value=t;
-        // Dynamic amplitude
-        targetAmp=0.35+scrollP*0.4+Math.abs(mx)*0.08;
-        mat.uniforms.uAmplitude.value+=(targetAmp-mat.uniforms.uAmplitude.value)*0.03;
-        // Slow rotation matching mazehq
-        points.rotation.y=t*0.04+mx*0.08;
-        points.rotation.x=-0.05+my*0.04;
-        glowSphere.rotation.y=t*0.02;
-        // Scroll-based fade
-        const fade=Math.max(0.05,1-scrollP*2.2);
-        mat.uniforms.uSize.value=2.2*fade;
-        camera.position.z=5-scrollP*1.5;
-        camera.position.x+=(.25*mx-camera.position.x)*.03;
-        camera.position.y+=(-.18*my-camera.position.y)*.03;
+        // Slow Earth-like rotation — only Y axis
+        points.rotation.y=t*0.055;
+        // Smooth scroll fade — canvas disappears as user scrolls away from hero
+        const fade=Math.max(0,1-scrollP*2.8);
+        canvas.style.opacity=fade;
+        // Very subtle mouse parallax (no blob distortion)
+        camera.position.x+=(mx*0.12-camera.position.x)*0.04;
+        camera.position.y+=(-my*0.08-camera.position.y)*0.04;
         renderer.render(scene,camera);
     }
     animate();
