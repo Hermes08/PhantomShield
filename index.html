@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Shield | Advanced Cybersecurity Consulting & Defense</title>
-    <meta name="description" content="Phantom Shield - Expert cybersecurity consulting, penetration testing, network defense, compliance assessments, and security education. Your invisible armor in the digital world.">
+    <meta name="description" content="Phantom Shield - Expert cybersecurity consulting, penetration testing, network defense, compliance assessments, and security education.">
     <meta name="keywords" content="cybersecurity, consulting, network security, penetration testing, compliance, incident response, HIPAA, PCI-DSS, SOC2, Orlando, Florida">
     <meta name="author" content="Phantom Shield">
     <meta name="theme-color" content="#050816">
@@ -35,24 +35,118 @@
         .preloader svg{width:80px;height:80px;animation:pulse-shield 1.5s ease-in-out infinite}
         @keyframes pulse-shield{0%,100%{filter:drop-shadow(0 0 12px rgba(0,212,255,0.3));transform:scale(1)}50%{filter:drop-shadow(0 0 30px var(--accent));transform:scale(1.08)}}
 
-        /* THREE.JS CANVAS */
-        #mesh-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+        /* 3D CANVAS */
+        #gfx-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
-        /* GLOBAL LAYOUT */
+        /* LAYOUT */
         .page-content{position:relative;z-index:1}
-        .container{max-width:1240px;margin:0 auto;padding:0 32px}
-        .section-pad{padding:120px 0}
+        .container{max-width:1200px;margin:0 auto;padding:0 40px}
+        .module{position:relative}
+        .module--full-height{min-height:100vh;display:flex;align-items:center}
 
-        /* SECTION NUMBERS (Maze editorial style) */
-        .section-num{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:20px}
-        .section-num::before{content:'';width:32px;height:1px;background:var(--accent)}
-        .section-title{font-size:clamp(32px,4vw,52px);font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:20px;color:var(--text-bright)}
-        .section-sub{font-size:17px;color:var(--text-muted);max-width:560px;margin-bottom:56px;line-height:1.7}
+        /* HEADER */
+        header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .4s cubic-bezier(.4,0,.2,1)}
+        header.scrolled{background:rgba(5,8,22,0.85);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid rgba(0,212,255,0.06);padding:12px 0}
+        .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 40px}
+        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-bright)}
+        .logo-icon{width:38px;height:38px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,212,255,0.25);position:relative;overflow:hidden}
+        .logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15) 50%,transparent 60%);animation:shimmer 3s infinite}
+        @keyframes shimmer{0%{transform:translateX(-100%) rotate(25deg)}100%{transform:translateX(200%) rotate(25deg)}}
+        .logo-icon svg{width:20px;height:20px;fill:white;position:relative;z-index:1}
+        .logo-text{font-weight:700;font-size:19px;letter-spacing:-.02em}
+        .logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+        nav.desktop-nav{display:flex;align-items:center;gap:4px}
+        nav.desktop-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .25s}
+        nav.desktop-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
+        .nav-dropdown{position:relative}
+        .nav-dropdown-trigger{cursor:pointer;display:flex;align-items:center;gap:4px}
+        .nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);min-width:180px;padding:8px;background:rgba(10,15,30,0.95);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:14px;opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+        .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+        .nav-dropdown-menu a{display:block;padding:10px 14px;color:var(--text-muted);font-size:13px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s}
+        .nav-dropdown-menu a:hover{color:var(--accent);background:rgba(0,212,255,0.06)}
+        .cta-nav{padding:10px 22px !important;background:var(--grad) !important;color:white !important;border-radius:45px !important;font-weight:600 !important;font-size:13px !important;box-shadow:0 4px 20px rgba(0,212,255,0.25);transition:all .3s !important;text-decoration:none}
+        .cta-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
+        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
+        .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+        nav.mobile-nav{display:none}
+
+        /* TYPOGRAPHY */
         .gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-        /* GLASSMORPHISM */
-        .glass{background:var(--glass);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border:1px solid var(--border);border-radius:var(--radius-lg)}
-        .glass:hover{background:var(--glass-hover);border-color:var(--border-hover)}
+        /* HERO MODULE */
+        .hero-content{text-align:center;max-width:800px;margin:0 auto;padding:160px 0 80px}
+        .hero-alert{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:100px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:32px;text-decoration:none;transition:all .3s}
+        .hero-alert:hover{background:rgba(0,212,255,0.1);border-color:rgba(0,212,255,0.25)}
+        .hero-alert .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:blink 2s infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+        .hero h1{font-size:clamp(36px,5.5vw,72px);font-weight:800;line-height:1.06;letter-spacing:-.04em;margin-bottom:28px;color:var(--text-bright)}
+        .hero-sub{font-size:18px;color:var(--text-muted);line-height:1.7;max-width:560px;margin:0 auto 44px}
+        .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:var(--grad);color:white;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 8px 30px rgba(0,212,255,0.25);transition:all .3s cubic-bezier(.4,0,.2,1);border:none;cursor:pointer}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,212,255,0.35)}
+        .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:45px;background:transparent;color:var(--text-bright);font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,0.12);transition:all .3s;cursor:pointer}
+        .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+
+        /* TRUST BAR (like Maze client logos) */
+        .trust-bar{padding:48px 0;border-top:1px solid rgba(255,255,255,0.03)}
+        .trust-label{text-align:center;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.14em;color:var(--text-dim);margin-bottom:28px}
+        .trust-logos{display:flex;justify-content:center;align-items:center;gap:44px;flex-wrap:wrap;opacity:.35}
+        .trust-logos span{font-size:16px;font-weight:700;letter-spacing:-.02em;color:var(--text-muted)}
+
+        /* STORY MODULES (Maze-style scroll-driven narrative) */
+        .module--story{padding:140px 0}
+        .story-header{max-width:720px;margin-bottom:80px}
+        .story-header h2{font-size:clamp(28px,3.8vw,48px);font-weight:800;line-height:1.12;letter-spacing:-.03em;color:var(--text-bright)}
+
+        /* DATA POINTS - scroll-animated counters */
+        .data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-bottom:80px}
+        .data-card{padding:40px 32px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
+        .data-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-4px)}
+        .data-num{font-size:clamp(42px,5vw,64px);font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}
+        .data-num.cyan{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .data-num.green{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .data-num.magenta{background:linear-gradient(90deg,#d409fe,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .data-label{font-size:14px;color:var(--text-muted);font-weight:500}
+        .data-sublabel{font-size:12px;color:var(--text-dim);margin-top:4px}
+
+        /* TIMELINE (like Maze's time-to-exploit) */
+        .timeline{display:flex;align-items:stretch;gap:0;margin:60px 0;position:relative}
+        .timeline::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));opacity:.2}
+        .timeline-item{flex:1;text-align:center;position:relative;padding:24px 16px}
+        .timeline-item::before{content:'';width:12px;height:12px;border-radius:50%;background:var(--accent);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 20px rgba(0,212,255,0.4);z-index:1;transition:all .4s}
+        .timeline-item:nth-child(2)::before{background:var(--accent2);box-shadow:0 0 20px rgba(212,9,254,0.4)}
+        .timeline-item:nth-child(3)::before{background:var(--accent3);box-shadow:0 0 20px rgba(0,255,163,0.4)}
+        .timeline-item:nth-child(4)::before{background:#ff4757;box-shadow:0 0 20px rgba(255,71,87,0.4)}
+        .tl-year{font-size:13px;font-weight:600;color:var(--text-dim);margin-bottom:32px}
+        .tl-num{font-size:clamp(28px,3vw,40px);font-weight:900;letter-spacing:-.03em;margin-top:32px}
+        .tl-unit{font-size:13px;color:var(--text-muted);font-weight:500}
+
+        /* PROBLEM CARDS (like Maze's feature items) */
+        .problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+        .problem-card{padding:36px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
+        .problem-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-4px)}
+        .problem-card .pc-stat{font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;letter-spacing:-.02em}
+        .problem-card p{font-size:15px;color:var(--text-muted);line-height:1.7}
+
+        /* SOLUTION SECTION */
+        .solution-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .sol-card{padding:40px 32px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s;position:relative;overflow:visible}
+        .sol-card:hover{background:var(--glass-hover);border-color:var(--border-hover);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 40px rgba(0,212,255,0.06)}
+        .sol-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .4s}
+        .sol-card:hover::after{opacity:1}
+        .sol-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+        .sol-icon svg{width:26px;height:26px;stroke-width:1.5;fill:none;stroke:currentColor}
+        .sol-icon.si-1{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.12)}
+        .sol-icon.si-2{background:rgba(212,9,254,0.1);box-shadow:0 4px 20px rgba(212,9,254,0.12)}
+        .sol-icon.si-3{background:rgba(0,255,163,0.1);box-shadow:0 4px 20px rgba(0,255,163,0.12)}
+        .sol-icon.si-4{background:rgba(255,71,87,0.1);box-shadow:0 4px 20px rgba(255,71,87,0.12)}
+        .sol-icon.si-5{background:rgba(255,193,7,0.1);box-shadow:0 4px 20px rgba(255,193,7,0.12)}
+        .sol-icon.si-6{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.12)}
+        .sol-card h3{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.01em;color:var(--text-bright)}
+        .sol-card p{font-size:14px;color:var(--text-muted);line-height:1.7}
+        .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;transition:gap .3s}
+        .card-link:hover{gap:10px}
 
         /* ANIMATED GRADIENT BORDER */
         @property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
@@ -61,121 +155,13 @@
         .glow-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--angle),transparent 40%,var(--accent) 50%,var(--accent2) 60%,transparent 70%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:rotate-gradient 4s linear infinite;opacity:0;transition:opacity .4s}
         .glow-border:hover::before{opacity:1}
 
-        /* 3D TILT */
-        .tilt-card{transform-style:preserve-3d;transition:transform .4s cubic-bezier(.4,0,.2,1),box-shadow .4s}
+        /* GRAPH MODULE (large stat + visual) */
+        .module--graph{padding:120px 0;text-align:center}
+        .graph-big-stat{font-size:clamp(80px,12vw,160px);font-weight:900;letter-spacing:-.06em;line-height:.9;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+        .graph-label{font-size:20px;color:var(--text-muted);font-weight:500}
+        .graph-sub{font-size:15px;color:var(--text-dim);max-width:500px;margin:12px auto 0}
 
-        /* HEADER / NAV */
-        header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .4s cubic-bezier(.4,0,.2,1)}
-        header.scrolled{background:rgba(5,8,22,0.82);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-bottom:1px solid rgba(0,212,255,0.06);padding:10px 0}
-        .header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1240px;margin:0 auto;padding:0 32px}
-        .logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--text-bright)}
-        .logo-icon{width:40px;height:40px;background:var(--grad);border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,212,255,0.3);position:relative;overflow:hidden}
-        .logo-icon::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.15) 50%,transparent 60%);animation:shimmer 3s infinite}
-        @keyframes shimmer{0%{transform:translateX(-100%) rotate(25deg)}100%{transform:translateX(200%) rotate(25deg)}}
-        .logo-icon svg{width:22px;height:22px;fill:white;position:relative;z-index:1}
-        .logo-text{font-weight:700;font-size:20px;letter-spacing:-.02em}
-        .logo-text span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-
-        nav.desktop-nav{display:flex;align-items:center;gap:6px}
-        nav.desktop-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:10px;transition:all .25s ease}
-        nav.desktop-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
-        .nav-dropdown{position:relative}
-        .nav-dropdown-trigger{cursor:pointer;display:flex;align-items:center;gap:4px}
-        .nav-dropdown-menu{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);min-width:180px;padding:8px;background:rgba(10,15,30,0.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:14px;opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
-        .nav-dropdown:hover .nav-dropdown-menu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
-        .nav-dropdown-menu a{display:block;padding:10px 14px;color:var(--text-muted);font-size:13px;font-weight:500;border-radius:8px;text-decoration:none;transition:all .2s}
-        .nav-dropdown-menu a:hover{color:var(--accent);background:rgba(0,212,255,0.06)}
-        .cta-nav{padding:10px 22px !important;background:var(--grad) !important;color:white !important;border-radius:12px !important;font-weight:600 !important;font-size:13px !important;box-shadow:0 4px 20px rgba(0,212,255,0.3);transition:all .3s !important;text-decoration:none}
-        .cta-nav:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.4)}
-        .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:8px}
-        .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
-        nav.mobile-nav{display:none}
-
-        /* HERO */
-        .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 100px;position:relative}
-        .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:100px;background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px}
-        .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent3);box-shadow:0 0 8px var(--accent3);animation:blink 2s infinite}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        .hero h1{font-size:clamp(42px,5.2vw,68px);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:24px;color:var(--text-bright)}
-        .hero-sub{font-size:17px;color:var(--text-muted);line-height:1.7;max-width:480px;margin-bottom:40px}
-        .hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
-        .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:14px;background:var(--grad);color:white;font-weight:600;font-size:15px;text-decoration:none;box-shadow:0 8px 30px rgba(0,212,255,0.3);transition:all .3s cubic-bezier(.4,0,.2,1);border:none;cursor:pointer}
-        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,212,255,0.4)}
-        .btn-secondary{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;border-radius:14px;background:transparent;color:var(--text-bright);font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--border);transition:all .3s;cursor:pointer}
-        .btn-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
-
-        /* Hero 3D mesh area */
-        .hero-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:520px}
-        #hero-mesh{width:100%;height:520px;border-radius:var(--radius-xl)}
-        .hero-visual .floating-badge{position:absolute;padding:14px 20px;border-radius:16px;background:rgba(10,15,30,0.7);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);font-size:13px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:float-badge 4s ease-in-out infinite}
-        .floating-badge.fb1{top:8%;right:-8%;animation-delay:0s}
-        .floating-badge.fb2{bottom:12%;left:-3%;animation-delay:-1.5s}
-        .floating-badge.fb3{top:48%;right:-14%;animation-delay:-3s}
-        @keyframes float-badge{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-        .fb-icon{font-size:20px;margin-right:8px}
-        .fb-val{color:var(--accent);font-size:18px;font-weight:800}
-        .fb-label{color:var(--text-muted);font-size:11px;display:block;margin-top:2px}
-
-        /* TRUST BAR */
-        .trust-bar{padding:60px 0;border-top:1px solid rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.03)}
-        .trust-label{text-align:center;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-bottom:32px}
-        .trust-logos{display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;opacity:.4}
-        .trust-logos span{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--text-muted)}
-
-        /* SERVICES GRID */
-        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-        .service-card{padding:36px 32px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:visible}
-        .service-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity .4s}
-        .service-card:hover{transform:translateY(-6px);background:var(--glass-hover);border-color:var(--border-hover);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 40px rgba(0,212,255,0.08)}
-        .service-card:hover::after{opacity:1}
-        .card-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;font-size:26px}
-        .card-icon.ci-1{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.15)}
-        .card-icon.ci-2{background:rgba(212,9,254,0.1);box-shadow:0 4px 20px rgba(212,9,254,0.15)}
-        .card-icon.ci-3{background:rgba(0,255,163,0.1);box-shadow:0 4px 20px rgba(0,255,163,0.15)}
-        .card-icon.ci-4{background:rgba(255,71,87,0.1);box-shadow:0 4px 20px rgba(255,71,87,0.15)}
-        .card-icon.ci-5{background:rgba(255,193,7,0.1);box-shadow:0 4px 20px rgba(255,193,7,0.15)}
-        .card-icon.ci-6{background:rgba(0,212,255,0.1);box-shadow:0 4px 20px rgba(0,212,255,0.15)}
-        .service-card h3{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.01em;color:var(--text-bright)}
-        .service-card p{font-size:14px;color:var(--text-muted);line-height:1.7}
-        .card-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;transition:gap .3s}
-        .card-link:hover{gap:10px}
-
-        /* STATS */
-        .stats-section{padding:80px 0;background:linear-gradient(180deg,transparent 0%,rgba(0,212,255,0.015) 50%,transparent 100%)}
-        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-        .stat-card{text-align:center;padding:40px 24px;border-radius:var(--radius-lg);background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);transition:all .4s}
-        .stat-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.2);border-color:var(--border-hover)}
-        .stat-num{font-size:42px;font-weight:900;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
-        .stat-label{font-size:14px;color:var(--text-muted);font-weight:500}
-
-        /* WHY SECTION */
-        .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-        .why-list{display:flex;flex-direction:column;gap:28px}
-        .why-item{display:flex;gap:20px;padding:24px;border-radius:16px;transition:all .3s}
-        .why-item:hover{background:rgba(0,212,255,0.03)}
-        .why-icon{flex-shrink:0;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px}
-        .why-icon.wi-1{background:rgba(0,212,255,0.1)}
-        .why-icon.wi-2{background:rgba(212,9,254,0.1)}
-        .why-icon.wi-3{background:rgba(0,255,163,0.1)}
-        .why-icon.wi-4{background:rgba(255,71,87,0.1)}
-        .why-item h4{font-size:16px;font-weight:700;margin-bottom:6px;color:var(--text-bright)}
-        .why-item p{font-size:14px;color:var(--text-muted)}
-        .why-visual{position:relative;display:flex;align-items:center;justify-content:center}
-        .why-card-stack{display:flex;flex-direction:column;gap:16px;width:100%;max-width:400px;position:relative;z-index:1}
-        .mini-glass{padding:24px 28px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:18px;transition:all .3s}
-        .mini-glass:hover{border-color:var(--border-hover);transform:translateX(6px)}
-        .mini-glass .mg-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-        .mg-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 10px;border-radius:6px}
-        .mg-tag.green{background:rgba(0,255,163,0.1);color:var(--accent3)}
-        .mg-tag.red{background:rgba(255,71,87,0.1);color:#ff4757}
-        .mg-tag.blue{background:rgba(0,212,255,0.1);color:var(--accent)}
-        .mini-glass h5{font-size:15px;font-weight:600;margin-bottom:6px;color:var(--text-bright)}
-        .mini-glass p{font-size:13px;color:var(--text-muted)}
-        .mg-bar{height:4px;border-radius:4px;background:rgba(255,255,255,0.06);margin-top:12px}
-        .mg-bar-fill{height:100%;border-radius:4px}
-
-        /* GLOBAL REACH */
+        /* REACH SECTION */
         .reach-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
         .reach-card{padding:36px 30px;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .4s;position:relative;overflow:visible}
         .reach-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.25);border-color:var(--border-hover)}
@@ -186,12 +172,11 @@
         .reach-stat .rs-num{font-size:22px;font-weight:800;color:var(--accent)}
         .reach-stat .rs-label{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em}
 
-        /* CTA */
-        .cta-section{padding:100px 0}
-        .cta-box{text-align:center;padding:80px 60px;border-radius:var(--radius-xl);background:linear-gradient(135deg,rgba(0,212,255,0.05) 0%,rgba(212,9,254,0.05) 100%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border);position:relative;overflow:hidden}
-        .cta-box::before{content:'';position:absolute;top:-2px;left:20%;right:20%;height:2px;background:var(--grad);border-radius:2px}
-        .cta-box h2{font-size:clamp(28px,3vw,42px);font-weight:800;letter-spacing:-.02em;margin-bottom:16px;color:var(--text-bright)}
-        .cta-box p{font-size:17px;color:var(--text-muted);max-width:500px;margin:0 auto 36px}
+        /* CTA MODULE (Maze-style centered, full-height) */
+        .module--cta{text-align:center;padding:160px 0}
+        .cta-inner{max-width:640px;margin:0 auto}
+        .cta-inner h2{font-size:clamp(32px,4.5vw,56px);font-weight:800;letter-spacing:-.03em;margin-bottom:24px;color:var(--text-bright);line-height:1.08}
+        .cta-inner p{font-size:18px;color:var(--text-muted);max-width:480px;margin:0 auto 40px}
         .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 
         /* FOOTER */
@@ -203,27 +188,27 @@
         .footer-col a:hover{color:var(--accent)}
         .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--text-dim)}
 
-        /* SCROLL REVEAL */
-        .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
-        .reveal.visible{opacity:1;transform:translateY(0)}
-        .reveal-delay-1{transition-delay:.1s}
-        .reveal-delay-2{transition-delay:.2s}
-        .reveal-delay-3{transition-delay:.3s}
-        .reveal-delay-4{transition-delay:.4s}
-        .reveal-delay-5{transition-delay:.5s}
+        /* SCROLL OBSERVE ANIMATIONS */
+        [data-observe]{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.4,0,.2,1),transform .8s cubic-bezier(.4,0,.2,1)}
+        [data-observe].visible{opacity:1;transform:translateY(0)}
+        [data-observe][data-delay="1"]{transition-delay:.1s}
+        [data-observe][data-delay="2"]{transition-delay:.2s}
+        [data-observe][data-delay="3"]{transition-delay:.3s}
+        [data-observe][data-delay="4"]{transition-delay:.4s}
+        [data-observe][data-delay="5"]{transition-delay:.5s}
+
+        /* COUNTER ANIMATION */
+        .counter-animated{font-variant-numeric:tabular-nums}
 
         /* RESPONSIVE */
         @media(max-width:1024px){
-            .hero-grid{grid-template-columns:1fr;text-align:center}
-            .hero-sub{margin:0 auto 40px}
-            .hero-ctas{justify-content:center}
-            .hero-visual{display:none}
-            .services-grid{grid-template-columns:repeat(2,1fr)}
-            .stats-grid{grid-template-columns:repeat(2,1fr)}
-            .why-grid{grid-template-columns:1fr}
-            .why-visual{display:none}
+            .data-grid{grid-template-columns:repeat(2,1fr)}
+            .solution-grid{grid-template-columns:repeat(2,1fr)}
+            .problem-grid{grid-template-columns:1fr}
             .reach-cards{grid-template-columns:repeat(2,1fr)}
             .footer-grid{grid-template-columns:1fr 1fr}
+            .timeline{flex-wrap:wrap}
+            .timeline-item{flex:0 0 50%}
         }
         @media(max-width:768px){
             nav.desktop-nav{display:none}
@@ -232,12 +217,14 @@
             nav.mobile-nav.active{display:flex}
             nav.mobile-nav a{color:var(--text-muted);text-decoration:none;font-size:18px;font-weight:600;padding:14px 16px;border-radius:12px;transition:all .2s}
             nav.mobile-nav a:hover{color:var(--text-bright);background:rgba(255,255,255,0.04)}
-            .services-grid{grid-template-columns:1fr}
-            .stats-grid{grid-template-columns:1fr 1fr}
+            .data-grid{grid-template-columns:1fr}
+            .solution-grid{grid-template-columns:1fr}
             .reach-cards{grid-template-columns:1fr}
             .footer-grid{grid-template-columns:1fr}
-            .section-pad{padding:80px 0}
-            .hero{padding:120px 0 60px}
+            .module--story{padding:80px 0}
+            .container{padding:0 24px}
+            .header-inner{padding:0 24px}
+            .timeline-item{flex:0 0 50%}
         }
     </style>
 </head>
@@ -251,8 +238,8 @@
         </svg>
     </div>
 
-    <!-- Three.js dynamic mesh background -->
-    <canvas id="mesh-canvas"></canvas>
+    <!-- Three.js Shield-Earth Canvas -->
+    <canvas id="gfx-canvas"></canvas>
 
     <div class="page-content">
 
@@ -280,9 +267,7 @@
                     <a href="/contact">Contact</a>
                     <a href="/contact" class="cta-nav">Get Protected</a>
                 </nav>
-                <div class="hamburger" id="hamburger">
-                    <span></span><span></span><span></span>
-                </div>
+                <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
             </div>
         </header>
 
@@ -296,198 +281,196 @@
             <a href="/contact">Contact</a>
         </nav>
 
-        <!-- HERO -->
-        <section class="hero">
+        <!-- ==========================================
+             MODULE 1: HERO (full-height, centered)
+             ========================================== -->
+        <section class="module module--full-height hero" id="section-hero">
             <div class="container">
-                <div class="hero-grid">
-                    <div class="hero-content reveal">
-                        <div class="hero-badge"><span class="dot"></span> Now protecting LATAM & North America</div>
-                        <h1>Cybersecurity<br>That Shields<br><span class="gradient-text">Your Future</span></h1>
-                        <p class="hero-sub">Enterprise-grade threat detection, penetration testing, and compliance consulting — from Orlando to Panama City. We find vulnerabilities before attackers do.</p>
-                        <div class="hero-ctas">
-                            <a href="/contact" class="btn-primary">
-                                Get a Free Assessment
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            </a>
-                            <a href="/services" class="btn-secondary">Explore Services</a>
-                        </div>
-                    </div>
-                    <div class="hero-visual reveal reveal-delay-2">
-                        <canvas id="hero-mesh"></canvas>
-                        <div class="floating-badge fb1">
-                            <span class="fb-icon">&#128737;</span>
-                            <div><span class="fb-val">99.9%</span><span class="fb-label">Threat Detection</span></div>
-                        </div>
-                        <div class="floating-badge fb2">
-                            <span class="fb-icon">&#9889;</span>
-                            <div><span class="fb-val">&lt;15min</span><span class="fb-label">Response Time</span></div>
-                        </div>
-                        <div class="floating-badge fb3">
-                            <span class="fb-icon">&#127758;</span>
-                            <div><span class="fb-val">24/7</span><span class="fb-label">Global Monitoring</span></div>
-                        </div>
+                <div class="hero-content">
+                    <a href="/contact" class="hero-alert" data-observe>
+                        <span class="dot"></span> Now protecting LATAM & North America
+                    </a>
+                    <h1 data-observe>Enterprise Cybersecurity<br>That Shields <span class="gradient-text">Your Future</span></h1>
+                    <p class="hero-sub" data-observe data-delay="1">Threat detection, penetration testing, and compliance consulting — from Orlando to Panama City. We find vulnerabilities before attackers do.</p>
+                    <div class="hero-ctas" data-observe data-delay="2">
+                        <a href="/contact" class="btn-primary">
+                            Get a Free Assessment
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </a>
+                        <a href="/services" class="btn-secondary">Explore Services</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TRUST BAR -->
-        <section class="trust-bar reveal">
+        <!-- Trust Bar -->
+        <section class="trust-bar" data-observe>
             <div class="container">
-                <p class="trust-label">Frameworks & Compliance Standards We Work With</p>
+                <p class="trust-label">Frameworks & compliance standards we work with</p>
                 <div class="trust-logos">
                     <span>NIST</span><span>ISO 27001</span><span>SOC 2</span><span>HIPAA</span><span>PCI-DSS</span><span>GDPR</span><span>CMMC</span>
                 </div>
             </div>
         </section>
 
-        <!-- SERVICES -->
-        <section class="section-pad" id="services">
+        <!-- ==========================================
+             MODULE 2: STORY — The Problem
+             (Maze-style scroll-driven narrative)
+             ========================================== -->
+        <section class="module module--story" id="section-story-1">
             <div class="container">
-                <div class="reveal">
-                    <div class="section-num">01 — What We Do</div>
-                    <h2 class="section-title">Full-Spectrum<br><span class="gradient-text">Cyber Defense</span></h2>
-                    <p class="section-sub">From proactive penetration testing to 24/7 monitoring, our team covers every vector of attack your organization faces.</p>
+                <div class="story-header" data-observe>
+                    <h2>Cyber threats are accelerating, and most organizations can't keep up</h2>
                 </div>
-                <div class="services-grid">
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-1">
-                        <div class="card-icon ci-1">&#128269;</div>
+
+                <!-- Data Points Grid -->
+                <div class="data-grid">
+                    <div class="data-card glow-border" data-observe data-delay="1">
+                        <div class="data-num cyan counter-animated" data-count="40000">0</div>
+                        <div class="data-label">Vulnerabilities published in 2024</div>
+                        <div class="data-sublabel">Up 38% from 2023</div>
+                    </div>
+                    <div class="data-card glow-border" data-observe data-delay="2">
+                        <div class="data-num magenta counter-animated" data-count="34" data-suffix="%">0%</div>
+                        <div class="data-label">Increase in exploited vulnerabilities</div>
+                        <div class="data-sublabel">Used for initial access in 2024</div>
+                    </div>
+                    <div class="data-card glow-border" data-observe data-delay="3">
+                        <div class="data-num green counter-animated" data-count="15" data-prefix="<" data-suffix="min">0</div>
+                        <div class="data-label">Our average response time</div>
+                        <div class="data-sublabel">Industry average: 277 days</div>
+                    </div>
+                </div>
+
+                <!-- Timeline: Time to Exploit (inspired by Maze) -->
+                <div data-observe>
+                    <h2 style="font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-.02em;color:var(--text-bright);margin-bottom:8px">Time to exploit is collapsing</h2>
+                    <p style="font-size:15px;color:var(--text-muted);margin-bottom:0">Attackers are weaponizing vulnerabilities faster than ever</p>
+                </div>
+                <div class="timeline" data-observe>
+                    <div class="timeline-item">
+                        <div class="tl-year">2019</div>
+                        <div class="tl-num" style="color:var(--accent)">63</div>
+                        <div class="tl-unit">days</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">2022</div>
+                        <div class="tl-num" style="color:var(--accent2)">32</div>
+                        <div class="tl-unit">days</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">2023</div>
+                        <div class="tl-num" style="color:var(--accent3)">5</div>
+                        <div class="tl-unit">days</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="tl-year">2025</div>
+                        <div class="tl-num" style="color:#ff4757">&lt;1</div>
+                        <div class="tl-unit">day</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MODULE 3: BIG STAT (Maze graph-style)
+             ========================================== -->
+        <section class="module module--graph" id="section-graph" data-observe>
+            <div class="container">
+                <div class="graph-big-stat counter-animated" data-count="99" data-suffix=".9%">0</div>
+                <div class="graph-label">Threat detection rate</div>
+                <div class="graph-sub">Our SOC monitors 24/7 with SIEM integration, threat hunting, and automated response playbooks</div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MODULE 4: STORY — The Problem (continued)
+             ========================================== -->
+        <section class="module module--story" id="section-story-2">
+            <div class="container">
+                <div class="story-header" data-observe>
+                    <h2>Most security teams are buried in false positives and can't prioritize what actually matters</h2>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card glow-border" data-observe data-delay="1">
+                        <div class="pc-stat">90%</div>
+                        <p>Of all vulnerability findings are false positives when investigated in context — wasting critical analyst time</p>
+                    </div>
+                    <div class="problem-card glow-border" data-observe data-delay="2">
+                        <div class="pc-stat">277 days</div>
+                        <p>Average time to identify and contain a breach — attackers move in hours, defenders move in months</p>
+                    </div>
+                    <div class="problem-card glow-border" data-observe data-delay="3">
+                        <div class="pc-stat">3,065</div>
+                        <p>Average weekly cyberattacks per organization in Latin America — a 26% year-over-year increase</p>
+                    </div>
+                    <div class="problem-card glow-border" data-observe data-delay="4">
+                        <div class="pc-stat">$4.88M</div>
+                        <p>Average cost of a data breach in 2024 — with healthcare and financial sectors paying significantly more</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             MODULE 5: STORY — The Solution
+             ========================================== -->
+        <section class="module module--story" id="section-solution">
+            <div class="container">
+                <div class="story-header" data-observe>
+                    <h2>Full-spectrum cyber defense that finds and fixes vulnerabilities <span class="gradient-text">before attackers do</span></h2>
+                </div>
+                <div class="solution-grid">
+                    <div class="sol-card glow-border" data-observe data-delay="1">
+                        <div class="sol-icon si-1" style="color:var(--accent)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg></div>
                         <h3>Penetration Testing</h3>
                         <p>Advanced red-team simulations across networks, web apps, cloud infrastructure, and social engineering vectors.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-2">
-                        <div class="card-icon ci-2">&#128737;</div>
+                    <div class="sol-card glow-border" data-observe data-delay="2">
+                        <div class="sol-icon si-2" style="color:var(--accent2)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                         <h3>Managed Detection & Response</h3>
                         <p>24/7 SOC monitoring with SIEM integration, threat hunting, and automated incident response playbooks.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-3">
-                        <div class="card-icon ci-3">&#128203;</div>
+                    <div class="sol-card glow-border" data-observe data-delay="3">
+                        <div class="sol-icon si-3" style="color:var(--accent3)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
                         <h3>Compliance & Audit</h3>
                         <p>Gap analysis, policy development, and audit preparation for HIPAA, PCI-DSS, SOC 2, GDPR, and CMMC.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-1">
-                        <div class="card-icon ci-4">&#128680;</div>
+                    <div class="sol-card glow-border" data-observe data-delay="1">
+                        <div class="sol-icon si-4" style="color:#ff4757"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
                         <h3>Incident Response</h3>
                         <p>Rapid containment, forensic investigation, evidence preservation, and recovery with sub-15-minute SLA.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-2">
-                        <div class="card-icon ci-5">&#127891;</div>
+                    <div class="sol-card glow-border" data-observe data-delay="2">
+                        <div class="sol-icon si-5" style="color:#ffc107"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
                         <h3>Security Training</h3>
                         <p>Custom phishing simulations, role-based awareness programs, and executive-level security workshops.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
-                    <div class="service-card glow-border tilt-card reveal reveal-delay-3">
-                        <div class="card-icon ci-6">&#9729;</div>
+                    <div class="sol-card glow-border" data-observe data-delay="3">
+                        <div class="sol-icon si-6" style="color:var(--accent)"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></div>
                         <h3>Cloud Security</h3>
                         <p>Architecture reviews, IAM hardening, misconfiguration detection across AWS, Azure, and GCP environments.</p>
-                        <a href="/services" class="card-link">Learn more &#8594;</a>
+                        <a href="/services" class="card-link">Learn more <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- STATS -->
-        <section class="stats-section">
+        <!-- ==========================================
+             MODULE 6: GLOBAL REACH
+             ========================================== -->
+        <section class="module module--story" style="background:linear-gradient(180deg,transparent,rgba(0,212,255,0.012),transparent)">
             <div class="container">
-                <div class="stats-grid">
-                    <div class="stat-card glow-border reveal reveal-delay-1">
-                        <div class="stat-num">500+</div>
-                        <div class="stat-label">Vulnerabilities Found</div>
-                    </div>
-                    <div class="stat-card glow-border reveal reveal-delay-2">
-                        <div class="stat-num">&lt;15min</div>
-                        <div class="stat-label">Avg. Response Time</div>
-                    </div>
-                    <div class="stat-card glow-border reveal reveal-delay-3">
-                        <div class="stat-num">99.9%</div>
-                        <div class="stat-label">Detection Rate</div>
-                    </div>
-                    <div class="stat-card glow-border reveal reveal-delay-4">
-                        <div class="stat-num">24/7</div>
-                        <div class="stat-label">Monitoring Coverage</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- WHY PHANTOM SHIELD -->
-        <section class="section-pad">
-            <div class="container">
-                <div class="why-grid">
-                    <div>
-                        <div class="reveal">
-                            <div class="section-num">02 — Why Choose Us</div>
-                            <h2 class="section-title">Built Different.<br><span class="gradient-text">Built Secure.</span></h2>
-                            <p class="section-sub">Founded by a UCF MS Cybersecurity graduate with industry certifications and hands-on experience across enterprise and government environments.</p>
-                        </div>
-                        <div class="why-list">
-                            <div class="why-item reveal reveal-delay-1">
-                                <div class="why-icon wi-1">&#127919;</div>
-                                <div>
-                                    <h4>Attacker Mindset</h4>
-                                    <p>We think like adversaries — using the same TTPs as nation-state actors and ransomware gangs to find what automated scanners miss.</p>
-                                </div>
-                            </div>
-                            <div class="why-item reveal reveal-delay-2">
-                                <div class="why-icon wi-2">&#128202;</div>
-                                <div>
-                                    <h4>Compliance-First</h4>
-                                    <p>Every engagement maps directly to your regulatory requirements — HIPAA, PCI, SOC 2, CMMC, or Ley 81 in Panama.</p>
-                                </div>
-                            </div>
-                            <div class="why-item reveal reveal-delay-3">
-                                <div class="why-icon wi-3">&#127758;</div>
-                                <div>
-                                    <h4>Bilingual Operations</h4>
-                                    <p>Full English and Spanish capabilities. Offices in Orlando and Panama City for seamless Americas coverage.</p>
-                                </div>
-                            </div>
-                            <div class="why-item reveal reveal-delay-4">
-                                <div class="why-icon wi-4">&#9889;</div>
-                                <div>
-                                    <h4>Rapid Deployment</h4>
-                                    <p>From initial assessment to active protection in under 48 hours. No bloated onboarding — just results.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="why-visual reveal reveal-delay-2">
-                        <div class="why-card-stack">
-                            <div class="mini-glass glow-border">
-                                <div class="mg-top"><h5>Threat Detected</h5><span class="mg-tag red">Critical</span></div>
-                                <p>SQL injection attempt blocked on /api/auth endpoint</p>
-                                <div class="mg-bar"><div class="mg-bar-fill" style="width:95%;background:var(--grad);"></div></div>
-                            </div>
-                            <div class="mini-glass glow-border">
-                                <div class="mg-top"><h5>Compliance Scan</h5><span class="mg-tag green">Passed</span></div>
-                                <p>HIPAA gap assessment — 47/48 controls verified</p>
-                                <div class="mg-bar"><div class="mg-bar-fill" style="width:98%;background:var(--grad2);"></div></div>
-                            </div>
-                            <div class="mini-glass glow-border">
-                                <div class="mg-top"><h5>Pentest Report</h5><span class="mg-tag blue">In Progress</span></div>
-                                <p>External network scan — 12 findings documented</p>
-                                <div class="mg-bar"><div class="mg-bar-fill" style="width:65%;background:var(--grad);"></div></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- GLOBAL REACH -->
-        <section class="section-pad" style="background:linear-gradient(180deg,transparent,rgba(0,212,255,0.015),transparent);">
-            <div class="container">
-                <div class="reveal" style="text-align:center;margin-bottom:16px">
-                    <div class="section-num" style="justify-content:center">03 — Global Reach</div>
-                    <h2 class="section-title">Protecting Organizations<br><span class="gradient-text">Across the Americas</span></h2>
-                    <p class="section-sub" style="margin:0 auto 0">Cybersecurity expertise tailored to the regulatory landscape and threat environment of each region we serve.</p>
+                <div class="story-header" data-observe style="text-align:center;max-width:none">
+                    <h2>Protecting organizations <span class="gradient-text">across the Americas</span></h2>
                 </div>
                 <div class="reach-cards">
-                    <div class="reach-card glow-border tilt-card reveal reveal-delay-1">
+                    <div class="reach-card glow-border" data-observe data-delay="1">
                         <div class="reach-flag">&#127482;&#127480;</div>
                         <h3>United States</h3>
                         <p>Headquartered in Orlando, FL. Specializing in healthcare, finance, and government compliance.</p>
@@ -496,7 +479,7 @@
                             <div><span class="rs-num">SOC 2</span><span class="rs-label">Certified</span></div>
                         </div>
                     </div>
-                    <div class="reach-card glow-border tilt-card reveal reveal-delay-2">
+                    <div class="reach-card glow-border" data-observe data-delay="2">
                         <div class="reach-flag">&#127477;&#127462;</div>
                         <h3>Panama</h3>
                         <p>On-the-ground presence in Panama City. Ley 81 compliance experts for the banking and logistics hub.</p>
@@ -505,7 +488,7 @@
                             <div><span class="rs-num">ES/EN</span><span class="rs-label">Bilingual</span></div>
                         </div>
                     </div>
-                    <div class="reach-card glow-border tilt-card reveal reveal-delay-3">
+                    <div class="reach-card glow-border" data-observe data-delay="3">
                         <div class="reach-flag">&#127758;</div>
                         <h3>Latin America</h3>
                         <p>Costa Rica, Colombia, Mexico — wherever digital transformation outpaces cybersecurity investment.</p>
@@ -518,12 +501,14 @@
             </div>
         </section>
 
-        <!-- CTA -->
-        <section class="cta-section">
+        <!-- ==========================================
+             MODULE 7: CTA (Maze-style centered)
+             ========================================== -->
+        <section class="module module--cta" id="section-cta" data-observe>
             <div class="container">
-                <div class="cta-box glow-border reveal">
-                    <h2>Ready to Secure<br><span class="gradient-text">Your Organization?</span></h2>
-                    <p>Get a free security assessment and discover your attack surface before someone else does.</p>
+                <div class="cta-inner">
+                    <h2>Get your cybersecurity <span class="gradient-text">under control</span></h2>
+                    <p>Free security assessment. Discover your attack surface before someone else does.</p>
                     <div class="cta-buttons">
                         <a href="/contact" class="btn-primary">
                             Schedule Assessment
@@ -541,9 +526,7 @@
                 <div class="footer-grid">
                     <div class="footer-brand">
                         <a href="/" class="logo">
-                            <div class="logo-icon">
-                                <svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg>
-                            </div>
+                            <div class="logo-icon"><svg viewBox="0 0 32 32"><path d="M16 2L4 8v8c0 8.4 5.12 16.24 12 18 6.88-1.76 12-9.6 12-18V8L16 2z"/></svg></div>
                             <div class="logo-text"><span>Phantom</span> Shield</div>
                         </a>
                         <p>Enterprise cybersecurity consulting and defense. Your invisible armor in the digital world.</p>
@@ -574,17 +557,13 @@
                 </div>
             </div>
         </footer>
-
     </div>
 
     <script>
     // ============================================================
     // PRELOADER
     // ============================================================
-    window.addEventListener('load', () => {
-        setTimeout(() => document.getElementById('preloader').classList.add('done'), 800);
-    });
-    // Fallback: force dismiss after 3s
+    window.addEventListener('load', () => { setTimeout(() => document.getElementById('preloader').classList.add('done'), 600); });
     setTimeout(() => { const p = document.getElementById('preloader'); if (p) p.classList.add('done'); }, 3000);
 
     // ============================================================
@@ -605,39 +584,47 @@
             spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
             spans[1].style.opacity = '0';
             spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-        } else {
-            spans[0].style.transform = ''; spans[1].style.opacity = ''; spans[2].style.transform = '';
-        }
+        } else { spans[0].style.transform = ''; spans[1].style.opacity = ''; spans[2].style.transform = ''; }
     });
 
     // ============================================================
-    // SCROLL REVEAL
+    // SCROLL OBSERVE (Maze-style data-observe reveals)
     // ============================================================
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => revealObs.observe(el));
+    const observeEls = document.querySelectorAll('[data-observe]');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    observeEls.forEach(el => observer.observe(el));
 
     // ============================================================
-    // 3D TILT CARDS
+    // COUNTER ANIMATIONS (scroll-triggered number counting)
     // ============================================================
-    document.querySelectorAll('.tilt-card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-            card.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-6px)`;
-            card.style.boxShadow = `${-x * 20}px ${y * 20}px 60px rgba(0,0,0,0.3), 0 0 40px rgba(0,212,255,0.06)`;
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            const el = e.target;
+            const target = parseInt(el.dataset.count);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const duration = 2000;
+            const startTime = performance.now();
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 4);
+                const current = Math.round(eased * target);
+                el.textContent = prefix + current.toLocaleString() + suffix;
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+            counterObs.unobserve(el);
         });
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = '';
-            card.style.boxShadow = '';
-        });
-    });
+    }, { threshold: 0.3 });
+    counters.forEach(el => counterObs.observe(el));
 
     // ============================================================
-    // SIMPLEX NOISE (GLSL) — Ashima Arts
+    // SIMPLEX NOISE (GLSL)
     // ============================================================
     const NOISE_GLSL = `
     vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
@@ -645,232 +632,359 @@
     vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
     vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
     float snoise(vec3 v){
-        const vec2 C=vec2(1.0/6.0,1.0/3.0);
-        const vec4 D=vec4(0.0,0.5,1.0,2.0);
-        vec3 i=floor(v+dot(v,C.yyy));
-        vec3 x0=v-i+dot(i,C.xxx);
-        vec3 g=step(x0.yzx,x0.xyz);
-        vec3 l=1.0-g;
-        vec3 i1=min(g.xyz,l.zxy);
-        vec3 i2=max(g.xyz,l.zxy);
-        vec3 x1=x0-i1+C.xxx;
-        vec3 x2=x0-i2+C.yyy;
-        vec3 x3=x0-D.yyy;
+        const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
+        vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
+        vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;
+        vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
+        vec3 x1=x0-i1+C.xxx;vec3 x2=x0-i2+C.yyy;vec3 x3=x0-D.yyy;
         i=mod289(i);
         vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
-        float n_=0.142857142857;
-        vec3 ns=n_*D.wyz-D.xzx;
-        vec4 j=p-49.0*floor(p*ns.z*ns.z);
-        vec4 x_=floor(j*ns.z);
-        vec4 y_=floor(j-7.0*x_);
-        vec4 x=x_*ns.x+ns.yyyy;
-        vec4 y=y_*ns.x+ns.yyyy;
-        vec4 h=1.0-abs(x)-abs(y);
-        vec4 b0=vec4(x.xy,y.xy);
-        vec4 b1=vec4(x.zw,y.zw);
-        vec4 s0=floor(b0)*2.0+1.0;
-        vec4 s1=floor(b1)*2.0+1.0;
+        float n_=0.142857142857;vec3 ns=n_*D.wyz-D.xzx;
+        vec4 j=p-49.0*floor(p*ns.z*ns.z);vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);
+        vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
+        vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);
+        vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;
         vec4 sh=-step(h,vec4(0.0));
-        vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;
-        vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-        vec3 p0=vec3(a0.xy,h.x);
-        vec3 p1=vec3(a0.zw,h.y);
-        vec3 p2=vec3(a1.xy,h.z);
-        vec3 p3=vec3(a1.zw,h.w);
+        vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
+        vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
         vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
         p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
-        vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);
-        m=m*m;
+        vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
         return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
     }`;
 
     // ============================================================
-    // DYNAMIC 3D MORPHING MESH — Full-page background
+    // THREE.JS — SHIELD-EARTH HYBRID 3D MESH
+    // Morphing globe + shield silhouette + data points + connections
     // ============================================================
     (function() {
-        const canvas = document.getElementById('mesh-canvas');
+        const canvas = document.getElementById('gfx-canvas');
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+        camera.position.z = 4.5;
 
-        // Morphing blob — noise-displaced icosphere with custom shaders
+        // --- VERTEX SHADER: Shield-Earth morphing ---
         const vertexShader = `
             ${NOISE_GLSL}
             uniform float uTime;
-            uniform float uNoiseScale;
-            uniform float uNoiseStrength;
-            uniform vec2 uMouse;
             uniform float uScroll;
+            uniform vec2 uMouse;
+            uniform float uMorph; // 0=sphere, 1=shield shape
             varying vec3 vNormal;
             varying vec3 vPosition;
             varying float vDisplacement;
+            varying float vShieldMask;
+
+            // Shield shape SDF (signed distance to shield outline)
+            float shieldSDF(vec3 p) {
+                // Normalize to unit sphere coords
+                float lat = asin(clamp(p.y, -1.0, 1.0));
+                float lon = atan(p.x, p.z);
+                // Shield shape: wider at top, pointed at bottom
+                float shieldWidth = 0.7 * cos(lat * 0.8) * step(lat, 1.2);
+                float inside = step(abs(lon), shieldWidth) * step(-0.8, lat);
+                return inside;
+            }
+
             void main() {
                 vec3 pos = position;
-                // Multi-octave noise for organic feel
-                float n1 = snoise(pos * uNoiseScale + uTime * 0.3) * 0.6;
-                float n2 = snoise(pos * uNoiseScale * 2.0 + uTime * 0.5) * 0.3;
-                float n3 = snoise(pos * uNoiseScale * 4.0 + uTime * 0.2) * 0.1;
-                float displacement = (n1 + n2 + n3) * uNoiseStrength;
-                // Mouse influence — attract/repel
-                vec3 mouseDir = normalize(vec3(uMouse.x * 2.0, uMouse.y * 2.0, 0.5) - pos);
-                displacement += dot(normalize(pos), mouseDir) * 0.15;
-                // Scroll morph
-                displacement += sin(pos.y * 3.0 + uScroll * 0.003) * 0.08;
+
+                // Multi-octave noise displacement
+                float n1 = snoise(pos * 1.0 + uTime * 0.2) * 0.5;
+                float n2 = snoise(pos * 2.0 + uTime * 0.35) * 0.25;
+                float n3 = snoise(pos * 4.0 + uTime * 0.15) * 0.12;
+                float displacement = (n1 + n2 + n3) * 0.35;
+
+                // Mouse attraction
+                vec3 mouseDir = normalize(vec3(uMouse.x * 1.5, uMouse.y * 1.5, 1.0) - pos);
+                displacement += dot(normalize(pos), mouseDir) * 0.12;
+
+                // Scroll-based morphing — more displacement as user scrolls
+                float scrollFactor = uScroll * 0.0005;
+                displacement += sin(pos.y * 4.0 + uScroll * 0.002) * 0.06 * min(scrollFactor, 1.0);
+
+                // Shield mask — used for color variation
+                vShieldMask = shieldSDF(normalize(pos));
+
+                // Shield-shape morph: slightly extrude shield region
+                displacement += vShieldMask * 0.08 * (0.5 + 0.5 * sin(uTime * 0.5));
+
                 pos += normal * displacement;
+
                 vNormal = normalize(normalMatrix * normal);
                 vPosition = pos;
                 vDisplacement = displacement;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
             }
         `;
+
+        // --- FRAGMENT SHADER: Gradient + shield glow + fresnel ---
         const fragmentShader = `
             uniform float uTime;
+            uniform float uScroll;
             uniform vec3 uColor1;
             uniform vec3 uColor2;
             uniform vec3 uColor3;
             varying vec3 vNormal;
             varying vec3 vPosition;
             varying float vDisplacement;
+            varying float vShieldMask;
+
             void main() {
-                // Gradient based on position + displacement
-                float mixFactor = (vPosition.y + 1.5) / 3.0;
+                // Base gradient: cyan bottom → magenta top → green accent
+                float mixFactor = (vPosition.y + 1.8) / 3.6;
                 vec3 color = mix(uColor1, uColor2, smoothstep(0.0, 0.5, mixFactor));
-                color = mix(color, uColor3, smoothstep(0.5, 1.0, mixFactor));
+                color = mix(color, uColor3, smoothstep(0.6, 1.0, mixFactor));
+
+                // Shield region glow
+                color += vShieldMask * uColor1 * 0.4 * (0.7 + 0.3 * sin(uTime * 1.5));
+
                 // Fresnel rim glow
                 vec3 viewDir = normalize(cameraPosition - vPosition);
                 float fresnel = pow(1.0 - abs(dot(viewDir, vNormal)), 3.0);
-                color += fresnel * mix(uColor1, uColor2, 0.5) * 0.8;
-                // Displacement coloring
-                color += vDisplacement * 0.3 * uColor1;
-                // Pulsing alpha
-                float alpha = 0.12 + fresnel * 0.25 + abs(vDisplacement) * 0.15;
+                color += fresnel * mix(uColor1, uColor2, 0.5) * 0.7;
+
+                // Displacement-based brightness
+                color += vDisplacement * 0.25 * uColor1;
+
+                // Alpha: translucent with rim emphasis
+                float alpha = 0.10 + fresnel * 0.22 + abs(vDisplacement) * 0.12;
+                alpha += vShieldMask * 0.06;
+
                 gl_FragColor = vec4(color, alpha);
             }
         `;
 
-        const blobGeo = new THREE.IcosahedronGeometry(1.6, 64);
-        const blobMat = new THREE.ShaderMaterial({
-            vertexShader, fragmentShader,
-            uniforms: {
-                uTime: { value: 0 },
-                uNoiseScale: { value: 1.2 },
-                uNoiseStrength: { value: 0.4 },
-                uMouse: { value: new THREE.Vector2(0, 0) },
-                uScroll: { value: 0 },
-                uColor1: { value: new THREE.Color(0x00d4ff) },
-                uColor2: { value: new THREE.Color(0xd409fe) },
-                uColor3: { value: new THREE.Color(0x00ffa3) }
-            },
-            transparent: true,
-            side: THREE.DoubleSide,
-            depthWrite: false
-        });
-        const blob = new THREE.Mesh(blobGeo, blobMat);
-        scene.add(blob);
+        // Shared uniforms
+        const uniforms = {
+            uTime: { value: 0 },
+            uScroll: { value: 0 },
+            uMouse: { value: new THREE.Vector2(0, 0) },
+            uMorph: { value: 0 },
+            uColor1: { value: new THREE.Color(0x00d4ff) },
+            uColor2: { value: new THREE.Color(0xd409fe) },
+            uColor3: { value: new THREE.Color(0x00ffa3) }
+        };
 
-        // Wireframe overlay for mesh look
+        // Main morphing globe (high-res icosphere)
+        const globeGeo = new THREE.IcosahedronGeometry(1.6, 64);
+        const globeMat = new THREE.ShaderMaterial({
+            vertexShader, fragmentShader, uniforms,
+            transparent: true, side: THREE.DoubleSide, depthWrite: false
+        });
+        const globe = new THREE.Mesh(globeGeo, globeMat);
+        scene.add(globe);
+
+        // Wireframe mesh overlay
+        const wireFragShader = `
+            uniform float uTime;
+            uniform vec3 uColor1;
+            uniform vec3 uColor2;
+            varying vec3 vPosition;
+            varying float vDisplacement;
+            varying float vShieldMask;
+            varying vec3 vNormal;
+            void main() {
+                float mixFactor = (vPosition.y + 1.8) / 3.6;
+                vec3 color = mix(uColor1, uColor2, mixFactor);
+                color += vShieldMask * uColor1 * 0.3;
+                float alpha = 0.06 + abs(vDisplacement) * 0.08 + vShieldMask * 0.04;
+                gl_FragColor = vec4(color, alpha);
+            }
+        `;
         const wireMat = new THREE.ShaderMaterial({
-            vertexShader,
-            fragmentShader: `
+            vertexShader, fragmentShader: wireFragShader, uniforms,
+            transparent: true, wireframe: true, depthWrite: false
+        });
+        const wireGlobe = new THREE.Mesh(globeGeo.clone(), wireMat);
+        wireGlobe.scale.set(1.004, 1.004, 1.004);
+        scene.add(wireGlobe);
+
+        // --- DATA POINTS on globe surface ---
+        // These represent threat locations / protection nodes
+        const dataPointCount = 50;
+        const dpPositions = [];
+        const dpColors = [];
+        const dpSizes = [];
+        const dpBasePositions = []; // Store normalized positions for scroll-driven reveal
+        for (let i = 0; i < dataPointCount; i++) {
+            // Random point on sphere
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            const r = 1.65;
+            const x = r * Math.sin(phi) * Math.cos(theta);
+            const y = r * Math.sin(phi) * Math.sin(theta);
+            const z = r * Math.cos(phi);
+            dpPositions.push(x, y, z);
+            dpBasePositions.push(x, y, z);
+            // Color: cyan, magenta, green, red
+            const colors = [[0, 0.83, 1], [0.83, 0.035, 0.996], [0, 1, 0.64], [1, 0.28, 0.34]];
+            const c = colors[Math.floor(Math.random() * colors.length)];
+            dpColors.push(c[0], c[1], c[2]);
+            dpSizes.push(3 + Math.random() * 6);
+        }
+        const dpGeo = new THREE.BufferGeometry();
+        dpGeo.setAttribute('position', new THREE.Float32BufferAttribute(dpPositions, 3));
+        dpGeo.setAttribute('color', new THREE.Float32BufferAttribute(dpColors, 3));
+        dpGeo.setAttribute('size', new THREE.Float32BufferAttribute(dpSizes, 1));
+        const dpMat = new THREE.ShaderMaterial({
+            vertexShader: `
+                attribute float size;
+                varying vec3 vColor;
                 uniform float uTime;
-                uniform vec3 uColor1;
-                uniform vec3 uColor2;
-                uniform vec3 uColor3;
-                varying vec3 vNormal;
-                varying vec3 vPosition;
-                varying float vDisplacement;
+                uniform float uRevealProgress;
                 void main() {
-                    float mixFactor = (vPosition.y + 1.5) / 3.0;
-                    vec3 color = mix(uColor1, uColor2, mixFactor);
-                    float alpha = 0.08 + abs(vDisplacement) * 0.12;
-                    gl_FragColor = vec4(color, alpha);
+                    vColor = color;
+                    vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+                    // Pulse size
+                    float pulse = 1.0 + 0.3 * sin(uTime * 2.0 + position.x * 5.0);
+                    gl_PointSize = size * pulse * (200.0 / -mvPos.z) * uRevealProgress;
+                    gl_Position = projectionMatrix * mvPos;
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vColor;
+                void main() {
+                    float d = length(gl_PointCoord - 0.5);
+                    if (d > 0.5) discard;
+                    float glow = 1.0 - smoothstep(0.0, 0.5, d);
+                    gl_FragColor = vec4(vColor, glow * 0.8);
                 }
             `,
             uniforms: {
-                uTime: blobMat.uniforms.uTime,
-                uNoiseScale: blobMat.uniforms.uNoiseScale,
-                uNoiseStrength: blobMat.uniforms.uNoiseStrength,
-                uMouse: blobMat.uniforms.uMouse,
-                uScroll: blobMat.uniforms.uScroll,
-                uColor1: blobMat.uniforms.uColor1,
-                uColor2: blobMat.uniforms.uColor2,
-                uColor3: blobMat.uniforms.uColor3
+                uTime: uniforms.uTime,
+                uRevealProgress: { value: 0 }
             },
             transparent: true,
-            wireframe: true,
+            vertexColors: true,
+            blending: THREE.AdditiveBlending,
             depthWrite: false
         });
-        const wireBlob = new THREE.Mesh(blobGeo.clone(), wireMat);
-        wireBlob.scale.set(1.005, 1.005, 1.005);
-        scene.add(wireBlob);
+        const dataPoints = new THREE.Points(dpGeo, dpMat);
+        scene.add(dataPoints);
 
-        // Floating particles around the blob
-        const particleCount = 300;
-        const pPositions = new Float32Array(particleCount * 3);
-        const pColors = new Float32Array(particleCount * 3);
-        const c1 = new THREE.Color(0x00d4ff);
-        const c2 = new THREE.Color(0xd409fe);
-        const c3 = new THREE.Color(0x00ffa3);
-        for (let i = 0; i < particleCount; i++) {
-            pPositions[i*3] = (Math.random() - 0.5) * 30;
-            pPositions[i*3+1] = (Math.random() - 0.5) * 30;
-            pPositions[i*3+2] = (Math.random() - 0.5) * 20 - 5;
-            const c = [c1, c2, c3][Math.floor(Math.random() * 3)];
-            pColors[i*3] = c.r; pColors[i*3+1] = c.g; pColors[i*3+2] = c.b;
+        // --- CONNECTION LINES between data points ---
+        const linePositions = [];
+        const lineColors = [];
+        for (let i = 0; i < 30; i++) {
+            const a = Math.floor(Math.random() * dataPointCount);
+            const b = Math.floor(Math.random() * dataPointCount);
+            if (a === b) continue;
+            linePositions.push(
+                dpPositions[a*3], dpPositions[a*3+1], dpPositions[a*3+2],
+                dpPositions[b*3], dpPositions[b*3+1], dpPositions[b*3+2]
+            );
+            lineColors.push(0, 0.83, 1, 0, 0.83, 1);
+        }
+        const lineGeo = new THREE.BufferGeometry();
+        lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+        lineGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
+        const lineMat = new THREE.LineBasicMaterial({
+            vertexColors: true, transparent: true, opacity: 0,
+            blending: THREE.AdditiveBlending, depthWrite: false
+        });
+        const lines = new THREE.LineSegments(lineGeo, lineMat);
+        scene.add(lines);
+
+        // --- Ambient particles ---
+        const pCount = 250;
+        const pPos = new Float32Array(pCount * 3);
+        const pCol = new Float32Array(pCount * 3);
+        const pc1 = new THREE.Color(0x00d4ff), pc2 = new THREE.Color(0xd409fe), pc3 = new THREE.Color(0x00ffa3);
+        for (let i = 0; i < pCount; i++) {
+            pPos[i*3] = (Math.random()-0.5)*25;
+            pPos[i*3+1] = (Math.random()-0.5)*25;
+            pPos[i*3+2] = (Math.random()-0.5)*15 - 5;
+            const c = [pc1, pc2, pc3][Math.floor(Math.random() * 3)];
+            pCol[i*3] = c.r; pCol[i*3+1] = c.g; pCol[i*3+2] = c.b;
         }
         const pGeo = new THREE.BufferGeometry();
-        pGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
-        pGeo.setAttribute('color', new THREE.BufferAttribute(pColors, 3));
-        const pMat = new THREE.PointsMaterial({ size: 0.12, vertexColors: true, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true });
-        const particles = new THREE.Points(pGeo, pMat);
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+        pGeo.setAttribute('color', new THREE.BufferAttribute(pCol, 3));
+        const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({
+            size: 0.08, vertexColors: true, transparent: true, opacity: 0.25,
+            blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true
+        }));
         scene.add(particles);
 
-        // Mouse tracking
-        let mouseX = 0, mouseY = 0, targetMX = 0, targetMY = 0;
-        document.addEventListener('mousemove', (e) => {
-            targetMX = (e.clientX / window.innerWidth - 0.5) * 2;
-            targetMY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
+        // --- ORBIT RINGS ---
+        const ring1 = new THREE.Mesh(
+            new THREE.TorusGeometry(2.2, 0.01, 16, 120),
+            new THREE.MeshBasicMaterial({ color: 0x00d4ff, transparent: true, opacity: 0.12 })
+        );
+        ring1.rotation.x = Math.PI / 3;
+        scene.add(ring1);
+        const ring2 = new THREE.Mesh(
+            new THREE.TorusGeometry(2.5, 0.008, 16, 120),
+            new THREE.MeshBasicMaterial({ color: 0xd409fe, transparent: true, opacity: 0.08 })
+        );
+        ring2.rotation.x = Math.PI / 5;
+        ring2.rotation.z = 0.3;
+        scene.add(ring2);
 
-        // Scroll tracking
-        let scrollY = 0;
+        // Mouse & scroll tracking
+        let mx = 0, my = 0, tmx = 0, tmy = 0, scrollY = 0;
+        document.addEventListener('mousemove', e => {
+            tmx = (e.clientX / window.innerWidth - 0.5) * 2;
+            tmy = (e.clientY / window.innerHeight - 0.5) * 2;
+        });
         window.addEventListener('scroll', () => { scrollY = window.scrollY; });
+
+        const pageHeight = () => document.documentElement.scrollHeight - window.innerHeight;
 
         const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
             const t = clock.getElapsedTime();
+            const scrollProgress = scrollY / Math.max(pageHeight(), 1);
 
-            // Smooth mouse interpolation
-            mouseX += (targetMX - mouseX) * 0.03;
-            mouseY += (targetMY - mouseY) * 0.03;
+            // Smooth mouse
+            mx += (tmx - mx) * 0.03;
+            my += (tmy - my) * 0.03;
 
             // Update uniforms
-            blobMat.uniforms.uTime.value = t;
-            blobMat.uniforms.uMouse.value.set(mouseX, mouseY);
-            blobMat.uniforms.uScroll.value = scrollY;
+            uniforms.uTime.value = t;
+            uniforms.uMouse.value.set(mx, my);
+            uniforms.uScroll.value = scrollY;
 
-            // Blob rotation — slow, organic
-            blob.rotation.y = t * 0.08 + mouseX * 0.15;
-            blob.rotation.x = t * 0.05 + mouseY * 0.1;
-            wireBlob.rotation.copy(blob.rotation);
+            // Globe rotation — slow, organic + mouse influence
+            globe.rotation.y = t * 0.06 + mx * 0.2;
+            globe.rotation.x = t * 0.03 + my * 0.12;
+            wireGlobe.rotation.copy(globe.rotation);
+            dataPoints.rotation.copy(globe.rotation);
+            lines.rotation.copy(globe.rotation);
 
-            // Blob position drift based on scroll
-            blob.position.y = Math.sin(t * 0.3) * 0.2 - scrollY * 0.0008;
-            blob.position.x = Math.cos(t * 0.2) * 0.3 + mouseX * 0.5;
-            wireBlob.position.copy(blob.position);
+            // Globe position — drift + scroll push
+            globe.position.y = Math.sin(t * 0.25) * 0.15 - scrollY * 0.0006;
+            globe.position.x = Math.cos(t * 0.18) * 0.2 + mx * 0.4;
+            wireGlobe.position.copy(globe.position);
+            dataPoints.position.copy(globe.position);
+            lines.position.copy(globe.position);
+
+            // Rings orbit
+            ring1.rotation.z = t * 0.12;
+            ring1.position.copy(globe.position);
+            ring2.rotation.z = -t * 0.08;
+            ring2.position.copy(globe.position);
+
+            // Data points reveal — appear as user scrolls past hero
+            const revealTarget = Math.min(scrollProgress * 4, 1);
+            dpMat.uniforms.uRevealProgress.value += (revealTarget - dpMat.uniforms.uRevealProgress.value) * 0.03;
+
+            // Connection lines fade in with data points
+            lineMat.opacity = dpMat.uniforms.uRevealProgress.value * 0.12;
 
             // Particles
-            particles.rotation.y = t * 0.015 + mouseX * 0.03;
-            particles.rotation.x = t * 0.008 + mouseY * 0.02;
+            particles.rotation.y = t * 0.012 + mx * 0.02;
+            particles.rotation.x = t * 0.006 + my * 0.015;
 
-            // Camera subtle movement
-            camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.015;
-            camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.015;
+            // Camera
+            camera.position.x += (mx * 0.4 - camera.position.x) * 0.012;
+            camera.position.y += (-my * 0.25 - camera.position.y) * 0.012;
             camera.lookAt(0, 0, 0);
 
             renderer.render(scene, camera);
@@ -882,128 +996,6 @@
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-    })();
-
-    // ============================================================
-    // HERO 3D MORPHING SHIELD
-    // ============================================================
-    (function() {
-        const canvas = document.getElementById('hero-mesh');
-        if (!canvas) return;
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-        camera.position.set(0, 0, 6);
-
-        // Shield geometry
-        const shape = new THREE.Shape();
-        shape.moveTo(0, 1.8);
-        shape.bezierCurveTo(0.6, 1.6, 1.2, 1.2, 1.4, 0.6);
-        shape.bezierCurveTo(1.5, 0.2, 1.5, -0.4, 1.3, -0.8);
-        shape.bezierCurveTo(1.0, -1.3, 0.5, -1.7, 0, -2.0);
-        shape.bezierCurveTo(-0.5, -1.7, -1.0, -1.3, -1.3, -0.8);
-        shape.bezierCurveTo(-1.5, -0.4, -1.5, 0.2, -1.4, 0.6);
-        shape.bezierCurveTo(-1.2, 1.2, -0.6, 1.6, 0, 1.8);
-
-        const extrudeSettings = { depth: 0.3, bevelEnabled: true, bevelThickness: 0.08, bevelSize: 0.08, bevelSegments: 6 };
-        const shieldGeo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-        shieldGeo.center();
-
-        const shieldMat = new THREE.MeshPhysicalMaterial({
-            color: 0x00d4ff, metalness: 0.1, roughness: 0.15,
-            transparent: true, opacity: 0.35, side: THREE.DoubleSide, envMapIntensity: 1.5
-        });
-        const shield = new THREE.Mesh(shieldGeo, shieldMat);
-        scene.add(shield);
-
-        // Wireframe overlay
-        const wireMat2 = new THREE.MeshBasicMaterial({ color: 0x00d4ff, wireframe: true, transparent: true, opacity: 0.12 });
-        const wireShield = new THREE.Mesh(shieldGeo.clone(), wireMat2);
-        wireShield.scale.set(1.02, 1.02, 1.02);
-        scene.add(wireShield);
-
-        // Orbiting rings
-        const ring = new THREE.Mesh(
-            new THREE.TorusGeometry(2.2, 0.02, 16, 100),
-            new THREE.MeshBasicMaterial({ color: 0xd409fe, transparent: true, opacity: 0.4 })
-        );
-        scene.add(ring);
-        const ring2 = new THREE.Mesh(
-            new THREE.TorusGeometry(2.6, 0.015, 16, 100),
-            new THREE.MeshBasicMaterial({ color: 0x00ffa3, transparent: true, opacity: 0.2 })
-        );
-        ring2.rotation.x = Math.PI / 6;
-        scene.add(ring2);
-
-        // Orbiting particles
-        const orbCount = 80;
-        const orbPos = new Float32Array(orbCount * 3);
-        const orbCol = new Float32Array(orbCount * 3);
-        for (let i = 0; i < orbCount; i++) {
-            const angle = (i / orbCount) * Math.PI * 2;
-            const radius = 1.8 + Math.random() * 1.2;
-            orbPos[i*3] = Math.cos(angle) * radius;
-            orbPos[i*3+1] = (Math.random() - 0.5) * 2;
-            orbPos[i*3+2] = Math.sin(angle) * radius;
-            const c = [new THREE.Color(0x00d4ff), new THREE.Color(0xd409fe), new THREE.Color(0x00ffa3)][Math.floor(Math.random()*3)];
-            orbCol[i*3] = c.r; orbCol[i*3+1] = c.g; orbCol[i*3+2] = c.b;
-        }
-        const orbGeo = new THREE.BufferGeometry();
-        orbGeo.setAttribute('position', new THREE.BufferAttribute(orbPos, 3));
-        orbGeo.setAttribute('color', new THREE.BufferAttribute(orbCol, 3));
-        const orbMat = new THREE.PointsMaterial({ size: 0.06, vertexColors: true, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
-        const orbParticles = new THREE.Points(orbGeo, orbMat);
-        scene.add(orbParticles);
-
-        // Lighting
-        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
-        const dir = new THREE.DirectionalLight(0x00d4ff, 1.2);
-        dir.position.set(3, 4, 5);
-        scene.add(dir);
-        const point = new THREE.PointLight(0xd409fe, 0.8, 20);
-        point.position.set(-3, -2, 3);
-        scene.add(point);
-        const point2 = new THREE.PointLight(0x00ffa3, 0.5, 15);
-        point2.position.set(2, -3, 2);
-        scene.add(point2);
-
-        let heroMouseX = 0, heroMouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            heroMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            heroMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        const clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-            const t = clock.getElapsedTime();
-
-            shield.rotation.y = t * 0.3 + heroMouseX * 0.3;
-            shield.rotation.x = Math.sin(t * 0.5) * 0.1 + heroMouseY * 0.15;
-            wireShield.rotation.copy(shield.rotation);
-
-            ring.rotation.z = t * 0.2;
-            ring.rotation.x = Math.PI / 3 + Math.sin(t * 0.3) * 0.1;
-            ring2.rotation.z = -t * 0.15;
-
-            orbParticles.rotation.y = t * 0.15;
-            shield.position.y = Math.sin(t * 0.8) * 0.15;
-            wireShield.position.y = shield.position.y;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        const resizeObs = new ResizeObserver(() => {
-            const w = canvas.clientWidth, h = canvas.clientHeight;
-            camera.aspect = w / h;
-            camera.updateProjectionMatrix();
-            renderer.setSize(w, h);
-        });
-        resizeObs.observe(canvas);
     })();
     </script>
 </body>
