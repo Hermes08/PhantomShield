@@ -1,72 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1889 150" fill="none">
 
-  <!-- KDC FTP -->
-  <rect x="14" y="7" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="28" y="19" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
-  <text x="28" y="34" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">KDC · FTP</text>
-  <circle cx="28" cy="43" r="3.5" fill="#f04545" opacity="0.85"/>
-  <text x="37" y="46" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">High Risk</text>
+  <!-- LEFT VENDOR INTEGRATION CARDS -->
 
-  <!-- HTTP DNS -->
-  <rect x="14" y="55" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="28" y="67" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
-  <text x="28" y="82" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">HTTP · DNS</text>
-  <circle cx="28" cy="91" r="3.5" fill="#ffb347" opacity="0.85"/>
-  <text x="37" y="94" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,179,71,0.65)">Medium Risk</text>
+  <!-- CROWDSTRIKE FALCON -->
+  <rect x="14" y="7" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(227,24,55,0.22)" stroke-width="1"/>
+  <rect x="14" y="7" width="3" height="42" rx="1.5" fill="rgba(227,24,55,0.75)"/>
+  <circle cx="47" cy="28" r="13" fill="rgba(227,24,55,0.13)" stroke="rgba(227,24,55,0.32)" stroke-width="1"/>
+  <text x="47" y="32" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#E31837">CS</text>
+  <text x="71" y="24"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#EFF0F0" letter-spacing="0.3">CrowdStrike</text>
+  <text x="71" y="39"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(239,240,240,0.38)" letter-spacing="0.3">Falcon Platform · EDR</text>
+  <circle cx="338" cy="28" r="3.5" fill="#E31837" opacity="0.80"/>
 
-  <!-- LDAP AUTH -->
-  <rect x="14" y="103" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-  <text x="28" y="115" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
-  <text x="28" y="130" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">LDAP · AUTH</text>
-  <circle cx="28" cy="139" r="3.5" fill="#f04545" opacity="0.85"/>
-  <text x="37" y="142" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">High Risk</text>
+  <!-- PALO ALTO NETWORKS -->
+  <rect x="14" y="55" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(250,88,45,0.20)" stroke-width="1"/>
+  <rect x="14" y="55" width="3" height="42" rx="1.5" fill="rgba(250,88,45,0.70)"/>
+  <circle cx="47" cy="76" r="13" fill="rgba(250,88,45,0.11)" stroke="rgba(250,88,45,0.30)" stroke-width="1"/>
+  <text x="47" y="80" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#FA582D">PA</text>
+  <text x="71" y="72"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#EFF0F0" letter-spacing="0.3">Palo Alto Networks</text>
+  <text x="71" y="87"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(239,240,240,0.38)" letter-spacing="0.3">Cortex XSIAM · NGFW</text>
+  <circle cx="338" cy="76" r="3.5" fill="#FA582D" opacity="0.80"/>
 
-  <!-- AI ENGINE -->
-  <rect x="817" y="7" width="255" height="136" rx="9" fill="rgba(10,13,26,0.88)" stroke="rgba(55,198,244,0.16)" stroke-width="1"/>
-  <rect x="817" y="7" width="255" height="2.5" rx="1" fill="rgba(55,198,244,0.55)"/>
-  <text x="944" y="38" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.40)" letter-spacing="2.5">ANALYSIS ENGINE</text>
-  <text x="944" y="64" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="600" fill="#F1F3F5" letter-spacing="0.5">AI Engine</text>
-  <text x="944" y="83" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(55,198,244,0.50)">Threat Intelligence</text>
-  <line x1="843" y1="100" x2="1059" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-  <circle cx="855" cy="116" r="3.5" fill="#37c6f4" opacity="0.65"/>
-  <text x="864" y="119" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.50)">4 streams</text>
-  <text x="1059" y="119" text-anchor="end" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.20)">real-time</text>
-  <circle cx="898" cy="133" r="2.5" fill="rgba(55,198,244,0.45)"/>
-  <circle cx="910" cy="133" r="2.5" fill="rgba(55,198,244,0.25)"/>
-  <circle cx="922" cy="133" r="2.5" fill="rgba(55,198,244,0.55)"/>
-  <circle cx="934" cy="133" r="2.5" fill="rgba(55,198,244,0.20)"/>
-  <circle cx="946" cy="133" r="2.5" fill="rgba(55,198,244,0.50)"/>
-  <circle cx="958" cy="133" r="2.5" fill="rgba(55,198,244,0.35)"/>
-  <circle cx="970" cy="133" r="2.5" fill="rgba(55,198,244,0.60)"/>
-  <circle cx="982" cy="133" r="2.5" fill="rgba(55,198,244,0.20)"/>
-  <circle cx="994" cy="133" r="2.5" fill="rgba(55,198,244,0.40)"/>
+  <!-- SPLUNK -->
+  <rect x="14" y="103" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(107,178,45,0.18)" stroke-width="1"/>
+  <rect x="14" y="103" width="3" height="42" rx="1.5" fill="rgba(107,178,45,0.65)"/>
+  <circle cx="47" cy="124" r="13" fill="rgba(107,178,45,0.10)" stroke="rgba(107,178,45,0.26)" stroke-width="1"/>
+  <text x="47" y="128" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#6BB22D">SP</text>
+  <text x="71" y="120"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#EFF0F0" letter-spacing="0.3">Splunk</text>
+  <text x="71" y="135"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(239,240,240,0.38)" letter-spacing="0.3">SIEM · Log Intelligence</text>
+  <circle cx="338" cy="124" r="3.5" fill="#6BB22D" opacity="0.80"/>
+
+  <!-- CENTER AI ENGINE -->
+  <rect x="757" y="7" width="375" height="136" rx="10"
+        fill="rgba(10,13,26,0.88)" stroke="rgba(55,198,244,0.18)" stroke-width="1.2"/>
+  <rect x="757" y="7" width="375" height="2.5" rx="1" fill="rgba(55,198,244,0.55)"/>
+  <text x="944" y="40" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(55,198,244,0.40)" letter-spacing="2.5">ANALYSIS ENGINE</text>
+  <text x="944" y="68" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="26" font-weight="600" fill="#F1F3F5" letter-spacing="0.5">AI Engine</text>
+  <text x="944" y="87" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.50)">Threat Intelligence · Real-time</text>
+  <line x1="793" y1="104" x2="1095" y2="104"
+        stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <circle cx="805" cy="120" r="3.5" fill="#37c6f4" opacity="0.65"/>
+  <text x="814" y="123"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(55,198,244,0.50)">3 integrations</text>
+  <text x="1095" y="123" text-anchor="end"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(255,255,255,0.20)">live</text>
+  <circle cx="878" cy="138" r="2.5" fill="rgba(55,198,244,0.45)"/>
+  <circle cx="891" cy="138" r="2.5" fill="rgba(55,198,244,0.25)"/>
+  <circle cx="904" cy="138" r="2.5" fill="rgba(55,198,244,0.55)"/>
+  <circle cx="917" cy="138" r="2.5" fill="rgba(55,198,244,0.20)"/>
+  <circle cx="930" cy="138" r="2.5" fill="rgba(55,198,244,0.50)"/>
+  <circle cx="943" cy="138" r="2.5" fill="rgba(55,198,244,0.35)"/>
+  <circle cx="956" cy="138" r="2.5" fill="rgba(55,198,244,0.60)"/>
+  <circle cx="969" cy="138" r="2.5" fill="rgba(55,198,244,0.20)"/>
+  <circle cx="982" cy="138" r="2.5" fill="rgba(55,198,244,0.40)"/>
+  <circle cx="995" cy="138" r="2.5" fill="rgba(55,198,244,0.30)"/>
+
+  <!-- RIGHT OUTCOME CARDS -->
 
   <!-- CONFIRMED THREAT -->
-  <rect x="1620" y="7" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(240,69,69,0.14)" stroke-width="1"/>
-  <rect x="1838" y="10" width="30" height="16" rx="4" fill="rgba(240,69,69,0.14)" stroke="rgba(240,69,69,0.28)" stroke-width="0.8"/>
-  <text x="1853" y="21" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#f04545">1%</text>
-  <text x="1634" y="19" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
-  <text x="1634" y="34" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#f09090">Confirmed Threat</text>
-  <circle cx="1634" cy="43" r="3.5" fill="#f04545" opacity="0.85"/>
-  <text x="1643" y="46" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">Isolate &amp; Block</text>
+  <rect x="1535" y="7" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(240,69,69,0.18)" stroke-width="1"/>
+  <rect x="1872" y="7" width="3" height="42" rx="1.5" fill="rgba(240,69,69,0.65)"/>
+  <rect x="1540" y="12" width="28" height="15" rx="3"
+        fill="rgba(240,69,69,0.14)" stroke="rgba(240,69,69,0.30)" stroke-width="0.8"/>
+  <text x="1554" y="23" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#f04545">1%</text>
+  <text x="1579" y="24"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#f09090" letter-spacing="0.3">Confirmed Threat</text>
+  <text x="1579" y="39"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(240,69,69,0.55)" letter-spacing="0.3">Isolate &amp; Block</text>
 
   <!-- VULNERABILITY -->
-  <rect x="1620" y="55" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,179,71,0.11)" stroke-width="1"/>
-  <rect x="1838" y="58" width="30" height="16" rx="4" fill="rgba(255,179,71,0.12)" stroke="rgba(255,179,71,0.26)" stroke-width="0.8"/>
-  <text x="1853" y="69" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#ffb347">6%</text>
-  <text x="1634" y="67" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
-  <text x="1634" y="82" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#ffb347">Vulnerability</text>
-  <circle cx="1634" cy="91" r="3.5" fill="#ffb347" opacity="0.85"/>
-  <text x="1643" y="94" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,179,71,0.65)">Patch in SLA</text>
+  <rect x="1535" y="55" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(255,179,71,0.16)" stroke-width="1"/>
+  <rect x="1872" y="55" width="3" height="42" rx="1.5" fill="rgba(255,179,71,0.60)"/>
+  <rect x="1540" y="60" width="28" height="15" rx="3"
+        fill="rgba(255,179,71,0.12)" stroke="rgba(255,179,71,0.28)" stroke-width="0.8"/>
+  <text x="1554" y="71" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#ffb347">6%</text>
+  <text x="1579" y="72"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#ffb347" letter-spacing="0.3">Vulnerability</text>
+  <text x="1579" y="87"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(255,179,71,0.55)" letter-spacing="0.3">Patch in SLA</text>
 
-  <!-- NO THREAT -->
-  <rect x="1620" y="103" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(55,198,244,0.11)" stroke-width="1"/>
-  <rect x="1832" y="106" width="36" height="16" rx="4" fill="rgba(55,198,244,0.08)" stroke="rgba(55,198,244,0.20)" stroke-width="0.8"/>
-  <text x="1850" y="117" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#37c6f4" opacity="0.75">93%</text>
-  <text x="1634" y="115" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
-  <text x="1634" y="130" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#7dafc4">No Threat Found</text>
-  <circle cx="1634" cy="139" r="3.5" fill="#37c6f4" opacity="0.70"/>
-  <text x="1643" y="142" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.55)">Audit &amp; Log</text>
+  <!-- NO THREAT FOUND -->
+  <rect x="1535" y="103" width="340" height="42" rx="8"
+        fill="rgba(10,13,26,0.82)" stroke="rgba(55,198,244,0.14)" stroke-width="1"/>
+  <rect x="1872" y="103" width="3" height="42" rx="1.5" fill="rgba(55,198,244,0.50)"/>
+  <rect x="1540" y="108" width="34" height="15" rx="3"
+        fill="rgba(55,198,244,0.08)" stroke="rgba(55,198,244,0.22)" stroke-width="0.8"/>
+  <text x="1557" y="119" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="9" font-weight="700" fill="#37c6f4" opacity="0.80">93%</text>
+  <text x="1584" y="120"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="13" font-weight="600" fill="#7dafc4" letter-spacing="0.3">No Threat Found</text>
+  <text x="1584" y="135"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="10" fill="rgba(55,198,244,0.48)" letter-spacing="0.3">Audit &amp; Log</text>
 
 </svg>
