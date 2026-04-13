@@ -1,51 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1889 150" fill="none">
 
-  <!-- KDC FTP high-risk -->
-  <rect x="14" y="7" width="278" height="42" rx="8" fill="rgba(242,244,245,0.06)" stroke="rgba(242,244,245,0.13)" stroke-width="1"/>
-  <circle cx="38" cy="28" r="5.5" fill="#f04545" opacity="0.88"/>
-  <text x="55" y="25" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="500" fill="#EFF0F0" letter-spacing="0.8">KDC · FTP</text>
-  <text x="55" y="42" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(239,240,240,0.40)" letter-spacing="0.3">High-Risk Protocol</text>
+  <!-- KDC FTP -->
+  <rect x="14" y="7" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="28" y="19" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
+  <text x="28" y="34" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">KDC · FTP</text>
+  <circle cx="28" cy="43" r="3.5" fill="#f04545" opacity="0.85"/>
+  <text x="37" y="46" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">High Risk</text>
 
-  <!-- HTTP DNS medium -->
-  <rect x="14" y="55" width="278" height="42" rx="8" fill="rgba(242,244,245,0.06)" stroke="rgba(242,244,245,0.13)" stroke-width="1"/>
-  <circle cx="38" cy="76" r="5.5" fill="#ffb347" opacity="0.88"/>
-  <text x="55" y="73" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="500" fill="#EFF0F0" letter-spacing="0.8">HTTP · DNS</text>
-  <text x="55" y="90" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(239,240,240,0.40)" letter-spacing="0.3">Medium-Risk Protocol</text>
+  <!-- HTTP DNS -->
+  <rect x="14" y="55" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="28" y="67" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
+  <text x="28" y="82" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">HTTP · DNS</text>
+  <circle cx="28" cy="91" r="3.5" fill="#ffb347" opacity="0.85"/>
+  <text x="37" y="94" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,179,71,0.65)">Medium Risk</text>
 
-  <!-- LDAP AUTH high-risk -->
-  <rect x="14" y="103" width="278" height="42" rx="8" fill="rgba(242,244,245,0.06)" stroke="rgba(242,244,245,0.13)" stroke-width="1"/>
-  <circle cx="38" cy="124" r="5.5" fill="#f04545" opacity="0.88"/>
-  <text x="55" y="121" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="500" fill="#EFF0F0" letter-spacing="0.8">LDAP · AUTH</text>
-  <text x="55" y="138" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(239,240,240,0.40)" letter-spacing="0.3">Identity Protocol</text>
+  <!-- LDAP AUTH -->
+  <rect x="14" y="103" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="28" y="115" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">SOURCE</text>
+  <text x="28" y="130" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="17" font-weight="600" fill="#F1F3F5">LDAP · AUTH</text>
+  <circle cx="28" cy="139" r="3.5" fill="#f04545" opacity="0.85"/>
+  <text x="37" y="142" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">High Risk</text>
 
-  <!-- CENTER AI ENGINE -->
-  <rect x="807" y="7" width="275" height="136" rx="10" fill="rgba(55,198,244,0.05)" stroke="rgba(55,198,244,0.20)" stroke-width="1.2"/>
-  <rect x="807" y="7" width="275" height="2" rx="1" fill="rgba(55,198,244,0.30)"/>
-  <text x="944" y="52" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="500" fill="#37c6f4" letter-spacing="3">AI ENGINE</text>
-  <text x="944" y="76" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(55,198,244,0.60)" letter-spacing="2">THREAT INTELLIGENCE</text>
-  <line x1="855" y1="94" x2="1033" y2="94" stroke="rgba(55,198,244,0.16)" stroke-width="1"/>
-  <text x="944" y="116" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(55,198,244,0.38)" letter-spacing="1">real-time · 4 streams</text>
+  <!-- AI ENGINE -->
+  <rect x="817" y="7" width="255" height="136" rx="9" fill="rgba(10,13,26,0.88)" stroke="rgba(55,198,244,0.16)" stroke-width="1"/>
+  <rect x="817" y="7" width="255" height="2.5" rx="1" fill="rgba(55,198,244,0.55)"/>
+  <text x="944" y="38" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.40)" letter-spacing="2.5">ANALYSIS ENGINE</text>
+  <text x="944" y="64" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="24" font-weight="600" fill="#F1F3F5" letter-spacing="0.5">AI Engine</text>
+  <text x="944" y="83" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="11" fill="rgba(55,198,244,0.50)">Threat Intelligence</text>
+  <line x1="843" y1="100" x2="1059" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <circle cx="855" cy="116" r="3.5" fill="#37c6f4" opacity="0.65"/>
+  <text x="864" y="119" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.50)">4 streams</text>
+  <text x="1059" y="119" text-anchor="end" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.20)">real-time</text>
+  <circle cx="898" cy="133" r="2.5" fill="rgba(55,198,244,0.45)"/>
+  <circle cx="910" cy="133" r="2.5" fill="rgba(55,198,244,0.25)"/>
+  <circle cx="922" cy="133" r="2.5" fill="rgba(55,198,244,0.55)"/>
+  <circle cx="934" cy="133" r="2.5" fill="rgba(55,198,244,0.20)"/>
+  <circle cx="946" cy="133" r="2.5" fill="rgba(55,198,244,0.50)"/>
+  <circle cx="958" cy="133" r="2.5" fill="rgba(55,198,244,0.35)"/>
+  <circle cx="970" cy="133" r="2.5" fill="rgba(55,198,244,0.60)"/>
+  <circle cx="982" cy="133" r="2.5" fill="rgba(55,198,244,0.20)"/>
+  <circle cx="994" cy="133" r="2.5" fill="rgba(55,198,244,0.40)"/>
 
-  <!-- CONFIRMED THREAT red -->
-  <rect x="1597" y="7" width="278" height="42" rx="8" fill="rgba(240,69,69,0.07)" stroke="rgba(240,69,69,0.20)" stroke-width="1"/>
-  <rect x="1609" y="14" width="32" height="17" rx="3" fill="rgba(240,69,69,0.16)" stroke="rgba(240,69,69,0.32)" stroke-width="0.8"/>
-  <text x="1625" y="26" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="700" fill="#f04545">1%</text>
-  <text x="1652" y="25" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="#f09090" letter-spacing="0.5">CONFIRMED THREAT</text>
-  <text x="1652" y="41" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(240,69,69,0.62)" letter-spacing="0.3">→ Isolate &amp; Block</text>
+  <!-- CONFIRMED THREAT -->
+  <rect x="1620" y="7" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(240,69,69,0.14)" stroke-width="1"/>
+  <rect x="1838" y="10" width="30" height="16" rx="4" fill="rgba(240,69,69,0.14)" stroke="rgba(240,69,69,0.28)" stroke-width="0.8"/>
+  <text x="1853" y="21" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#f04545">1%</text>
+  <text x="1634" y="19" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
+  <text x="1634" y="34" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#f09090">Confirmed Threat</text>
+  <circle cx="1634" cy="43" r="3.5" fill="#f04545" opacity="0.85"/>
+  <text x="1643" y="46" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(240,69,69,0.65)">Isolate &amp; Block</text>
 
-  <!-- VULNERABILITY orange -->
-  <rect x="1597" y="55" width="278" height="42" rx="8" fill="rgba(255,179,71,0.06)" stroke="rgba(255,179,71,0.18)" stroke-width="1"/>
-  <rect x="1609" y="62" width="32" height="17" rx="3" fill="rgba(255,179,71,0.16)" stroke="rgba(255,179,71,0.32)" stroke-width="0.8"/>
-  <text x="1625" y="74" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="700" fill="#ffb347">6%</text>
-  <text x="1652" y="73" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="#ffb347" letter-spacing="0.5">VULNERABILITY</text>
-  <text x="1652" y="89" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(255,179,71,0.62)" letter-spacing="0.3">→ Patch in SLA</text>
+  <!-- VULNERABILITY -->
+  <rect x="1620" y="55" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(255,179,71,0.11)" stroke-width="1"/>
+  <rect x="1838" y="58" width="30" height="16" rx="4" fill="rgba(255,179,71,0.12)" stroke="rgba(255,179,71,0.26)" stroke-width="0.8"/>
+  <text x="1853" y="69" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#ffb347">6%</text>
+  <text x="1634" y="67" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
+  <text x="1634" y="82" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#ffb347">Vulnerability</text>
+  <circle cx="1634" cy="91" r="3.5" fill="#ffb347" opacity="0.85"/>
+  <text x="1643" y="94" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,179,71,0.65)">Patch in SLA</text>
 
-  <!-- NO THREAT FOUND cyan -->
-  <rect x="1597" y="103" width="278" height="42" rx="8" fill="rgba(55,198,244,0.05)" stroke="rgba(55,198,244,0.16)" stroke-width="1"/>
-  <rect x="1609" y="110" width="38" height="17" rx="3" fill="rgba(55,198,244,0.10)" stroke="rgba(55,198,244,0.24)" stroke-width="0.8"/>
-  <text x="1628" y="122" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" font-weight="700" fill="#37c6f4" opacity="0.80">93%</text>
-  <text x="1658" y="121" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="500" fill="#7dafc4" letter-spacing="0.5">NO THREAT FOUND</text>
-  <text x="1658" y="137" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="12" fill="rgba(55,198,244,0.48)" letter-spacing="0.3">→ Audit &amp; Log</text>
+  <!-- NO THREAT -->
+  <rect x="1620" y="103" width="255" height="42" rx="7" fill="rgba(10,13,26,0.88)" stroke="rgba(55,198,244,0.11)" stroke-width="1"/>
+  <rect x="1832" y="106" width="36" height="16" rx="4" fill="rgba(55,198,244,0.08)" stroke="rgba(55,198,244,0.20)" stroke-width="0.8"/>
+  <text x="1850" y="117" text-anchor="middle" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="9" font-weight="700" fill="#37c6f4" opacity="0.75">93%</text>
+  <text x="1634" y="115" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(255,255,255,0.30)" letter-spacing="1.8">RESULT</text>
+  <text x="1634" y="130" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="16" font-weight="600" fill="#7dafc4">No Threat Found</text>
+  <circle cx="1634" cy="139" r="3.5" fill="#37c6f4" opacity="0.70"/>
+  <text x="1643" y="142" font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif" font-size="10" fill="rgba(55,198,244,0.55)">Audit &amp; Log</text>
 
 </svg>
