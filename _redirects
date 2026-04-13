@@ -25,17 +25,6 @@
 /blog/managed-detection-response      /blog/managed-detection-response.html      200
 /blog/ai-cybersecurity-consulting     /blog/ai-cybersecurity-consulting.html     200
 
-# Proxy all mazehq.com assets (CSS, JS, fonts, images, 3D models)
-/public/theme/styles.css           https://mazehq.com/public/theme/styles.css?v=1.0.46          200
-/public/theme/styles.css?v=1.0.46  https://mazehq.com/public/theme/styles.css?v=1.0.46          200
-/public/theme/libs.min.js          https://mazehq.com/public/theme/libs.min.js?v=1.0.46         200
-/public/theme/libs.min.js?v=1.0.46 https://mazehq.com/public/theme/libs.min.js?v=1.0.46        200
-/public/theme/scripts.min.js          https://mazehq.com/public/theme/scripts.min.js?v=1.0.46  200
-/public/theme/scripts.min.js?v=1.0.46 https://mazehq.com/public/theme/scripts.min.js?v=1.0.46 200
-/public/theme/models/*  https://mazehq.com/public/theme/models/:splat  200
-/public/theme/fonts/*   https://mazehq.com/public/theme/fonts/:splat   200
-/public/theme/images/*  https://mazehq.com/public/theme/images/:splat  200
-/public/upload/*        https://mazehq.com/public/upload/:splat         200
 
 # Blog listing
 /blog    /blog.html    200
