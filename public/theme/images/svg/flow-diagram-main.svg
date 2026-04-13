@@ -1,96 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1889 150" fill="none">
-  <defs>
-    <pattern id="dotGrid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="10" cy="10" r="0.8" fill="#37c6f4" opacity="0.18"/>
-    </pattern>
-    <linearGradient id="streamFade" x1="1" y1="0" x2="0" y2="0" gradientUnits="objectBoundingBox">
-      <stop offset="0%"   stop-color="#37c6f4" stop-opacity="0.5"/>
-      <stop offset="60%"  stop-color="#37c6f4" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#37c6f4" stop-opacity="0"/>
-    </linearGradient>
-  </defs>
-  <rect width="1889" height="150" fill="url(#dotGrid)"/>
-  <rect x="0"    y="0" width="430"  height="150" fill="#37c6f4" fill-opacity="0.018"/>
-  <rect x="430"  y="0" width="670"  height="150" fill="#37c6f4" fill-opacity="0.012"/>
-  <rect x="1100" y="0" width="450"  height="150" fill="#37c6f4" fill-opacity="0.018"/>
-  <rect x="1550" y="0" width="339"  height="150" fill="#37c6f4" fill-opacity="0.025"/>
-  <line x1="430"  y1="0" x2="430"  y2="150" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.35"/>
-  <line x1="1100" y1="0" x2="1100" y2="150" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.35"/>
-  <line x1="1550" y1="0" x2="1550" y2="150" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.35"/>
-  <text x="215" y="13" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="9.5" fill="#37c6f4" opacity="0.7" letter-spacing="1.5">DATA SOURCES</text>
-  <text x="765" y="13" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="9.5" fill="#37c6f4" opacity="0.7" letter-spacing="1.5">AI VULNERABILITY ANALYST</text>
-  <text x="1325" y="13" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="9.5" fill="#37c6f4" opacity="0.7" letter-spacing="1.5">AI THREAT DETECTION</text>
-  <text x="1719" y="13" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="9.5" fill="#37c6f4" opacity="0.7" letter-spacing="1.5">AI REMEDIATION</text>
-  <line x1="0" y1="19" x2="1889" y2="19" stroke="#37c6f4" stroke-width="0.5" opacity="0.2"/>
-  <line x1="0" y1="34"  x2="1889" y2="34"  stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="47"  x2="1889" y2="47"  stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="60"  x2="1889" y2="60"  stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="78"  x2="1889" y2="78"  stroke="url(#streamFade)" stroke-width="0.7" opacity="0.7"/>
-  <line x1="0" y1="91"  x2="1889" y2="91"  stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="104" x2="1889" y2="104" stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="117" x2="1889" y2="117" stroke="url(#streamFade)" stroke-width="0.85"/>
-  <line x1="0" y1="130" x2="1889" y2="130" stroke="url(#streamFade)" stroke-width="0.85"/>
-  <text x="415" y="37"  text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">KDC SERVER</text>
-  <text x="415" y="50"  text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">FTP CLIENT</text>
-  <text x="415" y="63"  text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">HTTP · HTTPS</text>
-  <text x="415" y="81"  text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.55" letter-spacing="0.8">JSON PAYLOAD</text>
-  <text x="415" y="94"  text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">DNS RESOLVER</text>
-  <text x="415" y="107" text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">LDAP · AUTH</text>
-  <text x="415" y="120" text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">SMTP · MAIL</text>
-  <text x="415" y="133" text-anchor="end" font-family="'Courier New',Courier,monospace" font-size="8.5" fill="#7dafc4" opacity="0.9" letter-spacing="0.8">TLS · CERT</text>
-  <text x="85" y="144" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#37c6f4" opacity="0.4" letter-spacing="0.5">and others...</text>
-  <rect x="445" y="24" width="310" height="48" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.45"/>
-  <text x="600" y="37" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8" fill="#a8d4e6" opacity="0.85" letter-spacing="0.8">POTENTIALLY EXPLOITABLE</text>
-  <rect x="718" y="26" width="32" height="14" rx="2" fill="#37c6f4" fill-opacity="0.18" stroke="#37c6f4" stroke-width="0.7" opacity="0.9"/>
-  <text x="734" y="36.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="1">10%</text>
-  <rect x="445" y="72" width="310" height="68" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.3"/>
-  <text x="600" y="109" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8" fill="#a8d4e6" opacity="0.6" letter-spacing="0.8">NOT EXPLOITABLE</text>
-  <rect x="718" y="74" width="32" height="14" rx="2" fill="#37c6f4" fill-opacity="0.1" stroke="#37c6f4" stroke-width="0.7" opacity="0.6"/>
-  <text x="734" y="84.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="0.7">90%</text>
-  <rect x="778" y="24" width="310" height="48" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.45"/>
-  <text x="933" y="37" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8" fill="#a8d4e6" opacity="0.85" letter-spacing="0.8">CONFIRMED THREAT</text>
-  <rect x="1051" y="26" width="32" height="14" rx="2" fill="#37c6f4" fill-opacity="0.18" stroke="#37c6f4" stroke-width="0.7" opacity="0.9"/>
-  <text x="1067" y="36.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="1">10%</text>
-  <rect x="778" y="72" width="310" height="68" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.3"/>
-  <text x="933" y="109" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8" fill="#a8d4e6" opacity="0.6" letter-spacing="0.8">NO THREAT DETECTED</text>
-  <rect x="1051" y="74" width="32" height="14" rx="2" fill="#37c6f4" fill-opacity="0.1" stroke="#37c6f4" stroke-width="0.7" opacity="0.6"/>
-  <text x="1067" y="84.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="0.7">90%</text>
-  <rect x="1115" y="24" width="420" height="24" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.5"/>
-  <text x="1270" y="38" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.9" letter-spacing="0.8">URGENTLY FIX</text>
-  <rect x="1498" y="26" width="30" height="14" rx="2" fill="#37c6f4" fill-opacity="0.2" stroke="#37c6f4" stroke-width="0.8" opacity="1"/>
-  <text x="1513" y="36.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4">1%</text>
-  <rect x="1115" y="52" width="420" height="36" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.4"/>
-  <text x="1270" y="72" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.75" letter-spacing="0.8">PATCH IN SLA</text>
-  <rect x="1498" y="57" width="30" height="14" rx="2" fill="#37c6f4" fill-opacity="0.15" stroke="#37c6f4" stroke-width="0.7" opacity="0.9"/>
-  <text x="1513" y="67.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="0.9">6%</text>
-  <rect x="1115" y="92" width="420" height="50" rx="1" fill="none" stroke="#37c6f4" stroke-width="0.7" stroke-dasharray="4 3" opacity="0.28"/>
-  <text x="1270" y="120" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.55" letter-spacing="0.8">IGNORE</text>
-  <rect x="1498" y="97" width="30" height="14" rx="2" fill="#37c6f4" fill-opacity="0.1" stroke="#37c6f4" stroke-width="0.6" opacity="0.7"/>
-  <text x="1513" y="107.5" text-anchor="middle" font-family="'Courier New',Courier,monospace" font-size="8.5" font-weight="bold" fill="#37c6f4" opacity="0.65">93%</text>
-  <circle cx="1845" cy="34"  r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="34"  r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="47"  r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="47"  r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="60"  r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="60"  r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="78"  r="4"   fill="none" stroke="#37c6f4" stroke-width="0.8" opacity="0.45"/>
-  <circle cx="1845" cy="78"  r="1.5" fill="#37c6f4" opacity="0.45"/>
-  <circle cx="1845" cy="91"  r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="91"  r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="104" r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="104" r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="117" r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="117" r="2"   fill="#37c6f4" opacity="0.9"/>
-  <circle cx="1845" cy="130" r="5.5" fill="none" stroke="#37c6f4" stroke-width="1.1" opacity="0.85"/>
-  <circle cx="1845" cy="130" r="2"   fill="#37c6f4" opacity="0.9"/>
-  <line x1="1845" y1="28" x2="1845" y2="136" stroke="#37c6f4" stroke-width="0.7" opacity="0.3"/>
-  <text x="1630" y="37"  font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">ISOLATE IMMEDIATELY</text>
-  <text x="1630" y="50"  font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">BLOCK &amp; CONTAIN</text>
-  <text x="1630" y="63"  font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">PATCH IN SLA</text>
-  <text x="1630" y="81"  font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.4"  letter-spacing="0.5">EXCEPTION LOGGED</text>
-  <text x="1630" y="94"  font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">MONITOR &amp; ALERT</text>
-  <text x="1630" y="107" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">AUDIT TRAIL</text>
-  <text x="1630" y="120" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">QUARANTINE</text>
-  <text x="1630" y="133" font-family="'Courier New',Courier,monospace" font-size="7.5" fill="#a8d4e6" opacity="0.85" letter-spacing="0.5">CERT REVOKE</text>
+
+  <!-- LEFT DATA SOURCE CARDS -->
+
+  <rect x="14" y="7" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="26" y="20"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">DATA SOURCE</text>
+  <text x="26" y="34"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">Network Traffic Scan</text>
+  <circle cx="26" cy="43" r="3" fill="#37c6f4" opacity="0.75"/>
+  <text x="34" y="46"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.60)">Active · Real-time</text>
+
+  <rect x="14" y="57" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="26" y="70"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">DATA SOURCE</text>
+  <text x="26" y="84"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">Endpoint Telemetry</text>
+  <circle cx="26" cy="93" r="3" fill="#37c6f4" opacity="0.75"/>
+  <text x="34" y="96"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.60)">Streaming · 3 agents</text>
+
+  <rect x="14" y="107" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="26" y="120"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">DATA SOURCE</text>
+  <text x="26" y="134"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">Log Intelligence</text>
+  <circle cx="26" cy="143" r="3" fill="#37c6f4" opacity="0.75"/>
+  <text x="34" y="146"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.60)">4 feeds · SIEM</text>
+
+  <!-- CENTER AI ENGINE -->
+  <rect x="770" y="7" width="350" height="136" rx="8"
+        fill="rgba(10,13,26,0.90)" stroke="rgba(55,198,244,0.15)" stroke-width="1"/>
+  <rect x="770" y="7" width="350" height="2" rx="1" fill="rgba(55,198,244,0.50)"/>
+  <text x="945" y="36" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.40)" letter-spacing="2.2">ANALYSIS ENGINE</text>
+  <text x="945" y="65" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="28" font-weight="600" fill="#EFF0F0" letter-spacing="-0.5">AI Engine</text>
+  <text x="945" y="83" text-anchor="middle"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="12" fill="rgba(55,198,244,0.45)">Threat Intelligence · Real-time</text>
+  <line x1="806" y1="101" x2="1084" y2="101" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <circle cx="818" cy="118" r="3" fill="#37c6f4" opacity="0.60"/>
+  <text x="826" y="121"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.45)">Processing 3 streams</text>
+  <circle cx="900" cy="133" r="2.5" fill="rgba(55,198,244,0.55)"/>
+  <circle cx="913" cy="133" r="2.5" fill="rgba(55,198,244,0.30)"/>
+  <circle cx="926" cy="133" r="2.5" fill="rgba(55,198,244,0.65)"/>
+  <circle cx="939" cy="133" r="2.5" fill="rgba(55,198,244,0.20)"/>
+  <circle cx="952" cy="133" r="2.5" fill="rgba(55,198,244,0.50)"/>
+  <circle cx="965" cy="133" r="2.5" fill="rgba(55,198,244,0.35)"/>
+  <circle cx="978" cy="133" r="2.5" fill="rgba(55,198,244,0.60)"/>
+  <circle cx="991" cy="133" r="2.5" fill="rgba(55,198,244,0.25)"/>
+
+  <!-- RIGHT OUTCOME CARDS -->
+  <rect x="1605" y="7" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="1617" y="20"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">OUTCOME</text>
+  <text x="1617" y="34"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">Confirmed Threat</text>
+  <circle cx="1617" cy="43" r="3" fill="#f04545" opacity="0.85"/>
+  <text x="1625" y="46"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(240,69,69,0.65)">1% · Isolate &amp; Block</text>
+
+  <rect x="1605" y="57" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="1617" y="70"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">OUTCOME</text>
+  <text x="1617" y="84"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">Vulnerability</text>
+  <circle cx="1617" cy="93" r="3" fill="#ffb347" opacity="0.85"/>
+  <text x="1625" y="96"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(255,179,71,0.65)">6% · Patch in SLA</text>
+
+  <rect x="1605" y="107" width="270" height="44" rx="6"
+        fill="rgba(10,13,26,0.86)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <text x="1617" y="120"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(239,240,240,0.35)" letter-spacing="1.4">OUTCOME</text>
+  <text x="1617" y="134"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="14" font-weight="600" fill="#EFF0F0">No Threat Found</text>
+  <circle cx="1617" cy="143" r="3" fill="#37c6f4" opacity="0.75"/>
+  <text x="1625" y="146"
+        font-family="'HelveticaNeue','Helvetica Neue',Arial,sans-serif"
+        font-size="11" fill="rgba(55,198,244,0.55)">93% · Audit &amp; Log</text>
+
 </svg>
