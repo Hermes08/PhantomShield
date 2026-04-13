@@ -147,20 +147,26 @@ body.is-not-ready .s-header__nav-item{translate:none!important;opacity:1!importa
 <script src="/public/theme/libs.min.js?v=1.0.46"></script>
 <script src="/public/theme/scripts.min.js?v=1.0.46"></script>
 <script>
-/* Navigation fix: bypass mazehq SPA router for all internal page links */
+/* Navigation fix: intercept SPA pushState to force real page loads */
 (function() {
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href]');
-    if (!link) return;
-    var href = link.getAttribute('href');
-    if (!href) return;
-    // Only intercept internal page links (not hash-only anchors, not external URLs)
-    if (href.startsWith('/') && !href.startsWith('/#') && href !== '/') {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      window.location.href = href;
-    }
-  }, true);
+  function isRealPage(url) {
+    if (!url || typeof url !== 'string') return false;
+    if (!url.startsWith('/')) return false;
+    if (url === '/') return false;
+    if (url.startsWith('/#')) return false;
+    return true;
+  }
+  // Override history.pushState before deferred SPA scripts run
+  var _push = history.pushState;
+  history.pushState = function(state, title, url) {
+    if (isRealPage(url)) { window.location.href = url; return; }
+    return _push.apply(history, arguments);
+  };
+  var _replace = history.replaceState;
+  history.replaceState = function(state, title, url) {
+    if (isRealPage(url)) { window.location.href = url; return; }
+    return _replace.apply(history, arguments);
+  };
 })();
 </script>
 </body>
