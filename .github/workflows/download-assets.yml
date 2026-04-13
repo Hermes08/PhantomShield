@@ -21,54 +21,56 @@ jobs:
           mkdir -p public/theme/images
           mkdir -p public/theme/models
 
-      - name: Download fonts
+      - name: Download fonts via Netlify proxy
         run: |
-          BASE="https://mazehq.com/public/theme/fonts"
+          BASE="https://phantomshield-cyber.netlify.app/public/theme/fonts"
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
           # Roobert
-          curl -sfL "$BASE/Roobert/Roobert300.woff2" -o public/theme/fonts/Roobert/Roobert300.woff2
-          curl -sfL "$BASE/Roobert/Roobert300.woff"  -o public/theme/fonts/Roobert/Roobert300.woff
-          curl -sfL "$BASE/Roobert/Roobert400.woff2" -o public/theme/fonts/Roobert/Roobert400.woff2
-          curl -sfL "$BASE/Roobert/Roobert400.woff"  -o public/theme/fonts/Roobert/Roobert400.woff
-          curl -sfL "$BASE/Roobert/Roobert500.woff2" -o public/theme/fonts/Roobert/Roobert500.woff2
-          curl -sfL "$BASE/Roobert/Roobert500.woff"  -o public/theme/fonts/Roobert/Roobert500.woff
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert300.woff2" -o public/theme/fonts/Roobert/Roobert300.woff2
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert300.woff"  -o public/theme/fonts/Roobert/Roobert300.woff
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert400.woff2" -o public/theme/fonts/Roobert/Roobert400.woff2
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert400.woff"  -o public/theme/fonts/Roobert/Roobert400.woff
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert500.woff2" -o public/theme/fonts/Roobert/Roobert500.woff2
+          curl -sfL -A "$UA" "$BASE/Roobert/Roobert500.woff"  -o public/theme/fonts/Roobert/Roobert500.woff
           # HelveticaNeue
-          curl -sfL "$BASE/HelveticaNeue/HelveticaNeue300.woff2" -o public/theme/fonts/HelveticaNeue/HelveticaNeue300.woff2
-          curl -sfL "$BASE/HelveticaNeue/HelveticaNeue300.woff"  -o public/theme/fonts/HelveticaNeue/HelveticaNeue300.woff
-          curl -sfL "$BASE/HelveticaNeue/HelveticaNeue400.woff2" -o public/theme/fonts/HelveticaNeue/HelveticaNeue400.woff2
-          curl -sfL "$BASE/HelveticaNeue/HelveticaNeue400.woff"  -o public/theme/fonts/HelveticaNeue/HelveticaNeue400.woff
+          curl -sfL -A "$UA" "$BASE/HelveticaNeue/HelveticaNeue300.woff2" -o public/theme/fonts/HelveticaNeue/HelveticaNeue300.woff2
+          curl -sfL -A "$UA" "$BASE/HelveticaNeue/HelveticaNeue300.woff"  -o public/theme/fonts/HelveticaNeue/HelveticaNeue300.woff
+          curl -sfL -A "$UA" "$BASE/HelveticaNeue/HelveticaNeue400.woff2" -o public/theme/fonts/HelveticaNeue/HelveticaNeue400.woff2
+          curl -sfL -A "$UA" "$BASE/HelveticaNeue/HelveticaNeue400.woff"  -o public/theme/fonts/HelveticaNeue/HelveticaNeue400.woff
           # PPSupplySans
-          curl -sfL "$BASE/PPSupplySans/PPSupplySans300.woff2" -o public/theme/fonts/PPSupplySans/PPSupplySans300.woff2
-          curl -sfL "$BASE/PPSupplySans/PPSupplySans300.woff"  -o public/theme/fonts/PPSupplySans/PPSupplySans300.woff
-          curl -sfL "$BASE/PPSupplySans/PPSupplySans400.woff2" -o public/theme/fonts/PPSupplySans/PPSupplySans400.woff2
-          curl -sfL "$BASE/PPSupplySans/PPSupplySans400.woff"  -o public/theme/fonts/PPSupplySans/PPSupplySans400.woff
+          curl -sfL -A "$UA" "$BASE/PPSupplySans/PPSupplySans300.woff2" -o public/theme/fonts/PPSupplySans/PPSupplySans300.woff2
+          curl -sfL -A "$UA" "$BASE/PPSupplySans/PPSupplySans300.woff"  -o public/theme/fonts/PPSupplySans/PPSupplySans300.woff
+          curl -sfL -A "$UA" "$BASE/PPSupplySans/PPSupplySans400.woff2" -o public/theme/fonts/PPSupplySans/PPSupplySans400.woff2
+          curl -sfL -A "$UA" "$BASE/PPSupplySans/PPSupplySans400.woff"  -o public/theme/fonts/PPSupplySans/PPSupplySans400.woff
           echo "Fonts downloaded:"
           ls -lh public/theme/fonts/Roobert/ public/theme/fonts/HelveticaNeue/ public/theme/fonts/PPSupplySans/
 
-      - name: Download images
+      - name: Download images via Netlify proxy
         run: |
-          BASE="https://mazehq.com/public/theme/images"
-          curl -sfL "$BASE/logo.png"     -o public/theme/images/logo.png
-          curl -sfL "$BASE/particle.png" -o public/theme/images/particle.png
-          curl -sfL "$BASE/pcb.png"      -o public/theme/images/pcb.png
+          BASE="https://phantomshield-cyber.netlify.app/public/theme/images"
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+          curl -sfL -A "$UA" "$BASE/logo.png"     -o public/theme/images/logo.png
+          curl -sfL -A "$UA" "$BASE/particle.png" -o public/theme/images/particle.png
+          curl -sfL -A "$UA" "$BASE/pcb.png"      -o public/theme/images/pcb.png
           echo "Images downloaded:"
           ls -lh public/theme/images/
 
-      - name: Download 3D models
+      - name: Download 3D models via Netlify proxy
         run: |
-          BASE="https://mazehq.com/public/theme/models"
-          curl -sfL "$BASE/Cubes.glb" -o public/theme/models/Cubes.glb
-          curl -sfL "$BASE/Net.glb"   -o public/theme/models/Net.glb
-          curl -sfL "$BASE/Shield.glb" -o public/theme/models/Shield.glb
-          curl -sfL "$BASE/Users.glb" -o public/theme/models/Users.glb
-          curl -sfL "$BASE/World.glb" -o public/theme/models/World.glb
+          BASE="https://phantomshield-cyber.netlify.app/public/theme/models"
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+          curl -sfL -A "$UA" "$BASE/Cubes.glb"  -o public/theme/models/Cubes.glb
+          curl -sfL -A "$UA" "$BASE/Net.glb"    -o public/theme/models/Net.glb
+          curl -sfL -A "$UA" "$BASE/Shield.glb" -o public/theme/models/Shield.glb
+          curl -sfL -A "$UA" "$BASE/Users.glb"  -o public/theme/models/Users.glb
+          curl -sfL -A "$UA" "$BASE/World.glb"  -o public/theme/models/World.glb
           echo "Models downloaded:"
           ls -lh public/theme/models/
 
       - name: Remove mazehq proxy rules from _redirects
         run: |
-          # Keep all non-mazehq lines
           grep -v 'mazehq.com' _redirects > _redirects.tmp && mv _redirects.tmp _redirects
-          echo "_redirects updated:"
+          echo "_redirects after cleanup:"
           cat _redirects
 
       - name: Commit and push assets
@@ -76,6 +78,6 @@ jobs:
           git config user.email "davidaguirre53@gmail.com"
           git config user.name "David Aguirre"
           git add public/ _redirects
-          git status
-          git commit -m "Self-host all mazehq.com assets: fonts, images, 3D models; remove proxy deps"
+          git diff --cached --stat
+          git commit -m "Self-host all assets: fonts, images, 3D models; remove mazehq.com proxy dependency"
           git push
